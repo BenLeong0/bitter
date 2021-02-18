@@ -1,23 +1,29 @@
 {
   "files": {
-    "main.css": "/bitter_react/static/css/main.8c8b27cf.chunk.css",
-    "main.js": "/bitter_react/static/js/main.aaed9e17.chunk.js",
-    "main.js.map": "/bitter_react/static/js/main.aaed9e17.chunk.js.map",
-    "runtime-main.js": "/bitter_react/static/js/runtime-main.2d31fb7e.js",
-    "runtime-main.js.map": "/bitter_react/static/js/runtime-main.2d31fb7e.js.map",
-    "static/js/2.0a968f5a.chunk.js": "/bitter_react/static/js/2.0a968f5a.chunk.js",
-    "static/js/2.0a968f5a.chunk.js.map": "/bitter_react/static/js/2.0a968f5a.chunk.js.map",
-    "static/js/3.3b1d711b.chunk.js": "/bitter_react/static/js/3.3b1d711b.chunk.js",
-    "static/js/3.3b1d711b.chunk.js.map": "/bitter_react/static/js/3.3b1d711b.chunk.js.map",
+    "main.css": "/bitter_react/static/css/main.86365213.chunk.css",
+    "main.js": "/bitter_react/static/js/main.67cf4ab2.chunk.js",
+    "main.js.map": "/bitter_react/static/js/main.67cf4ab2.chunk.js.map",
+    "runtime-main.js": "/bitter_react/static/js/runtime-main.68e94eb6.js",
+    "runtime-main.js.map": "/bitter_react/static/js/runtime-main.68e94eb6.js.map",
+    "static/js/2.65ec12e9.chunk.js": "/bitter_react/static/js/2.65ec12e9.chunk.js",
+    "static/js/2.65ec12e9.chunk.js.map": "/bitter_react/static/js/2.65ec12e9.chunk.js.map",
+    "static/js/3.f34fdc13.chunk.js": "/bitter_react/static/js/3.f34fdc13.chunk.js",
+    "static/js/3.f34fdc13.chunk.js.map": "/bitter_react/static/js/3.f34fdc13.chunk.js.map",
     "index.html": "/bitter_react/index.html",
-    "static/css/main.8c8b27cf.chunk.css.map": "/bitter_react/static/css/main.8c8b27cf.chunk.css.map",
-    "static/js/2.0a968f5a.chunk.js.LICENSE.txt": "/bitter_react/static/js/2.0a968f5a.chunk.js.LICENSE.txt",
-    "static/media/logo.6ce24c58.svg": "/bitter_react/static/media/logo.6ce24c58.svg"
+    "static/css/main.86365213.chunk.css.map": "/bitter_react/static/css/main.86365213.chunk.css.map",
+    "static/js/2.65ec12e9.chunk.js.LICENSE.txt": "/bitter_react/static/js/2.65ec12e9.chunk.js.LICENSE.txt",
+    "static/media/dislike.4c5bf648.svg": "/bitter_react/static/media/dislike.4c5bf648.svg",
+    "static/media/home.671555e9.svg": "/bitter_react/static/media/home.671555e9.svg",
+    "static/media/like.231952c6.svg": "/bitter_react/static/media/like.231952c6.svg",
+    "static/media/rebit.e12d3005.svg": "/bitter_react/static/media/rebit.e12d3005.svg",
+    "static/media/reply.34834fc8.svg": "/bitter_react/static/media/reply.34834fc8.svg",
+    "static/media/settings.949b2aef.svg": "/bitter_react/static/media/settings.949b2aef.svg",
+    "static/media/user.279444fa.svg": "/bitter_react/static/media/user.279444fa.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.2d31fb7e.js",
-    "static/js/2.0a968f5a.chunk.js",
-    "static/css/main.8c8b27cf.chunk.css",
-    "static/js/main.aaed9e17.chunk.js"
+    "static/js/runtime-main.68e94eb6.js",
+    "static/js/2.65ec12e9.chunk.js",
+    "static/css/main.86365213.chunk.css",
+    "static/js/main.67cf4ab2.chunk.js"
   ]
 }
