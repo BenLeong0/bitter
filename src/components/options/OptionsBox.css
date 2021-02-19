@@ -1,0 +1,40 @@
+.options-box {
+  width: 240px;
+  height: 232px;
+  margin-top: 32px;
+  background-color: rgb(228, 228, 228);
+  padding-top: 1px;
+  padding-bottom: 48px;
+  font-family: "Alte DIN 1451 Mittelschrift gepraegt", sans-serif;
+}
+
+.option {
+  width: 208px;
+  height: 48px;
+  margin: 0 16px 24px 16px;
+  /* background-color: rgb(248, 248, 248); */
+}
+
+.first-option {
+  margin-top: 15px;
+}
+
+.option-title {
+  margin-left: 8px;
+  float: left;
+  font-size: 24px;
+  padding-top: 12px;
+  max-width: 152px;
+}
+
+.option-logo-box {
+  float: left;
+  width: 48px;
+  height: 48px;
+}
+
+.option-logo {
+  display: block;
+  width: 36px;
+  margin: 6px;
+}

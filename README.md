@@ -1,70 +1,51 @@
-# Getting Started with Create React App
+# Bitter
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The aim of this project is to create a simplified version of Twitter, as an exercise in full-stack development.
 
-## Available Scripts
+- This repository holds only the frontend
 
-In the project directory, you can run:
+## Project
 
-### `npm start`
+The stack will consist of:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- React (Frontend)
+- Django (Backend)
+- PostgreSQL (Database)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+While I have experience with JavaScript and Python, this will be my first time building a full-stack application, and my first time using Django. Additionally, this will be my first time implementing SQL knowledge that I have developed but not used before.
 
-### `npm test`
+## To-do list
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- [] Add card to portfolio
+- [] Each tweet gets its own page w replies
 
-### `npm run build`
+### Main page
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- [x] Resize post box (border cut off)
+- [] Profile pics
+- [] Interactions counters
+- [] Display name + handle link to user page
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### User pages
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- [] Individual pages for each user
+  - [] Display name and banner
+  - [] Profile pic
+  - [] Banner
+  - [] Description
+  - [] Join date
+  - [] Follow button
+  - [] Location?
+  - [] All their tweets
+  - [] All their likes?
+  - [] All their replies
+  - [] Following list
+  - [] Follower list
+  - [] Edit button on own profile
+- [] Same side bars
 
-### `npm run eject`
+### Fullstack
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- [] Assign functions to all buttons
+  - Figure out exactly what each should do
+  - How do likes/dislikes work?

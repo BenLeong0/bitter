@@ -1,0 +1,12 @@
+.app-title-box {
+  height: 88px;
+  width: 240px;
+  background-color: rgb(228, 228, 228);
+}
+
+.app-title {
+  font-family: "consolas", monospace;
+  font-size: 52px;
+  padding: 10px 24px;
+  font-style: italic;
+}

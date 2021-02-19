@@ -1,0 +1,120 @@
+.timeline {
+  width: 600px;
+  margin: 0 20px;
+  background-color: white;
+  height: calc(100vh - 12px);
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.timeline::-webkit-scrollbar {
+  display: none;
+}
+
+.postbox {
+  width: calc(100% - 2px);
+  float: left;
+  border: grey solid 1px;
+  /* border-radius: 4px; */
+}
+
+.postbox div {
+  float: left;
+}
+
+.postbox-pfp {
+  width: 96px;
+  height: 96px;
+}
+
+.postbox-pfp img {
+  border-radius: 50%;
+  margin: 16px;
+}
+
+.postbox-input {
+  width: 480px;
+  margin-top: 20px;
+  margin-bottom: 24px;
+}
+
+.postbox-input textarea {
+  width: 100%;
+  padding: 2px;
+  max-width: 476px;
+  border: 0;
+  resize: none;
+  outline: none;
+  overflow: auto;
+  padding-bottom: 10px;
+  margin-bottom: 5px;
+  background-color: rgb(225, 225, 225);
+}
+
+.postbox-input button {
+  /* width: 72px; */
+  float: right;
+}
+
+#postbox-charcount {
+  float: right;
+  margin-right: 12px;
+  font-size: 12px;
+  margin-top: 3px;
+}
+
+.bit {
+  width: 560px;
+  margin: 19px 19px 0;
+  border: grey solid 1px;
+  float: left;
+  padding-top: 16px;
+  border-radius: 4px;
+}
+
+.bit-pfp {
+  height: 100%;
+  width: 80px;
+  float: left;
+}
+
+.bit-pfp img {
+  border-radius: 50%;
+}
+
+.bit-content {
+  float: left;
+  text-align: left;
+  max-width: 480px;
+  word-wrap: break-word;
+}
+
+.bit-info-displayname {
+  font-weight: bold;
+}
+
+.bit-info-handle {
+  /* font-style: italic; */
+  margin-left: 10px;
+}
+
+.bit-info-handle,
+.bit-info-time {
+  color: rgb(160, 160, 160);
+}
+
+.bit-text {
+  margin-bottom: 4px;
+  margin-right: 16px;
+}
+
+.bit-buttons {
+  height: 40px;
+  width: 100%;
+}
+
+.bit-buttons input {
+  margin-right: 96px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
