@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/bitter_react/static/css/main.a9d02bd3.chunk.css",
+    "main.css": "/bitter_react/static/css/main.cbd44091.chunk.css",
     "main.js": "/bitter_react/static/js/main.e3e98b59.chunk.js",
     "main.js.map": "/bitter_react/static/js/main.e3e98b59.chunk.js.map",
     "runtime-main.js": "/bitter_react/static/js/runtime-main.f13a41c2.js",
@@ -10,8 +10,9 @@
     "static/js/3.3df821ed.chunk.js": "/bitter_react/static/js/3.3df821ed.chunk.js",
     "static/js/3.3df821ed.chunk.js.map": "/bitter_react/static/js/3.3df821ed.chunk.js.map",
     "index.html": "/bitter_react/index.html",
-    "static/css/main.a9d02bd3.chunk.css.map": "/bitter_react/static/css/main.a9d02bd3.chunk.css.map",
+    "static/css/main.cbd44091.chunk.css.map": "/bitter_react/static/css/main.cbd44091.chunk.css.map",
     "static/js/2.53f4c8e6.chunk.js.LICENSE.txt": "/bitter_react/static/js/2.53f4c8e6.chunk.js.LICENSE.txt",
+    "static/media/App.css": "/bitter_react/static/media/din1451alt G.1f5ffc3f.woff",
     "static/media/dislike.4c5bf648.svg": "/bitter_react/static/media/dislike.4c5bf648.svg",
     "static/media/home.671555e9.svg": "/bitter_react/static/media/home.671555e9.svg",
     "static/media/like.231952c6.svg": "/bitter_react/static/media/like.231952c6.svg",
@@ -23,7 +24,7 @@
   "entrypoints": [
     "static/js/runtime-main.f13a41c2.js",
     "static/js/2.53f4c8e6.chunk.js",
-    "static/css/main.a9d02bd3.chunk.css",
+    "static/css/main.cbd44091.chunk.css",
     "static/js/main.e3e98b59.chunk.js"
   ]
 }
