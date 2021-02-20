@@ -1,0 +1,51 @@
+.postbox {
+  width: calc(100% - 2px);
+  float: left;
+  border: grey solid 1px;
+  /* border-radius: 4px; */
+}
+
+.postbox div {
+  float: left;
+}
+
+.postbox-pfp {
+  width: 96px;
+  height: 96px;
+}
+
+.postbox-pfp img {
+  border-radius: 50%;
+  margin: 16px;
+}
+
+.postbox-input {
+  width: 480px;
+  margin-top: 20px;
+  margin-bottom: 24px;
+}
+
+.postbox-input textarea {
+  width: 100%;
+  padding: 2px;
+  max-width: 476px;
+  border: 0;
+  resize: none;
+  outline: none;
+  overflow: auto;
+  padding-bottom: 10px;
+  margin-bottom: 5px;
+  background-color: rgb(225, 225, 225);
+}
+
+.postbox-input button {
+  /* width: 72px; */
+  float: right;
+}
+
+#postbox-charcount {
+  float: right;
+  margin-right: 12px;
+  font-size: 12px;
+  margin-top: 3px;
+}

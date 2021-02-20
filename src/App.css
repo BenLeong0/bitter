@@ -37,7 +37,7 @@ a:-webkit-any-link {
 }
 
 #mid-col {
-  max-width: 640px;
+  width: 640px;
   /* background-color: rgb(200, 200, 200); */
 }
 
