@@ -23,7 +23,7 @@ const OptionsBox = (props) => {
   return (
     <div className="options-box">
       {optionList.map((option, index) => (
-        <OptionLink key={index} index={index} {...option} />
+        <OptionLink key={option.title} index={index} {...option} />
       ))}
     </div>
   );
