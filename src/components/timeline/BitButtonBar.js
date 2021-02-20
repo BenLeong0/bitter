@@ -7,6 +7,7 @@ import DislikeButton from "./dislike.svg";
 const BitButtonBar = (props) => {
   const reply = () => {
     console.log(`reply to tweet ${props.index}`);
+    console.log(JSON.stringify(props));
   };
 
   const rebit = () => {

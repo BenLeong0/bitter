@@ -1,7 +1,6 @@
 import React from "react";
-import "./Timeline.css";
-import PostBit from "./PostBit";
-import BitList from "./BitList";
+import PostBit from "../components/Timeline/PostBit";
+import BitList from "../components/Timeline/BitList";
 
 const Timeline = () => {
   return (

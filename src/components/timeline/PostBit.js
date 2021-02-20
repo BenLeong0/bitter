@@ -1,5 +1,6 @@
 import React from "react";
 import PostBoxForm from "./PostBoxForm";
+import "./Postbox.css";
 
 const PostBit = () => {
   return (
