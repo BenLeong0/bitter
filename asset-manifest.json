@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/bitter_react/static/css/main.5a73be5e.chunk.css",
-    "main.js": "/bitter_react/static/js/main.4a68b6b0.chunk.js",
-    "main.js.map": "/bitter_react/static/js/main.4a68b6b0.chunk.js.map",
-    "runtime-main.js": "/bitter_react/static/js/runtime-main.832b48fe.js",
-    "runtime-main.js.map": "/bitter_react/static/js/runtime-main.832b48fe.js.map",
-    "static/js/2.eb8bec9c.chunk.js": "/bitter_react/static/js/2.eb8bec9c.chunk.js",
-    "static/js/2.eb8bec9c.chunk.js.map": "/bitter_react/static/js/2.eb8bec9c.chunk.js.map",
-    "static/js/3.d3127cab.chunk.js": "/bitter_react/static/js/3.d3127cab.chunk.js",
-    "static/js/3.d3127cab.chunk.js.map": "/bitter_react/static/js/3.d3127cab.chunk.js.map",
+    "main.css": "/bitter_react/static/css/main.3082ee7a.chunk.css",
+    "main.js": "/bitter_react/static/js/main.7d8eac90.chunk.js",
+    "main.js.map": "/bitter_react/static/js/main.7d8eac90.chunk.js.map",
+    "runtime-main.js": "/bitter_react/static/js/runtime-main.53b69271.js",
+    "runtime-main.js.map": "/bitter_react/static/js/runtime-main.53b69271.js.map",
+    "static/js/2.998629d8.chunk.js": "/bitter_react/static/js/2.998629d8.chunk.js",
+    "static/js/2.998629d8.chunk.js.map": "/bitter_react/static/js/2.998629d8.chunk.js.map",
+    "static/js/3.302461b5.chunk.js": "/bitter_react/static/js/3.302461b5.chunk.js",
+    "static/js/3.302461b5.chunk.js.map": "/bitter_react/static/js/3.302461b5.chunk.js.map",
     "index.html": "/bitter_react/index.html",
-    "static/css/main.5a73be5e.chunk.css.map": "/bitter_react/static/css/main.5a73be5e.chunk.css.map",
-    "static/js/2.eb8bec9c.chunk.js.LICENSE.txt": "/bitter_react/static/js/2.eb8bec9c.chunk.js.LICENSE.txt",
+    "static/css/main.3082ee7a.chunk.css.map": "/bitter_react/static/css/main.3082ee7a.chunk.css.map",
+    "static/js/2.998629d8.chunk.js.LICENSE.txt": "/bitter_react/static/js/2.998629d8.chunk.js.LICENSE.txt",
     "static/media/App.css": "/bitter_react/static/media/din1451alt G.1f5ffc3f.woff",
     "static/media/dislike.4c5bf648.svg": "/bitter_react/static/media/dislike.4c5bf648.svg",
     "static/media/home.671555e9.svg": "/bitter_react/static/media/home.671555e9.svg",
@@ -22,9 +22,9 @@
     "static/media/user.279444fa.svg": "/bitter_react/static/media/user.279444fa.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.832b48fe.js",
-    "static/js/2.eb8bec9c.chunk.js",
-    "static/css/main.5a73be5e.chunk.css",
-    "static/js/main.4a68b6b0.chunk.js"
+    "static/js/runtime-main.53b69271.js",
+    "static/js/2.998629d8.chunk.js",
+    "static/css/main.3082ee7a.chunk.css",
+    "static/js/main.7d8eac90.chunk.js"
   ]
 }
