@@ -12,7 +12,7 @@ const BitList = (props) => {
   }, []);
 
   const fetchBits = async () => {
-    const data = await fetch("http://localhost:8000/bits/");
+    const data = await fetch(`${props.backend_url}bits/`);
     const items = await data.json();
     setBits(items);
   };

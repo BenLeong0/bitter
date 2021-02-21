@@ -18,7 +18,7 @@ const FindUserForm = () => {
 
   const handleSubmitClick = async (e) => {
     e.preventDefault();
-    console.log(`Submit: ${handle}`);
+    // console.log(`Submit: ${handle}`);
 
     const userExists = () => {
       return true;
@@ -28,6 +28,8 @@ const FindUserForm = () => {
       let userInfo = retrieveUserInfo(handle);
       history.push(`/u/${userInfo.handle}`);
     }
+
+    updateHandle("");
   };
 
   const retrieveUserInfo = (userHandle) => {

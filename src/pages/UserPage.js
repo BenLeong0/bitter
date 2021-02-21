@@ -1,29 +1,41 @@
 import { React, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import UserHeader from "../components/UserPage/UserHeader";
+import UserBitList from "../components/UserPage/UserBitList";
+import "../components/UserPage/UserPage.css";
 
-const UserPage = ({ match }) => {
+const UserPage = (props) => {
   const [user, setUser] = useState({});
-
-  var handle = match.params.handle;
 
   const fetchUser = async (handle) => {
     const fetchUser = await fetch(
-      `http://localhost:8000/user/get?handle=${handle}`
+      `${props.backend_url}user/get?handle=${handle}`
     );
-    const user = await fetchUser.json();
-
-    setUser(user);
+    const data = await fetchUser.json();
+    setUser(data);
+    // console.log(data.user_id);
+    props.setCurrId(data.user_id);
   };
 
-  const history = useHistory();
+  // First load or direct access
+  useEffect(() => {
+    fetchUser(props.match.params.handle);
+  }, []);
 
+  // Update when moving between user pages
+  const history = useHistory();
   useEffect(() => {
     return history.listen((location) => {
       fetchUser(location.pathname.slice(3));
     });
   }, [history]);
 
-  return <div className="user-page">{user.handle}</div>;
+  return (
+    <div className="user-page">
+      <UserHeader {...user} {...props} />
+      <UserBitList {...user} {...props} />
+    </div>
+  );
 };
 
 export default UserPage;

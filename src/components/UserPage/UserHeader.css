@@ -1,0 +1,36 @@
+.user-header {
+}
+
+.user-banner {
+  float: left;
+}
+
+.user-pfp-follow {
+  float: left;
+  width: 600px;
+}
+
+.user-pfp-follow div {
+  float: left;
+}
+
+.user-photo {
+  margin-top: -13%;
+  margin-left: 20px;
+}
+
+.user-photo img {
+  border-radius: 50%;
+}
+
+.user-follow-button {
+  width: 440px;
+}
+
+.user-follow-button button {
+  float: right;
+  width: 120px;
+  height: 40px;
+  font-size: 12px;
+  margin: 10px;
+}

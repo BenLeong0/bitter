@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useState } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -20,6 +20,11 @@ import Timeline from "./pages/Timeline";
 import UserPage from "./pages/UserPage";
 
 const App = (props) => {
+  const backend_url = "http://77.100.149.123:8000/";
+  const [currId, setCurrId] = useState(0);
+  const [myId, setMyId] = useState(1);
+  const [isFollowing, setIsFollowing] = useState(false);
+
   return (
     <Router>
       <div className="App">
@@ -29,16 +34,51 @@ const App = (props) => {
         </div>
         <div id="mid-col" className="main-col">
           <Switch>
-            <Route exact path="/" component={Timeline} />
-            <Route path="/home" component={Timeline} />
-            <Route path="/bitter_react" component={Timeline} />
+            <Route
+              exact
+              path="/"
+              render={(props) => (
+                <Timeline {...props} backend_url={backend_url} />
+              )}
+            />
+            <Route
+              path="/home"
+              render={(props) => (
+                <Timeline {...props} backend_url={backend_url} />
+              )}
+            />
+            <Route
+              path="/bitter_react"
+              render={(props) => (
+                <Timeline {...props} backend_url={backend_url} />
+              )}
+            />
             <Route path="/admin" component={Admin} />
-            <Route path="/u/:handle" component={UserPage} />
+            <Route
+              path="/u/:handle"
+              render={(props) => (
+                <UserPage
+                  {...props}
+                  currId={currId}
+                  setCurrId={setCurrId}
+                  myId={myId}
+                  isFollowing={isFollowing}
+                  setIsFollowing={setIsFollowing}
+                  backend_url={backend_url}
+                />
+              )}
+            />
           </Switch>
         </div>
         <div id="right-col" className="main-col">
           <FindUser />
-          <UserSuggestions />
+          <UserSuggestions
+            currId={currId}
+            myId={myId}
+            isFollowing={isFollowing}
+            setIsFollowing={setIsFollowing}
+            backend_url={backend_url}
+          />
         </div>
       </div>
 

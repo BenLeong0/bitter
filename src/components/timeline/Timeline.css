@@ -1,0 +1,12 @@
+.timeline {
+  width: 600px;
+  margin: 0 20px;
+  background-color: white;
+  height: calc(100vh - 12px);
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.timeline::-webkit-scrollbar {
+  display: none;
+}

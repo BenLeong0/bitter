@@ -1,16 +1,3 @@
-.timeline {
-  width: 600px;
-  margin: 0 20px;
-  background-color: white;
-  height: calc(100vh - 12px);
-  overflow-y: scroll;
-  overflow-x: hidden;
-}
-
-.timeline::-webkit-scrollbar {
-  display: none;
-}
-
 .bit {
   width: 560px;
   margin: 19px 19px 0;

@@ -1,12 +1,13 @@
 import React from "react";
 import PostBit from "../components/Timeline/PostBit";
 import BitList from "../components/Timeline/BitList";
+import "../components/Timeline/Timeline.css";
 
-const Timeline = () => {
+const Timeline = (props) => {
   return (
     <div className="timeline">
-      <PostBit />
-      <BitList />
+      <PostBit {...props} />
+      <BitList {...props} />
     </div>
   );
 };

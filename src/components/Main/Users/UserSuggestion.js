@@ -1,7 +1,12 @@
-import React from "react";
+import { React, useEffect } from "react";
 import { Link } from "react-router-dom";
+import UserFollowButton from "./components/UserFollowButton";
 
 const UserSuggestion = (props) => {
+  // useEffect(() => {
+  //   console.log(props);
+  // }, []);
+
   return (
     <>
       <hr className="solid"></hr>
@@ -17,9 +22,7 @@ const UserSuggestion = (props) => {
             <div className="user-suggestion-handle">@{props.handle}</div>
           </div>
         </Link>
-        <div className="user-suggestion-follow">
-          <button>Follow</button>
-        </div>
+        <UserFollowButton className="user-suggestion-follow" {...props} />
       </div>
     </>
   );
