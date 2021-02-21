@@ -16,36 +16,44 @@ While I have experience with JavaScript and Python, this will be my first time b
 
 ## To-do list
 
-- [] Add card to portfolio
-- [] Each tweet gets its own page w replies
+- [x] Add card to portfolio
+- [ ] Each tweet gets its own page w replies
 
 ### Main page
 
 - [x] Resize post box (border cut off)
-- [] Profile pics
-- [] Interactions counters
-- [] Display name + handle link to user page
+- [ ] Profile pics
+- [ ] Interactions counters
+- [ ] Display name + handle link to user page
 
 ### User pages
 
-- [] Individual pages for each user
-  - [] Display name and banner
-  - [] Profile pic
-  - [] Banner
-  - [] Description
-  - [] Join date
-  - [] Follow button
-  - [] Location?
-  - [] All their tweets
-  - [] All their likes?
-  - [] All their replies
-  - [] Following list
-  - [] Follower list
-  - [] Edit button on own profile
-- [] Same side bars
+- [ ] Individual pages for each user
+  - [x] Display name and banner
+  - [x] Profile pic
+  - [x] Banner
+  - [ ] Description
+  - [ ] Join date
+  - [x] Follow button
+  - [ ] Location?
+  - [x] All their tweets
+  - [ ] All their likes?
+  - [ ] All their replies
+  - [ ] Following list
+  - [ ] Follower list
+  - [ ] Edit button on own profile
+- [x] Same side bars
+
+### Settings
+
+- [ ] Change handle
+- [ ] Change display name
+- [ ] Deactivate account
+- [ ] Delete account (?)
 
 ### Fullstack
 
-- [] Assign functions to all buttons
+- [ ] Assign functions to all buttons
   - Figure out exactly what each should do
   - How do likes/dislikes work?
+- [ ] Index follows by destination_id

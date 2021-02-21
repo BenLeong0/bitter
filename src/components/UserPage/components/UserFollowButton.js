@@ -6,7 +6,7 @@ import UnfollowButton from "./UnfollowButton";
 const UserFollowButton = (props) => {
   const checkIfFollowing = async () => {
     const data = await fetch(
-      `${props.backend_url}is-following/get?source_id=${props.myId}&destination_id=${props.currId}`
+      `${props.API_URL}is-following/get?source_id=${props.myId}&destination_id=${props.currId}`
     );
     const result = await data.json();
     props.setIsFollowing(result);

@@ -16,7 +16,7 @@ const OptionsBox = (props) => {
 
   const optionList = [
     new Option("Home", "/home", HomeLogo),
-    new Option("My Page", "/u/user", UserLogo),
+    new Option("My Page", `/me`, UserLogo),
     new Option("Settings", "/settings", SettingsLogo),
   ];
 

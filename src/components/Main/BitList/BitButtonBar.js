@@ -19,7 +19,7 @@ const BitButtonBar = (props) => {
     formdata.append("username", "userben");
     formdata.append("password", "passwordman");
 
-    fetch(`${props.backend_url}rest-auth/login/`, {
+    fetch(`${props.API_URL}rest-auth/login/`, {
       method: "POST",
       body: formdata,
     })

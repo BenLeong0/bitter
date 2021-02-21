@@ -1,21 +1,20 @@
 import { React, useState, useEffect } from "react";
 import BitList from "../Main/BitList/BitList";
-import "./UserBitList.css";
 
-const UserBitList = (props) => {
+const TimelineBitList = (props) => {
   // fetch list of bits
   const [bits, setBits] = useState([]);
 
   useEffect(() => {
-    if (!props.hasOwnProperty("currId")) {
+    if (!props.hasOwnProperty("myId")) {
       return;
     }
     fetchBits();
-  }, [props.currId]);
+  }, [props.myId]);
 
   const fetchBits = async () => {
     const data = await fetch(
-      `${props.API_URL}bits/user?user_id=${props.currId}`
+      `${props.API_URL}bits/timeline?user_id=${props.myId}`
     );
     const items = await data.json();
     setBits(items);
@@ -26,4 +25,4 @@ const UserBitList = (props) => {
   return <BitList {...props} bits={bits} />;
 };
 
-export default UserBitList;
+export default TimelineBitList;

@@ -7,7 +7,7 @@ const UserSuggestions = (props) => {
 
   // Fetch 3 random users from the database
   const fetchSuggestions = async () => {
-    const data = await fetch(`${props.backend_url}user-suggestions/get`);
+    const data = await fetch(`${props.API_URL}user-suggestions/get`);
     const items = await data.json();
     updateSuggestions(items);
   };

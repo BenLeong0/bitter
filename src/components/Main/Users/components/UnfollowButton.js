@@ -14,7 +14,7 @@ const UnfollowButton = (props) => {
 
     // update db
     fetch(
-      `${props.backend_url}delete-follow/post?source_id=${props.myId}&destination_id=${props.user_id}`,
+      `${props.API_URL}delete-follow/post?source_id=${props.myId}&destination_id=${props.user_id}`,
       { method: "POST" }
     )
       .then((response) => response.text())

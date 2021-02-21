@@ -4,6 +4,11 @@ import { Link } from "react-router-dom";
 
 const Bit = (props) => {
   // convert timestamp to time passed
+
+  // If user_id === props.myId then give option to delete
+
+  // Numbers for interactions
+
   return (
     <div className="bit">
       <Link to={`/u/${props.handle}`}>

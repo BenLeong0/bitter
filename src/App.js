@@ -4,6 +4,7 @@ import {
   Route,
   DefaultRoute,
   Switch,
+  Redirect,
 } from "react-router-dom";
 // import Home from "./pages/Home";
 import Admin from "./pages/Admin";
@@ -18,12 +19,15 @@ import AppTitle from "./components/Main/AppTitle/AppTitle";
 // Pages
 import Timeline from "./pages/Timeline";
 import UserPage from "./pages/UserPage";
+import Settings from "./pages/Settings";
 
 const App = (props) => {
-  const backend_url = "http://77.100.149.123:8000/";
+  const API_URL = "http://77.100.149.123:8000/";
   const [currId, setCurrId] = useState(0);
   const [myId, setMyId] = useState(1);
+  const [myHandle, setMyHandle] = useState("ben");
   const [isFollowing, setIsFollowing] = useState(false);
+  const globalConstants = { currId, myId, isFollowing, API_URL, myHandle };
 
   return (
     <Router>
@@ -37,34 +41,32 @@ const App = (props) => {
             <Route
               exact
               path="/"
-              render={(props) => (
-                <Timeline {...props} backend_url={backend_url} />
-              )}
+              render={(props) => <Timeline {...props} {...globalConstants} />}
             />
+
             <Route
               path="/home"
-              render={(props) => (
-                <Timeline {...props} backend_url={backend_url} />
-              )}
+              render={(props) => <Timeline {...props} {...globalConstants} />}
             />
             <Route
               path="/bitter_react"
-              render={(props) => (
-                <Timeline {...props} backend_url={backend_url} />
-              )}
+              render={(props) => <Timeline {...props} {...globalConstants} />}
             />
+
             <Route path="/admin" component={Admin} />
+            <Route path="/settings" component={Settings} />
+
+            <Route exact path="/me">
+              <Redirect to={`/u/${myHandle}`} />
+            </Route>
             <Route
               path="/u/:handle"
               render={(props) => (
                 <UserPage
                   {...props}
-                  currId={currId}
+                  {...globalConstants}
                   setCurrId={setCurrId}
-                  myId={myId}
-                  isFollowing={isFollowing}
                   setIsFollowing={setIsFollowing}
-                  backend_url={backend_url}
                 />
               )}
             />
@@ -73,11 +75,9 @@ const App = (props) => {
         <div id="right-col" className="main-col">
           <FindUser />
           <UserSuggestions
-            currId={currId}
-            myId={myId}
-            isFollowing={isFollowing}
+            {...props}
+            {...globalConstants}
             setIsFollowing={setIsFollowing}
-            backend_url={backend_url}
           />
         </div>
       </div>

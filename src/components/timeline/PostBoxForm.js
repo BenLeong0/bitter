@@ -1,7 +1,7 @@
 import { React, useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 
-const PostBoxForm = () => {
+const PostBoxForm = (props) => {
   const [post, updatePost] = useState("");
   const [remainingChars, updateChars] = useState(140);
   const [charCounterColour, changeCounterColour] = useState("black");
@@ -36,8 +36,20 @@ const PostBoxForm = () => {
       console.error("Invalid post length.");
       return;
     }
-    console.log(`Submit: ${post}`);
-    console.log(remainingChars);
+    const formData = new FormData();
+    formData.append("user_id", props.myId);
+    formData.append("content", post);
+
+    var requestOptions = {
+      method: "POST",
+      body: formData,
+      redirect: "follow",
+    };
+
+    fetch(`${props.API_URL}bit/post`, requestOptions)
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.log("error", error));
 
     updatePost("");
   };

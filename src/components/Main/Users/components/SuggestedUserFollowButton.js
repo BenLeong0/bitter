@@ -2,12 +2,12 @@ import { React, useState, useEffect } from "react";
 import FollowButton from "./FollowButton";
 import UnfollowButton from "./UnfollowButton";
 
-const UserFollowButton = (props) => {
+const SuggestedUserFollowButton = (props) => {
   const [followingSuggested, setFollowingSuggested] = useState(false);
 
   const checkIfFollowing = async () => {
     const data = await fetch(
-      `${props.backend_url}is-following/get?source_id=${props.myId}&destination_id=${props.user_id}`
+      `${props.API_URL}is-following/get?source_id=${props.myId}&destination_id=${props.user_id}`
     );
     const result = await data.json();
     setFollowingSuggested(result);
@@ -40,4 +40,4 @@ const UserFollowButton = (props) => {
   );
 };
 
-export default UserFollowButton;
+export default SuggestedUserFollowButton;

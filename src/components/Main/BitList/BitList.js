@@ -3,19 +3,9 @@ import Bit from "./Bit";
 import "./Bits.css";
 
 const BitList = (props) => {
-  // retrieve bits from backend
+  // retrieve bits from props
 
-  const [bits, setBits] = useState([]);
-
-  useEffect(() => {
-    fetchBits();
-  }, []);
-
-  const fetchBits = async () => {
-    const data = await fetch(`${props.backend_url}bits/`);
-    const items = await data.json();
-    setBits(items);
-  };
+  var bits = props.bits;
 
   return (
     <>
