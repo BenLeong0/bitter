@@ -15,16 +15,18 @@
 }
 
 .user-photo {
-  margin-top: -13%;
+  margin-top: -16%;
   margin-left: 20px;
 }
 
 .user-photo img {
   border-radius: 50%;
+  border: white solid 4px;
 }
 
 .user-follow-button {
-  width: 440px;
+  width: 432px;
+  /* 600 - pfp.leftmargin - pfp.border - pfp.width */
 }
 
 .user-follow-button button {
@@ -33,4 +35,46 @@
   height: 40px;
   font-size: 12px;
   margin: 10px;
+}
+
+.user-info {
+  width: 600px;
+  float: left;
+}
+
+.user-displayname,
+.user-handle {
+  text-align: left;
+  margin-left: 20px;
+}
+
+.user-displayname {
+  font-weight: 900;
+  font-size: 22px;
+}
+
+.user-handle {
+  color: grey;
+  font-size: 16px;
+}
+
+.user-handle::before {
+  content: "@";
+}
+
+.user-bio {
+  width: 540px;
+  margin: 10px 30px;
+  text-align: left;
+  font-size: 14px;
+}
+
+.user-tabs div {
+  float: left;
+  font-size: 14px;
+  margin-left: 25px;
+}
+
+.user-current-tab {
+  text-decoration: underline;
 }

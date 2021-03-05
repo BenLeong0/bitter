@@ -10,10 +10,12 @@ const UserBitList = (props) => {
     if (!props.hasOwnProperty("currId")) {
       return;
     }
+    console.log(props.currId);
     fetchBits();
   }, [props.currId]);
 
   const fetchBits = async () => {
+    console.log("YO" + props.currId);
     const data = await fetch(
       `${props.API_URL}bits/user?user_id=${props.currId}`
     );

@@ -4,6 +4,7 @@ import "./UserHeader.css";
 import UserBanner from "./components/UserBanner";
 import UserPhoto from "./components/UserPhoto";
 import UserFollowButton from "./components/UserFollowButton";
+import UserInfo from "./components/UserInfo";
 
 const UserHeader = (props) => {
   return (
@@ -13,7 +14,7 @@ const UserHeader = (props) => {
         <UserPhoto />
         <UserFollowButton {...props} className="user-follow-button" />
       </div>
-      yo {props.handle}
+      <UserInfo {...props} />
     </div>
   );
 };

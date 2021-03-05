@@ -22,7 +22,7 @@ import UserPage from "./pages/UserPage";
 import Settings from "./pages/Settings";
 
 const App = (props) => {
-  const API_URL = "http://77.100.149.123:8000/";
+  const API_URL = "http://localhost:8000/";
   const [currId, setCurrId] = useState(0);
   const [myId, setMyId] = useState(1);
   const [myHandle, setMyHandle] = useState("ben");

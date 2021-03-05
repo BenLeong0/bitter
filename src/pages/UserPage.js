@@ -7,13 +7,18 @@ import "../components/UserPage/UserPage.css";
 
 const UserPage = (props) => {
   const [user, setUser] = useState({});
+  const [pageState, setPageState] = useState(
+    <UserBitList {...user} {...props} />
+  );
 
-  // Get profile info about user (display name, bio, etc)
+  // Get profile info about user by handle (display name, bio, etc), save in -user- and save to global -curr_id-
   const fetchUser = async (handle) => {
     const fetchUser = await fetch(`${props.API_URL}user/get?handle=${handle}`);
     const data = await fetchUser.json();
     setUser(data);
+    console.log(data);
     props.setCurrId(data.user_id);
+    console.log("wo" + props.currId);
   };
 
   // Load info (first access)
@@ -29,12 +34,28 @@ const UserPage = (props) => {
     });
   }, [history]);
 
+  function updatePageState(stateId) {
+    if (stateId === 0) {
+      // Posts
+      setPageState(<UserBitList {...user} {...props} replies={false} />);
+    } else if (stateId === 1) {
+      // Posts and replies
+      setPageState(<UserBitList {...user} {...props} replies={true} />);
+    } else if (stateId === 2) {
+      // following list
+    } else if (stateId === 3) {
+      // followers list
+    } else if (stateId === 4) {
+      // like list
+    }
+  }
+
   return (
     <div className="user-page">
       {props.currId !== -1 ? (
         <>
-          <UserHeader {...user} {...props} />{" "}
-          <UserBitList {...user} {...props} />{" "}
+          <UserHeader {...user} {...props} updatePageState={updatePageState} />
+          {pageState}
         </>
       ) : (
         <UserNotFound {...props} />
