@@ -7,23 +7,24 @@ import SettingsLogo from "./settings.svg";
 
 const OptionsBox = (props) => {
   class Option {
-    constructor(title, link, logo) {
+    constructor(title, link, logo, requireLogin) {
       this.title = title;
       this.link = link;
       this.logo = logo;
+      this.requireLogin = requireLogin;
     }
   }
 
   const optionList = [
-    new Option("Home", "/home", HomeLogo),
-    new Option("My Page", `/me`, UserLogo),
-    new Option("Settings", "/settings", SettingsLogo),
+    new Option("Home", "/home", HomeLogo, false),
+    new Option("My Page", "/me", UserLogo, true),
+    new Option("Settings", "/settings", SettingsLogo, true),
   ];
 
   return (
     <div className="options-box">
-      {optionList.map((option, index) => (
-        <OptionLink key={option.title} index={index} {...option} />
+      {optionList.map((option) => (
+        <OptionLink key={option.title} {...option} />
       ))}
     </div>
   );

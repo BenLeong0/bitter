@@ -6,11 +6,8 @@ const UserNotFound = (props) => {
 
   return (
     <div className="user-not-found">
-      User{" "}
-      <span className="user-not-found-handle">
-        @{props.match.params.handle}
-      </span>{" "}
-      could not be found.
+      User <span className="user-not-found-handle">@{props.handle}</span> could
+      not be found.
     </div>
   );
 };

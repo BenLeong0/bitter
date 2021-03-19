@@ -4,6 +4,7 @@ import UserSuggestion from "./UserSuggestion";
 
 const UserSuggestions = (props) => {
   const [suggestedUsers, updateSuggestions] = useState([]);
+  console.log(props);
 
   // Fetch 3 random users from the database
   const fetchSuggestions = async () => {

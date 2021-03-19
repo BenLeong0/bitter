@@ -5,11 +5,14 @@ const TimelineBitList = (props) => {
   // fetch list of bits
   const [bits, setBits] = useState([]);
 
+  console.log("list", props);
+
   useEffect(() => {
     if (!props.hasOwnProperty("myId")) {
       return;
     }
     fetchBits();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.myId]);
 
   const fetchBits = async () => {
