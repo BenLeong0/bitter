@@ -2,7 +2,7 @@ import React from "react";
 import "./AppTitle.css";
 import { Link } from "react-router-dom";
 
-const AppTitle = () => {
+const AppTitle: React.FC<{}> = () => {
   return (
     <div className="app-title-box">
       <Link to="/home">

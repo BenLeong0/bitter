@@ -14,6 +14,17 @@ The stack will consist of:
 
 While I have experience with JavaScript and Python, this will be my first time building a full-stack application, and my first time using Django. Additionally, this will be my first time implementing SQL knowledge that I have developed but not used before.
 
+## CURRENT OVERHAUL
+
+Current to-do list as I move the entire project to AWS, and implement TypeScript.
+
+- [ ] Convert files to TS
+  - [x] Change file extensions to `.tsx` and deal with errors
+  - [ ] Specify type of each component (`React.FC`)
+  - [ ] Identify props required for each component
+    - No props => `<{}>`
+  - [ ] Type each variable
+
 ## To-do list
 
 - [x] Add card to portfolio
