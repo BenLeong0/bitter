@@ -2,7 +2,7 @@ import React from "react";
 import BitButtonBar from "./BitButtonBar";
 import { Link } from "react-router-dom";
 
-interface Props {
+interface BitInfo {
   content: string;
   dislikes: number;
   display_name: string;
@@ -71,9 +71,9 @@ function timestampFormat(bitTime: Date): string {
   return "less than a second"; //'just now' //or other string you like;
 }
 
-const Bit: React.FC<Props> = (props) => {
+const Bit: React.FC<BitInfo> = (bitInfo) => {
   // convert timestamp to time passed
-  const bitTime: Date = new Date(props.post_time);
+  const bitTime: Date = new Date(bitInfo.post_time);
   const timeString = timestampFormat(bitTime);
 
   // If user_id === props.myId then give option to delete
@@ -81,7 +81,7 @@ const Bit: React.FC<Props> = (props) => {
   // Numbers for interactions
   return (
     <div className="bit">
-      <Link to={`/u/${props.handle}`}>
+      <Link to={`/u/${bitInfo.handle}`}>
         <div className="bit-pfp">
           <img src={"https://via.placeholder.com/48"} alt="profile pic"></img>
         </div>
@@ -89,17 +89,17 @@ const Bit: React.FC<Props> = (props) => {
 
       <div className="bit-content">
         <div className="bit-info">
-          <Link to={`/u/${props.handle}`}>
-            <span className="bit-info-displayname">{props.display_name}</span>
-            <span className="bit-info-handle">@{props.handle}</span>
+          <Link to={`/u/${bitInfo.handle}`}>
+            <span className="bit-info-displayname">{bitInfo.display_name}</span>
+            <span className="bit-info-handle">@{bitInfo.handle}</span>
           </Link>
           ・
-          <Link to={`/t/${props.post_id}`}>
+          <Link to={`/t/${bitInfo.post_id}`}>
             <span className="bit-info-time">{timeString}</span>
           </Link>
         </div>
-        <div className="bit-text"> {props.content} </div>
-        <BitButtonBar {...props} />
+        <div className="bit-text"> {bitInfo.content} </div>
+        <BitButtonBar {...bitInfo} />
       </div>
     </div>
   );

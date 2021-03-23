@@ -16,7 +16,7 @@ interface User {
   following_count?: number;
 }
 
-const UserPage = () => {
+const UserPage: React.FC<{}> = () => {
   const [user, setUser] = useState<User>({ user_id: -1 });
   const [listState, setListState] = useState(<UserBitList replies={false} />);
 

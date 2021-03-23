@@ -1,8 +1,6 @@
 import React from "react";
 
-interface Props {}
-
-const SelfUnfollowButton: React.FC<Props> = () => {
+const SelfUnfollowButton: React.FC<{}> = () => {
   return (
     <button
       className="button-primary"

@@ -2,7 +2,7 @@ import React from "react";
 import PostBoxForm from "./PostBoxForm";
 import "./Postbox.css";
 
-const PostBit = () => {
+const PostBit: React.FC<{}> = () => {
   return (
     <div className="postbox">
       <div className="postbox-pfp">

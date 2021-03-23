@@ -1,11 +1,7 @@
 import React, { useContext } from "react";
 import { AccountContext } from "../../Account";
 
-interface Props {
-  user_id: number;
-}
-
-const FollowButton: React.FC<Props> = ({ user_id }) => {
+const FollowButton: React.FC<{ user_id: number }> = ({ user_id }) => {
   const {
     myId,
     setIsFollowing,

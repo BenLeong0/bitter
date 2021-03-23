@@ -2,7 +2,7 @@ import React from "react";
 import Bit from "./Bit";
 import "./Bits.css";
 
-interface BitType {
+interface BitInfo {
   content: string;
   dislikes: number;
   display_name: string;
@@ -19,7 +19,7 @@ interface BitType {
 }
 
 interface Props {
-  bits: Array<BitType>;
+  bits: Array<BitInfo>;
 }
 
 const BitList: React.FC<Props> = ({ bits }) => {

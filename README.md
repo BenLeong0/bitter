@@ -20,7 +20,7 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
 
 - [ ] Convert files to TS
   - [x] Change file extensions to `.tsx` and deal with errors
-  - [ ] Specify type of each component (`React.FC`)
+  - [x] Specify type of each component (`React.FC`)
   - [ ] Identify props required for each component
     - No props => `<{}>`
   - [ ] Type each variable
@@ -54,6 +54,8 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
   - [ ] Follower list
   - [ ] Edit button on own profile
 - [x] Same side bars
+- [ ] Message if no tweets found
+  - For each list
 
 ### Settings
 

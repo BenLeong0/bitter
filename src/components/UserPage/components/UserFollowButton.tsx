@@ -4,11 +4,7 @@ import UnfollowButton from "./UnfollowButton";
 import SelfUnfollowButton from "./SelfUnfollowButton";
 import { AccountContext } from "../../Account";
 
-interface Props {
-  user_id: number;
-}
-
-const UserFollowButton: React.FC<Props> = ({ user_id }) => {
+const UserFollowButton: React.FC<{ user_id: number }> = ({ user_id }) => {
   const {
     myId,
     isFollowing,

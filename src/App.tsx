@@ -22,7 +22,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import PrivateRoute from "./PrivateRoute";
 
-const App = (props: any) => {
+const App: React.FC<{}> = () => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true);
   const myHandle = "ben";
 

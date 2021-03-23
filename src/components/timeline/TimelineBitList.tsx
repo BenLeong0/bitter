@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { AccountContext } from "../Account";
 import BitList from "../Main/BitList/BitList";
 
-const TimelineBitList = () => {
+const TimelineBitList: React.FC<{}> = () => {
   // fetch list of bits
   const [bits, setBits] = useState([]);
 

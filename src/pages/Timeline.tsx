@@ -3,7 +3,7 @@ import PostBit from "../components/Timeline/PostBit";
 import TimelineBitList from "../components/Timeline/TimelineBitList";
 import "../components/Timeline/Timeline.css";
 
-const Timeline = () => {
+const Timeline: React.FC<{}> = () => {
   return (
     <div className="timeline">
       <PostBit />

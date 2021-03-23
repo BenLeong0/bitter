@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import { AccountContext } from "../Account";
 
-const PostBoxForm = () => {
+const PostBoxForm: React.FC<{}> = () => {
   const { API_URL, myId } = useContext(AccountContext);
 
   const [post, updatePost] = useState<string>("");

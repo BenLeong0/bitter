@@ -1,10 +1,6 @@
 import React from "react";
 
-interface Props {
-  user_id: number | null;
-}
-
-const UserBanner: React.FC<Props> = ({ user_id }) => {
+const UserBanner: React.FC<{ user_id: number }> = ({ user_id }) => {
   const imageHeight: number = 150;
 
   return (

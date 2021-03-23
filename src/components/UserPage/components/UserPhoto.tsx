@@ -1,10 +1,6 @@
 import React from "react";
 
-interface Props {
-  user_id: number | null;
-}
-
-const UserPhoto: React.FC<Props> = ({ user_id }) => {
+const UserPhoto: React.FC<{ user_id: number }> = ({ user_id }) => {
   const imageHeight: number = 140;
 
   return (

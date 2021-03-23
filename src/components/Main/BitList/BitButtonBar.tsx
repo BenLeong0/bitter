@@ -6,31 +6,26 @@ import DislikeButton from "./dislike.svg";
 import { AccountContext } from "../../Account";
 
 interface BitInfo {
-  content: string;
   dislikes: number;
-  display_name: string;
-  handle: string;
   index: number;
   likes: number;
   post_id: number;
-  post_time: string;
   replies: number;
-  reply_to: number;
   reposts: number;
-  status: number;
-  user_id: number;
 }
 
 const BitButtonBar: React.FC<BitInfo> = (props) => {
+  console.log(props);
+
   const { API_URL } = useContext(AccountContext);
 
   const reply = () => {
-    console.log(`reply to tweet ${props.index}`);
+    console.log(`reply to tweet ${props.post_id}`);
     console.log(JSON.stringify(props));
   };
 
   const rebit = () => {
-    console.log(`rebit tweet ${props.index}`);
+    console.log(`rebit tweet ${props.post_id}`);
   };
 
   const like = async () => {
@@ -52,7 +47,7 @@ const BitButtonBar: React.FC<BitInfo> = (props) => {
   };
 
   const dislike = () => {
-    console.log(`dislike tweet ${props.index}`);
+    console.log(`dislike tweet ${props.post_id}`);
   };
 
   return (
