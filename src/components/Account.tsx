@@ -12,16 +12,16 @@ import Pool from "../UserPool";
 //   getSession: () => Promise<void>;
 //   logout: () => void;
 //   isLoggedIn: boolean;
-//   setIsLoggedIn: (status: boolean) => void;
+//   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 //   checkIfFollowing: (
 //     sourceId: number,
 //     destinationId: number
 //   ) => Promise<boolean>;
 //   currId: number;
-//   setCurrId: (id: number) => void;
+//   setCurrId: React.Dispatch<React.SetStateAction<number>>;
 //   API_URL: string;
 //   isFollowing: boolean;
-//   setIsFollowing: (status: boolean) => void;
+//   setIsFollowing: React.Dispatch<React.SetStateAction<boolean>>;
 //   myId: number;
 //   createFollowEdge: (sourceId: number, destinationId: number) => Promise<void>;
 //   deleteFollowEdge: (sourceId: number, destinationId: number) => Promise<void>;
@@ -29,7 +29,7 @@ import Pool from "../UserPool";
 
 interface Props {
   isLoggedIn: boolean;
-  setIsLoggedIn: (status: boolean) => void;
+  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
   myHandle: string;
   children: any;
 }
@@ -42,15 +42,13 @@ const Account: React.FC<Props> = ({
   myHandle,
   children,
 }) => {
-  console.log(children);
+  const API_URL: string = "http://localhost:8000/";
 
-  const API_URL = "http://localhost:8000/";
-
-  const myId = 1;
+  const myId: number = 1;
 
   // Info about current user being viewed, i.e. owner of /u/handle
-  const [currId, setCurrId] = useState(0);
-  const [isFollowing, setIsFollowing] = useState(false);
+  const [currId, setCurrId] = useState<number>(0);
+  const [isFollowing, setIsFollowing] = useState<boolean>(false);
 
   const checkIfFollowing = async (sourceId: number, destinationId: number) => {
     const data = await fetch(

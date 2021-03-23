@@ -9,11 +9,11 @@ interface Props {
 
 const PrivateRoute: React.FC<Props> = ({ Component, path }) => {
   // isLoggedIn in props please!
-  const { isLoggedIn } = useContext(AccountContext);
+  const { isLoggedIn }: { isLoggedIn: boolean } = useContext(AccountContext);
 
   return (
     <Route
-      render={(props) =>
+      render={() =>
         isLoggedIn === true ? (
           <div id="mid-col" className="main-col">
             <Component />

@@ -2,11 +2,29 @@ import React, { useState, useEffect, useContext } from "react";
 import { AccountContext } from "../Account";
 import BitList from "../Main/BitList/BitList";
 
+interface BitInfo {
+  content: string;
+  dislikes: number;
+  display_name: string;
+  handle: string;
+  index: number;
+  likes: number;
+  post_id: number;
+  post_time: string;
+  replies: number;
+  reply_to: number;
+  reposts: number;
+  status: number;
+  user_id: number;
+}
+
 const TimelineBitList: React.FC<{}> = () => {
   // fetch list of bits
-  const [bits, setBits] = useState([]);
+  const [bits, setBits] = useState<Array<BitInfo>>([]);
 
-  const { myId, API_URL } = useContext(AccountContext);
+  const { API_URL, myId }: { API_URL: string; myId: number } = useContext(
+    AccountContext
+  );
 
   useEffect(() => {
     fetchBits();
@@ -15,10 +33,9 @@ const TimelineBitList: React.FC<{}> = () => {
 
   const fetchBits = async () => {
     const data = await fetch(`${API_URL}bits/timeline?user_id=${myId}`);
-    const items = await data.json();
+    const items: Array<BitInfo> = await data.json();
     setBits(items);
   };
-  // bits = [bit1, bit2, ....]
 
   // pass into BitList
   return <BitList bits={bits} />;

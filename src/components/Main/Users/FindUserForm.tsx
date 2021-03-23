@@ -21,22 +21,8 @@ const FindUserForm: React.FC<{}> = () => {
 
   const handleSubmitClick = async (e: any) => {
     e.preventDefault();
-    // console.log(`Submit: ${handle}`);
-
-    const userExists = () => {
-      return true;
-    };
-
-    if (userExists()) {
-      let userInfo = retrieveUserInfo(handle);
-      history.push(`/u/${userInfo.handle}`);
-    }
-
+    history.push(`/u/${handle}`);
     updateHandle("");
-  };
-
-  const retrieveUserInfo = (userHandle: string) => {
-    return { handle: userHandle };
   };
 
   return (

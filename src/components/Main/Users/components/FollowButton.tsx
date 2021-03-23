@@ -8,9 +8,21 @@ type Props = {
 
 const FollowButton: React.FC<Props> = (props) => {
   const { setIsFollowingSuggested, user_id } = props;
-  const { myId, currId, setIsFollowing, createFollowEdge } = useContext(
-    AccountContext
-  );
+
+  const {
+    myId,
+    currId,
+    setIsFollowing,
+    createFollowEdge,
+  }: {
+    myId: number;
+    currId: number;
+    setIsFollowing: React.Dispatch<React.SetStateAction<boolean>>;
+    createFollowEdge: (
+      sourceId: number,
+      destinationId: number
+    ) => Promise<void>;
+  } = useContext(AccountContext);
 
   const follow = async () => {
     setIsFollowingSuggested(true);

@@ -19,8 +19,6 @@ interface BitInfo {
 }
 
 function timestampFormat(bitTime: Date): string {
-  // TIP: to find current time in milliseconds, use:
-  // var  current_time_milliseconds = new Date().getTime();
   const milliseconds: number = Date.now() - bitTime.getTime(); // Difference in milliseconds
 
   const months: Array<string> = [
@@ -38,9 +36,9 @@ function timestampFormat(bitTime: Date): string {
     "Dec ",
   ];
 
-  var temp = Math.floor(milliseconds / 1000);
+  var temp: number = Math.floor(milliseconds / 1000);
 
-  var days = Math.floor((temp %= 31536000) / 86400);
+  var days: number = Math.floor((temp %= 31536000) / 86400);
   if (days) {
     // Full date if over a month ago, show year if not current year
     if (days > 30) {
@@ -56,15 +54,15 @@ function timestampFormat(bitTime: Date): string {
 
     return days + "d";
   }
-  var hours = Math.floor((temp %= 86400) / 3600);
+  var hours: number = Math.floor((temp %= 86400) / 3600);
   if (hours) {
     return hours + "h";
   }
-  var minutes = Math.floor((temp %= 3600) / 60);
+  var minutes: number = Math.floor((temp %= 3600) / 60);
   if (minutes) {
     return minutes + "m";
   }
-  var seconds = temp % 60;
+  var seconds: number = temp % 60;
   if (seconds) {
     return seconds + "s";
   }
@@ -74,7 +72,7 @@ function timestampFormat(bitTime: Date): string {
 const Bit: React.FC<BitInfo> = (bitInfo) => {
   // convert timestamp to time passed
   const bitTime: Date = new Date(bitInfo.post_time);
-  const timeString = timestampFormat(bitTime);
+  const timeString: string = timestampFormat(bitTime);
 
   // If user_id === props.myId then give option to delete
 

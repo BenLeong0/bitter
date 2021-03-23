@@ -15,8 +15,6 @@ interface BitInfo {
 }
 
 const BitButtonBar: React.FC<BitInfo> = (props) => {
-  console.log(props);
-
   const { API_URL } = useContext(AccountContext);
 
   const reply = () => {
@@ -29,7 +27,7 @@ const BitButtonBar: React.FC<BitInfo> = (props) => {
   };
 
   const like = async () => {
-    var formdata = new FormData();
+    var formdata: FormData = new FormData();
     formdata.append("username", "userben");
     formdata.append("password", "passwordman");
 

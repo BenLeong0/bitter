@@ -9,10 +9,15 @@ const OptionsBox: React.FC<{}> = () => {
   class Option {
     title: string;
     link: string;
-    logo: any;
+    logo: string; // hmmm
     requireLogin: boolean;
 
-    constructor(title: string, link: string, logo: any, requireLogin: boolean) {
+    constructor(
+      title: string,
+      link: string,
+      logo: string,
+      requireLogin: boolean
+    ) {
       this.title = title;
       this.link = link;
       this.logo = logo;

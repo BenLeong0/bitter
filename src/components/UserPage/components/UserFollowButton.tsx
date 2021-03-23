@@ -17,7 +17,7 @@ const UserFollowButton: React.FC<{ user_id: number }> = ({ user_id }) => {
       sourceId: number,
       destinationId: number
     ) => Promise<boolean>;
-    setIsFollowing: (status: boolean) => void;
+    setIsFollowing: React.Dispatch<React.SetStateAction<boolean>>;
   } = useContext(AccountContext);
 
   // Change follow button when loading page

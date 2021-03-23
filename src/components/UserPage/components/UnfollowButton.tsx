@@ -7,9 +7,8 @@ const UnfollowButton: React.FC<{ user_id: number }> = ({ user_id }) => {
     setIsFollowing,
     deleteFollowEdge,
   }: {
-    currId: number;
     myId: number;
-    setIsFollowing: (isFollowing: boolean) => void;
+    setIsFollowing: React.Dispatch<React.SetStateAction<boolean>>;
     deleteFollowEdge: (
       sourceId: number,
       destinationId: number
@@ -20,7 +19,9 @@ const UnfollowButton: React.FC<{ user_id: number }> = ({ user_id }) => {
     setIsFollowing(false);
     // update db
     deleteFollowEdge(myId, user_id);
+
     // Authenticate user first + in request!
+
     // Pass through apikey, lambda to compare to cognito
   };
 

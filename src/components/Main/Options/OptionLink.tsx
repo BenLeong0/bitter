@@ -5,7 +5,7 @@ import { AccountContext } from "../../Account";
 interface Option {
   title: string;
   link: string;
-  logo: any;
+  logo: string;
   requireLogin: boolean;
 }
 

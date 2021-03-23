@@ -3,7 +3,9 @@ import TextareaAutosize from "react-textarea-autosize";
 import { AccountContext } from "../Account";
 
 const PostBoxForm: React.FC<{}> = () => {
-  const { API_URL, myId } = useContext(AccountContext);
+  const { API_URL, myId }: { API_URL: string; myId: number } = useContext(
+    AccountContext
+  );
 
   const [post, updatePost] = useState<string>("");
   const [remainingChars, updateChars] = useState<number>(140);
@@ -42,8 +44,9 @@ const PostBoxForm: React.FC<{}> = () => {
       console.error("Invalid post length.");
       return;
     }
+
     const formData = new FormData();
-    formData.append("user_id", myId);
+    formData.append("user_id", String(myId));
     formData.append("content", post);
 
     var requestOptions = {

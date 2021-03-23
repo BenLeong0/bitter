@@ -18,11 +18,21 @@ interface User {
 
 const UserPage: React.FC<{}> = () => {
   const [user, setUser] = useState<User>({ user_id: -1 });
-  const [listState, setListState] = useState(<UserBitList replies={false} />);
+  const [listState, setListState] = useState<any>(
+    <UserBitList replies={false} />
+  );
 
-  const { API_URL, currId, setCurrId } = useContext(AccountContext);
+  const {
+    API_URL,
+    currId,
+    setCurrId,
+  }: {
+    API_URL: string;
+    currId: number;
+    setCurrId: React.Dispatch<React.SetStateAction<number>>;
+  } = useContext(AccountContext);
 
-  const handle = useLocation().pathname.slice(3);
+  const handle: string = useLocation().pathname.slice(3);
 
   // Database call for user by handle
   const fetchUser = async (handle: string) => {
@@ -46,10 +56,11 @@ const UserPage: React.FC<{}> = () => {
       fetchUser(location.pathname.slice(3));
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [history]);
+  }, []);
+  // }, [history]);
 
   // Change view between bits / bits+replies / following / followers / likes
-  function updatePageState(stateId: number) {
+  function updatePageState(stateId: number): void {
     if (stateId === 0) {
       // Posts
       setListState(<UserBitList replies={false} />);
@@ -67,7 +78,6 @@ const UserPage: React.FC<{}> = () => {
       //
     }
   }
-  console.log("wowowowwo", user);
 
   return (
     <div className="user-page">

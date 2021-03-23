@@ -24,7 +24,7 @@ import PrivateRoute from "./PrivateRoute";
 
 const App: React.FC<{}> = () => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true);
-  const myHandle = "ben";
+  const myHandle: string = "ben";
 
   return (
     <Account

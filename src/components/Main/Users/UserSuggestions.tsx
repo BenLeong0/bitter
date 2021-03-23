@@ -20,7 +20,7 @@ const UserSuggestions: React.FC<{}> = () => {
   // Fetch 3 random users from the database
   const fetchSuggestions = async () => {
     const data = await fetch(`${API_URL}user-suggestions/get`);
-    const items = await data.json();
+    const items: Array<User> = await data.json();
     updateSuggestions(items);
   };
 

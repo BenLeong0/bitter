@@ -27,7 +27,9 @@ const UserBitList: React.FC<Props> = ({ replies }) => {
   // fetch list of bits
   const [bits, setBits] = useState<Array<Bit>>([]);
 
-  const { API_URL, currId } = useContext(AccountContext);
+  const { API_URL, currId }: { API_URL: string; currId: number } = useContext(
+    AccountContext
+  );
 
   // Fetch posts every time the user changes
   useEffect(() => {
@@ -36,8 +38,8 @@ const UserBitList: React.FC<Props> = ({ replies }) => {
   }, [currId]);
 
   const fetchBits = async () => {
-    const data = await fetch(`${API_URL}bits/user?user_id=${currId}`);
-    const items = await data.json();
+    const data: Response = await fetch(`${API_URL}bits/user?user_id=${currId}`);
+    const items: Array<Bit> = await data.json();
     setBits(items);
   };
 

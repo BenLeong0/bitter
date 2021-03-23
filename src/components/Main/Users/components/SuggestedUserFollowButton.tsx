@@ -9,7 +9,9 @@ interface Props {
 }
 
 const SuggestedUserFollowButton: React.FC<Props> = ({ className, user_id }) => {
-  const [isFollowingSuggested, setIsFollowingSuggested] = useState(false);
+  const [isFollowingSuggested, setIsFollowingSuggested] = useState<boolean>(
+    false
+  );
 
   const {
     checkIfFollowing,

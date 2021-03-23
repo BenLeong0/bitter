@@ -8,9 +8,21 @@ type Props = {
 
 const UnfollowButton: React.FC<Props> = (props) => {
   const { setIsFollowingSuggested, user_id } = props;
-  const { myId, currId, setIsFollowing, deleteFollowEdge } = useContext(
-    AccountContext
-  );
+
+  const {
+    myId,
+    currId,
+    setIsFollowing,
+    deleteFollowEdge,
+  }: {
+    myId: number;
+    currId: number;
+    setIsFollowing: React.Dispatch<React.SetStateAction<boolean>>;
+    deleteFollowEdge: (
+      sourceId: number,
+      destinationId: number
+    ) => Promise<void>;
+  } = useContext(AccountContext);
 
   const unfollow = async () => {
     setIsFollowingSuggested(false);

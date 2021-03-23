@@ -8,7 +8,7 @@ const FollowButton: React.FC<{ user_id: number }> = ({ user_id }) => {
     createFollowEdge,
   }: {
     myId: number;
-    setIsFollowing: (isFollowing: boolean) => void;
+    setIsFollowing: React.Dispatch<React.SetStateAction<boolean>>;
     createFollowEdge: (
       sourceId: number,
       destinationId: number
@@ -19,7 +19,9 @@ const FollowButton: React.FC<{ user_id: number }> = ({ user_id }) => {
     setIsFollowing(true);
     // update db
     createFollowEdge(myId, user_id);
+
     // Authenticate user first + in request!
+
     // Pass through apikey, lambda to compare to cognito
   };
 
