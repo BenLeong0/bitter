@@ -18,22 +18,42 @@ interface Props {
   user_id: number;
 }
 
-function millisecondsToStr(milliseconds: number): string {
+function timestampFormat(bitTime: Date): string {
   // TIP: to find current time in milliseconds, use:
   // var  current_time_milliseconds = new Date().getTime();
+  const milliseconds: number = Date.now() - bitTime.getTime(); // Difference in milliseconds
 
-  function numberEnding(number: number) {
-    return number > 1 ? "s" : "";
-  }
+  const months: Array<string> = [
+    "Jan ",
+    "Feb ",
+    "Mar ",
+    "Apr ",
+    "May ",
+    "Jun ",
+    "Jul ",
+    "Aug ",
+    "Sep ",
+    "Oct ",
+    "Nov ",
+    "Dec ",
+  ];
 
   var temp = Math.floor(milliseconds / 1000);
-  var years = Math.floor(temp / 31536000);
-  if (years) {
-    return years + " year" + numberEnding(years);
-  }
-  //TODO: Months! Maybe weeks?
+
   var days = Math.floor((temp %= 31536000) / 86400);
   if (days) {
+    // Full date if over a month ago, show year if not current year
+    if (days > 30) {
+      const day: string = String(bitTime.getDay());
+      const month: string = months[bitTime.getMonth()];
+      const year: string =
+        bitTime.getFullYear() === new Date().getFullYear()
+          ? ""
+          : ", bitTime.getFullYear()";
+
+      return month + day + year;
+    }
+
     return days + "d";
   }
   var hours = Math.floor((temp %= 86400) / 3600);
@@ -54,8 +74,7 @@ function millisecondsToStr(milliseconds: number): string {
 const Bit: React.FC<Props> = (props) => {
   // convert timestamp to time passed
   const bitTime: Date = new Date(props.post_time);
-  const timeDifference: number = Date.now() - bitTime.getTime(); // Difference in milliseconds
-  const timeString = millisecondsToStr(timeDifference);
+  const timeString = timestampFormat(bitTime);
 
   // If user_id === props.myId then give option to delete
 
