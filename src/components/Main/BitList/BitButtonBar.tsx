@@ -5,14 +5,22 @@ import LikeButton from "./like.svg";
 import DislikeButton from "./dislike.svg";
 import { AccountContext } from "../../Account";
 
-interface BitInfo {
-  dislikes: number;
-  index: number;
-  likes: number;
-  post_id: number;
-  replies: number;
-  reposts: number;
-}
+import BitInfo from "../../../Types/BitInfo";
+// interface BitInfo {
+//   content: string;
+//   dislikes: number;
+//   display_name: string;
+//   handle: string;
+//   index: number;
+//   likes: number;
+//   post_id: number;
+//   post_time: string;
+//   replies: number;
+//   reply_to: number;
+//   reposts: number;
+//   status: number;
+//   user_id: number;
+// }
 
 const BitButtonBar: React.FC<BitInfo> = (props) => {
   const { API_URL } = useContext(AccountContext);

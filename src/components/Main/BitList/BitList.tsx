@@ -2,21 +2,22 @@ import React from "react";
 import Bit from "./Bit";
 import "./Bits.css";
 
-interface BitInfo {
-  content: string;
-  dislikes: number;
-  display_name: string;
-  handle: string;
-  index: number;
-  likes: number;
-  post_id: number;
-  post_time: string;
-  replies: number;
-  reply_to: number;
-  reposts: number;
-  status: number;
-  user_id: number;
-}
+import BitInfo from "../../../Types/BitInfo";
+// interface BitInfo {
+//   content: string;
+//   dislikes: number;
+//   display_name: string;
+//   handle: string;
+//   index: number;
+//   likes: number;
+//   post_id: number;
+//   post_time: string;
+//   replies: number;
+//   reply_to: number;
+//   reposts: number;
+//   status: number;
+//   user_id: number;
+// }
 
 interface Props {
   bits: Array<BitInfo>;

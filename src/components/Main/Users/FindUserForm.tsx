@@ -3,15 +3,16 @@ import { useHistory } from "react-router-dom";
 
 const FindUserForm: React.FC<{}> = () => {
   const [handle, updateHandle] = useState<string>("");
-  const [buttonStatus, updateButton] = useState<[boolean, string]>([
-    false,
-    "50%",
-  ]);
-  const history = useHistory();
+
+  const [buttonStatus, updateButton] = useState<
+    [isButtonEnabled: boolean, buttonOpacity: string]
+  >([false, "50%"]);
 
   const handleChange = (e: any) => {
     const { value } = e.target;
     updateHandle(value);
+
+    // Can't press button if input field is empty
     if (value.length === 0) {
       updateButton([false, "50%"]);
     } else {
@@ -19,9 +20,14 @@ const FindUserForm: React.FC<{}> = () => {
     }
   };
 
+  const history = useHistory();
   const handleSubmitClick = async (e: any) => {
     e.preventDefault();
+
+    // Go to user page
     history.push(`/u/${handle}`);
+
+    // Reset input field
     updateHandle("");
   };
 

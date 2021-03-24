@@ -30,13 +30,18 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
 - [x] Add card to portfolio
 - [ ] Each tweet gets its own page w replies
 - [ ] Loading spinners
+- [ ] Tweet ID generated through a hash
+  - Sort tweets table in database by `created_at`
+- [ ] Title
+- [ ] Favicon
 
 ### Main page
 
 - [x] Resize post box (border cut off)
 - [ ] Profile pics
 - [ ] Interactions counters
-- [ ] Display name + handle link to user page
+- [x] Display name + handle link to user page
+- [ ] Individual pages for tweets
 
 ### User pages
 
@@ -44,16 +49,16 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
   - [x] Display name and banner
   - [x] Profile pic
   - [x] Banner
-  - [ ] Description
+  - [x] Bio
   - [ ] Join date
   - [x] Follow button
+  - [ ] Edit profile button (instead of follow)
   - [ ] Location?
   - [x] All their tweets
   - [ ] All their likes?
   - [ ] All their replies
   - [ ] Following list
   - [ ] Follower list
-  - [ ] Edit button on own profile
 - [x] Same side bars
 - [ ] Message if no tweets found
   - For each list

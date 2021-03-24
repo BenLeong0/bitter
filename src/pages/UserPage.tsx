@@ -6,15 +6,16 @@ import UserNotFound from "../components/UserPage/UserNotFound";
 import "../components/UserPage/UserPage.css";
 import { AccountContext } from "../components/Account";
 
-interface User {
-  user_id: number;
-  handle?: string;
-  display_name?: string;
-  created_on?: string;
-  bio?: string;
-  follower_count?: number;
-  following_count?: number;
-}
+import User from "../Types/User";
+// interface User {
+//   user_id: number;
+//   handle?: string;
+//   display_name?: string;
+//   created_on?: string;
+//   bio?: string;
+//   follower_count?: number;
+//   following_count?: number;
+// }
 
 const UserPage: React.FC<{}> = () => {
   const [user, setUser] = useState<User>({ user_id: -1 });

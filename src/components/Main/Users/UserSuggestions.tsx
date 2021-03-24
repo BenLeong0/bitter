@@ -3,15 +3,16 @@ import "./usersuggestions.css";
 import UserSuggestion from "./UserSuggestion";
 import { AccountContext } from "../../Account";
 
-interface User {
-  user_id: number;
-  handle?: string;
-  display_name?: string;
-  created_on?: string;
-  bio?: string;
-  follower_count?: number;
-  following_count?: number;
-}
+import User from "../../../Types/User";
+// interface User {
+//   user_id: number;
+//   handle?: string;
+//   display_name?: string;
+//   created_on?: string;
+//   bio?: string;
+//   follower_count?: number;
+//   following_count?: number;
+// }
 
 const UserSuggestions: React.FC<{}> = () => {
   const [suggestedUsers, updateSuggestions] = useState<Array<User>>([]);
