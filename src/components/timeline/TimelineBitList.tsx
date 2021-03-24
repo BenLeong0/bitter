@@ -21,6 +21,7 @@ interface BitInfo {
 const TimelineBitList: React.FC<{}> = () => {
   // fetch list of bits
   const [bits, setBits] = useState<Array<BitInfo>>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const { API_URL, myId }: { API_URL: string; myId: number } = useContext(
     AccountContext
@@ -32,13 +33,15 @@ const TimelineBitList: React.FC<{}> = () => {
   }, [myId]);
 
   const fetchBits = async () => {
+    setIsLoading(true);
     const data = await fetch(`${API_URL}bits/timeline?user_id=${myId}`);
     const items: Array<BitInfo> = await data.json();
     setBits(items);
+    setIsLoading(false);
   };
 
   // pass into BitList
-  return <BitList bits={bits} />;
+  return <BitList bits={bits} isLoading={isLoading} />;
 };
 
 export default TimelineBitList;

@@ -27,6 +27,7 @@ interface Props {
 const UserBitList: React.FC<Props> = ({ replies }) => {
   // fetch list of bits
   const [bits, setBits] = useState<Array<BitInfo>>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const { API_URL, currId }: { API_URL: string; currId: number } = useContext(
     AccountContext
@@ -39,13 +40,15 @@ const UserBitList: React.FC<Props> = ({ replies }) => {
   }, [currId]);
 
   const fetchBits = async () => {
+    setIsLoading(true);
     const data: Response = await fetch(`${API_URL}bits/user?user_id=${currId}`);
     const items: Array<BitInfo> = await data.json();
     setBits(items);
+    setIsLoading(false);
   };
 
   // pass into BitList
-  return <BitList bits={bits} />;
+  return <BitList bits={bits} isLoading={isLoading} />;
 };
 
 export default UserBitList;

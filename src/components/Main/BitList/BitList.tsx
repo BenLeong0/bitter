@@ -21,16 +21,25 @@ import BitInfo from "../../../Types/BitInfo";
 
 interface Props {
   bits: Array<BitInfo>;
+  isLoading: boolean;
 }
 
-const BitList: React.FC<Props> = ({ bits }) => {
+const BitList: React.FC<Props> = ({ bits, isLoading }) => {
   // retrieve bits from props
 
   return (
     <>
-      {bits.map((bit, index) => (
-        <Bit {...bit} key={bit.post_id} index={index} />
-      ))}
+      {isLoading ? (
+        <div className="bitlist-loader">
+          <div className="loader" />
+        </div>
+      ) : bits.length > 0 ? (
+        bits.map((bit, index) => (
+          <Bit {...bit} key={bit.post_id} index={index} />
+        ))
+      ) : (
+        <div className="no-bits">No bits found</div>
+      )}
     </>
   );
 };

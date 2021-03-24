@@ -29,7 +29,7 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
 
 - [x] Add card to portfolio
 - [ ] Each tweet gets its own page w replies
-- [ ] Loading spinners
+- [x] Loading spinners
 - [ ] Tweet ID generated through a hash
   - Sort tweets table in database by `created_at`
 - [ ] Title
@@ -50,9 +50,14 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
   - [x] Profile pic
   - [x] Banner
   - [x] Bio
-  - [ ] Join date
+  - [x] Join date
   - [x] Follow button
-  - [ ] Edit profile button (instead of follow)
+  - [ ] Edit profile
+    - [ ] Button replaces follow button
+    - [ ] Change display name
+    - [ ] Change bio
+    - [ ] Change pic
+    - [ ] Change banner
   - [ ] Location?
   - [x] All their tweets
   - [ ] All their likes?
@@ -60,13 +65,12 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
   - [ ] Following list
   - [ ] Follower list
 - [x] Same side bars
-- [ ] Message if no tweets found
+- [~] 'Error' message if no tweets found
   - For each list
 
 ### Settings
 
 - [ ] Change handle
-- [ ] Change display name
 - [ ] Deactivate account
 - [ ] Delete account (?)
 

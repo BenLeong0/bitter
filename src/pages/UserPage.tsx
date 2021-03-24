@@ -19,6 +19,7 @@ import User from "../Types/User";
 
 const UserPage: React.FC<{}> = () => {
   const [user, setUser] = useState<User>({ user_id: -1 });
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [listState, setListState] = useState<any>(
     <UserBitList replies={false} />
   );
@@ -37,11 +38,13 @@ const UserPage: React.FC<{}> = () => {
 
   // Database call for user by handle
   const fetchUser = async (handle: string) => {
+    setIsLoading(true);
     // Returns {user_id: -1} if user not found
     const fetchUser = await fetch(`${API_URL}user/get?handle=${handle}`);
     const data: User = await fetchUser.json();
     setUser(data);
     setCurrId(data.user_id);
+    setIsLoading(false);
   };
 
   // Load info on mount
@@ -81,16 +84,24 @@ const UserPage: React.FC<{}> = () => {
   }
 
   return (
-    <div className="user-page">
-      {currId !== -1 ? (
-        <>
-          <UserHeader updatePageState={updatePageState} user={user} />
-          {listState}
-        </>
+    <>
+      {isLoading ? (
+        <div className="user-loader">
+          <div className="loader" />
+        </div>
       ) : (
-        <UserNotFound handle={handle} />
+        <div className="user-page">
+          {currId !== -1 ? (
+            <>
+              <UserHeader updatePageState={updatePageState} user={user} />
+              {listState}
+            </>
+          ) : (
+            <UserNotFound handle={handle} />
+          )}
+        </div>
       )}
-    </div>
+    </>
   );
 };
 
