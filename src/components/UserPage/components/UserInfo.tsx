@@ -1,14 +1,15 @@
 import React from "react";
 
-interface User {
-  user_id: number;
-  handle?: string;
-  display_name?: string;
-  created_on?: string;
-  bio?: string;
-  follower_count?: number;
-  following_count?: number;
-}
+import User from "../../../Types/User";
+// interface User {
+//   user_id: number;
+//   handle?: string;
+//   display_name?: string;
+//   created_on?: string;
+//   bio?: string;
+//   follower_count?: number;
+//   following_count?: number;
+// }
 
 interface Props {
   updatePageState: (stateId: number) => void;
@@ -20,11 +21,35 @@ const UserInfo: React.FC<Props> = ({ updatePageState, user }) => {
     console.log("yo", user);
   };
 
+  const months: Array<string> = [
+    "Jan ",
+    "Feb ",
+    "Mar ",
+    "Apr ",
+    "May ",
+    "Jun ",
+    "Jul ",
+    "Aug ",
+    "Sep ",
+    "Oct ",
+    "Nov ",
+    "Dec ",
+  ];
+
+  const formatDate = (date: string | undefined) => {
+    if (!date) return "";
+    const x = new Date(date);
+    const month = x.getMonth();
+    const year = x.getFullYear();
+    return "Joined: " + months[month] + " " + year;
+  };
+
   return (
     <div className="user-info">
       <div className="user-displayname" onClick={printProps}>
         {user.display_name}
       </div>
+      <div id="user-joindate">{formatDate(user.created_on)}</div>
       <div className="user-handle">{user.handle}</div>
       <div className="user-bio">{user.bio}</div>
       <div className="user-tabs">

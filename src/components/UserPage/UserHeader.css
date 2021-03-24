@@ -43,10 +43,23 @@
   margin-bottom: 20px;
 }
 
+.user-info div {
+  float: left;
+}
+
 .user-displayname,
 .user-handle {
   text-align: left;
   margin-left: 20px;
+  width: 440px;
+}
+
+#user-joindate {
+  width: 120px;
+  margin: 5px 15px 5px 5px;
+  float: right;
+  font-size: 12px;
+  text-align: right;
 }
 
 .user-displayname {
