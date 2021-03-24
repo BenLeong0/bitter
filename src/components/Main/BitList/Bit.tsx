@@ -43,7 +43,7 @@ function timestampFormat(bitTime: Date): string {
   if (days) {
     // Full date if over a month ago, show year if not current year
     if (days > 30) {
-      const day: string = String(bitTime.getDay());
+      const day: string = String(bitTime.getDate());
       const month: string = months[bitTime.getMonth()];
       const year: string =
         bitTime.getFullYear() === new Date().getFullYear()
