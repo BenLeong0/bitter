@@ -10,3 +10,7 @@
 .user-page::-webkit-scrollbar {
   display: none;
 }
+
+.user-loader {
+  margin-top: 60px;
+}

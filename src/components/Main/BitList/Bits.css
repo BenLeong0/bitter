@@ -1,6 +1,7 @@
 .bitlist-loader {
   float: left;
   width: 100%;
+  margin-top: 40px;
 }
 
 .bitlist-loader .loader {
