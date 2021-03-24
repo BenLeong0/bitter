@@ -3,6 +3,17 @@
   background-color: rgb(228, 228, 228);
 }
 
+.user-suggestions-loader .loader {
+  width: 45px;
+  height: 45px;
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid #3498db;
+}
+
+.user-suggestions-loader {
+  padding: 30px;
+}
+
 .user-suggestions-title {
   width: 280px;
   margin: auto;

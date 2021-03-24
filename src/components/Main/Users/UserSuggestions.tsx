@@ -16,13 +16,16 @@ import User from "../../../Types/User";
 
 const UserSuggestions: React.FC<{}> = () => {
   const [suggestedUsers, updateSuggestions] = useState<Array<User>>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const { API_URL }: { API_URL: string } = useContext(AccountContext);
 
   // Fetch 3 random users from the database
   const fetchSuggestions = async () => {
+    setIsLoading(true);
     const data = await fetch(`${API_URL}user-suggestions/get`);
     const items: Array<User> = await data.json();
     updateSuggestions(items);
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -33,12 +36,20 @@ const UserSuggestions: React.FC<{}> = () => {
   return (
     <div className="user-suggestions">
       <div className="user-suggestions-title">Suggested users</div>
-      {suggestedUsers.map((user) => (
-        <UserSuggestion {...user} key={user.handle} />
-      ))}
-      <div className="user-suggestions-reroller">
-        <button onClick={fetchSuggestions}> Reroll </button>
-      </div>
+      {isLoading ? (
+        <div className="user-suggestions-loader">
+          <div className="loader" />
+        </div>
+      ) : (
+        <>
+          {suggestedUsers.map((user) => (
+            <UserSuggestion {...user} key={user.handle} />
+          ))}
+          <div className="user-suggestions-reroller">
+            <button onClick={fetchSuggestions}> Reroll </button>
+          </div>
+        </>
+      )}
     </div>
   );
 };
