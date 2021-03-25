@@ -23,14 +23,15 @@ import Register from "./pages/Register";
 import PrivateRoute from "./PrivateRoute";
 
 const App: React.FC<{}> = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true);
-  const myHandle: string = "ben";
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [myHandle, setMyHandle] = useState<string>("");
 
   return (
     <Account
       isLoggedIn={isLoggedIn}
       setIsLoggedIn={setIsLoggedIn}
       myHandle={myHandle}
+      setMyHandle={setMyHandle}
     >
       <Router>
         <div className="App">
@@ -45,7 +46,7 @@ const App: React.FC<{}> = () => {
                   isLoggedIn === true ? (
                     <Redirect to={{ pathname: "/home" }} />
                   ) : (
-                    <Login />
+                    <Login setMyHandle={setMyHandle} />
                   )
                 }
               />
