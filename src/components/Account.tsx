@@ -9,7 +9,7 @@ import Pool from "../UserPool";
 
 // type ContextProps = {
 //   authenticate: (Username: string, Password: string) => Promise<undefined>;
-//   getSession: () => Promise<void>;
+//   getSession: () => Promise<any>;
 //   logout: () => void;
 //   isLoggedIn: boolean;
 //   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
@@ -31,6 +31,7 @@ interface Props {
   isLoggedIn: boolean;
   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
   myHandle: string;
+  setMyHandle: React.Dispatch<React.SetStateAction<string>>;
   children: any;
 }
 
@@ -40,11 +41,13 @@ const Account: React.FC<Props> = ({
   isLoggedIn,
   setIsLoggedIn,
   myHandle,
+  setMyHandle,
   children,
 }) => {
   const API_URL: string = "http://localhost:8000/";
 
-  const myId: number = 1;
+  // const [myId, setMyId] = useState<string>('');   use
+  const [myId, setMyId] = useState<number>(-1);
 
   // Info about current user being viewed, i.e. owner of /u/handle
   const [currId, setCurrId] = useState<number>(0);
@@ -60,8 +63,11 @@ const Account: React.FC<Props> = ({
 
   useEffect(() => {
     getSession()
-      .then((session) => {
+      .then((session: any) => {
         setIsLoggedIn(true);
+        // setmyid(session.sub)
+        setMyId(1);
+        setMyHandle(session.user.username);
       })
       .catch((err) => {
         return;
