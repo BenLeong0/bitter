@@ -15,9 +15,7 @@ const PrivateRoute: React.FC<Props> = ({ Component, path }) => {
     <Route
       render={() =>
         isLoggedIn === true ? (
-          <div id="mid-col" className="main-col">
-            <Component />
-          </div>
+          <Component />
         ) : (
           <Redirect to={{ pathname: "/login" }} />
         )
