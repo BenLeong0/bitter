@@ -24,6 +24,8 @@ const UserPage: React.FC<{}> = () => {
     <UserBitList replies={false} />
   );
 
+  document.title = (user.handle ? "@" + user.handle : "user") + " / Bitter";
+
   const {
     API_URL,
     currId,
