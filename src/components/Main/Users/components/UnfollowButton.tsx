@@ -25,15 +25,19 @@ const UnfollowButton: React.FC<Props> = (props) => {
   } = useContext(AccountContext);
 
   const unfollow = async () => {
-    setIsFollowingSuggested(false);
+    if (myId !== user_id) {
+      setIsFollowingSuggested(false);
 
-    // Update userPage if same user
-    if (user_id === currId) {
-      setIsFollowing(false);
+      // Update userPage if same user
+      if (user_id === currId) {
+        setIsFollowing(false);
+      }
+
+      // update db
+      deleteFollowEdge(myId, user_id);
+    } else {
+      console.log("can't unfollow yourself!");
     }
-
-    // update db
-    deleteFollowEdge(myId, user_id);
   };
 
   return (

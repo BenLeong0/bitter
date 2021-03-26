@@ -14,6 +14,7 @@ const FollowButton: React.FC<Props> = (props) => {
     currId,
     setIsFollowing,
     createFollowEdge,
+    isLoggedIn,
   }: {
     myId: number;
     currId: number;
@@ -22,18 +23,23 @@ const FollowButton: React.FC<Props> = (props) => {
       sourceId: number,
       destinationId: number
     ) => Promise<void>;
+    isLoggedIn: boolean;
   } = useContext(AccountContext);
 
   const follow = async () => {
-    setIsFollowingSuggested(true);
+    if (isLoggedIn) {
+      setIsFollowingSuggested(true);
 
-    // Update userPage if same user
-    if (user_id === currId) {
-      setIsFollowing(true);
+      // Update userPage if same user
+      if (user_id === currId) {
+        setIsFollowing(true);
+      }
+
+      // update db
+      createFollowEdge(myId, user_id);
+    } else {
+      console.log("not logged in!");
     }
-
-    // update db
-    createFollowEdge(myId, user_id);
   };
 
   return (
