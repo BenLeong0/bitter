@@ -1,6 +1,5 @@
 .options-box {
   width: 240px;
-  height: 232px;
   margin-top: 32px;
   background-color: rgb(228, 228, 228);
   padding-top: 1px;
@@ -10,12 +9,12 @@
 .option {
   width: 208px;
   height: 48px;
-  margin: 0 16px 24px 16px;
+  padding: 12px 16px;
   /* background-color: rgb(248, 248, 248); */
 }
 
 .option:first-child {
-  margin-top: 15px;
+  padding-top: 15px;
 }
 
 .option-title {
@@ -36,4 +35,13 @@
   display: block;
   width: 36px;
   margin: 6px;
+}
+
+.options-box hr {
+  margin: 8px 10px;
+}
+
+.options-userbox {
+  padding: 10px 0 20px;
+  font-size: 18px;
 }

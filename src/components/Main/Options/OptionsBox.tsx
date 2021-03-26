@@ -1,11 +1,14 @@
 import React, { useContext } from "react";
 import "./OptionsBox.css";
 import OptionLink from "./OptionLink";
+import UserBox from "./OptionsUserBox";
+
 import HomeLogo from "./home.svg";
 import UserLogo from "./user.svg";
 import SettingsLogo from "./settings.svg";
 import LoginLogo from "./login.svg";
 import RegisterLogo from "./register.svg";
+
 import { AccountContext } from "../../Account";
 
 const OptionsBox: React.FC<{}> = () => {
@@ -37,6 +40,8 @@ const OptionsBox: React.FC<{}> = () => {
           {/* My page/settings if logged in */}
           <OptionLink {...userOption} />
           <OptionLink {...settingsOption} />
+          <hr />
+          <UserBox />
         </>
       ) : (
         <>
