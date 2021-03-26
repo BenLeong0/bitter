@@ -32,8 +32,8 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
 - [x] Loading spinners
 - [ ] Tweet ID generated through a hash
   - Sort tweets table in database by `created_at`
-- [ ] Title
-- [ ] Favicon
+- [x] Page titles
+- [x] Favicon
 
 ### Main page
 
@@ -42,6 +42,7 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
 - [ ] Interactions counters
 - [x] Display name + handle link to user page
 - [ ] Individual pages for tweets
+- [ ] User info / Login button in left column
 
 ### User pages
 
@@ -68,11 +69,37 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
 - [~] 'Error' message if no tweets found
   - For each list
 
+### Login
+
+- [x] Handle or email + password
+- [x] Set `isLoggedIn` to `true`
+- [ ] Set `myId`
+- [x] Set `handle`
+- [ ] Link to `/register`
+
+### Register
+
+- [ ] Handle + email + password
+  - [ ] Check all valid
+- [ ] Redirect to "Verify your account" page
+- [ ] Link to `/login`
+- [ ] Create database entry (use Lambda + Cognito / in `create-api-key`)
+
 ### Settings
 
-- [ ] Change handle
+- [ ] Change email
+  - [ ] Authorise user
+  - [ ] Check valid email
+  - [ ] Change
+- [ ] Change password
+  - [ ] Authorise user
+  - [ ] Check valid password
+  - [ ] Change
+- [ ] Logout
+  - [ ] Confirmation popup
+  - [ ] Set `isLoggedIn` to `false`
+  - [ ] Set `myId` to `-1`
 - [ ] Deactivate account
-- [ ] Delete account (?)
 
 ### Fullstack
 
@@ -80,3 +107,8 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
   - Figure out exactly what each should do
   - How do likes/dislikes work?
 - [ ] Index follows by destination_id
+
+### After features
+
+- [ ] Notifications
+- [ ] Tagging people
