@@ -46,8 +46,9 @@ const Account: React.FC<Props> = ({
 }) => {
   const API_URL: string = "http://localhost:8000/";
 
-  // const [myId, setMyId] = useState<string>('');   use
-  const [myId, setMyId] = useState<number>(-1);
+  // const [myId, setMyId] = useState<string>('');
+  // Change get_timeline in django
+  const [myId, setMyId] = useState<number>(0);
 
   // Info about current user being viewed, i.e. owner of /u/handle
   const [currId, setCurrId] = useState<number>(0);
@@ -174,6 +175,7 @@ const Account: React.FC<Props> = ({
     if (user) {
       user.signOut();
       setIsLoggedIn(false);
+      setMyId(0);
     }
   };
 
@@ -192,6 +194,7 @@ const Account: React.FC<Props> = ({
         isFollowing,
         setIsFollowing,
         myId,
+        setMyId,
         myHandle,
         createFollowEdge,
         deleteFollowEdge,
