@@ -17,7 +17,10 @@ import User from "../../../Types/User";
 const UserSuggestions: React.FC<{}> = () => {
   const [suggestedUsers, updateSuggestions] = useState<Array<User>>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const { API_URL }: { API_URL: string } = useContext(AccountContext);
+  const {
+    API_URL,
+    isLoggedIn,
+  }: { API_URL: string; isLoggedIn: boolean } = useContext(AccountContext);
 
   // Fetch 3 random users from the database
   const fetchSuggestions = async () => {
@@ -31,7 +34,7 @@ const UserSuggestions: React.FC<{}> = () => {
   useEffect(() => {
     fetchSuggestions();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [isLoggedIn]);
 
   return (
     <div className="user-suggestions">
