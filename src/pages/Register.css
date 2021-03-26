@@ -1,0 +1,50 @@
+.register {
+  width: 600px;
+  margin: 0 20px;
+  border: lightgray 1px solid;
+  border-radius: 4px;
+  float: left;
+}
+
+.register-title {
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.register-input-field {
+  width: 90%;
+  margin: 30px auto 10px;
+}
+
+.register-input-field input {
+  width: 60%;
+  margin: 10px auto;
+  text-align: center;
+}
+
+.register button {
+  margin: 20px;
+}
+
+#register-login-link {
+  margin: 20px auto 30px;
+  font-size: 14px;
+}
+
+#register-login-link a {
+  color: blue;
+  text-decoration: underline;
+}
+
+.register input.invalid {
+  border: 1px solid #d3455b;
+  background-color: #d3455a10;
+  padding: 2px 3px;
+  border-radius: 2px;
+}
+
+.register-error-message {
+  color: #d3455b;
+  font-weight: bold;
+  font-size: 12px;
+}

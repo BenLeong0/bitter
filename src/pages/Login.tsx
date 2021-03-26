@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { AccountContext } from "../components/Account";
+import { Link } from "react-router-dom";
 import "./Login.css";
 import { CognitoUserSession } from "amazon-cognito-identity-js";
 
@@ -13,7 +14,7 @@ const Login: React.FC<LoginProps> = ({ setMyHandle }) => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const { authenticate, setIsLoggedIn } = useContext(AccountContext);
+  const { authenticate, setIsLoggedIn, setMyId } = useContext(AccountContext);
 
   const onSubmit = (event: any) => {
     event.preventDefault();
@@ -22,6 +23,7 @@ const Login: React.FC<LoginProps> = ({ setMyHandle }) => {
       .then((data: CognitoUserSession) => {
         console.log("Logged in!", data);
         setIsLoggedIn(true);
+        setMyId(1);
         setMyHandle(data.getIdToken().payload["cognito:username"]);
       })
       .catch((err: any) => {
@@ -53,6 +55,9 @@ const Login: React.FC<LoginProps> = ({ setMyHandle }) => {
         </div>
 
         <button type="submit">Submit</button>
+        <div id="login-register-link">
+          <Link to="/register">Create an account</Link>
+        </div>
       </form>
     </div>
   );

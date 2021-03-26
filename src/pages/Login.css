@@ -25,3 +25,13 @@
 .login button {
   margin: 20px;
 }
+
+#login-register-link {
+  margin: 20px auto 30px;
+}
+
+#login-register-link a {
+  color: blue;
+  text-decoration: underline;
+  font-size: 14px;
+}
