@@ -1,41 +1,50 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./OptionsBox.css";
 import OptionLink from "./OptionLink";
 import HomeLogo from "./home.svg";
 import UserLogo from "./user.svg";
 import SettingsLogo from "./settings.svg";
+import LoginLogo from "./login.svg";
+import RegisterLogo from "./register.svg";
+import { AccountContext } from "../../Account";
 
 const OptionsBox: React.FC<{}> = () => {
+  const { isLoggedIn }: { isLoggedIn: boolean } = useContext(AccountContext);
+
   class Option {
     title: string;
     link: string;
     logo: string; // hmmm
-    requireLogin: boolean;
 
-    constructor(
-      title: string,
-      link: string,
-      logo: string,
-      requireLogin: boolean
-    ) {
+    public constructor(title: string, link: string, logo: string) {
       this.title = title;
       this.link = link;
       this.logo = logo;
-      this.requireLogin = requireLogin;
     }
   }
 
-  const optionList = [
-    new Option("Home", "/home", HomeLogo, false),
-    new Option("My Page", "/me", UserLogo, true),
-    new Option("Settings", "/settings", SettingsLogo, true),
-  ];
+  const homeOption = new Option("Home", "/home", HomeLogo);
+  const userOption = new Option("My Page", "/me", UserLogo);
+  const settingsOption = new Option("Settings", "/settings", SettingsLogo);
+  const loginOption = new Option("Login", "/login", LoginLogo);
+  const registerOption = new Option("Register", "/register", RegisterLogo);
 
   return (
     <div className="options-box">
-      {optionList.map((option) => (
-        <OptionLink key={option.title} {...option} />
-      ))}
+      <OptionLink {...homeOption} />
+      {isLoggedIn ? (
+        <>
+          {/* My page/settings if logged in */}
+          <OptionLink {...userOption} />
+          <OptionLink {...settingsOption} />
+        </>
+      ) : (
+        <>
+          {/* Login/Register if not logged in */}
+          <OptionLink {...loginOption} />
+          <OptionLink {...registerOption} />
+        </>
+      )}
     </div>
   );
 };
