@@ -6,6 +6,7 @@ const FollowButton: React.FC<{ user_id: number }> = ({ user_id }) => {
     myId,
     setIsFollowing,
     createFollowEdge,
+    isLoggedIn,
   }: {
     myId: number;
     setIsFollowing: React.Dispatch<React.SetStateAction<boolean>>;
@@ -13,16 +14,21 @@ const FollowButton: React.FC<{ user_id: number }> = ({ user_id }) => {
       sourceId: number,
       destinationId: number
     ) => Promise<void>;
+    isLoggedIn: boolean;
   } = useContext(AccountContext);
 
   const follow = async () => {
-    setIsFollowing(true);
-    // update db
-    createFollowEdge(myId, user_id);
+    if (isLoggedIn) {
+      setIsFollowing(true);
+      // update db
+      createFollowEdge(myId, user_id);
 
-    // Authenticate user first + in request!
+      // Authenticate user first + in request!
 
-    // Pass through apikey, lambda to compare to cognito
+      // Pass through apikey, lambda to compare to cognito
+    } else {
+      console.log("not logged in");
+    }
   };
 
   return (
