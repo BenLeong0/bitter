@@ -8,11 +8,11 @@ The aim of this project is to create a simplified version of Twitter, as an exer
 
 The stack will consist of:
 
-- React (Frontend)
+- React (Frontend, with TypeScript)
 - Django (Backend)
 - PostgreSQL (Database)
 
-While I have experience with JavaScript and Python, this will be my first time building a full-stack application, and my first time using Django. Additionally, this will be my first time implementing SQL knowledge that I have developed but not used before.
+While I have experience with JavaScript and Python, this will be my first time building a full-stack application, and my first time using TypeScript and Django. Additionally, this will be my first time implementing SQL knowledge that I have developed but not used before.
 
 ## CURRENT OVERHAUL
 
@@ -24,6 +24,17 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
   - [x] Identify props required for each component
     - No props => `<{}>`
   - [x] Type each variable
+- [ ] Database to AWS (or other hosting?)
+- [ ] API to AWS
+  - [x] Update `create_user` so that `user_id = cognito:sub`
+- [ ] Add user to database after signing up
+- [x] Redesign database
+  - [x] `user_id = cognito:sub` (string)
+  - [x] `post_id` encoded
+- [x] Repopulate database
+  - [x] Users
+  - [x] Follows
+  - [x] Test posts
 
 ## To-do list
 
@@ -37,12 +48,15 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
 
 ### Main page
 
-- [x] Resize post box (border cut off)
+- [ ] Post box
+  - [x] Resize post box (border cut off)
+  - [ ] Only empty if post is successful
+  - [ ] "Login / Register" message if not logged in
 - [ ] Profile pics
 - [ ] Interactions counters
 - [x] Display name + handle link to user page
 - [ ] Individual pages for tweets
-- [ ] User info / Login button in left column
+- [x] User info / Login button in left column
 
 ### User pages
 
@@ -73,33 +87,45 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
 
 - [x] Handle or email + password
 - [x] Set `isLoggedIn` to `true`
-- [ ] Set `myId`
+- [x] Set `myId`
 - [x] Set `handle`
-- [ ] Link to `/register`
+- [x] Link to `/register`
+- [x] Error handling
+  - [x] Incorrect username/password
+  - [x] Not yet verified
 
 ### Register
 
-- [ ] Handle + email + password
-  - [ ] Check all valid
-- [ ] Redirect to "Verify your account" page
-- [ ] Link to `/login`
+- [x] Handle + email + password
+  - [x] Valid handle (no special chars)
+  - [x] Valid email (cognito error)
+  - [x] Valid password (upper, lower, number, special, >8 chars)
+- [ ] Redirect to "Verify your account" message page
+- [x] Link to `/login`
 - [ ] Create database entry (use Lambda + Cognito / in `create-api-key`)
 
 ### Settings
 
 - [ ] Change email
-  - [ ] Authorise user
-  - [ ] Check valid email
-  - [ ] Change
+  - [x] Check if email exists
+  - [x] Authorise user
+  - [x] Check valid email
+  - [ ] Confirmation popup
+  - [x] Change
+  - Instead: send link to new email, clicking link updates and verifies email ?
+    - This way, email is only changed after verification
 - [ ] Change password
   - [ ] Authorise user
   - [ ] Check valid password
+  - [ ] Confirmation popup
   - [ ] Change
 - [ ] Logout
   - [ ] Confirmation popup
-  - [ ] Set `isLoggedIn` to `false`
-  - [ ] Set `myId` to `-1`
+  - [x] Set `isLoggedIn` to `false`
+  - [x] Set `myId` to `''`
 - [ ] Deactivate account
+  - [ ] Password
+  - [ ] Type `delete-me`
 
 ### Fullstack
 
@@ -112,3 +138,6 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
 
 - [ ] Notifications
 - [ ] Tagging people
+- [ ] Admin features
+  - [ ] Delete any posts
+  - [ ] Delete user
