@@ -4,7 +4,7 @@ import { AccountContext } from "../../Account";
 import SuggestedUserFollowButton from "./components/SuggestedUserFollowButton";
 
 interface User {
-  user_id: number;
+  user_id: string;
   handle?: string;
   display_name?: string;
 }

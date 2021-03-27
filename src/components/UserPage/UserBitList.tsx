@@ -29,7 +29,7 @@ const UserBitList: React.FC<Props> = ({ replies }) => {
   const [bits, setBits] = useState<Array<BitInfo>>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const { API_URL, currId }: { API_URL: string; currId: number } = useContext(
+  const { API_URL, currId }: { API_URL: string; currId: string } = useContext(
     AccountContext
   );
 

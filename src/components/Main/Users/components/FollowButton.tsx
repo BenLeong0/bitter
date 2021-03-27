@@ -3,7 +3,7 @@ import { AccountContext } from "../../../Account";
 
 type Props = {
   setIsFollowingSuggested: React.Dispatch<React.SetStateAction<boolean>>;
-  user_id: number;
+  user_id: string;
 };
 
 const FollowButton: React.FC<Props> = (props) => {
@@ -16,12 +16,12 @@ const FollowButton: React.FC<Props> = (props) => {
     createFollowEdge,
     isLoggedIn,
   }: {
-    myId: number;
-    currId: number;
+    myId: string;
+    currId: string;
     setIsFollowing: React.Dispatch<React.SetStateAction<boolean>>;
     createFollowEdge: (
-      sourceId: number,
-      destinationId: number
+      sourceId: string,
+      destinationId: string
     ) => Promise<void>;
     isLoggedIn: boolean;
   } = useContext(AccountContext);

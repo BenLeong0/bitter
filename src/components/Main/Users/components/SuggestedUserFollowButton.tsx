@@ -5,7 +5,7 @@ import { AccountContext } from "../../../Account";
 
 interface Props {
   className: string;
-  user_id: number;
+  user_id: string;
 }
 
 const SuggestedUserFollowButton: React.FC<Props> = ({ className, user_id }) => {
@@ -20,11 +20,11 @@ const SuggestedUserFollowButton: React.FC<Props> = ({ className, user_id }) => {
     isFollowing,
   }: {
     checkIfFollowing: (
-      sourceId: number,
-      destinationId: number
+      sourceId: string,
+      destinationId: string
     ) => Promise<boolean>;
-    currId: number;
-    myId: number;
+    currId: string;
+    myId: string;
     isFollowing: boolean;
   } = useContext(AccountContext);
 

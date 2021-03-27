@@ -19,7 +19,7 @@ import BitInfo from "../../../Types/BitInfo";
 //   reply_to: number;
 //   reposts: number;
 //   status: number;
-//   user_id: number;
+//   user_id: string;
 // }
 
 const BitButtonBar: React.FC<BitInfo> = (props) => {

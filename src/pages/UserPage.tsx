@@ -8,7 +8,7 @@ import { AccountContext } from "../components/Account";
 
 import User from "../Types/User";
 // interface User {
-//   user_id: number;
+//   user_id: string;
 //   handle?: string;
 //   display_name?: string;
 //   created_on?: string;
@@ -18,7 +18,7 @@ import User from "../Types/User";
 // }
 
 const UserPage: React.FC<{}> = () => {
-  const [user, setUser] = useState<User>({ user_id: -1 });
+  const [user, setUser] = useState<User>({ user_id: "" });
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [listState, setListState] = useState<any>(
     <UserBitList replies={false} />
@@ -32,8 +32,8 @@ const UserPage: React.FC<{}> = () => {
     setCurrId,
   }: {
     API_URL: string;
-    currId: number;
-    setCurrId: React.Dispatch<React.SetStateAction<number>>;
+    currId: string;
+    setCurrId: React.Dispatch<React.SetStateAction<string>>;
   } = useContext(AccountContext);
 
   const handle: string = useLocation().pathname.slice(3);
@@ -41,7 +41,7 @@ const UserPage: React.FC<{}> = () => {
   // Database call for user by handle
   const fetchUser = async (handle: string) => {
     setIsLoading(true);
-    // Returns {user_id: -1} if user not found
+    // Returns {user_id: ''} if user not found
     const fetchUser = await fetch(`${API_URL}user/get?handle=${handle}`);
     const data: User = await fetchUser.json();
     setUser(data);
@@ -93,7 +93,7 @@ const UserPage: React.FC<{}> = () => {
         </div>
       ) : (
         <div className="user-page">
-          {currId !== -1 ? (
+          {currId !== "" ? (
             <>
               <UserHeader updatePageState={updatePageState} user={user} />
               {listState}

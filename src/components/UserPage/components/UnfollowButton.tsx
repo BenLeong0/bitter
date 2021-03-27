@@ -1,17 +1,17 @@
 import React, { useContext } from "react";
 import { AccountContext } from "../../Account";
 
-const UnfollowButton: React.FC<{ user_id: number }> = ({ user_id }) => {
+const UnfollowButton: React.FC<{ user_id: string }> = ({ user_id }) => {
   const {
     myId,
     setIsFollowing,
     deleteFollowEdge,
   }: {
-    myId: number;
+    myId: string;
     setIsFollowing: React.Dispatch<React.SetStateAction<boolean>>;
     deleteFollowEdge: (
-      sourceId: number,
-      destinationId: number
+      sourceId: string,
+      destinationId: string
     ) => Promise<void>;
   } = useContext(AccountContext);
 

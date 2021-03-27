@@ -4,18 +4,18 @@ import UnfollowButton from "./UnfollowButton";
 import SelfUnfollowButton from "./SelfUnfollowButton";
 import { AccountContext } from "../../Account";
 
-const UserFollowButton: React.FC<{ user_id: number }> = ({ user_id }) => {
+const UserFollowButton: React.FC<{ user_id: string }> = ({ user_id }) => {
   const {
     myId,
     isFollowing,
     checkIfFollowing,
     setIsFollowing,
   }: {
-    myId: number;
+    myId: string;
     isFollowing: boolean;
     checkIfFollowing: (
-      sourceId: number,
-      destinationId: number
+      sourceId: string,
+      destinationId: string
     ) => Promise<boolean>;
     setIsFollowing: React.Dispatch<React.SetStateAction<boolean>>;
   } = useContext(AccountContext);

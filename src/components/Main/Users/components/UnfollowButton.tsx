@@ -3,7 +3,7 @@ import { AccountContext } from "../../../Account";
 
 type Props = {
   setIsFollowingSuggested: React.Dispatch<React.SetStateAction<boolean>>;
-  user_id: number;
+  user_id: string;
 };
 
 const UnfollowButton: React.FC<Props> = (props) => {
@@ -15,12 +15,12 @@ const UnfollowButton: React.FC<Props> = (props) => {
     setIsFollowing,
     deleteFollowEdge,
   }: {
-    myId: number;
-    currId: number;
+    myId: string;
+    currId: string;
     setIsFollowing: React.Dispatch<React.SetStateAction<boolean>>;
     deleteFollowEdge: (
-      sourceId: number,
-      destinationId: number
+      sourceId: string,
+      destinationId: string
     ) => Promise<void>;
   } = useContext(AccountContext);
 

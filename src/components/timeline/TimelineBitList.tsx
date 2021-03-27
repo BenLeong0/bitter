@@ -15,7 +15,7 @@ interface BitInfo {
   reply_to: number;
   reposts: number;
   status: number;
-  user_id: number;
+  user_id: string;
 }
 
 const TimelineBitList: React.FC<{}> = () => {
@@ -23,20 +23,26 @@ const TimelineBitList: React.FC<{}> = () => {
   const [bits, setBits] = useState<Array<BitInfo>>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const { API_URL, myId }: { API_URL: string; myId: number } = useContext(
+  const { API_URL, myId }: { API_URL: string; myId: string } = useContext(
     AccountContext
   );
 
   useEffect(() => {
     fetchBits();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [myId]);
 
   const fetchBits = async () => {
-    setIsLoading(true);
-    const data = await fetch(`${API_URL}bits/timeline?user_id=${myId}`);
-    const items: Array<BitInfo> = await data.json();
-    setBits(items);
+    if (myId === "") {
+      setBits([]);
+    } else {
+      console.log("fetching bits...", myId);
+      setIsLoading(true);
+      const data = await fetch(`${API_URL}bits/timeline?user_id=${myId}`);
+      const items: Array<BitInfo> = await data.json();
+      setBits(items);
+    }
     setIsLoading(false);
   };
 

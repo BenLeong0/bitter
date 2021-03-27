@@ -14,17 +14,18 @@ import Pool from "../UserPool";
 //   isLoggedIn: boolean;
 //   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 //   checkIfFollowing: (
-//     sourceId: number,
-//     destinationId: number
+//     sourceId: string,
+//     destinationId: string
 //   ) => Promise<boolean>;
-//   currId: number;
-//   setCurrId: React.Dispatch<React.SetStateAction<number>>;
+//   currId: string;
+//   setCurrId: React.Dispatch<React.SetStateAction<string>>;
 //   API_URL: string;
 //   isFollowing: boolean;
 //   setIsFollowing: React.Dispatch<React.SetStateAction<boolean>>;
-//   myId: number;
-//   createFollowEdge: (sourceId: number, destinationId: number) => Promise<void>;
-//   deleteFollowEdge: (sourceId: number, destinationId: number) => Promise<void>;
+//   myId: string;
+//   createFollowEdge: (sourceId: string, destinationId: string) => Promise<void>;
+//   deleteFollowEdge: (sourceId: string, destinationId: string) => Promise<void>;
+//   isEmailUsed: (email: string) => Promise<boolean>
 // };
 
 interface Props {
@@ -46,15 +47,15 @@ const Account: React.FC<Props> = ({
 }) => {
   const API_URL: string = "http://localhost:8000/";
 
-  // const [myId, setMyId] = useState<string>('');
+  const [myId, setMyId] = useState<string>("");
   // Change get_timeline in django
-  const [myId, setMyId] = useState<number>(0);
+  // const [myId, setMyId] = useState<number>(0);
 
   // Info about current user being viewed, i.e. owner of /u/handle
-  const [currId, setCurrId] = useState<number>(0);
+  const [currId, setCurrId] = useState<string>("");
   const [isFollowing, setIsFollowing] = useState<boolean>(false);
 
-  const checkIfFollowing = async (sourceId: number, destinationId: number) => {
+  const checkIfFollowing = async (sourceId: string, destinationId: string) => {
     const data = await fetch(
       `${API_URL}is-following/get?source_id=${sourceId}&destination_id=${destinationId}`
     );
@@ -66,8 +67,7 @@ const Account: React.FC<Props> = ({
     getSession()
       .then((session: any) => {
         setIsLoggedIn(true);
-        // setmyid(session.sub)
-        setMyId(1);
+        setMyId(session.sub);
         setMyHandle(session.user.username);
       })
       .catch((err) => {
@@ -126,7 +126,7 @@ const Account: React.FC<Props> = ({
       }
     });
 
-  const createFollowEdge = async (sourceId: number, destinationId: number) => {
+  const createFollowEdge = async (sourceId: string, destinationId: string) => {
     fetch(
       `${API_URL}create-follow/post?source_id=${sourceId}&destination_id=${destinationId}`,
       { method: "POST" }
@@ -136,7 +136,7 @@ const Account: React.FC<Props> = ({
       .catch((error) => console.error("Follow error:", error));
   };
 
-  const deleteFollowEdge = async (sourceId: number, destinationId: number) => {
+  const deleteFollowEdge = async (sourceId: string, destinationId: string) => {
     fetch(
       `${API_URL}delete-follow/post?source_id=${sourceId}&destination_id=${destinationId}`,
       { method: "POST" }
@@ -174,9 +174,18 @@ const Account: React.FC<Props> = ({
     const user = Pool.getCurrentUser();
     if (user) {
       user.signOut();
+      setMyId("");
+      setMyHandle("");
       setIsLoggedIn(false);
-      setMyId(0);
     }
+  };
+
+  const isEmailUsed = async (email: string): Promise<boolean> => {
+    const data = await fetch(
+      `https://wvv2lnqscf.execute-api.eu-west-2.amazonaws.com/dev/user-exists?email=${email}`
+    );
+    const result = await data.json();
+    return result;
   };
 
   return (
@@ -198,6 +207,7 @@ const Account: React.FC<Props> = ({
         myHandle,
         createFollowEdge,
         deleteFollowEdge,
+        isEmailUsed,
       }}
     >
       {children}

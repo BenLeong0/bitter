@@ -1,18 +1,18 @@
 import React, { useContext } from "react";
 import { AccountContext } from "../../Account";
 
-const FollowButton: React.FC<{ user_id: number }> = ({ user_id }) => {
+const FollowButton: React.FC<{ user_id: string }> = ({ user_id }) => {
   const {
     myId,
     setIsFollowing,
     createFollowEdge,
     isLoggedIn,
   }: {
-    myId: number;
+    myId: string;
     setIsFollowing: React.Dispatch<React.SetStateAction<boolean>>;
     createFollowEdge: (
-      sourceId: number,
-      destinationId: number
+      sourceId: string,
+      destinationId: string
     ) => Promise<void>;
     isLoggedIn: boolean;
   } = useContext(AccountContext);

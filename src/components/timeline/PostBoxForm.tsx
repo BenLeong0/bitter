@@ -3,7 +3,7 @@ import TextareaAutosize from "react-textarea-autosize";
 import { AccountContext } from "../Account";
 
 const PostBoxForm: React.FC<{}> = () => {
-  const { API_URL, myId }: { API_URL: string; myId: number } = useContext(
+  const { API_URL, myId }: { API_URL: string; myId: string } = useContext(
     AccountContext
   );
 
@@ -46,7 +46,7 @@ const PostBoxForm: React.FC<{}> = () => {
     }
 
     const formData = new FormData();
-    formData.append("user_id", String(myId));
+    formData.append("user_id", myId);
     formData.append("content", post);
 
     var requestOptions = {

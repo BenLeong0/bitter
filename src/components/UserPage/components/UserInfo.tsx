@@ -2,7 +2,7 @@ import React from "react";
 
 import User from "../../../Types/User";
 // interface User {
-//   user_id: number;
+//   user_id: string;
 //   handle?: string;
 //   display_name?: string;
 //   created_on?: string;

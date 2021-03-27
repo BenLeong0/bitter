@@ -11,5 +11,5 @@ export default interface BitInfo {
     reply_to: number;
     reposts: number;
     status: number;
-    user_id: number;
+    user_id: string;
   }
