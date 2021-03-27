@@ -30,14 +30,8 @@
 
 .settings input {
   /* inputs have 4px built in border etc */
-  width: 344px;
+  width: calc(100% - 8px);
   float: left;
-}
-
-.settings input.invalid {
-  border: 1px solid #d3455b;
-  padding: 2px 3px;
-  border-radius: 2px;
 }
 
 .settings-input-label {
@@ -46,6 +40,17 @@
   margin-right: 8px;
   text-align: right;
   font-size: 14px;
+}
+
+.settings-input-wrapper {
+  float: left;
+  width: 352px;
+}
+
+.settings-input-wrapper .form-error-message {
+  text-align: left;
+  float: left;
+  padding: 5px 0;
 }
 
 .settings-field button {

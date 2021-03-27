@@ -35,16 +35,3 @@
   color: blue;
   text-decoration: underline;
 }
-
-.register input.invalid {
-  border: 1px solid #d3455b;
-  background-color: #d3455a10;
-  padding: 2px 3px;
-  border-radius: 2px;
-}
-
-.register-error-message {
-  color: #d3455b;
-  font-weight: bold;
-  font-size: 12px;
-}
