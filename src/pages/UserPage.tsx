@@ -61,7 +61,7 @@ const UserPage: React.FC<{}> = () => {
   useEffect(() => {
     fetchUser(handle);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [myHandle]);
 
   // Update when moving between user pages
   const history = useHistory();
