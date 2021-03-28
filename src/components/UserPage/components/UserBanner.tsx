@@ -1,6 +1,6 @@
 import React from "react";
 
-const UserBanner: React.FC<{ user_id: string }> = ({ user_id }) => {
+const UserBanner: React.FC<{ handle: string }> = ({ handle }) => {
   const imageHeight: number = 150;
 
   return (

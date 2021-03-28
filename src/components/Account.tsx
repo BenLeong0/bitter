@@ -17,8 +17,8 @@ import Pool from "../UserPool";
 //     sourceId: string,
 //     destinationId: string
 //   ) => Promise<boolean>;
-//   currId: string;
-//   setCurrId: React.Dispatch<React.SetStateAction<string>>;
+//   currHandle: string;
+//   setCurrHandle: React.Dispatch<React.SetStateAction<string>>;
 //   API_URL: string;
 //   isFollowing: boolean;
 //   setIsFollowing: React.Dispatch<React.SetStateAction<boolean>>;
@@ -52,7 +52,7 @@ const Account: React.FC<Props> = ({
   // const [myId, setMyId] = useState<number>(0);
 
   // Info about current user being viewed, i.e. owner of /u/handle
-  const [currId, setCurrId] = useState<string>("");
+  const [currHandle, setCurrHandle] = useState<string>("");
   const [isFollowing, setIsFollowing] = useState<boolean>(false);
 
   const checkIfFollowing = async (sourceId: string, destinationId: string) => {
@@ -202,8 +202,8 @@ const Account: React.FC<Props> = ({
         isLoggedIn,
         setIsLoggedIn,
         checkIfFollowing,
-        currId,
-        setCurrId,
+        currHandle,
+        setCurrHandle,
         API_URL,
         isFollowing,
         setIsFollowing,

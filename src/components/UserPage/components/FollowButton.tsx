@@ -1,14 +1,14 @@
 import React, { useContext } from "react";
 import { AccountContext } from "../../Account";
 
-const FollowButton: React.FC<{ user_id: string }> = ({ user_id }) => {
+const FollowButton: React.FC<{ handle: string }> = ({ handle }) => {
   const {
-    myId,
+    myHandle,
     setIsFollowing,
     createFollowEdge,
     isLoggedIn,
   }: {
-    myId: string;
+    myHandle: string;
     setIsFollowing: React.Dispatch<React.SetStateAction<boolean>>;
     createFollowEdge: (
       sourceId: string,
@@ -21,7 +21,7 @@ const FollowButton: React.FC<{ user_id: string }> = ({ user_id }) => {
     if (isLoggedIn) {
       setIsFollowing(true);
       // update db
-      createFollowEdge(myId, user_id);
+      createFollowEdge(myHandle, handle);
 
       // Authenticate user first + in request!
 

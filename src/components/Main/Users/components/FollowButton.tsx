@@ -3,21 +3,21 @@ import { AccountContext } from "../../../Account";
 
 type Props = {
   setIsFollowingSuggested: React.Dispatch<React.SetStateAction<boolean>>;
-  user_id: string;
+  handle: string;
 };
 
 const FollowButton: React.FC<Props> = (props) => {
-  const { setIsFollowingSuggested, user_id } = props;
+  const { setIsFollowingSuggested, handle } = props;
 
   const {
-    myId,
-    currId,
+    myHandle,
+    currHandle,
     setIsFollowing,
     createFollowEdge,
     isLoggedIn,
   }: {
-    myId: string;
-    currId: string;
+    myHandle: string;
+    currHandle: string;
     setIsFollowing: React.Dispatch<React.SetStateAction<boolean>>;
     createFollowEdge: (
       sourceId: string,
@@ -31,12 +31,12 @@ const FollowButton: React.FC<Props> = (props) => {
       setIsFollowingSuggested(true);
 
       // Update userPage if same user
-      if (user_id === currId) {
+      if (handle === currHandle) {
         setIsFollowing(true);
       }
 
       // update db
-      createFollowEdge(myId, user_id);
+      createFollowEdge(myHandle, handle);
     } else {
       console.log("not logged in!");
     }

@@ -18,7 +18,7 @@ import User from "../Types/User";
 // }
 
 const UserPage: React.FC<{}> = () => {
-  const [user, setUser] = useState<User>({ user_id: "" });
+  const [user, setUser] = useState<User>({ handle: "" });
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [listState, setListState] = useState<any>(
     <UserBitList replies={false} />
@@ -27,13 +27,15 @@ const UserPage: React.FC<{}> = () => {
   document.title = (user.handle ? "@" + user.handle : "user") + " / Bitter";
 
   const {
-    API_URL,
-    currId,
-    setCurrId,
+    currHandle,
+    setCurrHandle,
+    myHandle,
+    setIsFollowing,
   }: {
-    API_URL: string;
-    currId: string;
-    setCurrId: React.Dispatch<React.SetStateAction<string>>;
+    currHandle: string;
+    setCurrHandle: React.Dispatch<React.SetStateAction<string>>;
+    myHandle: string;
+    setIsFollowing: React.Dispatch<React.SetStateAction<boolean>>;
   } = useContext(AccountContext);
 
   const handle: string = useLocation().pathname.slice(3);
@@ -42,10 +44,16 @@ const UserPage: React.FC<{}> = () => {
   const fetchUser = async (handle: string) => {
     setIsLoading(true);
     // Returns {user_id: ''} if user not found
-    const fetchUser = await fetch(`${API_URL}user/get?handle=${handle}`);
+    const fetchUser = await fetch(
+      `https://7z39hjjfg1.execute-api.eu-west-2.amazonaws.com/dev/users/data?handle=${handle}&myHandle=${myHandle}`
+    );
     const data: User = await fetchUser.json();
     setUser(data);
-    setCurrId(data.user_id);
+    setCurrHandle(data.handle);
+    if (data.isFollowing) {
+      setIsFollowing(data.isFollowing);
+      console.log(data);
+    }
     setIsLoading(false);
   };
 
@@ -93,7 +101,7 @@ const UserPage: React.FC<{}> = () => {
         </div>
       ) : (
         <div className="user-page">
-          {currId !== "" ? (
+          {currHandle !== "" ? (
             <>
               <UserHeader updatePageState={updatePageState} user={user} />
               {listState}

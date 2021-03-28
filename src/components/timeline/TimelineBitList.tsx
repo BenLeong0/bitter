@@ -23,9 +23,13 @@ const TimelineBitList: React.FC<{}> = () => {
   const [bits, setBits] = useState<Array<BitInfo>>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const { API_URL, myId }: { API_URL: string; myId: string } = useContext(
-    AccountContext
-  );
+  const {
+    myId,
+    myHandle,
+  }: {
+    myId: string;
+    myHandle: string;
+  } = useContext(AccountContext);
 
   useEffect(() => {
     fetchBits();
@@ -34,16 +38,32 @@ const TimelineBitList: React.FC<{}> = () => {
   }, [myId]);
 
   const fetchBits = async () => {
-    if (myId === "") {
-      setBits([]);
-    } else {
-      console.log("fetching bits...", myId);
-      setIsLoading(true);
-      const data = await fetch(`${API_URL}bits/timeline?user_id=${myId}`);
-      const items: Array<BitInfo> = await data.json();
-      setBits(items);
-    }
+    setIsLoading(true);
+    setBits([]);
+    console.log("fetching bits...", myId);
+    //a
+
+    // const data = await fetch(`${API_URL}bits/timeline?user_id=${myId}`);
+    const url = `https://7z39hjjfg1.execute-api.eu-west-2.amazonaws.com/dev/bits/timeline?handle=${myHandle}`;
+    const data = await fetch(url);
+
+    const items: Array<BitInfo> = await data.json();
+    setBits(items);
     setIsLoading(false);
+
+    // Logged in
+    // getSession().then(async ({ headers }) => {
+    //   console.log("fetching bits...", myId);
+    //   console.log(headers);
+    //   // const data = await fetch(`${API_URL}bits/timeline?user_id=${myId}`);
+    //   const url = `https://7z39hjjfg1.execute-api.eu-west-2.amazonaws.com/dev/bits/timeline?user_id=${myId}`;
+
+    //   const data = await fetch(url, { headers });
+
+    //   const items: Array<BitInfo> = await data.json();
+    //   setBits(items);
+    //   setIsLoading(false);
+    // });
   };
 
   // pass into BitList

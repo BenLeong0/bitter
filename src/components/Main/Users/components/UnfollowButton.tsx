@@ -3,20 +3,20 @@ import { AccountContext } from "../../../Account";
 
 type Props = {
   setIsFollowingSuggested: React.Dispatch<React.SetStateAction<boolean>>;
-  user_id: string;
+  handle: string;
 };
 
 const UnfollowButton: React.FC<Props> = (props) => {
-  const { setIsFollowingSuggested, user_id } = props;
+  const { setIsFollowingSuggested, handle } = props;
 
   const {
-    myId,
-    currId,
+    myHandle,
+    currHandle,
     setIsFollowing,
     deleteFollowEdge,
   }: {
-    myId: string;
-    currId: string;
+    myHandle: string;
+    currHandle: string;
     setIsFollowing: React.Dispatch<React.SetStateAction<boolean>>;
     deleteFollowEdge: (
       sourceId: string,
@@ -25,16 +25,16 @@ const UnfollowButton: React.FC<Props> = (props) => {
   } = useContext(AccountContext);
 
   const unfollow = async () => {
-    if (myId !== user_id) {
+    if (myHandle !== handle) {
       setIsFollowingSuggested(false);
 
       // Update userPage if same user
-      if (user_id === currId) {
+      if (handle === currHandle) {
         setIsFollowing(false);
       }
 
       // update db
-      deleteFollowEdge(myId, user_id);
+      deleteFollowEdge(myHandle, handle);
     } else {
       console.log("can't unfollow yourself!");
     }

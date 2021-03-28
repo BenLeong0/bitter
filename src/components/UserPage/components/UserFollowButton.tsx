@@ -4,14 +4,14 @@ import UnfollowButton from "./UnfollowButton";
 import SelfUnfollowButton from "./SelfUnfollowButton";
 import { AccountContext } from "../../Account";
 
-const UserFollowButton: React.FC<{ user_id: string }> = ({ user_id }) => {
+const UserFollowButton: React.FC<{ handle: string }> = ({ handle }) => {
   const {
-    myId,
+    myHandle,
     isFollowing,
     checkIfFollowing,
     setIsFollowing,
   }: {
-    myId: string;
+    myHandle: string;
     isFollowing: boolean;
     checkIfFollowing: (
       sourceId: string,
@@ -21,29 +21,29 @@ const UserFollowButton: React.FC<{ user_id: string }> = ({ user_id }) => {
   } = useContext(AccountContext);
 
   // Change follow button when loading page
-  useEffect(() => {
-    if (!checkIfFollowing || !setIsFollowing) {
-      return;
-    }
-    async function check() {
-      let response = await checkIfFollowing(myId, user_id);
-      setIsFollowing(response);
-    }
-    check();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user_id]);
+  // useEffect(() => {
+  //   if (!checkIfFollowing || !setIsFollowing) {
+  //     return;
+  //   }
+  //   async function check() {
+  //     let response = await checkIfFollowing(myId, user_id);
+  //     setIsFollowing(response);
+  //   }
+  //   check();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [user_id]);
 
   // SelfUnfollowButton: Users cannot unfollow themselves
   // Shows button to unfollow if currently following
   // Else shows button to follow
   return (
     <div className="user-follow-button">
-      {user_id === myId ? (
+      {myHandle === handle ? (
         <SelfUnfollowButton />
       ) : isFollowing ? (
-        <UnfollowButton user_id={user_id} />
+        <UnfollowButton handle={handle} />
       ) : (
-        <FollowButton user_id={user_id} />
+        <FollowButton handle={handle} />
       )}
     </div>
   );

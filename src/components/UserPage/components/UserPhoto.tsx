@@ -1,6 +1,6 @@
 import React from "react";
 
-const UserPhoto: React.FC<{ user_id: string }> = ({ user_id }) => {
+const UserPhoto: React.FC<{ handle: string }> = ({ handle }) => {
   const imageHeight: number = 140;
 
   return (

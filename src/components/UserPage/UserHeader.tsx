@@ -8,7 +8,7 @@ import UserInfo from "./components/UserInfo";
 
 import User from "../../Types/User";
 // interface User {
-//   user_id: string;
+//   handle: string;
 //   handle?: string;
 //   display_name?: string;
 //   created_on?: string;
@@ -25,10 +25,10 @@ interface Props {
 const UserHeader: React.FC<Props> = ({ updatePageState, user }) => {
   return (
     <div className="user-header">
-      <UserBanner user_id={user.user_id} />
+      <UserBanner handle={user.handle} />
       <div className="user-pfp-follow">
-        <UserPhoto user_id={user.user_id} />
-        <UserFollowButton user_id={user.user_id} />
+        <UserPhoto handle={user.handle} />
+        <UserFollowButton handle={user.handle} />
       </div>
       <UserInfo updatePageState={updatePageState} user={user} />
     </div>

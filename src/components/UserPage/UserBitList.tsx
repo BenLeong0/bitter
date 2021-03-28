@@ -29,19 +29,19 @@ const UserBitList: React.FC<Props> = ({ replies }) => {
   const [bits, setBits] = useState<Array<BitInfo>>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const { API_URL, currId }: { API_URL: string; currId: string } = useContext(
-    AccountContext
-  );
+  const { currHandle }: { currHandle: string } = useContext(AccountContext);
 
   // Fetch posts every time the user changes
   useEffect(() => {
     fetchBits();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currId]);
+  }, [currHandle]);
 
   const fetchBits = async () => {
     setIsLoading(true);
-    const data: Response = await fetch(`${API_URL}bits/user?user_id=${currId}`);
+    const data: Response = await fetch(
+      `https://7z39hjjfg1.execute-api.eu-west-2.amazonaws.com/dev/users/posts?handle=${currHandle}`
+    );
     const items: Array<BitInfo> = await data.json();
     setBits(items);
     setIsLoading(false);
