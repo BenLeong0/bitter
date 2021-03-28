@@ -4,28 +4,19 @@ import UserSuggestion from "./UserSuggestion";
 import { AccountContext } from "../../Account";
 
 import User from "../../../Types/User";
-// interface User {
-//   user_id: string;
-//   handle?: string;
-//   display_name?: string;
-//   created_on?: string;
-//   bio?: string;
-//   follower_count?: number;
-//   following_count?: number;
-// }
 
 const UserSuggestions: React.FC<{}> = () => {
   const [suggestedUsers, updateSuggestions] = useState<Array<User>>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const {
-    API_URL,
-    isLoggedIn,
-  }: { API_URL: string; isLoggedIn: boolean } = useContext(AccountContext);
+  const { myHandle }: { myHandle: string } = useContext(AccountContext);
 
   // Fetch 3 random users from the database
   const fetchSuggestions = async () => {
     setIsLoading(true);
-    const data = await fetch(`${API_URL}user-suggestions/get`);
+
+    const data = await fetch(
+      `https://7z39hjjfg1.execute-api.eu-west-2.amazonaws.com/dev/users/suggested?myHandle=${myHandle}`
+    );
     const items: Array<User> = await data.json();
     updateSuggestions(items);
     setIsLoading(false);
@@ -34,7 +25,7 @@ const UserSuggestions: React.FC<{}> = () => {
   useEffect(() => {
     fetchSuggestions();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoggedIn]);
+  }, [myHandle]);
 
   return (
     <div className="user-suggestions">

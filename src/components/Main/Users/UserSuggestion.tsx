@@ -4,9 +4,9 @@ import { AccountContext } from "../../Account";
 import SuggestedUserFollowButton from "./components/SuggestedUserFollowButton";
 
 interface User {
-  user_id: string;
-  handle?: string;
+  handle: string;
   display_name?: string;
+  isFollowing?: boolean;
 }
 
 const UserSuggestion: React.FC<User> = (user) => {
@@ -27,7 +27,8 @@ const UserSuggestion: React.FC<User> = (user) => {
         </Link>
         <SuggestedUserFollowButton
           className="user-suggestion-follow"
-          user_id={user.user_id}
+          handle={user.handle}
+          isFollowing={user.isFollowing}
         />
       </div>
     </>
