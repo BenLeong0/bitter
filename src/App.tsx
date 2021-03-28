@@ -15,6 +15,7 @@ import LeftColumn from "./components/Main/LeftColumn";
 import RightColumn from "./components/Main/RightColumn";
 
 // Pages
+import PageNotFound from "./pages/PageNotFound";
 import Timeline from "./pages/Timeline";
 import UserPage from "./pages/UserPage";
 import Settings from "./pages/Settings";
@@ -91,6 +92,8 @@ const App: React.FC<{}> = () => {
 
               {/* General user page */}
               <Route path="/u/:handle" render={() => <UserPage />} />
+
+              <Route component={PageNotFound} />
             </Switch>
           </div>
 

@@ -26,7 +26,17 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
   - [x] Type each variable
 - [ ] Database to AWS (or other hosting?)
 - [ ] API to AWS
-  - [x] Update `create_user` so that `user_id = cognito:sub`
+  - [x] `create_user` after confirmation
+  - [ ] `get_timeline(user_id)`
+    - Check if logged in or not (i.e. `user_id == ''`)
+  - [ ] `get_suggested_users()`
+    - Check if following here
+  - [ ] `check_if_following(source_id, destination_id)`
+  - [ ] `create_follow(source_id, destination_id)`
+  - [ ] `delete_follow(source_id, destination_id)`
+  - [ ] `get_user_data(handle)`
+    - For opening user page
+    - Include if following
 - [ ] Add user to database after signing up
 - [x] Redesign database
   - [x] `user_id = cognito:sub` (string)
@@ -45,6 +55,8 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
   - Sort tweets table in database by `created_at`
 - [x] Page titles
 - [x] Favicon
+- [x] Domain
+- [x] 404 page
 
 ### Main page
 

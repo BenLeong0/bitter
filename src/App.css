@@ -163,3 +163,14 @@ input.invalid {
   padding: 2px 3px;
   border-radius: 2px;
 }
+
+.nopage-code {
+  font-family: "Alte DIN 1451 Mittelschrift gepraegt", sans-serif;
+  font-size: 160px;
+}
+
+.nopage-msg {
+  font-family: "Alte DIN 1451 Mittelschrift gepraegt", sans-serif;
+  color: grey;
+  font-size: 20px;
+}
