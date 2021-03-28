@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Route,
   Switch,
   Redirect,
@@ -33,7 +33,7 @@ const App: React.FC<{}> = () => {
       myHandle={myHandle}
       setMyHandle={setMyHandle}
     >
-      <Router>
+      <Router basename="/">
         <div className="App">
           <LeftColumn />
 
@@ -66,12 +66,8 @@ const App: React.FC<{}> = () => {
               {/* Home page and redirects */}
               <Route path="/home" exact render={() => <Timeline />} />
               <Route
-                exact
                 path="/"
-                render={() => <Redirect to={{ pathname: "/home" }} />}
-              />
-              <Route
-                path="/bitter_react"
+                exact
                 render={() => <Redirect to={{ pathname: "/home" }} />}
               />
 
