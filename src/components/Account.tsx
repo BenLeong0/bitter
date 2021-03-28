@@ -71,6 +71,9 @@ const Account: React.FC<Props> = ({
         setMyHandle(session.user.username);
       })
       .catch((err) => {
+        console.log("yo");
+        setMyId("");
+
         return;
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -182,9 +185,11 @@ const Account: React.FC<Props> = ({
 
   const isEmailUsed = async (email: string): Promise<boolean> => {
     const data = await fetch(
-      `https://wvv2lnqscf.execute-api.eu-west-2.amazonaws.com/dev/user-exists?email=${email}`
+      `https://7z39hjjfg1.execute-api.eu-west-2.amazonaws.com/dev/users/exists?email=${email}`
     );
     const result = await data.json();
+    console.log(result);
+
     return result;
   };
 
