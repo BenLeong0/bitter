@@ -93,6 +93,7 @@ const App: React.FC<{}> = () => {
               {/* General user page */}
               <Route path="/u/:handle" render={() => <UserPage />} />
 
+              {/* 404 page */}
               <Route component={PageNotFound} />
             </Switch>
           </div>
