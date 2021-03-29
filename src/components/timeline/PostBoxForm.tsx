@@ -3,9 +3,15 @@ import TextareaAutosize from "react-textarea-autosize";
 import { AccountContext } from "../Account";
 
 const PostBoxForm: React.FC<{}> = () => {
-  const { API_URL, myId }: { API_URL: string; myId: string } = useContext(
-    AccountContext
-  );
+  const {
+    API_URL,
+    myId,
+    getSession,
+  }: {
+    API_URL: string;
+    myId: string;
+    getSession: () => Promise<any>;
+  } = useContext(AccountContext);
 
   const [post, updatePost] = useState<string>("");
   const [remainingChars, updateChars] = useState<number>(140);
@@ -40,26 +46,47 @@ const PostBoxForm: React.FC<{}> = () => {
 
   const handleSubmitClick = async (e: any) => {
     e.preventDefault();
-    if (remainingChars < 0 || remainingChars >= 140) {
-      console.error("Invalid post length.");
-      return;
-    }
+    getSession().then(async ({ headers }) => {
+      // Set loading
 
-    const formData = new FormData();
-    formData.append("user_id", myId);
-    formData.append("content", post);
+      // Check valid length
+      if (remainingChars < 0 || remainingChars >= 140) {
+        console.error("Invalid post length.");
+        return;
+      }
 
-    var requestOptions = {
-      method: "POST",
-      body: formData,
-    };
+      // Get post content
+      const formData = new FormData();
+      formData.append("content", post);
+      console.log(formData);
 
-    fetch(`${API_URL}bit/post`, requestOptions)
-      .then((response) => response.text())
-      .then((result) => console.log(result))
-      .catch((error) => console.log("error", error));
+      // Set Content-Type (might be correct by default)
+      headers["Content-Type"] = "application/json";
 
-    updatePost("");
+      // Request options
+      var requestOptions = {
+        headers,
+        method: "POST",
+        body: JSON.stringify({ content: post }),
+      };
+      console.log(requestOptions);
+
+      fetch(
+        `https://7z39hjjfg1.execute-api.eu-west-2.amazonaws.com/dev/bits/post`,
+        requestOptions
+      )
+        .then((response) => response.text())
+        .then((result) => {
+          const resultJSON = JSON.parse(result);
+          // Attach success code with response, empty post if true
+          if (resultJSON.code === "postSuccess") {
+            updatePost("");
+          }
+        })
+        .catch((error) => console.log("error", error));
+
+      // Set not loading
+    });
   };
 
   return (
