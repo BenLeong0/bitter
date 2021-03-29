@@ -13,10 +13,6 @@ import Pool from "../UserPool";
 //   logout: () => void;
 //   isLoggedIn: boolean;
 //   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
-//   checkIfFollowing: (
-//     sourceId: string,
-//     destinationId: string
-//   ) => Promise<boolean>;
 //   currHandle: string;
 //   setCurrHandle: React.Dispatch<React.SetStateAction<string>>;
 //   API_URL: string;
@@ -48,20 +44,10 @@ const Account: React.FC<Props> = ({
   const API_URL: string = "http://localhost:8000/";
 
   const [myId, setMyId] = useState<string>("");
-  // Change get_timeline in django
-  // const [myId, setMyId] = useState<number>(0);
 
   // Info about current user being viewed, i.e. owner of /u/handle
   const [currHandle, setCurrHandle] = useState<string>("");
   const [isFollowing, setIsFollowing] = useState<boolean>(false);
-
-  const checkIfFollowing = async (sourceId: string, destinationId: string) => {
-    const data = await fetch(
-      `${API_URL}is-following/get?source_id=${sourceId}&destination_id=${destinationId}`
-    );
-    const result = await data.json();
-    return result;
-  };
 
   useEffect(() => {
     getSession()
@@ -71,7 +57,6 @@ const Account: React.FC<Props> = ({
         setMyHandle(session.user.username);
       })
       .catch((err) => {
-        console.log("yo");
         setMyId("");
 
         return;
@@ -79,7 +64,7 @@ const Account: React.FC<Props> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const getSession = async () =>
+  const getSession = async (): Promise<any> =>
     await new Promise((resolve, reject) => {
       const user: CognitoUser | null = Pool.getCurrentUser();
       if (user) {
@@ -129,14 +114,16 @@ const Account: React.FC<Props> = ({
       }
     });
 
-  const createFollowEdge = async (sourceId: string, destinationId: string) => {
-    fetch(
-      `${API_URL}create-follow/post?source_id=${sourceId}&destination_id=${destinationId}`,
-      { method: "POST" }
-    )
-      .then((response) => response.text())
-      .then((result) => console.log(result))
-      .catch((error) => console.error("Follow error:", error));
+  const createFollowEdge = async (destinationId: string) => {
+    getSession().then(async ({ headers }) => {
+      fetch(
+        `https://7z39hjjfg1.execute-api.eu-west-2.amazonaws.com/dev/users/follow?handle=${destinationId}`,
+        { headers, method: "POST" }
+      )
+        .then((response) => response.text())
+        .then((result) => console.log(result))
+        .catch((error) => console.error("Follow error:", error));
+    });
   };
 
   const deleteFollowEdge = async (sourceId: string, destinationId: string) => {
@@ -201,7 +188,6 @@ const Account: React.FC<Props> = ({
         logout,
         isLoggedIn,
         setIsLoggedIn,
-        checkIfFollowing,
         currHandle,
         setCurrHandle,
         API_URL,
