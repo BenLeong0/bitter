@@ -23,8 +23,6 @@ import BitInfo from "../../../Types/BitInfo";
 // }
 
 const BitButtonBar: React.FC<BitInfo> = (props) => {
-  const { API_URL } = useContext(AccountContext);
-
   const reply = () => {
     console.log(`reply to tweet ${props.post_id}`);
     console.log(JSON.stringify(props));
@@ -34,18 +32,8 @@ const BitButtonBar: React.FC<BitInfo> = (props) => {
     console.log(`rebit tweet ${props.post_id}`);
   };
 
-  const like = async () => {
-    var formdata: FormData = new FormData();
-    formdata.append("username", "userben");
-    formdata.append("password", "passwordman");
-
-    fetch(`${API_URL}rest-auth/login/`, {
-      method: "POST",
-      body: formdata,
-    })
-      .then((response) => response.json())
-      .then((result) => console.log(result))
-      .catch((error) => console.log("error", error));
+  const like = () => {
+    console.log(`like tweet ${props.post_id}`);
   };
 
   const dislike = () => {
