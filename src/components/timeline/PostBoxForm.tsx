@@ -6,9 +6,13 @@ const PostBoxForm: React.FC<{}> = () => {
   const {
     API_URL,
     getSession,
+    setRefreshList,
+    refreshList,
   }: {
     API_URL: string;
     getSession: () => Promise<any>;
+    setRefreshList: React.Dispatch<React.SetStateAction<boolean>>;
+    refreshList: boolean;
   } = useContext(AccountContext);
 
   const [post, updatePost] = useState<string>("");
@@ -105,6 +109,7 @@ const PostBoxForm: React.FC<{}> = () => {
         .finally(() => {
           // Set not loading
           setIsLoading(false);
+          setRefreshList(!refreshList);
         });
     });
   };
@@ -112,7 +117,9 @@ const PostBoxForm: React.FC<{}> = () => {
   return (
     <div className="postbox-input">
       {isLoading ? (
-        <div className="loader" />
+        <div id="postbox-loader-wrapper">
+          <div className="loader" />
+        </div>
       ) : (
         <form>
           <TextareaAutosize

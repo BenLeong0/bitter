@@ -27,16 +27,17 @@ const TimelineBitList: React.FC<{}> = () => {
   const {
     API_URL,
     myHandle,
+    refreshList,
   }: {
     API_URL: string;
     myHandle: string;
+    refreshList: boolean;
   } = useContext(AccountContext);
 
   useEffect(() => {
     fetchBits();
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [myHandle]);
+  }, [myHandle, refreshList]);
 
   const fetchBits = async () => {
     setRequestCounter(requestCounter + 1);

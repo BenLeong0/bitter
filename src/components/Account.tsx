@@ -22,6 +22,8 @@ import Pool from "../UserPool";
 //   createFollowEdge: (sourceId: string, destinationId: string) => Promise<void>;
 //   deleteFollowEdge: (sourceId: string, destinationId: string) => Promise<void>;
 //   isEmailUsed: (email: string) => Promise<boolean>
+//   refreshList: boolean;
+//   setRefreshList: React.Dispatch<React.SetStateAction<boolean>>;
 // };
 
 interface Props {
@@ -50,6 +52,9 @@ const Account: React.FC<Props> = ({
   // Info about current user being viewed, i.e. owner of /u/handle
   const [currHandle, setCurrHandle] = useState<string>("");
   const [isFollowing, setIsFollowing] = useState<boolean>(false);
+
+  // Hook to refresh timeline after posting
+  const [refreshList, setRefreshList] = useState<boolean>(true);
 
   useEffect(() => {
     getSession()
@@ -198,9 +203,12 @@ const Account: React.FC<Props> = ({
         myId,
         setMyId,
         myHandle,
+        setMyHandle,
         createFollowEdge,
         deleteFollowEdge,
         isEmailUsed,
+        refreshList,
+        setRefreshList,
       }}
     >
       {children}
