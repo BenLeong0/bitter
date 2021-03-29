@@ -49,3 +49,12 @@
   font-size: 12px;
   margin-top: 3px;
 }
+
+#postbox-error {
+  float: left;
+  color: #d3455b;
+  font-size: 12px;
+  margin-top: 3px;
+  margin-left: 5px;
+  font-weight: bold;
+}

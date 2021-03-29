@@ -27,17 +27,27 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
 - [ ] Database to AWS (or other hosting?)
 - [ ] API to AWS
   - [x] `create_user` after confirmation
-  - [ ] `get_timeline(user_id)`
+  - [x] `get_timeline(user_id)`
     - Check if logged in or not (i.e. `user_id == ''`)
-  - [ ] `get_suggested_users()`
-    - Check if following here
-  - [ ] `check_if_following(source_id, destination_id)`
-  - [ ] `create_follow(source_id, destination_id)`
-  - [ ] `delete_follow(source_id, destination_id)`
-  - [ ] `get_user_data(handle)`
-    - For opening user page
-    - Include if following
-- [ ] Add user to database after signing up
+  - [x] `get_user_data(handle)`
+    - [x] For opening user page
+    - [x] Include if following check in Lambda
+  - [x] `get_user_posts(handle)`
+  - [x] `get_suggested_users()`
+    - [x] Check if following
+  - [~] `check_if_following(source_id, destination_id)`
+    - Integrated into other functions
+  - [x] `create_follow(destination_id)`
+    - [x] Require auth (source_id)
+    - [x] User suggestions
+    - [x] User pages
+  - [x] `delete_follow(destination_id)`
+    - [x] Require auth (source_id)
+    - [x] User suggestions
+    - [x] User pages
+  - [ ] `post_bit(content)`
+    - [ ] Require auth
+- [x] Add user to database after signing up
 - [x] Redesign database
   - [x] `user_id = cognito:sub` (string)
   - [x] `post_id` encoded
@@ -57,12 +67,14 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
 - [x] Favicon
 - [x] Domain
 - [x] 404 page
+- [ ] Encode + decode api calls
 
 ### Main page
 
 - [ ] Post box
   - [x] Resize post box (border cut off)
-  - [ ] Only empty if post is successful
+  - [x] Only empty if post is successful
+  - [x] Loading spinner while sending
   - [ ] "Login / Register" message if not logged in
 - [ ] Profile pics
 - [ ] Interactions counters
