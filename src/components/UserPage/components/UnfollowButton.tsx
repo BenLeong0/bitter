@@ -13,7 +13,7 @@ const UnfollowButton: React.FC<{ handle: string }> = ({ handle }) => {
   } = useContext(AccountContext);
 
   const unfollow = async () => {
-    if (myHandle !== handle) {
+    if (myHandle === handle) {
       console.log("Can't unfollow yourself!");
       return;
     }
