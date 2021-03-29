@@ -9,20 +9,19 @@ const UnfollowButton: React.FC<{ handle: string }> = ({ handle }) => {
   }: {
     myHandle: string;
     setIsFollowing: React.Dispatch<React.SetStateAction<boolean>>;
-    deleteFollowEdge: (
-      sourceId: string,
-      destinationId: string
-    ) => Promise<void>;
+    deleteFollowEdge: (destinationHandle: string) => Promise<void>;
   } = useContext(AccountContext);
 
   const unfollow = async () => {
+    if (myHandle !== handle) {
+      console.log("Can't unfollow yourself!");
+      return;
+    }
+
     setIsFollowing(false);
+
     // update db
-    deleteFollowEdge(myHandle, handle);
-
-    // Authenticate user first + in request!
-
-    // Pass through apikey, lambda to compare to cognito
+    deleteFollowEdge(handle);
   };
 
   return (

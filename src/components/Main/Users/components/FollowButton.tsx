@@ -10,19 +10,14 @@ const FollowButton: React.FC<Props> = (props) => {
   const { setIsFollowingSuggested, handle } = props;
 
   const {
-    myHandle,
     currHandle,
     setIsFollowing,
     createFollowEdge,
     isLoggedIn,
   }: {
-    myHandle: string;
     currHandle: string;
     setIsFollowing: React.Dispatch<React.SetStateAction<boolean>>;
-    createFollowEdge: (
-      sourceId: string,
-      destinationId: string
-    ) => Promise<void>;
+    createFollowEdge: (destinationHandle: string) => Promise<void>;
     isLoggedIn: boolean;
   } = useContext(AccountContext);
 
@@ -36,7 +31,7 @@ const FollowButton: React.FC<Props> = (props) => {
       }
 
       // update db
-      createFollowEdge(myHandle, handle);
+      createFollowEdge(handle);
     } else {
       console.log("Not logged in!");
     }

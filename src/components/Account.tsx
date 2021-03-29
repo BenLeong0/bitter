@@ -114,10 +114,10 @@ const Account: React.FC<Props> = ({
       }
     });
 
-  const createFollowEdge = async (destinationId: string) => {
+  const createFollowEdge = async (destinationHandle: string) => {
     getSession().then(async ({ headers }) => {
       fetch(
-        `https://7z39hjjfg1.execute-api.eu-west-2.amazonaws.com/dev/users/follow?handle=${destinationId}`,
+        `https://7z39hjjfg1.execute-api.eu-west-2.amazonaws.com/dev/users/follow?handle=${destinationHandle}`,
         { headers, method: "POST" }
       )
         .then((response) => response.text())
@@ -126,14 +126,16 @@ const Account: React.FC<Props> = ({
     });
   };
 
-  const deleteFollowEdge = async (sourceId: string, destinationId: string) => {
-    fetch(
-      `${API_URL}delete-follow/post?source_id=${sourceId}&destination_id=${destinationId}`,
-      { method: "POST" }
-    )
-      .then((response) => response.text())
-      .then((result) => console.log(result))
-      .catch((error) => console.error("Unfollow error:", error));
+  const deleteFollowEdge = async (destinationHandle: string) => {
+    getSession().then(async ({ headers }) => {
+      fetch(
+        `https://7z39hjjfg1.execute-api.eu-west-2.amazonaws.com/dev/users/unfollow?handle=${destinationHandle}`,
+        { headers, method: "POST" }
+      )
+        .then((response) => response.text())
+        .then((result) => console.log(result))
+        .catch((error) => console.error("Unfollow error:", error));
+    });
   };
 
   const authenticate = async (Username: string, Password: string) =>

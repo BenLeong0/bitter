@@ -18,26 +18,24 @@ const UnfollowButton: React.FC<Props> = (props) => {
     myHandle: string;
     currHandle: string;
     setIsFollowing: React.Dispatch<React.SetStateAction<boolean>>;
-    deleteFollowEdge: (
-      sourceId: string,
-      destinationId: string
-    ) => Promise<void>;
+    deleteFollowEdge: (destinationHandle: string) => Promise<void>;
   } = useContext(AccountContext);
 
   const unfollow = async () => {
     if (myHandle !== handle) {
-      setIsFollowingSuggested(false);
-
-      // Update userPage if same user
-      if (handle === currHandle) {
-        setIsFollowing(false);
-      }
-
-      // update db
-      deleteFollowEdge(myHandle, handle);
-    } else {
       console.log("Can't unfollow yourself!");
+      return;
     }
+
+    setIsFollowingSuggested(false);
+
+    // Update userPage if same user
+    if (handle === currHandle) {
+      setIsFollowing(false);
+    }
+
+    // update db
+    deleteFollowEdge(handle);
   };
 
   return (
