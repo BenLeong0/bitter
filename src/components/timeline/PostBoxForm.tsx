@@ -5,11 +5,9 @@ import { AccountContext } from "../Account";
 const PostBoxForm: React.FC<{}> = () => {
   const {
     API_URL,
-    myId,
     getSession,
   }: {
     API_URL: string;
-    myId: string;
     getSession: () => Promise<any>;
   } = useContext(AccountContext);
 
@@ -71,10 +69,7 @@ const PostBoxForm: React.FC<{}> = () => {
       };
       console.log(requestOptions);
 
-      fetch(
-        `https://7z39hjjfg1.execute-api.eu-west-2.amazonaws.com/dev/bits/post`,
-        requestOptions
-      )
+      fetch(`${API_URL}/bits/post`, requestOptions)
         .then((response) => response.text())
         .then((result) => {
           const resultJSON = JSON.parse(result);

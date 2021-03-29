@@ -25,8 +25,10 @@ const TimelineBitList: React.FC<{}> = () => {
   const [requestCounter, setRequestCounter] = useState<number>(0);
 
   const {
+    API_URL,
     myHandle,
   }: {
+    API_URL: string;
     myHandle: string;
   } = useContext(AccountContext);
 
@@ -44,8 +46,7 @@ const TimelineBitList: React.FC<{}> = () => {
     setBits([]);
     console.log("Fetching bits...");
 
-    const url = `https://7z39hjjfg1.execute-api.eu-west-2.amazonaws.com/dev/bits/timeline?handle=${myHandle}`;
-    const data = await fetch(url);
+    const data = await fetch(`${API_URL}/bits/timeline?handle=${myHandle}`);
     const items: Array<BitInfo> = await data.json();
 
     // Only update if final request ie ignore if another request was sent out after

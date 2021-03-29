@@ -41,7 +41,9 @@ const Account: React.FC<Props> = ({
   setMyHandle,
   children,
 }) => {
-  const API_URL: string = "http://localhost:8000/";
+  const url = "https://7z39hjjfg1.execute-api.eu-west-2.amazonaws.com";
+  const stage = "/dev";
+  const API_URL: string = url + stage;
 
   const [myId, setMyId] = useState<string>("");
 
@@ -116,10 +118,10 @@ const Account: React.FC<Props> = ({
 
   const createFollowEdge = async (destinationHandle: string) => {
     getSession().then(async ({ headers }) => {
-      fetch(
-        `https://7z39hjjfg1.execute-api.eu-west-2.amazonaws.com/dev/users/follow?handle=${destinationHandle}`,
-        { headers, method: "POST" }
-      )
+      fetch(`${API_URL}/users/follow?handle=${destinationHandle}`, {
+        headers,
+        method: "POST",
+      })
         .then((response) => response.text())
         .then((result) => console.log(result))
         .catch((error) => console.error("Follow error:", error));
@@ -128,10 +130,10 @@ const Account: React.FC<Props> = ({
 
   const deleteFollowEdge = async (destinationHandle: string) => {
     getSession().then(async ({ headers }) => {
-      fetch(
-        `https://7z39hjjfg1.execute-api.eu-west-2.amazonaws.com/dev/users/unfollow?handle=${destinationHandle}`,
-        { headers, method: "POST" }
-      )
+      fetch(`${API_URL}/users/unfollow?handle=${destinationHandle}`, {
+        headers,
+        method: "POST",
+      })
         .then((response) => response.text())
         .then((result) => console.log(result))
         .catch((error) => console.error("Unfollow error:", error));
@@ -173,9 +175,7 @@ const Account: React.FC<Props> = ({
   };
 
   const isEmailUsed = async (email: string): Promise<boolean> => {
-    const data = await fetch(
-      `https://7z39hjjfg1.execute-api.eu-west-2.amazonaws.com/dev/users/exists?email=${email}`
-    );
+    const data = await fetch(`${API_URL}/users/exists?email=${email}`);
     const result = await data.json();
     console.log(result);
 

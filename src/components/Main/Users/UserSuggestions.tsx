@@ -8,15 +8,16 @@ import User from "../../../Types/User";
 const UserSuggestions: React.FC<{}> = () => {
   const [suggestedUsers, updateSuggestions] = useState<Array<User>>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const { myHandle }: { myHandle: string } = useContext(AccountContext);
+  const {
+    API_URL,
+    myHandle,
+  }: { API_URL: string; myHandle: string } = useContext(AccountContext);
 
   // Fetch 3 random users from the database
   const fetchSuggestions = async () => {
     setIsLoading(true);
 
-    const data = await fetch(
-      `https://7z39hjjfg1.execute-api.eu-west-2.amazonaws.com/dev/users/suggested?myHandle=${myHandle}`
-    );
+    const data = await fetch(`${API_URL}/users/suggested?myHandle=${myHandle}`);
     const items: Array<User> = await data.json();
     updateSuggestions(items);
     setIsLoading(false);
