@@ -40,8 +40,7 @@ const TimelineBitList: React.FC<{}> = () => {
   const fetchBits = async () => {
     setIsLoading(true);
     setBits([]);
-    console.log("fetching bits...", myId);
-    //a
+    console.log("Fetching bits...");
 
     // const data = await fetch(`${API_URL}bits/timeline?user_id=${myId}`);
     const url = `https://7z39hjjfg1.execute-api.eu-west-2.amazonaws.com/dev/bits/timeline?handle=${myHandle}`;

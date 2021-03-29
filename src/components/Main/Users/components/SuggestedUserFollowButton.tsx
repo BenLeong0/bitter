@@ -17,15 +17,10 @@ const SuggestedUserFollowButton: React.FC<Props> = (props) => {
   const { handle, className } = props;
 
   const {
-    checkIfFollowing,
     currHandle,
     myHandle,
     isFollowing,
   }: {
-    checkIfFollowing: (
-      sourceId: string,
-      destinationId: string
-    ) => Promise<boolean>;
     currHandle: string;
     myHandle: string;
     isFollowing: boolean;

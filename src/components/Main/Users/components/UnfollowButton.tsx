@@ -36,7 +36,7 @@ const UnfollowButton: React.FC<Props> = (props) => {
       // update db
       deleteFollowEdge(myHandle, handle);
     } else {
-      console.log("can't unfollow yourself!");
+      console.log("Can't unfollow yourself!");
     }
   };
 

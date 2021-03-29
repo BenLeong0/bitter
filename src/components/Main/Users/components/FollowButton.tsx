@@ -38,7 +38,7 @@ const FollowButton: React.FC<Props> = (props) => {
       // update db
       createFollowEdge(myHandle, handle);
     } else {
-      console.log("not logged in!");
+      console.log("Not logged in!");
     }
   };
 

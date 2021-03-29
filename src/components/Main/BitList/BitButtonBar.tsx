@@ -44,12 +44,8 @@ const BitButtonBar: React.FC<BitInfo> = (props) => {
       body: formdata,
     })
       .then((response) => response.json())
-      .then((result) => printResp(result))
+      .then((result) => console.log(result))
       .catch((error) => console.log("error", error));
-  };
-
-  const printResp = (resp: any) => {
-    console.log(resp);
   };
 
   const dislike = () => {

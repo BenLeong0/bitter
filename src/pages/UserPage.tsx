@@ -52,7 +52,6 @@ const UserPage: React.FC<{}> = () => {
     setCurrHandle(data.handle);
     if (data.isFollowing) {
       setIsFollowing(data.isFollowing);
-      console.log(data);
     }
     setIsLoading(false);
   };
