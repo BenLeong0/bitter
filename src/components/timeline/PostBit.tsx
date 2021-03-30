@@ -12,7 +12,10 @@ const PostBit: React.FC<{}> = () => {
       {isLoggedIn ? (
         <>
           <div className="postbox-pfp">
-            <img src="https://via.placeholder.com/48" alt="profile pic"></img>
+            <img
+              src={`${process.env.PUBLIC_URL}/placeholder48.png`}
+              alt="pfp"
+            />
           </div>
           <PostBoxForm />
         </>

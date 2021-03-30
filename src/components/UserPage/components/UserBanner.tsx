@@ -1,12 +1,10 @@
 import React from "react";
 
 const UserBanner: React.FC<{ handle: string }> = ({ handle }) => {
-  const imageHeight: number = 150;
-
   return (
     <div className="user-banner">
       <img
-        src={`https://via.placeholder.com/600x${imageHeight}?text=Banner`}
+        src={`${process.env.PUBLIC_URL}/placeholderbanner.png`}
         alt="profile banner"
       />
     </div>

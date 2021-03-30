@@ -16,7 +16,10 @@ const UserSuggestion: React.FC<User> = (user) => {
       <div className="user-suggestion">
         <Link to={"/u/" + user.handle}>
           <div className="user-suggestion-pfp">
-            <img src="https://via.placeholder.com/48" alt="profile pic"></img>
+            <img
+              src={`${process.env.PUBLIC_URL}/placeholder48.png`}
+              alt="profile pic"
+            ></img>
           </div>
           <div className="user-suggestion-info">
             <div className="user-suggestion-displayname">

@@ -82,7 +82,10 @@ const Bit: React.FC<BitInfo> = (bitInfo) => {
     <div className="bit">
       <Link to={`/u/${bitInfo.handle}`}>
         <div className="bit-pfp">
-          <img src={"https://via.placeholder.com/48"} alt="profile pic"></img>
+          <img
+            src={`${process.env.PUBLIC_URL}/placeholder48.png`}
+            alt="profile pic"
+          ></img>
         </div>
       </Link>
 
