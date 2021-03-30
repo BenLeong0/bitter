@@ -6,7 +6,7 @@ const AppTitle: React.FC<{}> = () => {
   return (
     <div className="app-title-box">
       <Link to="/home">
-        <div className="app-title">BitteR</div>
+        <div className="app-title">Bitter</div>
       </Link>
     </div>
   );

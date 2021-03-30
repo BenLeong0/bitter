@@ -1,5 +1,6 @@
 .postbox {
   width: calc(100% - 2px);
+  min-height: 100px;
   float: left;
   border: grey solid 1px;
   /* border-radius: 4px; */
@@ -72,4 +73,18 @@
   border: 4px solid #f3f3f3;
   border-top: 4px solid #3498db;
   margin: auto;
+}
+
+#postbox-login {
+  text-align: center;
+  margin: 30px auto 40px;
+  float: none;
+  font-size: 30px;
+  line-height: 30px;
+}
+
+#postbox-login a {
+  font-weight: bold;
+  text-decoration: underline;
+  color: #2093b6;
 }
