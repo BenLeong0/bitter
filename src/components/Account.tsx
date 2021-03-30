@@ -8,22 +8,23 @@ import {
 import Pool from "../UserPool";
 
 // type ContextProps = {
+//   API_URL: string;
 //   authenticate: (Username: string, Password: string) => Promise<undefined>;
+//   isEmailUsed: (email: string) => Promise<boolean>
 //   getSession: () => Promise<any>;
 //   logout: () => void;
-//   isLoggedIn: boolean;
-//   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
-//   currHandle: string;
-//   setCurrHandle: React.Dispatch<React.SetStateAction<string>>;
-//   API_URL: string;
-//   isFollowing: boolean;
-//   setIsFollowing: React.Dispatch<React.SetStateAction<boolean>>;
-//   myId: string;
-//   createFollowEdge: (sourceId: string, destinationId: string) => Promise<void>;
-//   deleteFollowEdge: (sourceId: string, destinationId: string) => Promise<void>;
-//   isEmailUsed: (email: string) => Promise<boolean>
 //   refreshList: boolean;
 //   setRefreshList: React.Dispatch<React.SetStateAction<boolean>>;
+//   isLoggedIn: boolean;
+//   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
+//   isFollowing: boolean;
+//   setIsFollowing: React.Dispatch<React.SetStateAction<boolean>>;
+//   currHandle: string;
+//   setCurrHandle: React.Dispatch<React.SetStateAction<string>>;
+//   myHandle: string;
+//   setMyHandle: React.Dispatch<React.SetStateAction<string>>;
+//   createFollowEdge: (sourceId: string, destinationId: string) => Promise<void>;
+//   deleteFollowEdge: (sourceId: string, destinationId: string) => Promise<void>;
 // };
 
 interface Props {
@@ -47,8 +48,6 @@ const Account: React.FC<Props> = ({
   const stage = "/dev";
   const API_URL: string = url + stage;
 
-  const [myId, setMyId] = useState<string>("");
-
   // Info about current user being viewed, i.e. owner of /u/handle
   const [currHandle, setCurrHandle] = useState<string>("");
   const [isFollowing, setIsFollowing] = useState<boolean>(false);
@@ -60,11 +59,10 @@ const Account: React.FC<Props> = ({
     getSession()
       .then((session: any) => {
         setIsLoggedIn(true);
-        setMyId(session.sub);
         setMyHandle(session.user.username);
       })
       .catch((err) => {
-        setMyId("");
+        setMyHandle("");
 
         return;
       });
@@ -173,7 +171,6 @@ const Account: React.FC<Props> = ({
     const user = Pool.getCurrentUser();
     if (user) {
       user.signOut();
-      setMyId("");
       setMyHandle("");
       setIsLoggedIn(false);
     }
@@ -190,25 +187,23 @@ const Account: React.FC<Props> = ({
   return (
     <AccountContext.Provider
       value={{
+        API_URL,
         authenticate,
+        isEmailUsed,
         getSession,
         logout,
+        refreshList,
+        setRefreshList,
         isLoggedIn,
         setIsLoggedIn,
-        currHandle,
-        setCurrHandle,
-        API_URL,
         isFollowing,
         setIsFollowing,
-        myId,
-        setMyId,
+        currHandle,
+        setCurrHandle,
         myHandle,
         setMyHandle,
         createFollowEdge,
         deleteFollowEdge,
-        isEmailUsed,
-        refreshList,
-        setRefreshList,
       }}
     >
       {children}
