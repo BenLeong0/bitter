@@ -24,8 +24,7 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
   - [x] Identify props required for each component
     - No props => `<{}>`
   - [x] Type each variable
-- [ ] Database to AWS (or other hosting?)
-- [ ] API to AWS
+- [x] API to AWS
   - [x] `create_user` after confirmation
   - [x] `get_timeline(user_id)`
     - Check if logged in or not (i.e. `user_id == ''`)
@@ -35,8 +34,6 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
   - [x] `get_user_posts(handle)`
   - [x] `get_suggested_users()`
     - [x] Check if following
-  - [~] `check_if_following(source_id, destination_id)`
-    - Integrated into other functions
   - [x] `create_follow(destination_id)`
     - [x] Require auth (source_id)
     - [x] User suggestions
@@ -45,8 +42,8 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
     - [x] Require auth (source_id)
     - [x] User suggestions
     - [x] User pages
-  - [ ] `post_bit(content)`
-    - [ ] Require auth
+  - [x] `post_bit(content)`
+    - [x] Require auth
 - [x] Add user to database after signing up
 - [x] Redesign database
   - [x] `user_id = cognito:sub` (string)
@@ -55,32 +52,39 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
   - [x] Users
   - [x] Follows
   - [x] Test posts
+- [ ] Encode + decode api calls (symbols to %xx))
+- [ ] Success + error message for API calls
 
 ## To-do list
 
 - [x] Add card to portfolio
 - [ ] Each tweet gets its own page w replies
 - [x] Loading spinners
-- [ ] Tweet ID generated through a hash
+- [x] Bit ID generated through a hash
   - Sort tweets table in database by `created_at`
 - [x] Page titles
 - [x] Favicon
 - [x] Domain
 - [x] 404 page
-- [ ] Encode + decode api calls
+- [x] Organise account file
 
 ### Main page
 
-- [ ] Post box
+- [x] Post box
   - [x] Resize post box (border cut off)
   - [x] Only empty if post is successful
-  - [x] Loading spinner while sending
-  - [ ] "Login / Register" message if not logged in
+  - [x] Loading spinner while sending (format!!)
+  - [x] "Login / Register" message if not logged in
 - [ ] Profile pics
 - [ ] Interactions counters
 - [x] Display name + handle link to user page
 - [ ] Individual pages for tweets
 - [x] User info / Login button in left column
+- [x] Delete own tweets
+  - [x] Popover
+  - [x] Lambda function
+  - [x] API gateway
+  - [x] Fetch function
 
 ### User pages
 
@@ -104,15 +108,13 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
   - [ ] Following list
   - [ ] Follower list
 - [x] Same side bars
-- [~] 'Error' message if no tweets found
-  - For each list
+- [x] 'Error' message if no tweets found
 
 ### Login
 
 - [x] Handle or email + password
 - [x] Set `isLoggedIn` to `true`
-- [x] Set `myId`
-- [x] Set `handle`
+- [x] Set `myHandle`
 - [x] Link to `/register`
 - [x] Error handling
   - [x] Incorrect username/password
@@ -130,14 +132,12 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
 
 ### Settings
 
-- [ ] Change email
+- [x] Change email
   - [x] Check if email exists
   - [x] Authorise user
   - [x] Check valid email
-  - [ ] Confirmation popup
+  - [x] Confirmation popup
   - [x] Change
-  - Instead: send link to new email, clicking link updates and verifies email ?
-    - This way, email is only changed after verification
 - [ ] Change password
   - [ ] Authorise user
   - [ ] Check valid password
@@ -146,10 +146,16 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
 - [ ] Logout
   - [ ] Confirmation popup
   - [x] Set `isLoggedIn` to `false`
-  - [x] Set `myId` to `''`
+  - [x] Set `myHandle` to `''`
 - [ ] Deactivate account
+  - [ ] Get accessToken
+    - `getSession().then((resp) => console.log(resp.accessToken))`
   - [ ] Password
   - [ ] Type `delete-me`
+
+### Interaction counters
+
+- [ ]
 
 ### Fullstack
 
@@ -165,3 +171,6 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
 - [ ] Admin features
   - [ ] Delete any posts
   - [ ] Delete user
+  - [ ] Update follow counts
+  - [ ] Update interaction counts
+- [ ] Mobile
