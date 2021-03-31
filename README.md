@@ -119,6 +119,7 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
 - [x] Error handling
   - [x] Incorrect username/password
   - [x] Not yet verified
+- [ ] Generic error message
 
 ### Register
 
@@ -126,9 +127,10 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
   - [x] Valid handle (no special chars)
   - [x] Valid email (cognito error)
   - [x] Valid password (upper, lower, number, special, >8 chars)
-- [ ] Redirect to "Verify your account" message page
+- [x] "Verify your account" message
 - [x] Link to `/login`
-- [ ] Create database entry (use Lambda + Cognito / in `create-api-key`)
+- [x] Create database entry (use Lambda + Cognito / in `create-api-key`)
+- [ ] Generic error message
 
 ### Settings
 
@@ -138,20 +140,26 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
   - [x] Check valid email
   - [x] Confirmation popup
   - [x] Change
-- [ ] Change password
-  - [ ] Authorise user
-  - [ ] Check valid password
-  - [ ] Confirmation popup
-  - [ ] Change
+  - [ ] Verification???
+- [x] Change password
+  - [x] Check valid password
+  - [x] Check passwords match
+  - [x] Authorise user
+  - [x] Confirmation popup
+  - [x] Change
+  - [ ] CHECK!!!
 - [x] Logout
   - [x] Confirmation popup
   - [x] Set `isLoggedIn` to `false`
   - [x] Set `myHandle` to `''`
-- [ ] Deactivate account
-  - [ ] Get accessToken
-    - `getSession().then((resp) => console.log(resp.accessToken))`
-  - [ ] Password
-  - [ ] Type `delete-me`
+- [x] Deactivate account
+  - [x] Get accessToken
+  - [x] Password
+  - [x] Type `delete-me`
+  - [x] Confirmation popup
+  - [x] Error messages
+    - [x] Wrong inputs
+    - [x] Generic
 
 ### Interaction counters
 
@@ -173,4 +181,4 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
   - [ ] Delete user
   - [ ] Update follow counts
   - [ ] Update interaction counts
-- [ ] Mobile
+- [ ] Mobile support

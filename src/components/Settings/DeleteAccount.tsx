@@ -105,6 +105,7 @@ const ChangeEmail: React.FC<ChangeEmailProps> = () => {
               onChange={(event) => {
                 setIsPasswordCorrect(true);
                 setPassword(event.target.value);
+                setErrorOccurred(false);
               }}
               type="password"
               className={!isPasswordCorrect ? "invalid" : ""}
@@ -131,6 +132,7 @@ const ChangeEmail: React.FC<ChangeEmailProps> = () => {
               onChange={(event) => {
                 setIsConfirmationCorrect(true);
                 setDeleteConfirmation(event.target.value);
+                setErrorOccurred(false);
               }}
               type="text"
               className={!isConfirmationCorrect ? "invalid" : ""}
@@ -151,6 +153,13 @@ const ChangeEmail: React.FC<ChangeEmailProps> = () => {
           onSubmit={onSubmit}
           active={password.length > 0}
         />
+
+        {/* Error message */}
+        {errorOccurred ? (
+          <div className="form-error-message">An error occurred.</div>
+        ) : (
+          ""
+        )}
       </form>
       <hr />
     </div>

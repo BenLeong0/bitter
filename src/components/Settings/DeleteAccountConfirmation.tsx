@@ -41,6 +41,7 @@ const DeleteAccountConfirmation: React.FC<DeleteAccountConfirmationProps> = ({
         style={{
           backgroundColor: "#d3455b",
           borderColor: "#d3455b",
+          marginBottom: "10px",
         }}
       >
         Delete account
