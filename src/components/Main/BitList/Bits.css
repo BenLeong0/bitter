@@ -18,6 +18,7 @@
   float: left;
   padding-top: 16px;
   border-radius: 4px;
+  position: relative;
 }
 
 .bit-pfp {
@@ -54,6 +55,7 @@
 .bit-text {
   margin-bottom: 4px;
   margin-right: 16px;
+  width: 464px;
 }
 
 .bit-buttons {
@@ -74,4 +76,43 @@
   margin-top: 20px;
   float: left;
   width: 100%;
+}
+
+.bit-content div {
+  float: left;
+}
+
+.bit-info {
+  width: 450px;
+  float: left;
+}
+
+.bit-delete {
+  width: 12px;
+  height: 12px;
+  margin-right: 18px;
+  float: right;
+}
+
+button.button-primary.delete-post {
+  background-color: #d3455b;
+  border-color: #d3455b;
+  font-size: 8px;
+  line-height: 16px;
+  height: 16px;
+  border-radius: 0;
+  position: absolute;
+  right: 43px;
+  top: 14px;
+  padding-left: 6px;
+  padding-right: 3px;
+}
+
+.delete-post-arrow {
+  position: absolute;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-left: 8px solid #d3455b;
+  right: 35px;
+  top: 14px;
 }

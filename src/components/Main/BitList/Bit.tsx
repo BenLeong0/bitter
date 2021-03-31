@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import BitButtonBar from "./BitButtonBar";
 import { Link } from "react-router-dom";
+import OutsideAlerter from "./OutsideAlerter";
 
 import BitInfo from "../../../Types/BitInfo";
+import { AccountContext } from "../../Account";
+import DeleteButton from "./delete.svg";
+
 // interface BitInfo {
 //   content: string;
 //   dislikes: number;
@@ -71,15 +75,66 @@ function timestampFormat(bitTime: Date): string {
 }
 
 const Bit: React.FC<BitInfo> = (bitInfo) => {
+  const {
+    API_URL,
+    getSession,
+  }: {
+    API_URL: string;
+    getSession: () => Promise<any>;
+  } = useContext(AccountContext);
+
   // convert timestamp to time passed
   const bitTime: Date = new Date(bitInfo.post_time);
   const timeString: string = timestampFormat(bitTime);
 
-  // If user_id === props.myId then give option to delete
+  // myHandle to show/hide delete button
+  const { myHandle }: { myHandle: string } = useContext(AccountContext);
+  const myPost = myHandle === bitInfo.handle;
+
+  // Hook to hide tweet after deleting
+  const [isDeleted, setIsDeleted] = useState<boolean>(false);
+
+  // Delete button
+  const handleDeletePost = async (e: any) => {
+    e.preventDefault();
+    getSession().then(async ({ headers }) => {
+      // Request options
+      var requestOptions = {
+        headers,
+        method: "DELETE",
+      };
+
+      // Call API
+      await fetch(
+        `${API_URL}/bits/post?post_id=${bitInfo.post_id}`,
+        requestOptions
+      )
+        .then((response) => response.text())
+        .then((result) => {
+          const resultJSON = JSON.parse(result);
+
+          // success/failure handling
+          if (resultJSON.code === "postSuccess") {
+            // Hide post
+            setIsDeleted(true);
+          } else {
+            // Error message
+            console.log(result);
+          }
+        })
+        .catch((err) => {
+          console.log("Error:", err);
+          // setErrorOccurred(true);
+        });
+    });
+  };
+
+  // Delete popover
+  const [isPopoverOpen, setIsPopoverOpen] = useState<boolean>(false);
 
   // Numbers for interactions
   return (
-    <div className="bit">
+    <div className="bit" style={{ display: isDeleted ? "none" : "" }}>
       <Link to={`/u/${bitInfo.handle}`}>
         <div className="bit-pfp">
           <img
@@ -100,6 +155,33 @@ const Bit: React.FC<BitInfo> = (bitInfo) => {
             <span className="bit-info-time">{timeString}</span>
           </Link>
         </div>
+        <input
+          type="image"
+          className="bit-delete"
+          src={DeleteButton}
+          alt="dislike button"
+          onClick={() => setIsPopoverOpen(true)}
+          style={{ display: myPost ? "block" : "none" }}
+        />
+        <OutsideAlerter
+          isPopoverOpen={isPopoverOpen}
+          setIsPopoverOpen={setIsPopoverOpen}
+        >
+          <div
+            className="bit-delete-popover"
+            style={{ display: isPopoverOpen ? "block" : "none" }}
+            // handleClickOutside={() => setIsPopoverOpen(false)}
+          >
+            <button
+              className="button-primary delete-post"
+              onClick={handleDeletePost}
+            >
+              Delete post
+            </button>
+            <div className="delete-post-arrow" />
+          </div>
+        </OutsideAlerter>
+
         <div className="bit-text"> {bitInfo.content} </div>
         <BitButtonBar {...bitInfo} />
       </div>
