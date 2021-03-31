@@ -126,7 +126,8 @@ const ChangeEmail: React.FC<ChangeEmailProps> = () => {
       {/* Success message */}
       {hasSucceeded ? (
         <div className="form-success-message">
-          Success! Please check your email to verify the new address
+          Success! Please check your email to see a meaningless verification
+          code
         </div>
       ) : (
         ""
