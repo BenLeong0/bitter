@@ -119,7 +119,7 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
 - [x] Error handling
   - [x] Incorrect username/password
   - [x] Not yet verified
-- [ ] Generic error message
+- [x] Generic error message
 
 ### Register
 
@@ -130,7 +130,7 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
 - [x] "Verify your account" message
 - [x] Link to `/login`
 - [x] Create database entry (use Lambda + Cognito / in `create-api-key`)
-- [ ] Generic error message
+- [x] Generic error message
 
 ### Settings
 
@@ -163,7 +163,10 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
 
 ### Interaction counters
 
-- [ ]
+- [ ] Replies
+- [ ] Rebits
+- [ ] Likes
+- [ ] Dislikes
 
 ### Fullstack
 

@@ -26,6 +26,7 @@ const Register: React.FC<{}> = () => {
   const [isPasswordValid, setIsPasswordValid] = useState<boolean>(true);
 
   const [hasSucceeded, setHasSucceeded] = useState<boolean>(false);
+  const [errorOccurred, setErrorOccurred] = useState<boolean>(false);
 
   const {
     isEmailUsed,
@@ -69,6 +70,7 @@ const Register: React.FC<{}> = () => {
             default:
               // MAKE GENERAL ERROR MESSAGE FOR IF THIS OCCURS !!!!!
               console.log("an error occured");
+              setErrorOccurred(true);
           }
         }
         if (data) {
@@ -172,6 +174,7 @@ const Register: React.FC<{}> = () => {
               setIsUsernameValid(true);
               setUsernameExists(false);
               setUsername(event.target.value);
+              setErrorOccurred(false);
             }}
             type="text"
             className={
@@ -226,6 +229,7 @@ const Register: React.FC<{}> = () => {
               setEmailExists(false);
               setIsEmailValid(true);
               setEmail(event.target.value);
+              setErrorOccurred(false);
             }}
             type="email"
             className={isEmailEmpty || emailExists ? "invalid" : ""}
@@ -263,6 +267,7 @@ const Register: React.FC<{}> = () => {
               setPasswordsMismatch(false);
               setIsPasswordValid(true);
               setPassword(event.target.value);
+              setErrorOccurred(false);
             }}
             type="password"
             className={!isPasswordValid || passwordsMismatch ? "invalid" : ""}
@@ -285,6 +290,7 @@ const Register: React.FC<{}> = () => {
               onChange={(event) => {
                 setPasswordsMismatch(false);
                 setConfirmPassword(event.target.value);
+                setErrorOccurred(false);
               }}
               type="password"
               className={!isPasswordValid || passwordsMismatch ? "invalid" : ""}
@@ -319,6 +325,13 @@ const Register: React.FC<{}> = () => {
               logging in
             </Link>
           </div>
+        ) : (
+          ""
+        )}
+
+        {/* Error message */}
+        {errorOccurred ? (
+          <div className="form-error-message">An error occurred.</div>
         ) : (
           ""
         )}
