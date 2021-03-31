@@ -27,11 +27,13 @@ const UserPage: React.FC<{}> = () => {
   document.title = (user.handle ? "@" + user.handle : "user") + " / Bitter";
 
   const {
+    API_URL,
     currHandle,
     setCurrHandle,
     myHandle,
     setIsFollowing,
   }: {
+    API_URL: string;
     currHandle: string;
     setCurrHandle: React.Dispatch<React.SetStateAction<string>>;
     myHandle: string;
@@ -45,7 +47,7 @@ const UserPage: React.FC<{}> = () => {
     setIsLoading(true);
     // Returns {user_id: ''} if user not found
     const fetchUser = await fetch(
-      `https://7z39hjjfg1.execute-api.eu-west-2.amazonaws.com/dev/users/data?handle=${handle}&myHandle=${myHandle}`
+      `${API_URL}/users/data?handle=${handle}&myHandle=${myHandle}`
     );
     const data: User = await fetchUser.json();
     setUser(data);
