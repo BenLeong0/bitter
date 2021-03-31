@@ -1,6 +1,5 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { AccountContext } from "../../Account";
 import SuggestedUserFollowButton from "./components/SuggestedUserFollowButton";
 
 interface User {
