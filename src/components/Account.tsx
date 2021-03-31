@@ -15,6 +15,7 @@ import Pool from "../UserPool";
 //   logout: () => void;
 //   refreshList: boolean;
 //   setRefreshList: React.Dispatch<React.SetStateAction<boolean>>;
+//   refreshBitList: () => void
 //   isLoggedIn: boolean;
 //   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 //   isFollowing: boolean;
@@ -184,6 +185,10 @@ const Account: React.FC<Props> = ({
     return result;
   };
 
+  const refreshBitList = () => {
+    setRefreshList(!refreshList);
+  };
+
   return (
     <AccountContext.Provider
       value={{
@@ -194,6 +199,7 @@ const Account: React.FC<Props> = ({
         logout,
         refreshList,
         setRefreshList,
+        refreshBitList,
         isLoggedIn,
         setIsLoggedIn,
         isFollowing,

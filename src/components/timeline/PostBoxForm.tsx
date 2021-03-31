@@ -6,13 +6,11 @@ const PostBoxForm: React.FC<{}> = () => {
   const {
     API_URL,
     getSession,
-    setRefreshList,
-    refreshList,
+    refreshBitList,
   }: {
     API_URL: string;
     getSession: () => Promise<any>;
-    setRefreshList: React.Dispatch<React.SetStateAction<boolean>>;
-    refreshList: boolean;
+    refreshBitList: () => void;
   } = useContext(AccountContext);
 
   const [post, updatePost] = useState<string>("");
@@ -109,7 +107,7 @@ const PostBoxForm: React.FC<{}> = () => {
         .finally(() => {
           // Set not loading
           setIsLoading(false);
-          setRefreshList(!refreshList);
+          refreshBitList();
         });
     });
   };
