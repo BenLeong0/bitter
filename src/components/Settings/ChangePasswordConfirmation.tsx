@@ -4,7 +4,6 @@ import Styled from "styled-components";
 
 export interface ChangeEmailConfirmationProps {
   onSubmit: (e: any) => Promise<void>;
-  newEmail: string;
 }
 
 const StyledPopup = Styled(Popup)`
@@ -12,32 +11,29 @@ const StyledPopup = Styled(Popup)`
     width: 300px;
     padding: 40px;
     text-align: center;
+    font-size: 20px;
     transform: translateY(-160px)
+  }
+  &-content button {
+    font-size: 12px;
+    line-height: 28px;
+    height: 28px;
   }
 `;
 
-const ChangeEmailConfirmation: React.FC<ChangeEmailConfirmationProps> = ({
+const ChangePasswordConfirmation: React.FC<ChangeEmailConfirmationProps> = ({
   onSubmit,
-  newEmail,
 }) => {
   const [open, setOpen] = useState<boolean>(false);
   const closeModal = () => setOpen(false);
 
   return (
     <>
-      <button
-        onClick={() => {
-          if (newEmail.length > 0) {
-            setOpen(true);
-          }
-        }}
-      >
-        Submit
-      </button>
+      <button onClick={() => setOpen(true)}>Submit</button>
 
       <StyledPopup open={open} modal>
         <div style={{ marginBottom: "30px" }}>
-          Are you sure you want to change your email to <b>{newEmail}</b>?
+          Are you sure you want to change your password?
         </div>
         <button
           onClick={async (e) => {
@@ -47,7 +43,7 @@ const ChangeEmailConfirmation: React.FC<ChangeEmailConfirmationProps> = ({
           type="submit"
           className="button-primary"
         >
-          Change email
+          Change password
         </button>
         <br />
         <button onClick={closeModal} style={{ marginTop: "10px" }}>
@@ -58,4 +54,4 @@ const ChangeEmailConfirmation: React.FC<ChangeEmailConfirmationProps> = ({
   );
 };
 
-export default ChangeEmailConfirmation;
+export default ChangePasswordConfirmation;

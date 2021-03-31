@@ -17,9 +17,10 @@ const LogoutButton: React.FC<LogoutButtonProps> = () => {
     padding: 40px;
     text-align: center;
     font-size: 20px;
+    transform: translateY(-160px)
   }
   &-content button {
-    font-size: 14px;
+    font-size: 12px;
     line-height: 28px;
     height: 28px;
   }
