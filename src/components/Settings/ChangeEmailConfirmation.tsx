@@ -35,7 +35,7 @@ const ChangeEmailConfirmation: React.FC<ChangeEmailConfirmationProps> = ({
         Submit
       </button>
 
-      <StyledPopup open={open} modal>
+      <StyledPopup open={open} modal onClose={closeModal}>
         <div style={{ marginBottom: "30px" }}>
           Are you sure you want to change your email to <b>{newEmail}</b>?
         </div>

@@ -16,7 +16,7 @@ const LogoutButton: React.FC<LogoutButtonProps> = () => {
     width: 250px;
     padding: 40px;
     text-align: center;
-    font-size: 20px;
+    font-size: 18px;
     transform: translateY(-160px)
   }
   &-content button {
@@ -42,7 +42,7 @@ const LogoutButton: React.FC<LogoutButtonProps> = () => {
         Logout
       </button>
 
-      <StyledPopup open={open} modal>
+      <StyledPopup open={open} modal onClose={closeModal}>
         <div style={{ marginBottom: "30px" }}>
           Are you sure you want to logout?
         </div>
