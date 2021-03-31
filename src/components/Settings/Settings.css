@@ -65,13 +65,17 @@
   margin: 20px auto;
 }
 
-#delete-account-button {
-  margin: 20px auto;
+.delete-account-label {
+  font-size: 14px;
+  margin-top: 5px;
+  float: left;
+  width: 100%;
 }
 
-#delete-account-button button {
-  background-color: #d3455b;
-  border-color: #d3455b;
+.delete-account-label code {
+  font-size: 11px;
+  background-color: lightgrey;
+  padding: 2px;
 }
 
 .settings button {

@@ -1,5 +1,4 @@
 import { CognitoUserAttribute } from "amazon-cognito-identity-js";
-import { CognitoIdentityServiceProvider } from "aws-sdk";
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AccountContext } from "../components/Account";
@@ -9,37 +8,42 @@ import "./Register.css";
 const Register: React.FC<{}> = () => {
   document.title = "Register / Bitter";
 
-  const cognito = new CognitoIdentityServiceProvider({ region: "eu-west-2" });
-
   const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
 
   const [isUsernameEmpty, setIsUsernameEmpty] = useState<boolean>(false);
+  const [isUsernameTooLong, setIsUsernameTooLong] = useState<boolean>(false);
   const [isEmailEmpty, setIsEmailEmpty] = useState<boolean>(false);
 
   const [usernameExists, setUsernameExists] = useState<boolean>(false);
   const [emailExists, setEmailExists] = useState<boolean>(false);
   const [passwordsMismatch, setPasswordsMismatch] = useState<boolean>(false);
 
+  const [isUsernameValid, setIsUsernameValid] = useState<boolean>(true);
   const [isEmailValid, setIsEmailValid] = useState<boolean>(true);
   const [isPasswordValid, setIsPasswordValid] = useState<boolean>(true);
 
-  const { authenticate } = useContext(AccountContext);
+  const [hasSucceeded, setHasSucceeded] = useState<boolean>(false);
 
-  const onSubmit = async (event: any) => {
+  const {
+    isEmailUsed,
+  }: {
+    isEmailUsed: (email: string) => Promise<boolean>;
+  } = useContext(AccountContext);
+
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log("register");
 
     // Check fields not empty and passwords match
     if (areFieldsValid()) {
-      console.log("empty fields!");
+      console.log("Empty fields!");
       return;
     }
 
     // Check if email exists
-    if (await isEmailUsed()) {
+    if (await isEmailUsed(email)) {
       setEmailExists(true);
       return;
     }
@@ -62,9 +66,14 @@ const Register: React.FC<{}> = () => {
             case "InvalidPasswordException":
               setIsPasswordValid(false);
               break;
+            default:
+              // MAKE GENERAL ERROR MESSAGE FOR IF THIS OCCURS !!!!!
+              console.log("an error occured");
           }
         }
-        console.log(data);
+        if (data) {
+          setHasSucceeded(true);
+        }
       }
     );
   };
@@ -76,6 +85,14 @@ const Register: React.FC<{}> = () => {
       console.log("no handle!");
       setIsUsernameEmpty(true);
       result = true;
+    } else if (username.length > 25) {
+      console.log("handle too long!");
+      setIsUsernameTooLong(true);
+      result = true;
+    } else if (!checkIsHandleValid(username)) {
+      console.log("invalid handle");
+      setIsUsernameValid(false);
+      result = true;
     }
 
     if (email.length < 1) {
@@ -84,7 +101,7 @@ const Register: React.FC<{}> = () => {
       result = true;
     }
 
-    if (checkPassword(password)) {
+    if (!checkIsPasswordValid(password)) {
       console.log("invalid password");
       setIsPasswordValid(false);
       result = true;
@@ -98,16 +115,24 @@ const Register: React.FC<{}> = () => {
     return result;
   };
 
-  const isEmailUsed = async () => {
-    const data = await fetch(
-      `https://wvv2lnqscf.execute-api.eu-west-2.amazonaws.com/dev/user-exists?email=${email}`
-    );
-    const result = await data.json();
-    return result;
+  const checkIsHandleValid = (s: string) => {
+    if (s.length < 1) return false;
+    const handleArray: Array<string> = s.split("");
+    const validChars: string =
+      "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+    for (let i = 0; i < handleArray.length; i++) {
+      if (validChars.includes(handleArray[i])) {
+        continue;
+      } else {
+        return false;
+      }
+    }
+    return true;
   };
 
-  const checkPassword = (s: string) => {
-    if (s.length < 8) return true;
+  const checkIsPasswordValid = (s: string) => {
+    if (s.length < 8) return false;
     const passwordArray: Array<string> = s.split("");
 
     let requirements: Array<boolean> = [false, false, false, false];
@@ -143,23 +168,48 @@ const Register: React.FC<{}> = () => {
             value={username}
             onChange={(event) => {
               setIsUsernameEmpty(false);
+              setIsUsernameTooLong(false);
+              setIsUsernameValid(true);
               setUsernameExists(false);
               setUsername(event.target.value);
             }}
             type="text"
-            className={isUsernameEmpty || usernameExists ? "invalid" : ""}
+            className={
+              isUsernameEmpty ||
+              !isUsernameValid ||
+              usernameExists ||
+              isUsernameTooLong
+                ? "invalid"
+                : ""
+            }
           />
 
           {/* Username field empty */}
           {isUsernameEmpty ? (
-            <div className="register-error-message">Handle field is empty</div>
+            <div className="form-error-message">Handle field is empty</div>
+          ) : (
+            ""
+          )}
+
+          {/* Username too long */}
+          {isUsernameTooLong ? (
+            <div className="form-error-message">Handle is too long</div>
+          ) : (
+            ""
+          )}
+
+          {/* Invalid username */}
+          {!isUsernameValid ? (
+            <div className="form-error-message">
+              Invalid handle (no special characters allowed)
+            </div>
           ) : (
             ""
           )}
 
           {/* Username already exists */}
           {usernameExists ? (
-            <div className="register-error-message">
+            <div className="form-error-message">
               An account with this handle already exists
             </div>
           ) : (
@@ -183,14 +233,14 @@ const Register: React.FC<{}> = () => {
 
           {/* Email field empty */}
           {isEmailEmpty ? (
-            <div className="register-error-message">Email field is empty</div>
+            <div className="form-error-message">Email field is empty</div>
           ) : (
             ""
           )}
 
           {/* Email already exists */}
           {emailExists ? (
-            <div className="register-error-message">
+            <div className="form-error-message">
               An account with this email already exists
             </div>
           ) : (
@@ -199,7 +249,7 @@ const Register: React.FC<{}> = () => {
 
           {/* Invalid email */}
           {!isEmailValid ? (
-            <div className="register-error-message">Invalid email</div>
+            <div className="form-error-message">Invalid email</div>
           ) : (
             ""
           )}
@@ -220,7 +270,7 @@ const Register: React.FC<{}> = () => {
 
           {/* Invalid password */}
           {!isPasswordValid ? (
-            <div className="register-error-message">
+            <div className="form-error-message">
               Password must be at least 8 characters long, and contain at least
               one uppercase, lowercase, number and special character.
             </div>
@@ -243,15 +293,36 @@ const Register: React.FC<{}> = () => {
 
           {/* Passwords don't match */}
           {passwordsMismatch && isPasswordValid ? (
-            <div className="register-error-message">
-              ! Passwords do not match !
-            </div>
+            <div className="form-error-message">! Passwords do not match !</div>
           ) : (
             ""
           )}
         </div>
 
         <button type="submit">Submit</button>
+
+        {/* Success message */}
+        {hasSucceeded ? (
+          <div
+            style={{
+              fontSize: "16px",
+            }}
+            className="form-success-message"
+          >
+            Success! Please verify your email before{" "}
+            <Link
+              style={{
+                color: "#33c3f0",
+              }}
+              to="/login"
+            >
+              logging in
+            </Link>
+          </div>
+        ) : (
+          ""
+        )}
+
         <div id="register-login-link">
           Already have an account? <Link to="/login">Login here</Link>
         </div>

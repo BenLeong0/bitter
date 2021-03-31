@@ -6,33 +6,35 @@ import { AccountContext } from "../Account";
 
 export interface LogoutButtonProps {}
 
+const StyledPopup = Styled(Popup)`
+&-content {
+  width: 250px;
+  padding: 40px;
+  text-align: center;
+  font-size: 18px;
+  transform: translateY(-160px)
+}
+&-content button {
+  font-size: 12px;
+  line-height: 28px;
+  height: 28px;
+}
+`;
+
 const LogoutButton: React.FC<LogoutButtonProps> = () => {
   // Confirmation popup
   const [open, setOpen] = useState<boolean>(false);
   const closeModal = () => setOpen(false);
 
-  const StyledPopup = Styled(Popup)`
-  &-content {
-    width: 250px;
-    padding: 40px;
-    text-align: center;
-    font-size: 18px;
-    transform: translateY(-160px)
-  }
-  &-content button {
-    font-size: 12px;
-    line-height: 28px;
-    height: 28px;
-  }
-  `;
-
   const { logout } = useContext(AccountContext);
   const history = useHistory();
   const onClick = (e: any) => {
     e.preventDefault();
-    // Confirmation popup !!!!
 
+    // Log out
     logout();
+
+    // Redirect to home page
     history.push(`/home`);
   };
 
@@ -42,6 +44,7 @@ const LogoutButton: React.FC<LogoutButtonProps> = () => {
         Logout
       </button>
 
+      {/* Confirmation popup */}
       <StyledPopup open={open} modal onClose={closeModal}>
         <div style={{ marginBottom: "30px" }}>
           Are you sure you want to logout?
