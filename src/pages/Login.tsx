@@ -14,20 +14,39 @@ const Login: React.FC<LoginProps> = ({ setMyHandle }) => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const { authenticate, setIsLoggedIn, setMyId } = useContext(AccountContext);
+  const [emailNotVerified, setEmailNotVerified] = useState<boolean>(false);
+  const [invalidLoginDetails, setInvalidLoginDetails] = useState<boolean>(
+    false
+  );
 
-  const onSubmit = (event: any) => {
+  const [errorOccurred, setErrorOccurred] = useState<boolean>(false);
+
+  const { authenticate, setIsLoggedIn } = useContext(AccountContext);
+
+  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     authenticate(username, password)
       .then((data: CognitoUserSession) => {
-        console.log("Logged in!", data);
-        setIsLoggedIn(true);
-        setMyId(1);
+        console.log("Logged in!");
         setMyHandle(data.getIdToken().payload["cognito:username"]);
+        setIsLoggedIn(true);
       })
       .catch((err: any) => {
-        console.error("Failed to login!", err);
+        const code: string = err.code;
+        switch (code) {
+          case "UserNotConfirmedException":
+            console.error("Email not verified");
+            setEmailNotVerified(true);
+            break;
+          case "NotAuthorizedException":
+            console.error("Incorrect username or password");
+            setInvalidLoginDetails(true);
+            break;
+          default:
+            console.error("Failed to login!", err);
+            setErrorOccurred(true);
+        }
       });
   };
 
@@ -40,24 +59,60 @@ const Login: React.FC<LoginProps> = ({ setMyHandle }) => {
           <div className="login-input-label">Email / Handle:</div>
           <input
             value={username}
-            onChange={(event) => setUsername(event.target.value)}
+            onChange={(event) => {
+              setEmailNotVerified(false);
+              setInvalidLoginDetails(false);
+              setUsername(event.target.value);
+              setErrorOccurred(false);
+            }}
             type="text"
+            className={emailNotVerified || invalidLoginDetails ? "invalid" : ""}
           />
+
+          {/* Account not verified */}
+          {emailNotVerified ? (
+            <div className="form-error-message">
+              You need to verify your email before logging in
+            </div>
+          ) : (
+            ""
+          )}
         </div>
 
         <div className="login-input-field">
           <div className="login-input-label">Password:</div>
           <input
             value={password}
-            onChange={(event) => setPassword(event.target.value)}
+            onChange={(event) => {
+              setInvalidLoginDetails(false);
+              setPassword(event.target.value);
+              setErrorOccurred(false);
+            }}
             type="password"
+            className={invalidLoginDetails ? "invalid" : ""}
           />
+
+          {/* Invalid login details */}
+          {invalidLoginDetails ? (
+            <div className="form-error-message">
+              Incorrect username or password
+            </div>
+          ) : (
+            ""
+          )}
         </div>
 
         <button type="submit">Submit</button>
         <div id="login-register-link">
           <Link to="/register">Create an account</Link>
         </div>
+
+        {/* Error message */}
+        {errorOccurred ? (
+          <div className="form-error-message">An error occurred.</div>
+        ) : (
+          ""
+        )}
       </form>
     </div>
   );
