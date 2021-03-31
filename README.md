@@ -143,8 +143,8 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
   - [ ] Check valid password
   - [ ] Confirmation popup
   - [ ] Change
-- [ ] Logout
-  - [ ] Confirmation popup
+- [x] Logout
+  - [x] Confirmation popup
   - [x] Set `isLoggedIn` to `false`
   - [x] Set `myHandle` to `''`
 - [ ] Deactivate account

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Popup from "reactjs-popup";
 import Styled from "styled-components";
-import "reactjs-popup/dist/index.css";
 
 export interface ChangeEmailConfirmationProps {
   onSubmit: (e: any) => Promise<void>;
@@ -26,6 +25,7 @@ const ChangeEmailConfirmation: React.FC<ChangeEmailConfirmationProps> = ({
   return (
     <>
       <button onClick={() => setOpen(true)}>Submit</button>
+
       <StyledPopup open={open} modal>
         <div style={{ marginBottom: "30px" }}>
           Are you sure you want to change your email to <b>{newEmail}</b>?

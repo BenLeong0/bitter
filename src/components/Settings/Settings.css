@@ -78,3 +78,7 @@
   height: 28px;
   font-size: 11px;
 }
+
+.popup-content {
+  width: 500px;
+}
