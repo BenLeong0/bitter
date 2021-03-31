@@ -140,7 +140,7 @@ const Bit: React.FC<BitInfo> = (bitInfo) => {
           <img
             src={`${process.env.PUBLIC_URL}/placeholder48.png`}
             alt="profile pic"
-          ></img>
+          />
         </div>
       </Link>
 

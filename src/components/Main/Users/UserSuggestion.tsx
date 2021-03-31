@@ -12,14 +12,14 @@ interface User {
 const UserSuggestion: React.FC<User> = (user) => {
   return (
     <>
-      <hr className="solid"></hr>
+      <hr className="solid" />
       <div className="user-suggestion">
         <Link to={"/u/" + user.handle}>
           <div className="user-suggestion-pfp">
             <img
               src={`${process.env.PUBLIC_URL}/placeholder48.png`}
               alt="profile pic"
-            ></img>
+            />
           </div>
           <div className="user-suggestion-info">
             <div className="user-suggestion-displayname">
