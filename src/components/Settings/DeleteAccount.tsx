@@ -15,6 +15,7 @@ const ChangeEmail: React.FC<ChangeEmailProps> = () => {
   );
 
   const [errorOccurred, setErrorOccurred] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const {
     authenticate,
@@ -31,11 +32,12 @@ const ChangeEmail: React.FC<ChangeEmailProps> = () => {
   const history = useHistory();
   const onSubmit = async (e: any) => {
     e.preventDefault();
-    console.log("delete account");
+    setIsLoading(true);
 
     // Check deleteConfirmation is correct
     if (deleteConfirmation !== "delete-me") {
       setIsConfirmationCorrect(false);
+      setIsLoading(false);
       return;
     }
 
@@ -69,12 +71,14 @@ const ChangeEmail: React.FC<ChangeEmailProps> = () => {
                 } else {
                   // Error message
                   setErrorOccurred(true);
+                  setIsLoading(false);
                   console.error(resultJSON);
                 }
               })
               .catch((err) => {
                 console.log("Error:", err);
                 setErrorOccurred(true);
+                setIsLoading(false);
               });
           })
           .catch((err: any) => {
@@ -85,82 +89,91 @@ const ChangeEmail: React.FC<ChangeEmailProps> = () => {
                 break;
               default:
                 console.error(err);
+                setIsLoading(false);
             }
           });
       })
       .catch((err: any) => {
         console.error(err);
+        setIsLoading(false);
       });
   };
 
   return (
     <div className="settings-field">
-      <div className="settings-header">Delete account</div>
-      <form onSubmit={(e) => e.preventDefault()}>
-        <div className="settings-input-field">
-          <div className="settings-input-label">Password:</div>
-          <div className="settings-input-wrapper">
-            <input
-              value={password}
-              onChange={(event) => {
-                setIsPasswordCorrect(true);
-                setPassword(event.target.value);
-                setErrorOccurred(false);
-              }}
-              type="password"
-              className={!isPasswordCorrect ? "invalid" : ""}
-            />
+      {isLoading ? (
+        <div className="loader" />
+      ) : (
+        <>
+          <div className="settings-header">Delete account</div>
+          <form onSubmit={(e) => e.preventDefault()}>
+            <div className="settings-input-field">
+              <div className="settings-input-label">Password:</div>
+              <div className="settings-input-wrapper">
+                <input
+                  value={password}
+                  onChange={(event) => {
+                    setIsPasswordCorrect(true);
+                    setPassword(event.target.value);
+                    setErrorOccurred(false);
+                  }}
+                  type="password"
+                  className={!isPasswordCorrect ? "invalid" : ""}
+                />
 
-            {/* Incorrect password */}
-            {!isPasswordCorrect ? (
-              <div className="form-error-message">Incorrect password</div>
-            ) : (
-              ""
-            )}
-          </div>
-        </div>
-
-        <div className="delete-account-label">
-          Type <code>delete-me</code> below to confirm your decision
-        </div>
-
-        <div className="settings-input-field">
-          <div className="settings-input-label">Confirmation:</div>
-          <div className="settings-input-wrapper">
-            <input
-              value={deleteConfirmation}
-              onChange={(event) => {
-                setIsConfirmationCorrect(true);
-                setDeleteConfirmation(event.target.value);
-                setErrorOccurred(false);
-              }}
-              type="text"
-              className={!isConfirmationCorrect ? "invalid" : ""}
-            />
-
-            {/* Incorrect confirmation text */}
-            {!isConfirmationCorrect ? (
-              <div className="form-error-message">
-                Incorrect confirmation message
+                {/* Incorrect password */}
+                {!isPasswordCorrect ? (
+                  <div className="form-error-message">Incorrect password</div>
+                ) : (
+                  ""
+                )}
               </div>
+            </div>
+
+            <div className="delete-account-label">
+              Type <code>delete-me</code> below to confirm your decision
+            </div>
+
+            <div className="settings-input-field">
+              <div className="settings-input-label">Confirmation:</div>
+              <div className="settings-input-wrapper">
+                <input
+                  value={deleteConfirmation}
+                  onChange={(event) => {
+                    setIsConfirmationCorrect(true);
+                    setDeleteConfirmation(event.target.value);
+                    setErrorOccurred(false);
+                  }}
+                  type="text"
+                  className={!isConfirmationCorrect ? "invalid" : ""}
+                />
+
+                {/* Incorrect confirmation text */}
+                {!isConfirmationCorrect ? (
+                  <div className="form-error-message">
+                    Incorrect confirmation message
+                  </div>
+                ) : (
+                  ""
+                )}
+              </div>
+            </div>
+
+            <DeleteAccountConfirmation
+              onSubmit={onSubmit}
+              active={password.length > 0}
+            />
+
+            {/* Error message */}
+            {errorOccurred ? (
+              <div className="form-error-message">An error occurred.</div>
             ) : (
               ""
             )}
-          </div>
-        </div>
+          </form>
+        </>
+      )}
 
-        <DeleteAccountConfirmation
-          onSubmit={onSubmit}
-          active={password.length > 0}
-        />
-
-        {/* Error message */}
-        {errorOccurred ? (
-          <div className="form-error-message">An error occurred.</div>
-        ) : (
-          ""
-        )}
-      </form>
       <hr />
     </div>
   );

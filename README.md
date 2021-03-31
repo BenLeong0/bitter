@@ -140,14 +140,12 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
   - [x] Check valid email
   - [x] Confirmation popup
   - [x] Change
-  - [ ] Verification???
 - [x] Change password
   - [x] Check valid password
   - [x] Check passwords match
   - [x] Authorise user
   - [x] Confirmation popup
   - [x] Change
-  - [ ] CHECK!!!
 - [x] Logout
   - [x] Confirmation popup
   - [x] Set `isLoggedIn` to `false`
@@ -160,6 +158,7 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
   - [x] Error messages
     - [x] Wrong inputs
     - [x] Generic
+  - [x] Loader
 
 ### Interaction counters
 
