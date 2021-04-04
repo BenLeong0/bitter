@@ -1,6 +1,6 @@
 export default interface BitInfo {
     post_id: string;
-    content?: string;
+    content: string;
     dislikes?: number;
     display_name?: string;
     handle?: string;

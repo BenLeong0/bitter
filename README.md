@@ -58,7 +58,6 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
 ## To-do list
 
 - [x] Add card to portfolio
-- [ ] Each tweet gets its own page w replies
 - [x] Loading spinners
 - [x] Bit ID generated through a hash
   - Sort tweets table in database by `created_at`
@@ -67,24 +66,40 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
 - [x] Domain
 - [x] 404 page
 - [x] Organise account file
+- [x] Each tweet gets its own page
+- [x] Tagging
+- [ ] Interactions counters
+- [ ] Edit profile
+- [ ] Replies
+  - [ ] Database links
+  - [ ] Bit pages
+  - [ ] User page tab (hide from "main" tab)
+  - [ ] Interaction counter
+- [ ] Hashtags
 
-### Main page
+### Timeline
 
 - [x] Post box
   - [x] Resize post box (border cut off)
   - [x] Only empty if post is successful
   - [x] Loading spinner while sending (format!!)
   - [x] "Login / Register" message if not logged in
-- [ ] Profile pics
-- [ ] Interactions counters
 - [x] Display name + handle link to user page
-- [ ] Individual pages for tweets
 - [x] User info / Login button in left column
+- [ ] Profile pic
+
+### Posts
+
+- [ ] Individual pages for posts
 - [x] Delete own tweets
   - [x] Popover
   - [x] Lambda function
   - [x] API gateway
   - [x] Fetch function
+- [ ] Interactions counters
+- [ ] Profile pics
+- [ ] Replies
+- [ ] Tagging
 
 ### User pages
 

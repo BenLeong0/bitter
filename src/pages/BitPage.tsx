@@ -12,6 +12,7 @@ const BitPage: React.FC<{}> = () => {
     post_id: "",
     handle: "",
     post_time: "",
+    content: "",
   });
   const [isLoading, setIsLoading] = useState<boolean>(false);
 

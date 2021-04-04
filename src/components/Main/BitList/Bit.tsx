@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import OutsideAlerter from "./OutsideAlerter";
 
 import BitInfo from "../../../Types/BitInfo";
+import BitTag from "./BitTag";
 import { AccountContext } from "../../Account";
 import DeleteButton from "./delete.svg";
 
@@ -83,6 +84,10 @@ const Bit: React.FC<BitInfo> = (bitInfo) => {
     API_URL: string;
     getSession: () => Promise<any>;
   } = useContext(AccountContext);
+
+  // Split for tags
+  const splitContent = bitInfo.content.split("@");
+  const initialContent = splitContent[0];
 
   // myHandle to show/hide delete button
   const { myHandle }: { myHandle: string } = useContext(AccountContext);
@@ -188,7 +193,12 @@ const Bit: React.FC<BitInfo> = (bitInfo) => {
           </div>
         </OutsideAlerter>
 
-        <div className="bit-text"> {bitInfo.content} </div>
+        <div className="bit-text">
+          {initialContent}
+          {splitContent.slice(1).map((tag, index) => (
+            <BitTag tag={tag} key={index} />
+          ))}
+        </div>
         <BitButtonBar {...bitInfo} />
       </div>
     </div>
