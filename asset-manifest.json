@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/bitter/static/css/main.1f12bda4.chunk.css",
-    "main.js": "/bitter/static/js/main.714d8f22.chunk.js",
-    "main.js.map": "/bitter/static/js/main.714d8f22.chunk.js.map",
-    "runtime-main.js": "/bitter/static/js/runtime-main.d7ce8d6c.js",
-    "runtime-main.js.map": "/bitter/static/js/runtime-main.d7ce8d6c.js.map",
+    "main.css": "/bitter/static/css/main.388bc910.chunk.css",
+    "main.js": "/bitter/static/js/main.27fbdae2.chunk.js",
+    "main.js.map": "/bitter/static/js/main.27fbdae2.chunk.js.map",
+    "runtime-main.js": "/bitter/static/js/runtime-main.74add266.js",
+    "runtime-main.js.map": "/bitter/static/js/runtime-main.74add266.js.map",
     "static/css/2.23154d62.chunk.css": "/bitter/static/css/2.23154d62.chunk.css",
-    "static/js/2.a992f85c.chunk.js": "/bitter/static/js/2.a992f85c.chunk.js",
-    "static/js/2.a992f85c.chunk.js.map": "/bitter/static/js/2.a992f85c.chunk.js.map",
-    "static/js/3.026558ed.chunk.js": "/bitter/static/js/3.026558ed.chunk.js",
-    "static/js/3.026558ed.chunk.js.map": "/bitter/static/js/3.026558ed.chunk.js.map",
+    "static/js/2.ba7968e4.chunk.js": "/bitter/static/js/2.ba7968e4.chunk.js",
+    "static/js/2.ba7968e4.chunk.js.map": "/bitter/static/js/2.ba7968e4.chunk.js.map",
+    "static/js/3.257aeee6.chunk.js": "/bitter/static/js/3.257aeee6.chunk.js",
+    "static/js/3.257aeee6.chunk.js.map": "/bitter/static/js/3.257aeee6.chunk.js.map",
     "index.html": "/bitter/index.html",
     "static/css/2.23154d62.chunk.css.map": "/bitter/static/css/2.23154d62.chunk.css.map",
-    "static/css/main.1f12bda4.chunk.css.map": "/bitter/static/css/main.1f12bda4.chunk.css.map",
-    "static/js/2.a992f85c.chunk.js.LICENSE.txt": "/bitter/static/js/2.a992f85c.chunk.js.LICENSE.txt",
+    "static/css/main.388bc910.chunk.css.map": "/bitter/static/css/main.388bc910.chunk.css.map",
+    "static/js/2.ba7968e4.chunk.js.LICENSE.txt": "/bitter/static/js/2.ba7968e4.chunk.js.LICENSE.txt",
     "static/media/delete.932bd998.svg": "/bitter/static/media/delete.932bd998.svg",
     "static/media/App.css": "/bitter/static/media/din1451alt G.1f5ffc3f.woff",
     "static/media/dislike.4c5bf648.svg": "/bitter/static/media/dislike.4c5bf648.svg",
@@ -27,10 +27,10 @@
     "static/media/user.279444fa.svg": "/bitter/static/media/user.279444fa.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.d7ce8d6c.js",
+    "static/js/runtime-main.74add266.js",
     "static/css/2.23154d62.chunk.css",
-    "static/js/2.a992f85c.chunk.js",
-    "static/css/main.1f12bda4.chunk.css",
-    "static/js/main.714d8f22.chunk.js"
+    "static/js/2.ba7968e4.chunk.js",
+    "static/css/main.388bc910.chunk.css",
+    "static/js/main.27fbdae2.chunk.js"
   ]
 }
