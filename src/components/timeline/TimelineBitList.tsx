@@ -1,22 +1,23 @@
 import React, { useState, useEffect, useContext } from "react";
 import { AccountContext } from "../Account";
 import BitList from "../Main/BitList/BitList";
+import BitInfo from "../../Types/BitInfo";
 
-interface BitInfo {
-  content: string;
-  dislikes: number;
-  display_name: string;
-  handle: string;
-  index: number;
-  likes: number;
-  post_id: number;
-  post_time: string;
-  replies: number;
-  reply_to: number;
-  reposts: number;
-  status: number;
-  user_id: string;
-}
+// interface BitInfo {
+//   content: string;
+//   dislikes: number;
+//   display_name: string;
+//   handle: string;
+//   index: number;
+//   likes: number;
+//   post_id: number;
+//   post_time: string;
+//   replies: number;
+//   reply_to: number;
+//   reposts: number;
+//   status: number;
+//   user_id: string;
+// }
 
 const TimelineBitList: React.FC<{}> = () => {
   // fetch list of bits
@@ -44,7 +45,7 @@ const TimelineBitList: React.FC<{}> = () => {
     const requestId = requestCounter;
 
     setIsLoading(true);
-    setBits([]);
+    // setBits([]);
     console.log("Fetching bits...");
 
     const data = await fetch(`${API_URL}/bits/timeline?handle=${myHandle}`);

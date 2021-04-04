@@ -23,7 +23,8 @@ import DeleteButton from "./delete.svg";
 //   user_id: string;
 // }
 
-function timestampFormat(bitTime: Date): string {
+function timestampFormat(post_time: string): string {
+  const bitTime: Date = new Date(post_time);
   const milliseconds: number = Date.now() - bitTime.getTime(); // Difference in milliseconds
 
   const months: Array<string> = [
@@ -83,13 +84,10 @@ const Bit: React.FC<BitInfo> = (bitInfo) => {
     getSession: () => Promise<any>;
   } = useContext(AccountContext);
 
-  // convert timestamp to time passed
-  const bitTime: Date = new Date(bitInfo.post_time);
-  const timeString: string = timestampFormat(bitTime);
-
   // myHandle to show/hide delete button
   const { myHandle }: { myHandle: string } = useContext(AccountContext);
   const myPost = myHandle === bitInfo.handle;
+  console.log(myPost);
 
   // Hook to hide tweet after deleting
   const [isDeleted, setIsDeleted] = useState<boolean>(false);
@@ -134,7 +132,13 @@ const Bit: React.FC<BitInfo> = (bitInfo) => {
 
   // Numbers for interactions
   return (
-    <div className="bit" style={{ display: isDeleted ? "none" : "" }}>
+    <div
+      className="bit"
+      style={{
+        display: isDeleted ? "none" : "",
+        fontSize: bitInfo.main_bit ? "20px" : "",
+      }}
+    >
       <Link to={`/u/${bitInfo.handle}`}>
         <div className="bit-pfp">
           <img
@@ -151,8 +155,10 @@ const Bit: React.FC<BitInfo> = (bitInfo) => {
             <span className="bit-info-handle">@{bitInfo.handle}</span>
           </Link>
           ・
-          <Link to={`/t/${bitInfo.post_id}`}>
-            <span className="bit-info-time">{timeString}</span>
+          <Link to={`/b/${bitInfo.post_id}`}>
+            <span className="bit-info-time">
+              {timestampFormat(bitInfo.post_time)}
+            </span>
           </Link>
         </div>
         <input

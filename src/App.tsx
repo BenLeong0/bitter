@@ -18,6 +18,7 @@ import RightColumn from "./components/Main/RightColumn";
 import PageNotFound from "./pages/PageNotFound";
 import Timeline from "./pages/Timeline";
 import UserPage from "./pages/UserPage";
+import BitPage from "./pages/BitPage";
 import Settings from "./pages/Settings";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -92,6 +93,9 @@ const App: React.FC<{}> = () => {
 
               {/* General user page */}
               <Route path="/u/:handle" render={() => <UserPage />} />
+
+              {/* General bit page */}
+              <Route path="/b/:post_id" render={() => <BitPage />} />
 
               {/* 404 page */}
               <Route component={PageNotFound} />
