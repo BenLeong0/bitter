@@ -52,8 +52,9 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
   - [x] Users
   - [x] Follows
   - [x] Test posts
-- [ ] Encode + decode api calls (symbols to %xx))
 - [ ] Success + error message for API calls
+  - [ ] Lambda functions
+  - [ ] Message popup
 
 ## To-do list
 
@@ -68,7 +69,7 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
 - [x] Organise account file
 - [x] Each tweet gets its own page
 - [x] Tagging
-- [ ] Interactions counters
+- [x] Interactions counters
   - [x] Like
     - [x] Frontend
     - [x] Backend post
@@ -85,12 +86,21 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
     - [x] Frontend
     - [x] Backend post
     - [x] Backend get
-  - [ ] Rebits
+- [x] Rebits
+  - [x] Separate table
+  - [x] Fetch
+  - [x] Create
+  - [x] Delete
+- [x] `DELETE` HTTP method for unlike etc
+- [x] Check if logged in for post interactions
 - [x] Profile stats
   - [x] Bits
   - [x] Bits + replies
   - [x] Likes
   - [x] `update_stats` function
+- [x] Delete post stat cascade
+  - [x] Decrement like/dislike counters
+  - [x] Delete like/dislike edges
 - [ ] Edit profile
 - [ ] Replies
   - [ ] Database links
@@ -112,16 +122,16 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
 
 ### Posts
 
-- [ ] Individual pages for posts
+- [x] Individual pages for posts
 - [x] Delete own tweets
   - [x] Popover
   - [x] Lambda function
   - [x] API gateway
   - [x] Fetch function
-- [ ] Interactions counters
+- [x] Interactions counters
+- [x] Tagging
 - [ ] Profile pics
 - [ ] Replies
-- [ ] Tagging
 
 ### User pages
 
@@ -138,7 +148,6 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
     - [ ] Change bio
     - [ ] Change pic
     - [ ] Change banner
-  - [ ] Location?
   - [x] All their tweets
   - [ ] All their likes?
   - [ ] All their replies
@@ -197,27 +206,12 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
     - [x] Generic
   - [x] Loader
 
-### Interaction counters
-
-- [ ] Replies
-- [ ] Rebits
-- [ ] Likes
-- [ ] Dislikes
-
-### Fullstack
-
-- [ ] Assign functions to all buttons
-  - Figure out exactly what each should do
-  - How do likes/dislikes work?
-- [ ] Index follows by destination_id
-
 ### After features
 
-- [ ] Notifications / mentions
-- [ ] Tagging people
 - [ ] Admin features
   - [ ] Delete any posts
   - [ ] Delete user
   - [ ] Update follow counts
   - [ ] Update interaction counts
 - [ ] Mobile support
+- [ ] Notifications / mentions
