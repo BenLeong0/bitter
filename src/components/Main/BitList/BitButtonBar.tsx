@@ -19,9 +19,12 @@ const BitButtonBar: React.FC<BitInfo> = (props) => {
   const {
     API_URL,
     getSession,
-  }: { API_URL: string; getSession: () => Promise<any> } = useContext(
-    AccountContext
-  );
+    isLoggedIn,
+  }: {
+    API_URL: string;
+    getSession: () => Promise<any>;
+    isLoggedIn: boolean;
+  } = useContext(AccountContext);
 
   const [isReposted, setIsReposted] = useState<boolean>(
     typeof props.isReposted === "undefined" ? false : props.isReposted
@@ -46,19 +49,38 @@ const BitButtonBar: React.FC<BitInfo> = (props) => {
     console.log(JSON.stringify(props));
   };
 
-  const rebit = () => {
+  const rebit = async () => {
+    if (!isLoggedIn) return;
     setIsReposted(true);
     setRebitShift(rebitShift + 1);
-    console.log(`rebit tweet ${props.post_id}`);
+    getSession().then(async ({ headers }) => {
+      fetch(`${API_URL}/bits/rebit?post_id=${props.post_id}`, {
+        headers,
+        method: "POST",
+      })
+        .then((response) => response.text())
+        .then((result) => console.log(result))
+        .catch((error) => console.error(error));
+    });
   };
 
   const unrebit = () => {
+    if (!isLoggedIn) return;
     setIsReposted(false);
     setRebitShift(rebitShift - 1);
-    console.log(`unrebit tweet ${props.post_id}`);
+    getSession().then(async ({ headers }) => {
+      fetch(`${API_URL}/bits/rebit?post_id=${props.post_id}`, {
+        headers,
+        method: "DELETE",
+      })
+        .then((response) => response.text())
+        .then((result) => console.log(result))
+        .catch((error) => console.error(error));
+    });
   };
 
   const like = async () => {
+    if (!isLoggedIn) return;
     setIsLiked(true);
     setLikeShift(likeShift + 1);
     getSession().then(async ({ headers }) => {
@@ -73,12 +95,13 @@ const BitButtonBar: React.FC<BitInfo> = (props) => {
   };
 
   const unlike = async () => {
+    if (!isLoggedIn) return;
     setIsLiked(false);
     setLikeShift(likeShift - 1);
     getSession().then(async ({ headers }) => {
-      fetch(`${API_URL}/bits/unlike?post_id=${props.post_id}`, {
+      fetch(`${API_URL}/bits/like?post_id=${props.post_id}`, {
         headers,
-        method: "POST",
+        method: "DELETE",
       })
         .then((response) => response.text())
         .then((result) => console.log(result))
@@ -87,6 +110,7 @@ const BitButtonBar: React.FC<BitInfo> = (props) => {
   };
 
   const dislike = async () => {
+    if (!isLoggedIn) return;
     setIsDisliked(true);
     setDislikeShift(dislikeShift + 1);
     getSession().then(async ({ headers }) => {
@@ -101,12 +125,13 @@ const BitButtonBar: React.FC<BitInfo> = (props) => {
   };
 
   const undislike = async () => {
+    if (!isLoggedIn) return;
     setIsDisliked(false);
     setDislikeShift(dislikeShift - 1);
     getSession().then(async ({ headers }) => {
-      fetch(`${API_URL}/bits/undislike?post_id=${props.post_id}`, {
+      fetch(`${API_URL}/bits/dislike?post_id=${props.post_id}`, {
         headers,
-        method: "POST",
+        method: "DELETE",
       })
         .then((response) => response.text())
         .then((result) => console.log(result))

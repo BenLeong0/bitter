@@ -7,6 +7,7 @@ import BitInfo from "../../../Types/BitInfo";
 import BitTag from "./BitTag";
 import { AccountContext } from "../../Account";
 import DeleteButton from "./delete.svg";
+import RebitedButton from "./rebited.svg";
 
 // interface BitInfo {
 //   content: string;
@@ -85,6 +86,8 @@ const Bit: React.FC<BitInfo> = (bitInfo) => {
     getSession: () => Promise<any>;
   } = useContext(AccountContext);
 
+  console.log(bitInfo);
+
   // Split for tags
   const splitContent = bitInfo.content.split("@");
   const initialContent = splitContent[0];
@@ -143,6 +146,19 @@ const Bit: React.FC<BitInfo> = (bitInfo) => {
         fontSize: bitInfo.main_bit ? "20px" : "",
       }}
     >
+      {/* Show who rebitted if rebit */}
+      <div
+        className="bit-rebitter"
+        style={{
+          display: typeof bitInfo.rebitter === "undefined" ? "none" : "",
+        }}
+      >
+        <img src={RebitedButton} alt="rebit button" />
+        Rebitted by{" "}
+        <Link to={`/u/${bitInfo.rebitter}`}>@{bitInfo.rebitter}</Link>
+      </div>
+
+      {/* Poster profile picture */}
       <Link to={`/u/${bitInfo.handle}`}>
         <div className="bit-pfp">
           <img
@@ -152,7 +168,13 @@ const Bit: React.FC<BitInfo> = (bitInfo) => {
         </div>
       </Link>
 
-      <div className="bit-content">
+      <div
+        className="bit-content"
+        style={{
+          marginTop: typeof bitInfo.rebitter === "undefined" ? "" : "4px",
+        }}
+      >
+        {/* Poster info */}
         <div className="bit-info">
           <Link to={`/u/${bitInfo.handle}`}>
             <span className="bit-info-displayname">{bitInfo.display_name}</span>

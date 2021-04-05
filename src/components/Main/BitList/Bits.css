@@ -138,3 +138,22 @@ button.button-primary.delete-post {
   right: 35px;
   top: 14px;
 }
+
+.bit-rebitter {
+  font-size: 10px;
+  position: absolute;
+  top: 4px;
+  left: 80px;
+  color: lime;
+}
+
+.bit-rebitter a {
+  color: #33c3f0;
+}
+
+.bit-rebitter img {
+  margin-right: 3px;
+  padding-top: 1px;
+  float: left;
+  width: 12px;
+}

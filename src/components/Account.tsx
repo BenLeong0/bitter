@@ -134,9 +134,9 @@ const Account: React.FC<Props> = ({
 
   const deleteFollowEdge = async (destinationHandle: string) => {
     getSession().then(async ({ headers }) => {
-      fetch(`${API_URL}/users/unfollow?handle=${destinationHandle}`, {
+      fetch(`${API_URL}/users/follow?handle=${destinationHandle}`, {
         headers,
-        method: "POST",
+        method: "DELETE",
       })
         .then((response) => response.text())
         .then((result) => console.log(result))

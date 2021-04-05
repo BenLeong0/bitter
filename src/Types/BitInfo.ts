@@ -15,5 +15,6 @@ export default interface BitInfo {
     dislikes: number;
     isLiked?: boolean;
     isDisliked?: boolean;
-    isReposted?: boolean
+    isReposted?: boolean;
+    rebitter?: string;
   }

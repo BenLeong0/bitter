@@ -35,7 +35,7 @@ const BitList: React.FC<Props> = ({ bits, isLoading }) => {
         </div>
       ) : bits.length > 0 ? (
         bits.map((bit, index) => (
-          <Bit {...bit} key={bit.post_id} index={index} />
+          <Bit {...bit} key={bit.post_id + bit.rebitter} index={index} />
         ))
       ) : (
         <div className="no-bits">No bits found</div>
