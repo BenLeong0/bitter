@@ -61,36 +61,9 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
 - [x] Add card to portfolio
 - [x] Loading spinners
 - [x] Bit ID generated through a hash
-  - Sort tweets table in database by `created_at`
-- [x] Page titles
-- [x] Favicon
+- [x] Page titles + Favicon
 - [x] Domain
 - [x] 404 page
-- [x] Organise account file
-- [x] Each tweet gets its own page
-- [x] Tagging
-- [x] Interactions counters
-  - [x] Like
-    - [x] Frontend
-    - [x] Backend post
-    - [x] Backend get
-  - [x] Unlike
-    - [x] Frontend
-    - [x] Backend post
-    - [x] Backend get
-  - [x] Dislike
-    - [x] Frontend
-    - [x] Backend post
-    - [x] Backend get
-  - [x] Undislike
-    - [x] Frontend
-    - [x] Backend post
-    - [x] Backend get
-- [x] Rebits
-  - [x] Separate table
-  - [x] Fetch
-  - [x] Create
-  - [x] Delete
 - [x] `DELETE` HTTP method for unlike etc
 - [x] Check if logged in for post interactions
 - [x] Profile stats
@@ -98,9 +71,7 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
   - [x] Bits + replies
   - [x] Likes
   - [x] `update_stats` function
-- [x] Delete post stat cascade
-  - [x] Decrement like/dislike counters
-  - [x] Delete like/dislike edges
+- [x] Delete post stat cascade (delete likes etc)
 - [ ] Edit profile
 - [ ] Replies
   - [ ] Database links
@@ -128,7 +99,9 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
   - [x] Lambda function
   - [x] API gateway
   - [x] Fetch function
-- [x] Interactions counters
+- [x] Interactions
+  - [x] Buttons
+  - [x] Counters
 - [x] Tagging
 - [ ] Profile pics
 - [ ] Replies
