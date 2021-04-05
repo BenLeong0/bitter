@@ -69,6 +69,28 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
 - [x] Each tweet gets its own page
 - [x] Tagging
 - [ ] Interactions counters
+  - [x] Like
+    - [x] Frontend
+    - [x] Backend post
+    - [x] Backend get
+  - [x] Unlike
+    - [x] Frontend
+    - [x] Backend post
+    - [x] Backend get
+  - [x] Dislike
+    - [x] Frontend
+    - [x] Backend post
+    - [x] Backend get
+  - [x] Undislike
+    - [x] Frontend
+    - [x] Backend post
+    - [x] Backend get
+  - [ ] Rebits
+- [x] Profile stats
+  - [x] Bits
+  - [x] Bits + replies
+  - [x] Likes
+  - [x] `update_stats` function
 - [ ] Edit profile
 - [ ] Replies
   - [ ] Database links
@@ -191,7 +213,7 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
 
 ### After features
 
-- [ ] Notifications
+- [ ] Notifications / mentions
 - [ ] Tagging people
 - [ ] Admin features
   - [ ] Delete any posts
