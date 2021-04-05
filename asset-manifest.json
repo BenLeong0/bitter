@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/bitter/static/css/main.754a4bba.chunk.css",
-    "main.js": "/bitter/static/js/main.38d2da53.chunk.js",
-    "main.js.map": "/bitter/static/js/main.38d2da53.chunk.js.map",
+    "main.js": "/bitter/static/js/main.5e59f308.chunk.js",
+    "main.js.map": "/bitter/static/js/main.5e59f308.chunk.js.map",
     "runtime-main.js": "/bitter/static/js/runtime-main.74add266.js",
     "runtime-main.js.map": "/bitter/static/js/runtime-main.74add266.js.map",
     "static/css/2.23154d62.chunk.css": "/bitter/static/css/2.23154d62.chunk.css",
@@ -16,11 +16,14 @@
     "static/js/2.02f4ed35.chunk.js.LICENSE.txt": "/bitter/static/js/2.02f4ed35.chunk.js.LICENSE.txt",
     "static/media/delete.932bd998.svg": "/bitter/static/media/delete.932bd998.svg",
     "static/media/App.css": "/bitter/static/media/din1451alt G.1f5ffc3f.woff",
-    "static/media/dislike.4c5bf648.svg": "/bitter/static/media/dislike.4c5bf648.svg",
+    "static/media/dislike.6101c61e.svg": "/bitter/static/media/dislike.6101c61e.svg",
+    "static/media/disliked.e954b579.svg": "/bitter/static/media/disliked.e954b579.svg",
     "static/media/home.671555e9.svg": "/bitter/static/media/home.671555e9.svg",
     "static/media/like.231952c6.svg": "/bitter/static/media/like.231952c6.svg",
+    "static/media/liked.bf753584.svg": "/bitter/static/media/liked.bf753584.svg",
     "static/media/login.58b554af.svg": "/bitter/static/media/login.58b554af.svg",
     "static/media/rebit.e12d3005.svg": "/bitter/static/media/rebit.e12d3005.svg",
+    "static/media/rebited.813dff2f.svg": "/bitter/static/media/rebited.813dff2f.svg",
     "static/media/register.2c6615d2.svg": "/bitter/static/media/register.2c6615d2.svg",
     "static/media/reply.34834fc8.svg": "/bitter/static/media/reply.34834fc8.svg",
     "static/media/settings.949b2aef.svg": "/bitter/static/media/settings.949b2aef.svg",
@@ -31,6 +34,6 @@
     "static/css/2.23154d62.chunk.css",
     "static/js/2.02f4ed35.chunk.js",
     "static/css/main.754a4bba.chunk.css",
-    "static/js/main.38d2da53.chunk.js"
+    "static/js/main.5e59f308.chunk.js"
   ]
 }
