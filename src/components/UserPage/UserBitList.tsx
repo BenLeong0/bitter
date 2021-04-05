@@ -32,7 +32,10 @@ const UserBitList: React.FC<Props> = ({ replies }) => {
   const {
     API_URL,
     currHandle,
-  }: { API_URL: string; currHandle: string } = useContext(AccountContext);
+    myHandle,
+  }: { API_URL: string; currHandle: string; myHandle: string } = useContext(
+    AccountContext
+  );
 
   // Fetch posts every time the user changes
   useEffect(() => {
@@ -42,7 +45,9 @@ const UserBitList: React.FC<Props> = ({ replies }) => {
 
   const fetchBits = async () => {
     setIsLoading(true);
-    const data = await fetch(`${API_URL}/users/posts?handle=${currHandle}`);
+    const data = await fetch(
+      `${API_URL}/users/posts?handle=${currHandle}&myHandle=${myHandle}`
+    );
     const items: Array<BitInfo> = await data.json();
     setBits(items);
     setIsLoading(false);

@@ -13,6 +13,10 @@ const BitPage: React.FC<{}> = () => {
     handle: "",
     post_time: "",
     content: "",
+    dislikes: 0,
+    likes: 0,
+    replies: 0,
+    reposts: 0,
   });
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -49,7 +53,7 @@ const BitPage: React.FC<{}> = () => {
   useEffect(() => {
     fetchPost(post_id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [myHandle]);
 
   // Update when moving between post pages
   const history = useHistory();

@@ -92,7 +92,6 @@ const Bit: React.FC<BitInfo> = (bitInfo) => {
   // myHandle to show/hide delete button
   const { myHandle }: { myHandle: string } = useContext(AccountContext);
   const myPost = myHandle === bitInfo.handle;
-  console.log(myPost);
 
   // Hook to hide tweet after deleting
   const [isDeleted, setIsDeleted] = useState<boolean>(false);
@@ -166,6 +165,7 @@ const Bit: React.FC<BitInfo> = (bitInfo) => {
             </span>
           </Link>
         </div>
+
         <input
           type="image"
           className="bit-delete"
@@ -174,6 +174,7 @@ const Bit: React.FC<BitInfo> = (bitInfo) => {
           onClick={() => setIsPopoverOpen(true)}
           style={{ display: myPost ? "block" : "none" }}
         />
+
         <OutsideAlerter
           isPopoverOpen={isPopoverOpen}
           setIsPopoverOpen={setIsPopoverOpen}

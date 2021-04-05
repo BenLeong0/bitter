@@ -63,10 +63,32 @@
   width: 100%;
 }
 
+.bit-stat {
+  width: 120px;
+  height: 40px;
+}
+
+.bit-stat-count {
+  line-height: 16px;
+  height: 16px;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  width: 80px;
+  font-size: 14px;
+}
+
+.bit-buttons img {
+  /* margin-right: 96px; */
+  float: left;
+  margin: 8px 12px 8px 4px;
+  cursor: pointer;
+}
+
 .bit-buttons input {
   margin-right: 96px;
   margin-top: 8px;
   margin-bottom: 8px;
+  cursor: pointer;
 }
 
 .no-bits {
