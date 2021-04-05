@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/bitter/static/css/main.02216bd6.chunk.css",
-    "main.js": "/bitter/static/js/main.3862bafe.chunk.js",
-    "main.js.map": "/bitter/static/js/main.3862bafe.chunk.js.map",
+    "main.css": "/bitter/static/css/main.062fcc69.chunk.css",
+    "main.js": "/bitter/static/js/main.99783690.chunk.js",
+    "main.js.map": "/bitter/static/js/main.99783690.chunk.js.map",
     "runtime-main.js": "/bitter/static/js/runtime-main.74add266.js",
     "runtime-main.js.map": "/bitter/static/js/runtime-main.74add266.js.map",
     "static/css/2.23154d62.chunk.css": "/bitter/static/css/2.23154d62.chunk.css",
@@ -12,7 +12,7 @@
     "static/js/3.257aeee6.chunk.js.map": "/bitter/static/js/3.257aeee6.chunk.js.map",
     "index.html": "/bitter/index.html",
     "static/css/2.23154d62.chunk.css.map": "/bitter/static/css/2.23154d62.chunk.css.map",
-    "static/css/main.02216bd6.chunk.css.map": "/bitter/static/css/main.02216bd6.chunk.css.map",
+    "static/css/main.062fcc69.chunk.css.map": "/bitter/static/css/main.062fcc69.chunk.css.map",
     "static/js/2.ebdb11f3.chunk.js.LICENSE.txt": "/bitter/static/js/2.ebdb11f3.chunk.js.LICENSE.txt",
     "static/media/delete.932bd998.svg": "/bitter/static/media/delete.932bd998.svg",
     "static/media/App.css": "/bitter/static/media/din1451alt G.1f5ffc3f.woff",
@@ -23,7 +23,7 @@
     "static/media/liked.bf753584.svg": "/bitter/static/media/liked.bf753584.svg",
     "static/media/login.58b554af.svg": "/bitter/static/media/login.58b554af.svg",
     "static/media/rebit.e12d3005.svg": "/bitter/static/media/rebit.e12d3005.svg",
-    "static/media/rebited.813dff2f.svg": "/bitter/static/media/rebited.813dff2f.svg",
+    "static/media/rebited.756a8af7.svg": "/bitter/static/media/rebited.756a8af7.svg",
     "static/media/register.2c6615d2.svg": "/bitter/static/media/register.2c6615d2.svg",
     "static/media/reply.34834fc8.svg": "/bitter/static/media/reply.34834fc8.svg",
     "static/media/settings.949b2aef.svg": "/bitter/static/media/settings.949b2aef.svg",
@@ -33,7 +33,7 @@
     "static/js/runtime-main.74add266.js",
     "static/css/2.23154d62.chunk.css",
     "static/js/2.ebdb11f3.chunk.js",
-    "static/css/main.02216bd6.chunk.css",
-    "static/js/main.3862bafe.chunk.js"
+    "static/css/main.062fcc69.chunk.css",
+    "static/js/main.99783690.chunk.js"
   ]
 }
