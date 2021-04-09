@@ -22,6 +22,7 @@ import Pool from "../UserPool";
 //   setIsFollowing: React.Dispatch<React.SetStateAction<boolean>>;
 //   currHandle: string;
 //   setCurrHandle: React.Dispatch<React.SetStateAction<string>>;
+//   isAdmin: boolean;
 //   myHandle: string;
 //   setMyHandle: React.Dispatch<React.SetStateAction<string>>;
 //   createFollowEdge: (sourceId: string, destinationId: string) => Promise<void>;
@@ -51,6 +52,7 @@ const Account: React.FC<Props> = ({
 
   // Info about current user being viewed, i.e. owner of /u/handle
   const [currHandle, setCurrHandle] = useState<string>("");
+  const [isAdmin, setIsAdmin] = useState<boolean>(false);
   const [isFollowing, setIsFollowing] = useState<boolean>(false);
 
   // Hook to refresh timeline after posting
@@ -61,6 +63,7 @@ const Account: React.FC<Props> = ({
       .then((session: any) => {
         setIsLoggedIn(true);
         setMyHandle(session.user.username);
+        if (session["custom:role"] === "admin") setIsAdmin(true);
       })
       .catch((err) => {
         setMyHandle("");
@@ -206,6 +209,7 @@ const Account: React.FC<Props> = ({
         setIsFollowing,
         currHandle,
         setCurrHandle,
+        isAdmin,
         myHandle,
         setMyHandle,
         createFollowEdge,

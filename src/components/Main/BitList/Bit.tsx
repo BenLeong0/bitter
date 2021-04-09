@@ -81,9 +81,11 @@ const Bit: React.FC<BitInfo> = (bitInfo) => {
   const {
     API_URL,
     getSession,
+    isAdmin,
   }: {
     API_URL: string;
     getSession: () => Promise<any>;
+    isAdmin: boolean;
   } = useContext(AccountContext);
 
   console.log(bitInfo);
@@ -194,7 +196,7 @@ const Bit: React.FC<BitInfo> = (bitInfo) => {
           src={DeleteButton}
           alt="dislike button"
           onClick={() => setIsPopoverOpen(true)}
-          style={{ display: myPost ? "block" : "none" }}
+          style={{ display: myPost || isAdmin ? "block" : "none" }}
         />
 
         <OutsideAlerter

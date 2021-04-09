@@ -72,6 +72,13 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
   - [x] Likes
   - [x] `update_stats` function
 - [x] Delete post stat cascade (delete likes etc)
+- [x] Admin privileges
+  - [x] Create cognito role `admin`
+  - [x] Account `isAdmin` hook
+  - [x] Delete posts
+    - [x] Change frontend (`if (... || isAdmin)`)
+    - [x] Change api (extract role)
+    - [x] Change lambda (`if ... or role == 'admin'`)
 - [ ] Edit profile
 - [ ] Replies
   - [ ] Database links
@@ -182,7 +189,7 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
 ### After features
 
 - [ ] Admin features
-  - [ ] Delete any posts
+  - [x] Delete any posts
   - [ ] Delete user
   - [ ] Update follow counts
   - [ ] Update interaction counts
