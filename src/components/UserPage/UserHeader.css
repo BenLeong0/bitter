@@ -93,3 +93,27 @@
 .user-current-tab {
   text-decoration: underline;
 }
+
+.edit-profile-title {
+  margin-bottom: 25px;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.edit-profile-input {
+  width: 100%;
+}
+
+.edit-profile-label {
+  margin: 20px 0 10px;
+}
+
+.edit-profile-input {
+  resize: none;
+  outline: none;
+  overflow: auto;
+}
+
+.edit-profile-button {
+  margin-top: 20px;
+}

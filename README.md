@@ -79,12 +79,19 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
     - [x] Change frontend (`if (... || isAdmin)`)
     - [x] Change api (extract role)
     - [x] Change lambda (`if ... or role == 'admin'`)
-- [ ] Edit profile
+- [x] Edit profile
+- [ ] Move endpoints for post/delete bits
+- [ ] Hide post on successful delete
 - [ ] Replies
+  - [ ] "Reply to" note
   - [ ] Database links
   - [ ] Bit pages
-  - [ ] User page tab (hide from "main" tab)
+    - [ ] List replies above
+    - [ ] List replies below
+  - [ ] User page tab
+    - Hide replies from "main" tab
   - [ ] Interaction counter
+    - Only add to "bits" counter if not reply
 - [ ] Hashtags
 
 ### Timeline
@@ -117,15 +124,17 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
 
 - [ ] Individual pages for each user
   - [x] Display name and banner
-  - [x] Profile pic
-  - [x] Banner
+  - [ ] Profile pic
+    - [ ] Show on all tweets
+  - [ ] Banner
   - [x] Bio
   - [x] Join date
   - [x] Follow button
-  - [ ] Edit profile
-    - [ ] Button replaces follow button
-    - [ ] Change display name
-    - [ ] Change bio
+  - [~] Edit profile
+    - [x] Single API endpoint for all
+    - [x] Button replaces follow button
+    - [x] Change display name
+    - [x] Change bio
     - [ ] Change pic
     - [ ] Change banner
   - [x] All their tweets

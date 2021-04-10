@@ -70,10 +70,7 @@ const PostBoxForm: React.FC<{}> = () => {
 
       // Set loading
       setIsLoading(true);
-
-      // Get post content
-      const formData = new FormData();
-      formData.append("content", post);
+      setErrorOccurred(false);
 
       // Set Content-Type (might be correct by default)
       headers["Content-Type"] = "application/json";

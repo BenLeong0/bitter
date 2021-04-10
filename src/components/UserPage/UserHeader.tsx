@@ -28,7 +28,11 @@ const UserHeader: React.FC<Props> = ({ updatePageState, user }) => {
       <UserBanner handle={user.handle} />
       <div className="user-pfp-follow">
         <UserPhoto handle={user.handle} />
-        <UserFollowButton handle={user.handle} />
+        <UserFollowButton
+          handle={user.handle}
+          bio={user.bio}
+          display_name={user.display_name}
+        />
       </div>
       <UserInfo updatePageState={updatePageState} user={user} />
     </div>

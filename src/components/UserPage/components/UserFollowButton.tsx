@@ -1,14 +1,17 @@
-import React, { useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import FollowButton from "./FollowButton";
 import UnfollowButton from "./UnfollowButton";
-import SelfUnfollowButton from "./SelfUnfollowButton";
+import EditProfileButton from "./EditProfileButton";
 import { AccountContext } from "../../Account";
 
-const UserFollowButton: React.FC<{ handle: string }> = ({ handle }) => {
+const UserFollowButton: React.FC<{
+  handle: string;
+  bio?: string;
+  display_name?: string;
+}> = ({ handle, bio, display_name }) => {
   const {
     myHandle,
     isFollowing,
-    setIsFollowing,
   }: {
     myHandle: string;
     isFollowing: boolean;
@@ -18,7 +21,7 @@ const UserFollowButton: React.FC<{ handle: string }> = ({ handle }) => {
   return (
     <div className="user-follow-button">
       {myHandle === handle ? (
-        <SelfUnfollowButton />
+        <EditProfileButton bio={bio} display_name={display_name} />
       ) : isFollowing ? (
         <UnfollowButton handle={handle} />
       ) : (
