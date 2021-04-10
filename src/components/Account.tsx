@@ -9,7 +9,7 @@ import Pool from "../UserPool";
 
 // type ContextProps = {
 //   API_URL: string;
-//   authenticate: (Username: string, Password: string) => Promise<undefined>;
+//   authenticate: (Username: string, Password: string) => Promise<any>;
 //   isEmailUsed: (email: string) => Promise<boolean>
 //   getSession: () => Promise<any>;
 //   logout: () => void;
@@ -23,6 +23,7 @@ import Pool from "../UserPool";
 //   currHandle: string;
 //   setCurrHandle: React.Dispatch<React.SetStateAction<string>>;
 //   isAdmin: boolean;
+//   setIsAdmin: React.Dispatch<React.SetStateAction<boolean>>;
 //   myHandle: string;
 //   setMyHandle: React.Dispatch<React.SetStateAction<string>>;
 //   createFollowEdge: (sourceId: string, destinationId: string) => Promise<void>;
@@ -61,12 +62,13 @@ const Account: React.FC<Props> = ({
   useEffect(() => {
     getSession()
       .then((session: any) => {
+        if (session["custom:role"] === "admin") setIsAdmin(true);
         setIsLoggedIn(true);
         setMyHandle(session.user.username);
-        if (session["custom:role"] === "admin") setIsAdmin(true);
       })
       .catch((err) => {
         setMyHandle("");
+        setIsAdmin(false);
 
         return;
       });
@@ -177,6 +179,7 @@ const Account: React.FC<Props> = ({
       user.signOut();
       setMyHandle("");
       setIsLoggedIn(false);
+      setIsAdmin(false);
     }
   };
 
@@ -210,6 +213,7 @@ const Account: React.FC<Props> = ({
         currHandle,
         setCurrHandle,
         isAdmin,
+        setIsAdmin,
         myHandle,
         setMyHandle,
         createFollowEdge,

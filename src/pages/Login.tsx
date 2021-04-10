@@ -21,7 +21,15 @@ const Login: React.FC<LoginProps> = ({ setMyHandle }) => {
 
   const [errorOccurred, setErrorOccurred] = useState<boolean>(false);
 
-  const { authenticate, setIsLoggedIn } = useContext(AccountContext);
+  const {
+    authenticate,
+    setIsLoggedIn,
+    setIsAdmin,
+  }: {
+    authenticate: (Username: string, Password: string) => Promise<any>;
+    setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
+    setIsAdmin: React.Dispatch<React.SetStateAction<boolean>>;
+  } = useContext(AccountContext);
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -30,6 +38,8 @@ const Login: React.FC<LoginProps> = ({ setMyHandle }) => {
       .then((data: CognitoUserSession) => {
         console.log("Logged in!");
         setMyHandle(data.getIdToken().payload["cognito:username"]);
+        if (data.getIdToken().payload["custom:role"] === "admin")
+          setIsAdmin(true);
         setIsLoggedIn(true);
       })
       .catch((err: any) => {

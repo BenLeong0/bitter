@@ -139,11 +139,12 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
     - [x] Change bio
     - [ ] Change pic
     - [ ] Change banner
-  - [x] All their tweets
-  - [ ] All their likes?
-  - [ ] All their replies
-  - [ ] Following list
-  - [ ] Follower list
+  - [ ] Tabs
+    - [ ] Main (no replies)
+    - [ ] Posts and replies
+    - [ ] Likes
+    - [ ] Following list
+    - [ ] Follower list
 - [x] Same side bars
 - [x] 'Error' message if no tweets found
 
