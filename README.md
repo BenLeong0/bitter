@@ -80,7 +80,7 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
     - [x] Change api (extract role)
     - [x] Change lambda (`if ... or role == 'admin'`)
 - [x] Edit profile
-- [ ] Move endpoints for post/delete bits
+- [x] Move endpoints for post/delete bits
 - [ ] Hide post on successful delete
 - [ ] Replies
   - [ ] "Reply to" note

@@ -112,16 +112,13 @@ const Bit: React.FC<BitInfo> = (bitInfo) => {
       };
 
       // Call API
-      await fetch(
-        `${API_URL}/bits/post?post_id=${bitInfo.post_id}`,
-        requestOptions
-      )
+      await fetch(`${API_URL}/bits?post_id=${bitInfo.post_id}`, requestOptions)
         .then((response) => response.text())
         .then((result) => {
           const resultJSON = JSON.parse(result);
 
           // success/failure handling
-          if (resultJSON.code === "postSuccess") {
+          if (resultJSON.code === "deleteSuccess") {
             // Hide post
             setIsDeleted(true);
           } else {

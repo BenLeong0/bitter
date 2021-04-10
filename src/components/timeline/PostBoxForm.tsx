@@ -83,7 +83,7 @@ const PostBoxForm: React.FC<{}> = () => {
       };
 
       // Post to API
-      await fetch(`${API_URL}/bits/post`, requestOptions)
+      await fetch(`${API_URL}/bits`, requestOptions)
         .then((response) => response.text())
         .then((result) => {
           const resultJSON = JSON.parse(result);
