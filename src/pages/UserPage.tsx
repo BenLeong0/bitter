@@ -47,7 +47,8 @@ const UserPage: React.FC<{}> = () => {
     setIsLoading(true);
     // Returns {user_id: ''} if user not found
     const fetchUser = await fetch(
-      `${API_URL}/users/data?handle=${handle}&myHandle=${myHandle}`
+      `${API_URL}/users?handle=${handle}&myHandle=${myHandle}`,
+      { method: "GET" }
     );
     const data: User = await fetchUser.json();
     setUser(data);
