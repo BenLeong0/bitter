@@ -23,6 +23,12 @@ interface Props {
 }
 
 const UserHeader: React.FC<Props> = ({ updatePageState, user }) => {
+  const isHater = (): boolean => {
+    if (!user.dislikes || !user.likes) return false;
+    if (user.dislikes > user.likes) return true;
+    else return false;
+  };
+
   return (
     <div className="user-header">
       <UserBanner handle={user.handle} />
@@ -32,6 +38,7 @@ const UserHeader: React.FC<Props> = ({ updatePageState, user }) => {
           handle={user.handle}
           bio={user.bio}
           display_name={user.display_name}
+          isHater={isHater}
         />
       </div>
       <UserInfo updatePageState={updatePageState} user={user} />

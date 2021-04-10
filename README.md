@@ -81,7 +81,8 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
     - [x] Change lambda (`if ... or role == 'admin'`)
 - [x] Edit profile
 - [x] Move endpoints for post/delete bits
-- [ ] Hide post on successful delete
+- [x] Hide post on successful delete
+- [x] Hater tag
 - [ ] Replies
   - [ ] "Reply to" note
   - [ ] Database links
@@ -91,7 +92,8 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
   - [ ] User page tab
     - Hide replies from "main" tab
   - [ ] Interaction counter
-    - Only add to "bits" counter if not reply
+    - [ ] On bit
+    - [ ] On user page
 - [ ] Hashtags
 
 ### Timeline

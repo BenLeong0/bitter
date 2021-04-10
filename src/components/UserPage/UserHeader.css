@@ -1,5 +1,4 @@
-/* .user-header {
-} */
+@import url("https://fonts.googleapis.com/css2?family=Rye&display=swap");
 
 .user-banner {
   float: left;
@@ -22,6 +21,20 @@
 .user-photo img {
   border-radius: 50%;
   border: white solid 4px;
+}
+
+.user-branding {
+  text-align: center;
+  width: 264px;
+  margin-top: 5px;
+  font-family: "Rye", cursive;
+  font-size: 40px;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.user-branding-hater {
+  color: red;
 }
 
 .user-follow-button {

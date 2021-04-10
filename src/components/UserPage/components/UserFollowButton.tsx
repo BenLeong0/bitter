@@ -8,7 +8,8 @@ const UserFollowButton: React.FC<{
   handle: string;
   bio?: string;
   display_name?: string;
-}> = ({ handle, bio, display_name }) => {
+  isHater: () => boolean;
+}> = ({ handle, bio, display_name, isHater }) => {
   const {
     myHandle,
     isFollowing,
@@ -20,6 +21,17 @@ const UserFollowButton: React.FC<{
 
   return (
     <div className="user-follow-button">
+      {isHater() ? (
+        <div
+          className="user-branding user-branding-hater"
+          title="This user has more dislikes than likes"
+        >
+          HATER
+        </div>
+      ) : (
+        ""
+      )}
+
       {myHandle === handle ? (
         <EditProfileButton bio={bio} display_name={display_name} />
       ) : isFollowing ? (
