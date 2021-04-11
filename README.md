@@ -2,17 +2,17 @@
 
 The aim of this project is to create a simplified version of Twitter, as an exercise in full-stack development.
 
-- This repository holds only the frontend
+- This repository holds only the frontend service
 
 ## Project
 
 The stack will consist of:
 
 - React (Frontend, with TypeScript)
-- Django (Backend)
+- AWS (Backend, previously Django)
 - PostgreSQL (Database)
 
-While I have experience with JavaScript and Python, this will be my first time building a full-stack application, and my first time using TypeScript and Django. Additionally, this will be my first time implementing SQL knowledge that I have developed but not used before.
+I have previous experience with Javascript, React, and Python, but this will be my first time using TypeScript and Amazon Web Services, and was my first time using Django. Additionally, this will be my first time implementing SQL knowledge that I have developed but not used before.
 
 ## CURRENT OVERHAUL
 
