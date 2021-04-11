@@ -3,9 +3,10 @@ import { AccountContext } from "../Account";
 import PostBoxForm from "./PostBoxForm";
 import "./Postbox.css";
 import { Link } from "react-router-dom";
+import ContextProps from "../../Types/ContextProps";
 
 const PostBit: React.FC<{}> = () => {
-  const { isLoggedIn }: { isLoggedIn: boolean } = useContext(AccountContext);
+  const { isLoggedIn }: ContextProps = useContext(AccountContext);
 
   return (
     <div className="postbox">

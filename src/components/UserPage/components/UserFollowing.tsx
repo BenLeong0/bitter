@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { AccountContext } from "../../Account";
 import User from "../../../Types/User";
 import UserFollowList from "./UserFollowList";
+import ContextProps from "../../../Types/ContextProps";
 
 export interface UserFollowingProps {}
 
@@ -10,11 +11,7 @@ const UserFollowing: React.FC<UserFollowingProps> = () => {
   const [users, setUsers] = useState<Array<User>>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const {
-    API_URL,
-    currHandle,
-    myHandle,
-  }: { API_URL: string; currHandle: string; myHandle: string } = useContext(
+  const { API_URL, currHandle, myHandle }: ContextProps = useContext(
     AccountContext
   );
 

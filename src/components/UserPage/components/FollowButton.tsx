@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import ContextProps from "../../../Types/ContextProps";
 import { AccountContext } from "../../Account";
 
 const FollowButton: React.FC<{ handle: string }> = ({ handle }) => {
@@ -6,11 +7,7 @@ const FollowButton: React.FC<{ handle: string }> = ({ handle }) => {
     setIsFollowing,
     createFollowEdge,
     isLoggedIn,
-  }: {
-    setIsFollowing: React.Dispatch<React.SetStateAction<boolean>>;
-    createFollowEdge: (destinationHandle: string) => Promise<void>;
-    isLoggedIn: boolean;
-  } = useContext(AccountContext);
+  }: ContextProps = useContext(AccountContext);
 
   const follow = async () => {
     if (isLoggedIn) {

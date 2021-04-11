@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import ContextProps from "../../../../Types/ContextProps";
 import { AccountContext } from "../../../Account";
 
 type Props = {
@@ -14,12 +15,7 @@ const UnfollowButton: React.FC<Props> = (props) => {
     currHandle,
     setIsFollowing,
     deleteFollowEdge,
-  }: {
-    myHandle: string;
-    currHandle: string;
-    setIsFollowing: React.Dispatch<React.SetStateAction<boolean>>;
-    deleteFollowEdge: (destinationHandle: string) => Promise<void>;
-  } = useContext(AccountContext);
+  }: ContextProps = useContext(AccountContext);
 
   const unfollow = async () => {
     if (myHandle === handle) {

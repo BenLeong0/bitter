@@ -10,9 +10,10 @@ import LoginLogo from "./login.svg";
 import RegisterLogo from "./register.svg";
 
 import { AccountContext } from "../../Account";
+import ContextProps from "../../../Types/ContextProps";
 
 const OptionsBox: React.FC<{}> = () => {
-  const { isLoggedIn }: { isLoggedIn: boolean } = useContext(AccountContext);
+  const { isLoggedIn }: ContextProps = useContext(AccountContext);
 
   class Option {
     title: string;

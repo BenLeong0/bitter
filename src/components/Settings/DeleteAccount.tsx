@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { useHistory } from "react-router";
+import ContextProps from "../../Types/ContextProps";
 import { AccountContext } from "../Account";
 import DeleteAccountConfirmation from "./DeleteAccountConfirmation";
 
@@ -22,12 +23,7 @@ const ChangeEmail: React.FC<ChangeEmailProps> = () => {
     getSession,
     logout,
     API_URL,
-  }: {
-    authenticate: (Username: string, Password: string) => Promise<undefined>;
-    getSession: () => Promise<any>;
-    logout: () => void;
-    API_URL: string;
-  } = useContext(AccountContext);
+  }: ContextProps = useContext(AccountContext);
 
   const history = useHistory();
   const onSubmit = async (e: any) => {

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import FollowButton from "./FollowButton";
 import UnfollowButton from "./UnfollowButton";
 import { AccountContext } from "../../../Account";
+import ContextProps from "../../../../Types/ContextProps";
 
 interface Props {
   className: string;
@@ -16,15 +17,7 @@ const SuggestedUserFollowButton: React.FC<Props> = (props) => {
 
   const { handle, className } = props;
 
-  const {
-    currHandle,
-    myHandle,
-    isFollowing,
-  }: {
-    currHandle: string;
-    myHandle: string;
-    isFollowing: boolean;
-  } = useContext(AccountContext);
+  const { currHandle, isFollowing }: ContextProps = useContext(AccountContext);
 
   // Check if following on mount
   useEffect(() => {

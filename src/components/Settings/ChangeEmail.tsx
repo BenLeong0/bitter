@@ -1,5 +1,6 @@
 import { CognitoUserAttribute } from "amazon-cognito-identity-js";
 import React, { useContext, useState } from "react";
+import ContextProps from "../../Types/ContextProps";
 import { AccountContext } from "../Account";
 import ChangeEmailConfirmation from "./ChangeEmailConfirmation";
 
@@ -13,15 +14,9 @@ const ChangeEmail: React.FC<ChangeEmailProps> = () => {
   const [isPasswordCorrect, setIsPasswordCorrect] = useState<boolean>(true);
   const [hasSucceeded, setHasSucceeded] = useState<boolean>(false);
 
-  const {
-    authenticate,
-    getSession,
-    isEmailUsed,
-  }: {
-    authenticate: (Username: string, Password: string) => Promise<undefined>;
-    getSession: () => Promise<any>;
-    isEmailUsed: (email: string) => Promise<boolean>;
-  } = useContext(AccountContext);
+  const { authenticate, getSession, isEmailUsed }: ContextProps = useContext(
+    AccountContext
+  );
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

@@ -3,6 +3,7 @@ import { AccountContext } from "../components/Account";
 import { Link } from "react-router-dom";
 import "./Login.css";
 import { CognitoUserSession } from "amazon-cognito-identity-js";
+import ContextProps from "../Types/ContextProps";
 
 interface LoginProps {
   setMyHandle: React.Dispatch<React.SetStateAction<string>>;
@@ -21,15 +22,9 @@ const Login: React.FC<LoginProps> = ({ setMyHandle }) => {
 
   const [errorOccurred, setErrorOccurred] = useState<boolean>(false);
 
-  const {
-    authenticate,
-    setIsLoggedIn,
-    setIsAdmin,
-  }: {
-    authenticate: (Username: string, Password: string) => Promise<any>;
-    setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
-    setIsAdmin: React.Dispatch<React.SetStateAction<boolean>>;
-  } = useContext(AccountContext);
+  const { authenticate, setIsLoggedIn, setIsAdmin }: ContextProps = useContext(
+    AccountContext
+  );
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

@@ -11,6 +11,7 @@ import UserLikeList from "../components/UserPage/UserLikeList";
 import UserNotFound from "../components/UserPage/UserNotFound";
 
 import User from "../Types/User";
+import ContextProps from "../Types/ContextProps";
 // interface User {
 //   user_id: string;
 //   handle?: string;
@@ -36,13 +37,7 @@ const UserPage: React.FC<{}> = () => {
     setCurrHandle,
     myHandle,
     setIsFollowing,
-  }: {
-    API_URL: string;
-    currHandle: string;
-    setCurrHandle: React.Dispatch<React.SetStateAction<string>>;
-    myHandle: string;
-    setIsFollowing: React.Dispatch<React.SetStateAction<boolean>>;
-  } = useContext(AccountContext);
+  }: ContextProps = useContext(AccountContext);
 
   const handle: string = useLocation().pathname.slice(3);
 

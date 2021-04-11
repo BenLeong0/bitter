@@ -4,14 +4,12 @@ import UserSuggestion from "./UserSuggestion";
 import { AccountContext } from "../../Account";
 
 import User from "../../../Types/User";
+import ContextProps from "../../../Types/ContextProps";
 
 const UserSuggestions: React.FC<{}> = () => {
   const [suggestedUsers, updateSuggestions] = useState<Array<User>>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const {
-    API_URL,
-    myHandle,
-  }: { API_URL: string; myHandle: string } = useContext(AccountContext);
+  const { API_URL, myHandle }: ContextProps = useContext(AccountContext);
 
   // Fetch 3 random users from the database
   const fetchSuggestions = async () => {

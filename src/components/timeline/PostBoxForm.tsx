@@ -1,17 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
+import ContextProps from "../../Types/ContextProps";
 import { AccountContext } from "../Account";
 
 const PostBoxForm: React.FC<{}> = () => {
-  const {
-    API_URL,
-    getSession,
-    refreshBitList,
-  }: {
-    API_URL: string;
-    getSession: () => Promise<any>;
-    refreshBitList: () => void;
-  } = useContext(AccountContext);
+  const { API_URL, getSession, refreshBitList }: ContextProps = useContext(
+    AccountContext
+  );
 
   const [post, updatePost] = useState<string>("");
   const [remainingChars, updateChars] = useState<number>(140);

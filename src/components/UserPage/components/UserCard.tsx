@@ -7,15 +7,8 @@ import { AccountContext } from "../../Account";
 import SuggestedUserFollowButton from "../../Main/Users/components/SuggestedUserFollowButton";
 
 const UserCard: React.FC<{ user: User }> = ({ user }) => {
-  const { API_URL, getSession }: ContextProps = useContext(AccountContext);
-
-  console.log(user);
-
   // myHandle to show/hide follow button
-  const { myHandle }: { myHandle: string } = useContext(AccountContext);
-  const isMe = myHandle === user.handle;
-
-  // Follow button
+  const { myHandle }: ContextProps = useContext(AccountContext);
 
   // Numbers for interactions
   return (
@@ -42,7 +35,7 @@ const UserCard: React.FC<{ user: User }> = ({ user }) => {
         {/* Follow button */}
         <div
           className="user-card-follow"
-          // style={{ display: isMe ? "none" : "" }}
+          style={{ display: myHandle === user.handle ? "none" : "" }}
         >
           <SuggestedUserFollowButton
             className="user-card-follow-button"

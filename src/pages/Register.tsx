@@ -2,6 +2,7 @@ import { CognitoUserAttribute } from "amazon-cognito-identity-js";
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AccountContext } from "../components/Account";
+import ContextProps from "../Types/ContextProps";
 import UserPool from "../UserPool";
 import "./Register.css";
 
@@ -28,11 +29,7 @@ const Register: React.FC<{}> = () => {
   const [hasSucceeded, setHasSucceeded] = useState<boolean>(false);
   const [errorOccurred, setErrorOccurred] = useState<boolean>(false);
 
-  const {
-    isEmailUsed,
-  }: {
-    isEmailUsed: (email: string) => Promise<boolean>;
-  } = useContext(AccountContext);
+  const { isEmailUsed }: ContextProps = useContext(AccountContext);
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

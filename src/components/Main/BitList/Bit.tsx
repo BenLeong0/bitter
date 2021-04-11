@@ -8,6 +8,7 @@ import BitTag from "./BitTag";
 import { AccountContext } from "../../Account";
 import DeleteButton from "./delete.svg";
 import RebitedButton from "./rebited.svg";
+import ContextProps from "../../../Types/ContextProps";
 
 // interface BitInfo {
 //   content: string;
@@ -78,15 +79,9 @@ function timestampFormat(post_time: string): string {
 }
 
 const Bit: React.FC<BitInfo> = (bitInfo) => {
-  const {
-    API_URL,
-    getSession,
-    isAdmin,
-  }: {
-    API_URL: string;
-    getSession: () => Promise<any>;
-    isAdmin: boolean;
-  } = useContext(AccountContext);
+  const { API_URL, getSession, isAdmin, myHandle }: ContextProps = useContext(
+    AccountContext
+  );
 
   console.log(bitInfo);
 
@@ -95,7 +90,6 @@ const Bit: React.FC<BitInfo> = (bitInfo) => {
   const initialContent = splitContent[0];
 
   // myHandle to show/hide delete button
-  const { myHandle }: { myHandle: string } = useContext(AccountContext);
   const myPost = myHandle === bitInfo.handle;
 
   // Hook to hide tweet after deleting

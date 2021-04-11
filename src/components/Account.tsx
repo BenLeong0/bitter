@@ -26,8 +26,8 @@ import Pool from "../UserPool";
 //   setIsAdmin: React.Dispatch<React.SetStateAction<boolean>>;
 //   myHandle: string;
 //   setMyHandle: React.Dispatch<React.SetStateAction<string>>;
-//   createFollowEdge: (sourceId: string, destinationId: string) => Promise<void>;
-//   deleteFollowEdge: (sourceId: string, destinationId: string) => Promise<void>;
+//   createFollowEdge: (destinationId: string) => Promise<void>;
+//   deleteFollowEdge: (destinationId: string) => Promise<void>;
 // };
 
 interface Props {

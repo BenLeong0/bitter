@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import ContextProps from "../../Types/ContextProps";
 import { AccountContext } from "../Account";
 import ChangePasswordConfirmation from "./ChangePasswordConfirmation";
 
@@ -15,7 +16,7 @@ const ChangePassword: React.FC<ChangePasswordProps> = () => {
 
   const [hasSucceeded, setHasSucceeded] = useState<boolean>(false);
 
-  const { getSession, authenticate } = useContext(AccountContext);
+  const { getSession, authenticate }: ContextProps = useContext(AccountContext);
 
   const checkIsPasswordValid = (s: string) => {
     if (s.length < 8) return false;

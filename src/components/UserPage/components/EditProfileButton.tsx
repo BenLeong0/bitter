@@ -3,6 +3,7 @@ import { useHistory } from "react-router";
 import TextareaAutosize from "react-textarea-autosize";
 import Popup from "reactjs-popup";
 import Styled from "styled-components";
+import ContextProps from "../../../Types/ContextProps";
 import { AccountContext } from "../../Account";
 
 const StyledPopup = Styled(Popup)`
@@ -38,12 +39,7 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
   const [bioTooLong, setBioTooLong] = useState<boolean>(false);
   const [errorOccurred, setErrorOccurred] = useState<boolean>(false);
 
-  const {
-    getSession,
-    API_URL,
-  }: { getSession: () => Promise<any>; API_URL: string } = useContext(
-    AccountContext
-  );
+  const { getSession, API_URL }: ContextProps = useContext(AccountContext);
 
   const setInputs = () => {
     if (props.display_name) {

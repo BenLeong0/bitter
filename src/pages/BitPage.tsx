@@ -6,6 +6,7 @@ import { AccountContext } from "../components/Account";
 import Bit from "../components/Main/BitList/Bit";
 
 import BitInfo from "../Types/BitInfo";
+import ContextProps from "../Types/ContextProps";
 
 const BitPage: React.FC<{}> = () => {
   const [post, setPost] = useState<BitInfo>({
@@ -22,13 +23,7 @@ const BitPage: React.FC<{}> = () => {
 
   document.title = (post.handle ? "@" + post.handle : "post") + " / Bitter";
 
-  const {
-    API_URL,
-    myHandle,
-  }: {
-    API_URL: string;
-    myHandle: string;
-  } = useContext(AccountContext);
+  const { API_URL, myHandle }: ContextProps = useContext(AccountContext);
 
   const post_id: string = useLocation().pathname.slice(3);
 

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { AccountContext } from "../Account";
 import BitList from "../Main/BitList/BitList";
 import BitInfo from "../../Types/BitInfo";
+import ContextProps from "../../Types/ContextProps";
 
 // interface BitInfo {
 //   content: string;
@@ -25,15 +26,9 @@ const TimelineBitList: React.FC<{}> = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [requestCounter, setRequestCounter] = useState<number>(0);
 
-  const {
-    API_URL,
-    myHandle,
-    refreshList,
-  }: {
-    API_URL: string;
-    myHandle: string;
-    refreshList: boolean;
-  } = useContext(AccountContext);
+  const { API_URL, myHandle, refreshList }: ContextProps = useContext(
+    AccountContext
+  );
 
   useEffect(() => {
     fetchBits();

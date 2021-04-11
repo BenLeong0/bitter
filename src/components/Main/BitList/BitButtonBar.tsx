@@ -9,6 +9,7 @@ import DislikedButton from "./disliked.svg";
 import { AccountContext } from "../../Account";
 
 import BitInfo from "../../../Types/BitInfo";
+import ContextProps from "../../../Types/ContextProps";
 
 const BitButtonBar: React.FC<BitInfo> = (props) => {
   // Affect like/dislike counter
@@ -16,15 +17,9 @@ const BitButtonBar: React.FC<BitInfo> = (props) => {
   const [likeShift, setLikeShift] = useState<number>(0);
   const [dislikeShift, setDislikeShift] = useState<number>(0);
 
-  const {
-    API_URL,
-    getSession,
-    isLoggedIn,
-  }: {
-    API_URL: string;
-    getSession: () => Promise<any>;
-    isLoggedIn: boolean;
-  } = useContext(AccountContext);
+  const { API_URL, getSession, isLoggedIn }: ContextProps = useContext(
+    AccountContext
+  );
 
   const [isReposted, setIsReposted] = useState<boolean>(
     typeof props.isReposted === "undefined" ? false : props.isReposted

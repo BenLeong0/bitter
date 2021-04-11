@@ -4,6 +4,7 @@ import BitList from "../Main/BitList/BitList";
 import "./UserBitList.css";
 
 import BitInfo from "../../Types/BitInfo";
+import ContextProps from "../../Types/ContextProps";
 // interface BitInfo {
 //   content: string;
 //   dislikes: number;
@@ -27,11 +28,7 @@ const UserBitList: React.FC<Props> = () => {
   const [likes, setLikes] = useState<Array<BitInfo>>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const {
-    API_URL,
-    currHandle,
-    myHandle,
-  }: { API_URL: string; currHandle: string; myHandle: string } = useContext(
+  const { API_URL, currHandle, myHandle }: ContextProps = useContext(
     AccountContext
   );
 

@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { useHistory } from "react-router";
 import Popup from "reactjs-popup";
 import Styled from "styled-components";
+import ContextProps from "../../Types/ContextProps";
 import { AccountContext } from "../Account";
 
 export interface LogoutButtonProps {}
@@ -26,7 +27,7 @@ const LogoutButton: React.FC<LogoutButtonProps> = () => {
   const [open, setOpen] = useState<boolean>(false);
   const closeModal = () => setOpen(false);
 
-  const { logout } = useContext(AccountContext);
+  const { logout }: ContextProps = useContext(AccountContext);
   const history = useHistory();
   const onClick = (e: any) => {
     e.preventDefault();
