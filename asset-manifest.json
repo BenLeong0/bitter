@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/bitter/static/css/main.6439f3d5.chunk.css",
-    "main.js": "/bitter/static/js/main.c762dd0d.chunk.js",
-    "main.js.map": "/bitter/static/js/main.c762dd0d.chunk.js.map",
+    "main.css": "/bitter/static/css/main.a9be58fb.chunk.css",
+    "main.js": "/bitter/static/js/main.1c1c95d9.chunk.js",
+    "main.js.map": "/bitter/static/js/main.1c1c95d9.chunk.js.map",
     "runtime-main.js": "/bitter/static/js/runtime-main.74add266.js",
     "runtime-main.js.map": "/bitter/static/js/runtime-main.74add266.js.map",
     "static/css/2.23154d62.chunk.css": "/bitter/static/css/2.23154d62.chunk.css",
@@ -12,7 +12,7 @@
     "static/js/3.257aeee6.chunk.js.map": "/bitter/static/js/3.257aeee6.chunk.js.map",
     "index.html": "/bitter/index.html",
     "static/css/2.23154d62.chunk.css.map": "/bitter/static/css/2.23154d62.chunk.css.map",
-    "static/css/main.6439f3d5.chunk.css.map": "/bitter/static/css/main.6439f3d5.chunk.css.map",
+    "static/css/main.a9be58fb.chunk.css.map": "/bitter/static/css/main.a9be58fb.chunk.css.map",
     "static/js/2.2cedd63d.chunk.js.LICENSE.txt": "/bitter/static/js/2.2cedd63d.chunk.js.LICENSE.txt",
     "static/media/delete.932bd998.svg": "/bitter/static/media/delete.932bd998.svg",
     "static/media/App.css": "/bitter/static/media/din1451alt G.1f5ffc3f.woff",
@@ -33,7 +33,7 @@
     "static/js/runtime-main.74add266.js",
     "static/css/2.23154d62.chunk.css",
     "static/js/2.2cedd63d.chunk.js",
-    "static/css/main.6439f3d5.chunk.css",
-    "static/js/main.c762dd0d.chunk.js"
+    "static/css/main.a9be58fb.chunk.css",
+    "static/js/main.1c1c95d9.chunk.js"
   ]
 }
