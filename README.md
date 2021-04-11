@@ -86,17 +86,17 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
 - [x] Suggested users prioritise unfollowed
   - [x] Change limit to 5
   - [x] If <5, fill remaining with followed
-- [ ] User page tabs
+- [x] User page tabs
   - [x] Bits
   - [x] Bits and replies
-  - [ ] Following
-  - [ ] Followers
+  - [x] Following
+  - [x] Followers
   - [x] Likes
 - [ ] Replies
   - [ ] "Reply to" note
   - [ ] Database links
   - [ ] Bit pages
-    - [ ] List replies above
+    - [ ] List thread above
     - [ ] List replies below
   - [ ] User page tab
     - Hide replies from "main" tab
@@ -148,12 +148,12 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
     - [x] Change bio
     - [ ] Change pic
     - [ ] Change banner
-  - [ ] Tabs
-    - [ ] Main (no replies)
-    - [ ] Posts and replies
-    - [ ] Likes
-    - [ ] Following list
-    - [ ] Follower list
+  - [x] Tabs
+    - [x] Main (no replies)
+    - [x] Posts and replies
+    - [x] Likes
+    - [x] Following list
+    - [x] Follower list
 - [x] Same side bars
 - [x] 'Error' message if no tweets found
 

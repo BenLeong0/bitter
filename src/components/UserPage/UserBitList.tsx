@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { AccountContext } from "../Account";
 import BitList from "../Main/BitList/BitList";
 import "./UserBitList.css";
+import "./UserFollowList.css";
 
 import BitInfo from "../../Types/BitInfo";
 // interface BitInfo {

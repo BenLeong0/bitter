@@ -1,0 +1,37 @@
+import React, { useContext, useEffect, useState } from "react";
+import { AccountContext } from "../../Account";
+import UserFollowList from "./UserFollowList";
+import User from "../../../Types/User";
+import ContextProps from "../../../Types/ContextProps";
+
+export interface UserFollowingProps {}
+
+const UserFollowers: React.FC<UserFollowingProps> = () => {
+  // fetch list of bits
+  const [users, setUsers] = useState<Array<User>>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const { API_URL, currHandle, myHandle }: ContextProps = useContext(
+    AccountContext
+  );
+
+  // Fetch posts every time the user changes
+  useEffect(() => {
+    fetchUsers();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currHandle]);
+
+  const fetchUsers = async () => {
+    setIsLoading(true);
+    const data = await fetch(
+      `${API_URL}/users/followers?handle=${currHandle}&myHandle=${myHandle}`
+    );
+    const items: Array<User> = await data.json();
+    setUsers(items);
+    setIsLoading(false);
+  };
+
+  return <UserFollowList users={users} isLoading={isLoading} />;
+};
+
+export default UserFollowers;

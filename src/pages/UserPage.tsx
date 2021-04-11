@@ -5,6 +5,8 @@ import "../components/UserPage/UserPage.css";
 
 import UserHeader from "../components/UserPage/UserHeader";
 import UserBitList from "../components/UserPage/UserBitList";
+import UserFollowing from "../components/UserPage/components/UserFollowing";
+import UserFollowers from "../components/UserPage/components/UserFollowers";
 import UserLikeList from "../components/UserPage/UserLikeList";
 import UserNotFound from "../components/UserPage/UserNotFound";
 
@@ -88,10 +90,10 @@ const UserPage: React.FC<{}> = () => {
       setListState(<UserBitList replies={true} />);
     } else if (stateId === 2) {
       // following list
-      //
+      setListState(<UserFollowing />);
     } else if (stateId === 3) {
       // followers list
-      //
+      setListState(<UserFollowers />);
     } else if (stateId === 4) {
       // like list
       setListState(<UserLikeList />);
