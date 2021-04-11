@@ -20,13 +20,11 @@ import BitInfo from "../../Types/BitInfo";
 //   user_id: number;
 // }
 
-interface Props {
-  replies: boolean;
-}
+interface Props {}
 
-const UserBitList: React.FC<Props> = ({ replies }) => {
+const UserBitList: React.FC<Props> = () => {
   // fetch list of bits
-  const [bits, setBits] = useState<Array<BitInfo>>([]);
+  const [likes, setLikes] = useState<Array<BitInfo>>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const {
@@ -46,20 +44,15 @@ const UserBitList: React.FC<Props> = ({ replies }) => {
   const fetchBits = async () => {
     setIsLoading(true);
     const data = await fetch(
-      `${API_URL}/users/posts?handle=${currHandle}&myHandle=${myHandle}`
+      `${API_URL}/users/posts/likes?handle=${currHandle}&myHandle=${myHandle}`
     );
     const items: Array<BitInfo> = await data.json();
-    setBits(items);
+    setLikes(items);
     setIsLoading(false);
   };
 
   // pass into BitList
-  return (
-    <BitList
-      bits={replies ? bits : bits.filter((post) => !post.reply_to)}
-      isLoading={isLoading}
-    />
-  );
+  return <BitList bits={likes} isLoading={isLoading} />;
 };
 
 export default UserBitList;

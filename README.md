@@ -83,6 +83,15 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
 - [x] Move endpoints for post/delete bits
 - [x] Hide post on successful delete
 - [x] Hater tag
+- [x] Suggested users prioritise unfollowed
+  - [x] Change limit to 5
+  - [x] If <5, fill remaining with followed
+- [ ] User page tabs
+  - [x] Bits
+  - [x] Bits and replies
+  - [ ] Following
+  - [ ] Followers
+  - [x] Likes
 - [ ] Replies
   - [ ] "Reply to" note
   - [ ] Database links

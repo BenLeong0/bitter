@@ -102,6 +102,7 @@
   float: left;
   font-size: 14px;
   margin-left: 25px;
+  cursor: pointer;
 }
 
 .user-current-tab {

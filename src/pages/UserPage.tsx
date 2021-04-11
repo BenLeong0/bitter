@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useHistory, useLocation } from "react-router-dom";
+import { AccountContext } from "../components/Account";
+import "../components/UserPage/UserPage.css";
+
 import UserHeader from "../components/UserPage/UserHeader";
 import UserBitList from "../components/UserPage/UserBitList";
+import UserLikeList from "../components/UserPage/UserLikeList";
 import UserNotFound from "../components/UserPage/UserNotFound";
-import "../components/UserPage/UserPage.css";
-import { AccountContext } from "../components/Account";
 
 import User from "../Types/User";
 // interface User {
@@ -45,6 +47,7 @@ const UserPage: React.FC<{}> = () => {
   // Database call for user by handle
   const fetchUser = async (handle: string) => {
     setIsLoading(true);
+    updatePageState(0);
     // Returns {user_id: ''} if user not found
     const fetchUser = await fetch(
       `${API_URL}/users?handle=${handle}&myHandle=${myHandle}`,
@@ -91,7 +94,7 @@ const UserPage: React.FC<{}> = () => {
       //
     } else if (stateId === 4) {
       // like list
-      //
+      setListState(<UserLikeList />);
     }
   }
 
