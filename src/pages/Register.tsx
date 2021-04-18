@@ -116,44 +116,17 @@ const Register: React.FC<{}> = () => {
 
   const checkIsHandleValid = (s: string) => {
     if (s.length < 1) return false;
-    const handleArray: Array<string> = s.split("");
-    const validChars: string =
-      "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-
-    for (let i = 0; i < handleArray.length; i++) {
-      if (validChars.includes(handleArray[i])) {
-        continue;
-      } else {
-        return false;
-      }
-    }
-    return true;
+    return !/[^a-zA-Z0-9]/.test(s);
   };
 
   const checkIsPasswordValid = (s: string) => {
     if (s.length < 8) return false;
-    const passwordArray: Array<string> = s.split("");
-
-    let requirements: Array<boolean> = [false, false, false, false];
-    const lowercase: string = "abcdefghijklmnopqrstuvwxyz";
-    const uppercase: string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    const numbers: string = "0123456789";
-    const specials: string = "=+-^$*.[]{}()?\"!@#%&/\\,><':;|_~`";
-    const checkSelf = (x: boolean): boolean => x;
-
-    passwordArray.forEach((char) => {
-      if (lowercase.includes(char)) {
-        requirements[0] = true;
-      } else if (uppercase.includes(char)) {
-        requirements[1] = true;
-      } else if (numbers.includes(char)) {
-        requirements[2] = true;
-      } else if (specials.includes(char)) {
-        requirements[3] = true;
-      }
-    });
-
-    return requirements.every(checkSelf);
+    return (
+      /[a-z]/.test(s) &&
+      /[A-Z]/.test(s) &&
+      /[0-9]/.test(s) &&
+      /[-=+^$*.[\]{}()?"!@#%&/\\,><':;|_~`]/.test(s)
+    );
   };
 
   return (

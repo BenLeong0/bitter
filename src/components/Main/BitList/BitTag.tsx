@@ -6,18 +6,15 @@ export interface BitTagProps {
 }
 
 const BitTag: React.FC<BitTagProps> = ({ tag }) => {
-  const validChars: string =
-    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-
   // No tag if first character isn't a letter or digit (invalid handle)
-  if (!validChars.includes(tag[0])) {
+  if (!/[a-zA-Z0-9]/.test(tag[0])) {
     return <>@{tag}</>;
   }
 
   // Up to where are chars letters? (Tag up to that point)
   let i = 1;
   while (i < tag.length) {
-    if (!validChars.includes(tag[i])) {
+    if (!/[a-zA-Z0-9]/.test(tag[i])) {
       break;
     } else {
       i++;
