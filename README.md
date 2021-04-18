@@ -93,17 +93,26 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
   - [x] Followers
   - [x] Likes
 - [ ] Replies
-  - [ ] "Reply to" note
-  - [ ] Database links
+  - [x] Reply text box / popup
+  - [x] "Reply to" note
+  - [x] Database links
   - [ ] Bit pages
-    - [ ] List thread above
+    - [x] List thread above
     - [ ] List replies below
-  - [ ] User page tab
-    - Hide replies from "main" tab
-  - [ ] Interaction counter
-    - [ ] On bit
-    - [ ] On user page
+      - [ ] Prioritise prethread participants
+    - [x] Hide "reply to ..." message
+  - [x] User page tab
+  - [x] Interaction counter
+    - [x] On bit
+    - [x] On user page
+- [ ] Check `status = 1` for all follows / users database calls
+- [ ] Case insensitive handles
+  - `SELECT DISTINCT COL_NAME FROM myTable WHERE LOWER(COL_NAME) LIKE LOWER('%PriceOrder%')`
+  - `SELECT DISTINCT COL_NAME FROM myTable WHERE COL_NAME iLIKE '%Priceorder%'` (postgresql)
+- [ ] Regex field verifications (username etc)
 - [ ] Hashtags
+- [ ] Check interaction icons when moving between posts
+- [x] Reply / rebit notes side by side instead of stacked
 
 ### Timeline
 

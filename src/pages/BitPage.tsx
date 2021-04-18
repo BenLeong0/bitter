@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import BitNotFound from "../components/BitPage/BitNotFound";
-import "../components/UserPage/UserPage.css";
+import BitPreThread from "../components/BitPage/PreThreadList";
+import "../components/BitPage/BitPage.css";
 import { AccountContext } from "../components/Account";
 import Bit from "../components/Main/BitList/Bit";
 
 import BitInfo from "../Types/BitInfo";
 import ContextProps from "../Types/ContextProps";
+import ReplyThread from "../components/BitPage/ReplyThread";
 
 const BitPage: React.FC<{}> = () => {
   const [post, setPost] = useState<BitInfo>({
@@ -30,6 +32,8 @@ const BitPage: React.FC<{}> = () => {
   // Database call for post by post_id
   const fetchPost = async (post_id: string) => {
     setIsLoading(true);
+    // console.log(myHandle);
+
     // Returns {post_id: '', handle: ''} if post not found
     const fetchInfo = await fetch(
       `${API_URL}/bits?post_id=${post_id}&handle=${myHandle}`
@@ -42,6 +46,8 @@ const BitPage: React.FC<{}> = () => {
     //   setIsFollowing(data.isFollowing);
     // }
     setIsLoading(false);
+    var elmnt = document.getElementsByClassName("thread-main-bit")[0];
+    if (elmnt) elmnt.scrollIntoView();
   };
 
   // Load post on mount
@@ -68,7 +74,22 @@ const BitPage: React.FC<{}> = () => {
         </div>
       ) : (
         <div className="bit-page">
-          {post.post_id !== "" ? <Bit {...post} main_bit /> : <BitNotFound />}
+          {post.post_id !== "" ? (
+            <>
+              <BitPreThread bit={post} />
+              <Bit {...post} classes="thread-main-bit" />
+              {typeof post.reply_threads === "undefined" ? (
+                <></>
+              ) : (
+                post.reply_threads.map((thread) => {
+                  console.log("yo", thread);
+                  return <ReplyThread thread={thread} />;
+                })
+              )}
+            </>
+          ) : (
+            <BitNotFound />
+          )}
         </div>
       )}
     </>

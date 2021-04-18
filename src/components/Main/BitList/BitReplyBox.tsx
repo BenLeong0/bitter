@@ -1,12 +1,15 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import TextareaAutosize from "react-textarea-autosize";
-import ContextProps from "../../Types/ContextProps";
-import { AccountContext } from "../Account";
+import ContextProps from "../../../Types/ContextProps";
+import { AccountContext } from "../../Account";
 
-const PostBoxForm: React.FC<{}> = () => {
-  const { API_URL, getSession, refreshBitList }: ContextProps = useContext(
-    AccountContext
-  );
+export interface BitReplyBoxProps {
+  post_id: string;
+  setReplying: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const BitReplyBox: React.FC<BitReplyBoxProps> = ({ post_id, setReplying }) => {
+  const { getSession, API_URL }: ContextProps = useContext(AccountContext);
 
   const [post, updatePost] = useState<string>("");
   const [remainingChars, updateChars] = useState<number>(140);
@@ -19,16 +22,66 @@ const PostBoxForm: React.FC<{}> = () => {
   const [errorOccurred, setErrorOccurred] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const enableButton = () => {
-    updateButton([true, "100%"]);
-  };
-  const disableButton = () => {
-    updateButton([false, "50%"]);
-  };
+  const enableButton = () => updateButton([true, "100%"]);
+  const disableButton = () => updateButton([false, "50%"]);
 
   const handleChange = (e: any) => {
     const { value } = e.target;
     updatePost(value);
+  };
+
+  const handleSubmitClick = async (e: any) => {
+    e.preventDefault();
+    e.preventDefault();
+    getSession().then(async ({ headers }) => {
+      // Check valid length
+      if (remainingChars < 0 || remainingChars >= 140) {
+        console.error("Invalid post length.");
+        return;
+      }
+
+      // Set loading
+      setIsLoading(true);
+      setErrorOccurred(false);
+
+      // Set Content-Type (might be correct by default)
+      headers["Content-Type"] = "application/json";
+
+      // Request options
+      var requestOptions = {
+        headers,
+        method: "POST",
+        body: JSON.stringify({ content: post, replyTo: post_id }),
+      };
+
+      // Post to API
+      await fetch(`${API_URL}/bits`, requestOptions)
+        .then((response) => response.text())
+        .then((result) => {
+          const resultJSON = JSON.parse(result);
+
+          // success/failure handling
+          if (resultJSON.code === "postSuccess") {
+            // Empty input field
+            updatePost("");
+            setReplying(false);
+          } else {
+            // Error message
+            setErrorOccurred(true);
+          }
+        })
+        .catch((err) => {
+          console.log("Error:", err);
+          setErrorOccurred(true);
+        })
+        .finally(() => {
+          // Set not loading
+          setIsLoading(false);
+        });
+    });
+    // Post reply
+    // Empty text box
+    // Hide textbox
   };
 
   const updateCharCount = () => {
@@ -52,68 +105,17 @@ const PostBoxForm: React.FC<{}> = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => updateCharCount(), [post]);
 
-  const handleSubmitClick = async (e: any) => {
-    e.preventDefault();
-    getSession().then(async ({ headers }) => {
-      // Check valid length
-      if (remainingChars < 0 || remainingChars >= 140) {
-        console.error("Invalid post length.");
-        return;
-      }
-
-      // Set loading
-      setIsLoading(true);
-      setErrorOccurred(false);
-
-      // Set Content-Type (might be correct by default)
-      headers["Content-Type"] = "application/json";
-
-      // Request options
-      var requestOptions = {
-        headers,
-        method: "POST",
-        body: JSON.stringify({ content: post }),
-      };
-
-      // Post to API
-      await fetch(`${API_URL}/bits`, requestOptions)
-        .then((response) => response.text())
-        .then((result) => {
-          const resultJSON = JSON.parse(result);
-
-          // success/failure handling
-          if (resultJSON.code === "postSuccess") {
-            // Empty input field
-            updatePost("");
-          } else {
-            // Error message
-            setErrorOccurred(true);
-          }
-        })
-        .catch((err) => {
-          console.log("Error:", err);
-          setErrorOccurred(true);
-        })
-        .finally(() => {
-          // Set not loading
-          setIsLoading(false);
-          refreshBitList();
-        });
-    });
-  };
-
   return (
-    <div className="postbox-input">
+    <div className="bit-reply-box">
       {isLoading ? (
-        <div id="postbox-loader-wrapper">
+        <div id="bit-reply-loader-wrapper">
           <div className="loader" />
         </div>
       ) : (
         <form>
           <TextareaAutosize
-            className="bit-content"
             id="postbox-input-field"
-            placeholder="Post a bit!"
+            placeholder="Post a reply!"
             value={post}
             onChange={handleChange}
           />
@@ -124,7 +126,7 @@ const PostBoxForm: React.FC<{}> = () => {
             disabled={!buttonStatus[0]}
             style={{ opacity: buttonStatus[1] }}
           >
-            Post
+            Post reply
           </button>
           <div id="postbox-charcount" style={{ color: charCounterColour }}>
             Remaining characters: {remainingChars}
@@ -142,4 +144,4 @@ const PostBoxForm: React.FC<{}> = () => {
   );
 };
 
-export default PostBoxForm;
+export default BitReplyBox;

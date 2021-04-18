@@ -1,0 +1,80 @@
+/* MAIN BIT */
+
+.thread-main-bit {
+  width: 600px;
+  font-size: 20px;
+}
+
+.thread-main-bit .bit-content {
+  max-width: 520px;
+}
+
+.thread-main-bit .bit-content .bit-text {
+  width: 480px;
+}
+
+/* GENERAL */
+
+.prethread-bit,
+.reply-thread-bit {
+  margin: 0 39px;
+  border-top: 0;
+  border-bottom: 0;
+  border-radius: 0;
+}
+
+/* PRE THREAD */
+
+.prethread-bit:last-child {
+  border-bottom: grey dashed 1px;
+}
+
+.prethread-bit:first-child {
+  border-top: grey solid 1px;
+  border-radius: 4px 4px 0 0;
+}
+
+/* REPLY THREADS */
+
+.reply-thread-bit {
+  padding-top: 2px;
+}
+
+.reply-thread-bit .bit-content,
+.prethread-bit .bit-content {
+  margin-top: 0;
+}
+
+.reply-thread-bit .bit-message,
+.prethread-bit .bit-message {
+  display: none;
+}
+
+.reply-thread {
+  float: left;
+}
+
+.reply-thread-bit:first-child {
+  border-top: grey dashed 1px;
+  padding-top: 10px;
+}
+
+.reply-thread:first-child .reply-thread-bit:first-child {
+  border-top: none;
+}
+
+.reply-thread-bit:last-child {
+  border-bottom: grey solid 1px;
+  margin-bottom: 9px;
+  border-radius: 0 0 4px 4px;
+}
+
+.reply-thread-bit hr,
+.prethread-bit hr {
+  display: block;
+}
+
+.reply-thread-bit:last-child hr,
+.prethread-bit:last-child hr {
+  display: none;
+}

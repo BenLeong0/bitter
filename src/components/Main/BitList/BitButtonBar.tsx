@@ -1,17 +1,29 @@
 import React, { useContext, useState, useEffect } from "react";
-import ReplyButton from "./reply.svg";
-import RebitButton from "./rebit.svg";
-import RebitedButton from "./rebited.svg";
-import LikeButton from "./like.svg";
-import LikedButton from "./liked.svg";
-import DislikeButton from "./dislike.svg";
-import DislikedButton from "./disliked.svg";
+import ReplyButton from "./Icons/reply.svg";
+import ReplyingButton from "./Icons/replied.svg";
+import RebitButton from "./Icons/rebit.svg";
+import RebitedButton from "./Icons/rebited.svg";
+import LikeButton from "./Icons/like.svg";
+import LikedButton from "./Icons/liked.svg";
+import DislikeButton from "./Icons/dislike.svg";
+import DislikedButton from "./Icons/disliked.svg";
 import { AccountContext } from "../../Account";
 
 import BitInfo from "../../../Types/BitInfo";
 import ContextProps from "../../../Types/ContextProps";
 
-const BitButtonBar: React.FC<BitInfo> = (props) => {
+interface OtherProps {
+  toggleReplying: () => void;
+  replying: boolean;
+}
+
+type BitButtonBarProps = BitInfo & OtherProps;
+
+const BitButtonBar: React.FC<BitButtonBarProps> = ({
+  toggleReplying,
+  replying,
+  ...props
+}) => {
   // Affect like/dislike counter
   const [rebitShift, setRebitShift] = useState<number>(0);
   const [likeShift, setLikeShift] = useState<number>(0);
@@ -40,7 +52,9 @@ const BitButtonBar: React.FC<BitInfo> = (props) => {
   }, [props.isReposted, props.isLiked, props.isDisliked]);
 
   const reply = () => {
+    toggleReplying();
     console.log(`reply to tweet ${props.post_id}`);
+    console.error("CHANGE REPLY ICON COLOUR");
     console.log(JSON.stringify(props));
   };
 
@@ -137,7 +151,11 @@ const BitButtonBar: React.FC<BitInfo> = (props) => {
   return (
     <div className="bit-buttons">
       <div className="bit-stat">
-        <img src={ReplyButton} alt="reply button" onClick={reply} />
+        {replying ? (
+          <img src={ReplyingButton} alt="reply button" onClick={reply} />
+        ) : (
+          <img src={ReplyButton} alt="reply button" onClick={reply} />
+        )}
         <div className="bit-stat-count">{props.replies}</div>
       </div>
 

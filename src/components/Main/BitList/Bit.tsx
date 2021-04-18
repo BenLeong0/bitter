@@ -6,9 +6,12 @@ import OutsideAlerter from "./OutsideAlerter";
 import BitInfo from "../../../Types/BitInfo";
 import BitTag from "./BitTag";
 import { AccountContext } from "../../Account";
-import DeleteButton from "./delete.svg";
-import RebitedButton from "./rebited.svg";
+import DeleteButton from "./Icons/delete.svg";
+import RebitedButton from "./Icons/rebited.svg";
+import RepliedButton from "./Icons/replied.svg";
 import ContextProps from "../../../Types/ContextProps";
+import BitReplyBox from "./BitReplyBox";
+import { stringifiedJson } from "aws-sdk/clients/customerprofiles";
 
 // interface BitInfo {
 //   content: string;
@@ -25,6 +28,12 @@ import ContextProps from "../../../Types/ContextProps";
 //   status: number;
 //   user_id: string;
 // }
+
+interface OtherProps {
+  classes?: stringifiedJson;
+}
+
+type BitProps = BitInfo & OtherProps;
 
 function timestampFormat(post_time: string): string {
   const bitTime: Date = new Date(post_time);
@@ -78,7 +87,7 @@ function timestampFormat(post_time: string): string {
   return "less than a second"; //'just now' //or other string you like;
 }
 
-const Bit: React.FC<BitInfo> = (bitInfo) => {
+const Bit: React.FC<BitProps> = ({ classes = "", ...bitInfo }) => {
   const { API_URL, getSession, isAdmin, myHandle }: ContextProps = useContext(
     AccountContext
   );
@@ -94,6 +103,14 @@ const Bit: React.FC<BitInfo> = (bitInfo) => {
 
   // Hook to hide tweet after deleting
   const [isDeleted, setIsDeleted] = useState<boolean>(false);
+
+  // Hook to toggle reply text box
+  const [replying, setReplying] = useState<boolean>(false);
+  const toggleReplying = (): void => setReplying(!replying);
+
+  if (typeof bitInfo.rebitter !== "undefined" || bitInfo.reply_to !== null) {
+    classes += " reply-bit";
+  }
 
   // Delete button
   const handleDeletePost = async (e: any) => {
@@ -133,22 +150,51 @@ const Bit: React.FC<BitInfo> = (bitInfo) => {
   // Numbers for interactions
   return (
     <div
-      className="bit"
+      className={"bit " + classes}
       style={{
         display: isDeleted ? "none" : "",
-        fontSize: bitInfo.main_bit ? "20px" : "",
       }}
     >
-      {/* Show who rebitted if rebit */}
-      <div
-        className="bit-rebitter"
-        style={{
-          display: typeof bitInfo.rebitter === "undefined" ? "none" : "",
-        }}
-      >
-        <img src={RebitedButton} alt="rebit button" />
-        Rebitted by{" "}
-        <Link to={`/u/${bitInfo.rebitter}`}>@{bitInfo.rebitter}</Link>
+      <div className="bit-message">
+        {/* Show who replied to if reply */}
+        <div
+          className="bit-reply-author"
+          style={{
+            display: bitInfo.reply_to === null ? "none" : "",
+            top: typeof bitInfo.rebitter === "undefined" ? "4px" : "20px",
+          }}
+        >
+          <img src={RepliedButton} alt="rebit button" />
+          <Link to={`/b/${bitInfo.reply_to}`}>
+            <span style={{ color: "#10b" }}>Reply</span>
+          </Link>{" "}
+          to
+          <Link to={`/u/${bitInfo.reply_author}`}>
+            {" "}
+            @{bitInfo.reply_author}
+          </Link>
+          <span
+            style={{
+              display: typeof bitInfo.rebitter === "undefined" ? "none" : "",
+              color: "black",
+            }}
+          >
+            {" "}
+            ・{" "}
+          </span>
+        </div>
+
+        {/* Show who rebitted if rebit */}
+        <div
+          className="bit-rebitter"
+          style={{
+            display: typeof bitInfo.rebitter === "undefined" ? "none" : "",
+          }}
+        >
+          <img src={RebitedButton} alt="rebit button" />
+          <span>Rebitted by </span>
+          <Link to={`/u/${bitInfo.rebitter}`}>@{bitInfo.rebitter}</Link>
+        </div>
       </div>
 
       {/* Poster profile picture */}
@@ -161,12 +207,7 @@ const Bit: React.FC<BitInfo> = (bitInfo) => {
         </div>
       </Link>
 
-      <div
-        className="bit-content"
-        style={{
-          marginTop: typeof bitInfo.rebitter === "undefined" ? "" : "4px",
-        }}
-      >
+      <div className="bit-content">
         {/* Poster info */}
         <div className="bit-info">
           <Link to={`/u/${bitInfo.handle}`}>
@@ -215,8 +256,18 @@ const Bit: React.FC<BitInfo> = (bitInfo) => {
             <BitTag tag={tag} key={index} />
           ))}
         </div>
-        <BitButtonBar {...bitInfo} />
+        <BitButtonBar
+          {...bitInfo}
+          toggleReplying={toggleReplying}
+          replying={replying}
+        />
       </div>
+      {replying ? (
+        <BitReplyBox post_id={bitInfo.post_id} setReplying={setReplying} />
+      ) : (
+        ""
+      )}
+      <hr className="bit-splitter" />
     </div>
   );
 };
