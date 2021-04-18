@@ -5,10 +5,10 @@ export default interface BitInfo {
     handle?: string;
     index?: number;
     post_time: string;
-    reply_to?: number;
+    reply_to?: string;
+    reply_author?: string;
     status?: number;
     user_id?: string;
-    main_bit?: boolean
     replies: number;
     reposts: number;
     likes: number;
@@ -17,4 +17,6 @@ export default interface BitInfo {
     isDisliked?: boolean;
     isReposted?: boolean;
     rebitter?: string;
+    pre_thread?: Array<BitInfo>;
+    reply_threads?: Array<Array<BitInfo>>
   }
