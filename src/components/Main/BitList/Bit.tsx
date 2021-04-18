@@ -11,7 +11,6 @@ import RebitedButton from "./Icons/rebited.svg";
 import RepliedButton from "./Icons/replied.svg";
 import ContextProps from "../../../Types/ContextProps";
 import BitReplyBox from "./BitReplyBox";
-import { stringifiedJson } from "aws-sdk/clients/customerprofiles";
 
 // interface BitInfo {
 //   content: string;
@@ -30,7 +29,7 @@ import { stringifiedJson } from "aws-sdk/clients/customerprofiles";
 // }
 
 interface OtherProps {
-  classes?: stringifiedJson;
+  classes?: string;
 }
 
 type BitProps = BitInfo & OtherProps;
@@ -87,12 +86,32 @@ function timestampFormat(post_time: string): string {
   return "less than a second"; //'just now' //or other string you like;
 }
 
+function formatDate(date: Date) {
+  var hours: any = date.getHours();
+  var minutes: any = date.getMinutes();
+  var ampm: any = hours >= 12 ? "pm" : "am";
+  hours = hours % 12;
+  hours = hours ? hours : 12; // the hour '0' should be '12'
+  minutes = minutes < 10 ? "0" + minutes : minutes;
+  var strTime = hours + ":" + minutes + " " + ampm;
+  return (
+    date.getMonth() +
+    1 +
+    "/" +
+    date.getDate() +
+    "/" +
+    date.getFullYear() +
+    " " +
+    strTime
+  );
+}
+
 const Bit: React.FC<BitProps> = ({ classes = "", ...bitInfo }) => {
   const { API_URL, getSession, isAdmin, myHandle }: ContextProps = useContext(
     AccountContext
   );
 
-  // console.log(bitInfo);
+  console.log(bitInfo);
 
   // Split for tags
   const splitContent = bitInfo.content.split("@");
@@ -216,7 +235,10 @@ const Bit: React.FC<BitProps> = ({ classes = "", ...bitInfo }) => {
           </Link>
           ・
           <Link to={`/b/${bitInfo.post_id}`}>
-            <span className="bit-info-time">
+            <span
+              className="bit-info-time"
+              title={formatDate(new Date(bitInfo.post_time))}
+            >
               {timestampFormat(bitInfo.post_time)}
             </span>
           </Link>
