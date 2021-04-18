@@ -22,29 +22,25 @@ const BitPage: React.FC<{}> = () => {
     reposts: 0,
   });
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [post_id, setPostId] = useState<string>(
+    useLocation().pathname.slice(3)
+  );
 
   document.title = (post.handle ? "@" + post.handle : "post") + " / Bitter";
 
   const { API_URL, myHandle }: ContextProps = useContext(AccountContext);
 
-  const post_id: string = useLocation().pathname.slice(3);
-
   // Database call for post by post_id
   const fetchPost = async (post_id: string) => {
     setIsLoading(true);
-    // console.log(myHandle);
 
     // Returns {post_id: '', handle: ''} if post not found
     const fetchInfo = await fetch(
       `${API_URL}/bits?post_id=${post_id}&handle=${myHandle}`
     );
     const data: BitInfo = await fetchInfo.json();
-    console.log(data);
 
     setPost(data);
-    // if (data.haveLiked) {
-    //   setIsFollowing(data.isFollowing);
-    // }
     setIsLoading(false);
     var elmnt = document.getElementsByClassName("thread-main-bit")[0];
     if (elmnt) elmnt.scrollIntoView();
@@ -54,17 +50,16 @@ const BitPage: React.FC<{}> = () => {
   useEffect(() => {
     fetchPost(post_id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [myHandle]);
+  }, [post_id, myHandle]);
 
   // Update when moving between post pages
   const history = useHistory();
   useEffect(() => {
     return history.listen((location) => {
-      fetchPost(location.pathname.slice(3));
+      setPostId(location.pathname.slice(3));
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  // }, [history]);
 
   return (
     <>
@@ -82,8 +77,9 @@ const BitPage: React.FC<{}> = () => {
                 <></>
               ) : (
                 post.reply_threads.map((thread) => {
-                  console.log("yo", thread);
-                  return <ReplyThread thread={thread} />;
+                  return (
+                    <ReplyThread thread={thread} key={thread[0].post_id} />
+                  );
                 })
               )}
             </>

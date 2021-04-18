@@ -92,7 +92,7 @@ const Bit: React.FC<BitProps> = ({ classes = "", ...bitInfo }) => {
     AccountContext
   );
 
-  console.log(bitInfo);
+  // console.log(bitInfo);
 
   // Split for tags
   const splitContent = bitInfo.content.split("@");

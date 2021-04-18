@@ -14,7 +14,7 @@ const PreThread: React.FC<PreThreadProps> = ({ bit }) => {
   return (
     <div className="prethread">
       {bit.pre_thread.map((prebit) => (
-        <Bit {...prebit} classes="prethread-bit" />
+        <Bit {...prebit} classes="prethread-bit" key={prebit.post_id} />
       ))}
     </div>
   );

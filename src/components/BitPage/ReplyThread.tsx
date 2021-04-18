@@ -3,12 +3,10 @@ import BitInfo from "../../Types/BitInfo";
 import Bit from "../Main/BitList/Bit";
 
 const ReplyThread: React.FC<{ thread: Array<BitInfo> }> = ({ thread }) => {
-  console.log("wow", thread);
-
   return (
     <div className="reply-thread">
       {thread.map((reply) => (
-        <Bit {...reply} classes="reply-thread-bit" />
+        <Bit {...reply} classes="reply-thread-bit" key={reply.post_id} />
       ))}
     </div>
   );
