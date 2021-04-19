@@ -3,6 +3,7 @@
 .thread-main-bit {
   width: 600px;
   font-size: 20px;
+  border-color: black;
 }
 
 .thread-main-bit .bit-content {
