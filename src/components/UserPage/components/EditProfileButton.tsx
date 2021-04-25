@@ -204,6 +204,16 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
                 ""
               )}
 
+              <div className="edit-profile-label">
+                Change profile picture (140x140)
+              </div>
+              <input
+                type="file"
+                name="upload-pfp"
+                accept=".jpeg, .png, .jpg"
+                id="upload-pfp"
+              />
+
               <button
                 type="submit"
                 className="button-primary edit-profile-button"
