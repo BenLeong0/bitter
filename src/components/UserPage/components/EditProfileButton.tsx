@@ -204,23 +204,23 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
                 ""
               )}
 
-              <div className="edit-profile-label">
-                Change profile picture (140x140)
-              </div>
+              <div className="edit-profile-label">Change profile picture</div>
               <input
                 type="file"
                 name="upload-pfp"
                 accept=".jpeg, .png, .jpg"
                 id="upload-pfp"
               />
+              <div className="image-rec-size">(Recommended size: 140x140)</div>
 
-              <div className="edit-profile-label">Change banner (600x150)</div>
+              <div className="edit-profile-label">Change banner</div>
               <input
                 type="file"
                 name="upload-pfp"
                 accept=".jpeg, .png, .jpg"
                 id="upload-pfp"
               />
+              <div className="image-rec-size">(Recommended size: 600x150)</div>
 
               <button
                 type="submit"
