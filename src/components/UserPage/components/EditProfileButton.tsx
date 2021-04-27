@@ -81,6 +81,14 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
     setDisplayName(value);
   };
 
+  const toBase64 = (file: any) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+
   const handlePfpChange = (e: any) => {
     const file: any = e.target.files[0];
     console.log(file);
