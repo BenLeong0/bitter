@@ -81,6 +81,11 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
     setDisplayName(value);
   };
 
+  const handlePfpChange = (e: any) => {
+    const file: any = e.target.files[0];
+    console.log(file);
+  };
+
   // Submit changes
   const onSubmit = async (e: any) => {
     e.preventDefault();
@@ -210,15 +215,16 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
                 name="upload-pfp"
                 accept=".jpeg, .png, .jpg"
                 id="upload-pfp"
+                onChange={handlePfpChange}
               />
               <div className="image-rec-size">(Recommended size: 140x140)</div>
 
               <div className="edit-profile-label">Change banner</div>
               <input
                 type="file"
-                name="upload-pfp"
+                name="upload-banner"
                 accept=".jpeg, .png, .jpg"
-                id="upload-pfp"
+                id="upload-banner"
               />
               <div className="image-rec-size">(Recommended size: 600x150)</div>
 
