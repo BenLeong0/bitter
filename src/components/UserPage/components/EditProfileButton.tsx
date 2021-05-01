@@ -134,39 +134,41 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
       // Set loading
       setIsLoading(true);
 
-      // Set Content-Type (might be correct by default)
-      headers["Content-Type"] = "application/json";
+      // Edit display name and bio
+      await editProfile(headers);
 
-      // Request options
-      var requestOptions = {
-        headers,
-        method: "PATCH",
-        body: JSON.stringify({ display_name: displayName, bio: bio }),
-      };
-
-      // Post to api
-      await fetch(`${API_URL}/users`, requestOptions)
-        .then((response) => response.text())
-        .then((result) => {
-          const resultJSON = JSON.parse(result);
-
-          // Success/failure handling
-          if (resultJSON.code === "updateSuccess") {
-            // Refresh page
-            history.go(0);
-          } else {
-            // Error message
-            setErrorOccurred(true);
-
-            // Set not loading
-            setIsLoading(false);
-          }
-        });
+      // Set not loading
+      setIsLoading(false);
 
       // Refresh page if successful
       // Else show generic error message
       closeModal();
     });
+  };
+
+  const editProfile = async (headers: any) => {
+    // Set Content-Type (might be correct by default)
+    headers["Content-Type"] = "application/json";
+    var requestOptions = {
+      headers,
+      method: "PATCH",
+      body: JSON.stringify({ display_name: displayName, bio: bio }),
+    };
+
+    await fetch(`${API_URL}/users`, requestOptions)
+      .then((response) => response.text())
+      .then((result) => {
+        const resultJSON = JSON.parse(result);
+
+        // Success/failure handling
+        if (resultJSON.code === "updateSuccess") {
+          // Refresh page
+          history.go(0);
+        } else {
+          // Error message
+          setErrorOccurred(true);
+        }
+      });
   };
 
   return (
