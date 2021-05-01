@@ -89,9 +89,22 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
       reader.onerror = (error) => reject(error);
     });
 
-  const handlePfpChange = (e: any) => {
+  const handlePfpChange = async (e: any) => {
     const file: any = e.target.files[0];
-    console.log(file);
+    // const base64File = await toBase64(file);
+    // if (typeof base64File !== "string") return;
+    const url = "https://api.imgur.com/3/upload";
+    const headers = { Authorization: "Client-ID {{clientId}}" };
+    const formData = new FormData();
+    formData.append("image", file);
+    formData.append("type", "file");
+    fetch(url, {
+      method: "POST",
+      headers,
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((x) => console.log(x));
   };
 
   // Submit changes
