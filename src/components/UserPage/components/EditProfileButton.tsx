@@ -28,6 +28,7 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
   };
   const history = useHistory();
 
+  //#region states
   // Input field states
   const [displayName, setDisplayName] = useState<string>("");
   const [bio, setBio] = useState<string>("");
@@ -38,6 +39,14 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
   const [displayNameTooLong, setDisplayNameTooLong] = useState<boolean>(false);
   const [bioTooLong, setBioTooLong] = useState<boolean>(false);
   const [errorOccurred, setErrorOccurred] = useState<boolean>(false);
+  const [pfp, setPfp] = useState<any>(undefined);
+  const [banner, setBanner] = useState<any>(undefined);
+
+  // Record if changes made
+  const [textChanged, setTextChanged] = useState<boolean>(false);
+  const [pfpChanged, setPfpChanged] = useState<boolean>(false);
+  const [bannerChanged, setBannerChanged] = useState<boolean>(false);
+  //#endregion
 
   const { getSession, API_URL }: ContextProps = useContext(AccountContext);
 
@@ -56,6 +65,15 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props]);
 
+  const toBase64 = (file: any) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+
+  //#region text fields
   // Inputting changes
   const handleBioChange = (e: any) => {
     const { value } = e.target;
@@ -81,34 +99,8 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
     setDisplayName(value);
   };
 
-  const toBase64 = (file: any) =>
-    new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = (error) => reject(error);
-    });
-
-  const handlePfpChange = async (e: any) => {
-    const file: any = e.target.files[0];
-    // const base64File = await toBase64(file);
-    // if (typeof base64File !== "string") return;
-    const url = "https://api.imgur.com/3/upload";
-    const headers = { Authorization: "Client-ID {{clientId}}" };
-    const formData = new FormData();
-    formData.append("image", file);
-    formData.append("type", "file");
-    fetch(url, {
-      method: "POST",
-      headers,
-      body: formData,
-    })
-      .then((res) => res.json())
-      .then((x) => console.log(x));
-  };
-
-  // Submit changes
-  const onSubmit = async (e: any) => {
+  // Submit text field changes
+  const onSubmitText = async (e: any) => {
     e.preventDefault();
 
     // Remove whitespace from start and end
@@ -134,8 +126,31 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
       // Set loading
       setIsLoading(true);
 
-      // Edit display name and bio
-      await editProfile(headers);
+      // Set Content-Type (might be correct by default)
+      headers["Content-Type"] = "application/json";
+
+      // Request options
+      var requestOptions = {
+        headers,
+        method: "PATCH",
+        body: JSON.stringify({ display_name: displayName, bio: bio }),
+      };
+
+      // Post to api
+      await fetch(`${API_URL}/users`, requestOptions)
+        .then((response) => response.text())
+        .then((result) => {
+          const resultJSON = JSON.parse(result);
+
+          // Success/failure handling
+          if (resultJSON.code === "updateSuccess") {
+            // Refresh page
+            history.go(0);
+          } else {
+            // Error message
+            setErrorOccurred(true);
+          }
+        });
 
       // Set not loading
       setIsLoading(false);
@@ -145,31 +160,37 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
       closeModal();
     });
   };
+  //#endregion
 
-  const editProfile = async (headers: any) => {
-    // Set Content-Type (might be correct by default)
-    headers["Content-Type"] = "application/json";
-    var requestOptions = {
-      headers,
-      method: "PATCH",
-      body: JSON.stringify({ display_name: displayName, bio: bio }),
-    };
+  //#region pfp
+  const handlePfpChange = async (e: any) => {
+    const file: any = e.target.files[0];
+    // const base64File = await toBase64(file);
+    // if (typeof base64File !== "string") return;
+    setPfp(file);
+    console.log(file.type);
 
-    await fetch(`${API_URL}/users`, requestOptions)
-      .then((response) => response.text())
-      .then((result) => {
-        const resultJSON = JSON.parse(result);
-
-        // Success/failure handling
-        if (resultJSON.code === "updateSuccess") {
-          // Refresh page
-          history.go(0);
-        } else {
-          // Error message
-          setErrorOccurred(true);
-        }
-      });
+    // const url = "https://api.imgur.com/3/upload";
+    // const headers = { Authorization: "Client-ID {{clientId}}" };
+    // const formData = new FormData();
+    // formData.append("image", file);
+    // formData.append("type", "file");
+    // fetch(url, {
+    //   method: "POST",
+    //   headers,
+    //   body: formData,
+    // })
+    //   .then((res) => res.json())
+    //   .then((x) => console.log(x));
   };
+  //#endregion
+
+  //#region banner
+  const handleBannerChange = async (e: any) => {
+    const file: any = e.tagget.files[0];
+    setBanner(file);
+  };
+  //#endregion
 
   return (
     <>
@@ -187,7 +208,7 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
         ) : (
           <>
             <div className="edit-profile-title">Edit Profile</div>
-            <form onSubmit={onSubmit}>
+            <form onSubmit={onSubmitText}>
               <div className="edit-profile-label">Change display name</div>
               <TextareaAutosize
                 className="edit-profile-input"
@@ -231,37 +252,37 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
               ) : (
                 ""
               )}
-
-              <div className="edit-profile-label">Change profile picture</div>
-              <input
-                type="file"
-                name="upload-pfp"
-                accept=".jpeg, .png, .jpg"
-                id="upload-pfp"
-                onChange={handlePfpChange}
-              />
-              <div className="image-rec-size">(Recommended size: 140x140)</div>
-
-              <div className="edit-profile-label">Change banner</div>
-              <input
-                type="file"
-                name="upload-banner"
-                accept=".jpeg, .png, .jpg"
-                id="upload-banner"
-              />
-              <div className="image-rec-size">(Recommended size: 600x150)</div>
-
               <button
                 type="submit"
                 className="button-primary edit-profile-button"
               >
                 Save changes
               </button>
-              <br />
-              <button onClick={closeModal} style={{ marginTop: "10px" }}>
-                Cancel
-              </button>
             </form>
+
+            <div className="edit-profile-label">Change profile picture</div>
+            <input
+              type="file"
+              name="upload-pfp"
+              accept=".jpeg, .png, .jpg"
+              id="upload-pfp"
+              onChange={handlePfpChange}
+            />
+            <div className="image-rec-size">(Recommended size: 140x140)</div>
+
+            <div className="edit-profile-label">Change banner</div>
+            <input
+              type="file"
+              name="upload-banner"
+              accept=".jpeg, .png, .jpg"
+              id="upload-banner"
+              onChange={handleBannerChange}
+            />
+            <div className="image-rec-size">(Recommended size: 600x150)</div>
+            <br />
+            <button onClick={closeModal} style={{ marginTop: "10px" }}>
+              Cancel
+            </button>
           </>
         )}
       </StyledPopup>
