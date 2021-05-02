@@ -172,7 +172,7 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
 
   //#region banner
   const handleBannerChange = async (e: any) => {
-    const file: any = e.tagget.files[0];
+    const file: any = e.target.files[0];
     setBanner(file);
   };
 
