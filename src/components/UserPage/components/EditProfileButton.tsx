@@ -49,9 +49,9 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
 
   const textButtonActive: boolean =
     textChanged &&
-    displayName.trim().length === 0 &&
-    displayName.trim().length > maxDisplayNameLength &&
-    bio.trim().length > maxBioLength;
+    displayName.trim().length > 0 &&
+    displayName.trim().length <= maxDisplayNameLength &&
+    bio.trim().length <= maxBioLength;
   //#endregion
 
   const { getSession, API_URL }: ContextProps = useContext(AccountContext);
@@ -200,7 +200,7 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
                 onChange={handleDisplayNameChange}
               />
               {/* Display name empty */}
-              {displayName.trim().length === 0 ? (
+              {displayName.trim().length > 0 ? (
                 <div className="form-error-message">
                   Display name cannot be empty
                 </div>
@@ -208,7 +208,7 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
                 ""
               )}
               {/* Display name too long */}
-              {displayName.trim().length > maxDisplayNameLength ? (
+              {displayName.trim().length <= maxDisplayNameLength ? (
                 <div className="form-error-message">
                   Display name is too long
                 </div>
@@ -224,7 +224,7 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
                 onChange={handleBioChange}
               />
               {/* Bio too long */}
-              {bio.trim().length > maxBioLength ? (
+              {bio.trim().length <= maxBioLength ? (
                 <div className="form-error-message">Bio too long</div>
               ) : (
                 ""
