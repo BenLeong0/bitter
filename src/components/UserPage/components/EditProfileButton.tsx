@@ -23,6 +23,7 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
   // Whether modal is open or not
   const [open, setOpen] = useState<boolean>(false);
   const closeModal = () => {
+    if (changesSubmitted) history.go(0);
     setOpen(false);
     resetInputs();
   };
@@ -46,6 +47,7 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
   const [textChanged, setTextChanged] = useState<boolean>(false);
   const [pfpChanged, setPfpChanged] = useState<boolean>(false);
   const [bannerChanged, setBannerChanged] = useState<boolean>(false);
+  const [changesSubmitted, setChangesSubmitted] = useState<boolean>(false);
 
   const textButtonActive: boolean =
     textChanged &&
@@ -128,7 +130,7 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
           // Success/failure handling
           if (resultJSON.code === "updateSuccess") {
             // Refresh page
-            history.go(0);
+            setChangesSubmitted(true);
           } else {
             // Error message
             setErrorOccurred(true);
@@ -137,10 +139,6 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
 
       // Set not loading
       setIsLoading(false);
-
-      // Refresh page if successful
-      // Else show generic error message
-      closeModal();
     });
   };
   //#endregion
