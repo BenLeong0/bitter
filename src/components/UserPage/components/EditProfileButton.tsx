@@ -164,12 +164,20 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
     //   .then((res) => res.json())
     //   .then((x) => console.log(x));
   };
+
+  const onSubmitPfp = async (e: any) => {
+    e.preventDefault();
+  };
   //#endregion
 
   //#region banner
   const handleBannerChange = async (e: any) => {
     const file: any = e.tagget.files[0];
     setBanner(file);
+  };
+
+  const onSubmitBanner = async (e: any) => {
+    e.preventDefault();
   };
   //#endregion
 
@@ -239,7 +247,7 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
                 style={{ opacity: textButtonActive ? 1 : 0.5 }}
                 disabled={!textButtonActive}
               >
-                Save changes
+                Submit changes
               </button>
             </form>
 
@@ -254,6 +262,14 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
               onChange={handlePfpChange}
             />
             <div className="image-rec-size">(Recommended size: 140x140)</div>
+            <button
+              className="button-primary edit-profile-button"
+              style={{ opacity: textButtonActive ? 1 : 0.5 }}
+              disabled={!textButtonActive}
+              onSubmit={onSubmitPfp}
+            >
+              Submit change
+            </button>
 
             <hr />
 
@@ -266,6 +282,14 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
               onChange={handleBannerChange}
             />
             <div className="image-rec-size">(Recommended size: 600x150)</div>
+            <button
+              className="button-primary edit-profile-button"
+              style={{ opacity: textButtonActive ? 1 : 0.5 }}
+              disabled={!textButtonActive}
+              onSubmit={onSubmitBanner}
+            >
+              Submit change
+            </button>
 
             <hr />
 
