@@ -266,7 +266,7 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
               className="button-primary edit-profile-button"
               style={{ opacity: pfp === undefined ? 0.5 : 1 }}
               disabled={pfp === undefined}
-              onSubmit={onSubmitPfp}
+              onClick={onSubmitPfp}
             >
               Submit change
             </button>
@@ -286,7 +286,7 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
               className="button-primary edit-profile-button"
               style={{ opacity: banner === undefined ? 0.5 : 1 }}
               disabled={banner === undefined}
-              onSubmit={onSubmitBanner}
+              onClick={onSubmitBanner}
             >
               Submit change
             </button>
