@@ -23,8 +23,8 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
   // Whether modal is open or not
   const [open, setOpen] = useState<boolean>(false);
   const closeModal = () => {
-    setInputs();
     setOpen(false);
+    resetInputs();
   };
   const history = useHistory();
 
@@ -46,22 +46,30 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
   const [textChanged, setTextChanged] = useState<boolean>(false);
   const [pfpChanged, setPfpChanged] = useState<boolean>(false);
   const [bannerChanged, setBannerChanged] = useState<boolean>(false);
+
+  const textButtonActive: boolean =
+    textChanged && !displayNameEmpty && !displayNameTooLong && !bioTooLong;
   //#endregion
 
   const { getSession, API_URL }: ContextProps = useContext(AccountContext);
 
-  const setInputs = () => {
+  const resetInputs = () => {
     if (props.display_name) {
       setDisplayName(props.display_name);
     }
     if (props.bio) {
       setBio(props.bio);
     }
+    setTextChanged(false);
+    setPfpChanged(false);
+    setBannerChanged(false);
+    setPfp(undefined);
+    setBanner(undefined);
   };
 
   // Update input fields on page load
   useEffect(() => {
-    setInputs();
+    resetInputs();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props]);
 
@@ -83,6 +91,7 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
       setBioTooLong(false);
     }
     setBio(value);
+    setTextChanged(true);
   };
   const handleDisplayNameChange = (e: any) => {
     const { value } = e.target;
@@ -97,6 +106,7 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
       setDisplayNameTooLong(false);
     }
     setDisplayName(value);
+    setTextChanged(true);
   };
 
   // Submit text field changes
@@ -255,10 +265,14 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
               <button
                 type="submit"
                 className="button-primary edit-profile-button"
+                style={{ opacity: textButtonActive ? 1 : 0.5 }}
+                disabled={!textButtonActive}
               >
                 Save changes
               </button>
             </form>
+
+            <hr />
 
             <div className="edit-profile-label">Change profile picture</div>
             <input
@@ -270,6 +284,8 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
             />
             <div className="image-rec-size">(Recommended size: 140x140)</div>
 
+            <hr />
+
             <div className="edit-profile-label">Change banner</div>
             <input
               type="file"
@@ -279,7 +295,9 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
               onChange={handleBannerChange}
             />
             <div className="image-rec-size">(Recommended size: 600x150)</div>
-            <br />
+
+            <hr />
+
             <button onClick={closeModal} style={{ marginTop: "10px" }}>
               Cancel
             </button>
