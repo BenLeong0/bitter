@@ -264,8 +264,8 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
             <div className="image-rec-size">(Recommended size: 140x140)</div>
             <button
               className="button-primary edit-profile-button"
-              style={{ opacity: textButtonActive ? 1 : 0.5 }}
-              disabled={!textButtonActive}
+              style={{ opacity: pfp === undefined ? 0.5 : 1 }}
+              disabled={pfp === undefined}
               onSubmit={onSubmitPfp}
             >
               Submit change
@@ -284,8 +284,8 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
             <div className="image-rec-size">(Recommended size: 600x150)</div>
             <button
               className="button-primary edit-profile-button"
-              style={{ opacity: textButtonActive ? 1 : 0.5 }}
-              disabled={!textButtonActive}
+              style={{ opacity: banner === undefined ? 0.5 : 1 }}
+              disabled={banner === undefined}
               onSubmit={onSubmitBanner}
             >
               Submit change
