@@ -91,13 +91,8 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
   };
   const handleDisplayNameChange = (e: any) => {
     const { value } = e.target;
-    setDisplayNameEmpty(false);
-    setDisplayNameTooLong(false);
-    if (value.length === 0) {
-      setDisplayNameEmpty(true);
-    } else if (value.length > 25) {
-      setDisplayNameTooLong(true);
-    }
+    setDisplayNameEmpty(value.length === 0);
+    setDisplayNameTooLong(value.length > 25);
     setDisplayName(value);
     setTextChanged(true);
   };
