@@ -28,6 +28,9 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
   };
   const history = useHistory();
 
+  const maxDisplayNameLength = 25;
+  const maxBioLength = 160;
+
   //#region states
   // Input field states
   const [displayName, setDisplayName] = useState<string>("");
@@ -35,9 +38,6 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   // Error messages
-  const [displayNameEmpty, setDisplayNameEmpty] = useState<boolean>(false);
-  const [displayNameTooLong, setDisplayNameTooLong] = useState<boolean>(false);
-  const [bioTooLong, setBioTooLong] = useState<boolean>(false);
   const [errorOccurred, setErrorOccurred] = useState<boolean>(false);
   const [pfp, setPfp] = useState<any>(undefined);
   const [banner, setBanner] = useState<any>(undefined);
@@ -48,7 +48,10 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
   const [bannerChanged, setBannerChanged] = useState<boolean>(false);
 
   const textButtonActive: boolean =
-    textChanged && !displayNameEmpty && !displayNameTooLong && !bioTooLong;
+    textChanged &&
+    displayName.trim().length === 0 &&
+    displayName.trim().length > maxDisplayNameLength &&
+    bio.trim().length > maxBioLength;
   //#endregion
 
   const { getSession, API_URL }: ContextProps = useContext(AccountContext);
@@ -85,14 +88,11 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
   // Inputting changes
   const handleBioChange = (e: any) => {
     const { value } = e.target;
-    setBioTooLong(value.length > 160);
     setBio(value);
     setTextChanged(true);
   };
   const handleDisplayNameChange = (e: any) => {
     const { value } = e.target;
-    setDisplayNameEmpty(value.length === 0);
-    setDisplayNameTooLong(value.length > 25);
     setDisplayName(value);
     setTextChanged(true);
   };
@@ -104,21 +104,6 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
     // Remove whitespace from start and end
     setBio(bio.trim());
     setDisplayName(displayName.trim());
-
-    // Check lengths
-    if (displayName.trim().length <= 0) {
-      setDisplayNameEmpty(true);
-      setDisplayNameTooLong(false);
-      return;
-    } else if (displayName.trim().length > 25) {
-      setDisplayNameEmpty(false);
-      setDisplayNameTooLong(true);
-      return;
-    }
-    if (bio.trim().length > 160) {
-      setBioTooLong(true);
-      return;
-    }
 
     getSession().then(async ({ headers }) => {
       // Set loading
@@ -215,7 +200,7 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
                 onChange={handleDisplayNameChange}
               />
               {/* Display name empty */}
-              {displayNameEmpty ? (
+              {displayName.trim().length === 0 ? (
                 <div className="form-error-message">
                   Display name cannot be empty
                 </div>
@@ -223,7 +208,7 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
                 ""
               )}
               {/* Display name too long */}
-              {displayNameTooLong ? (
+              {displayName.trim().length > maxDisplayNameLength ? (
                 <div className="form-error-message">
                   Display name is too long
                 </div>
@@ -239,7 +224,7 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
                 onChange={handleBioChange}
               />
               {/* Bio too long */}
-              {bioTooLong ? (
+              {bio.trim().length > maxBioLength ? (
                 <div className="form-error-message">Bio too long</div>
               ) : (
                 ""
