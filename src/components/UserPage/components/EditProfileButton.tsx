@@ -178,6 +178,49 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
 
   const onSubmitBanner = async (e: any) => {
     e.preventDefault();
+
+    // Convert banner to base64
+    const base64File = await toBase64(banner);
+    if (typeof base64File !== "string") return;
+
+    getSession().then(async ({ headers }) => {
+      // Set loading
+      setIsLoading(true);
+
+      // Set content type (necessary)
+      headers["Content-Type"] = "application/json";
+
+      // Request options
+      var requestOptions = {
+        headers,
+        method: "PUT",
+        body: JSON.stringify({
+          image: base64File,
+          field: "banner",
+          type: banner.type,
+        }),
+      };
+
+      // Post to api
+      await fetch(`${API_URL}/users`, requestOptions)
+        .then((response) => response.text())
+        .then((result) => {
+          const resultJSON = JSON.parse(result);
+
+          // Success/failure handling
+          if (resultJSON.code === "uploadSuccess") {
+            // Refresh page
+            setChangesSubmitted(true);
+            setBanner(undefined);
+          } else {
+            // Error message
+            setErrorOccurred(true);
+          }
+        });
+
+      // Set not loading
+      setIsLoading(false);
+    });
   };
   //#endregion
 
