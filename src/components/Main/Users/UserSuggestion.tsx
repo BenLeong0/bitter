@@ -15,7 +15,11 @@ const UserSuggestion: React.FC<User> = (user) => {
     setSrc(`${process.env.PUBLIC_URL}/placeholder48.png`);
   };
   useEffect(() => {
-    setSrc("https://bitter-imgs.s3.eu-west-2.amazonaws.com/pfp-" + user.handle);
+    setSrc(
+      "https://bitter-imgs.s3.eu-west-2.amazonaws.com/pfp-" +
+        user.handle +
+        `?${Date.now()}`
+    );
   }, [user.handle]);
 
   return (

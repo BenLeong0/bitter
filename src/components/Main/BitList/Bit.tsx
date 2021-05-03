@@ -118,7 +118,9 @@ const Bit: React.FC<BitProps> = ({ classes = "", ...bitInfo }) => {
   };
   useEffect(() => {
     setSrc(
-      "https://bitter-imgs.s3.eu-west-2.amazonaws.com/pfp-" + bitInfo.handle
+      "https://bitter-imgs.s3.eu-west-2.amazonaws.com/pfp-" +
+        bitInfo.handle +
+        `?${Date.now()}`
     );
   }, [bitInfo.handle]);
 

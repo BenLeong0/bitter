@@ -14,7 +14,11 @@ const PostBit: React.FC<{}> = () => {
     setSrc(`${process.env.PUBLIC_URL}/placeholder48.png`);
   };
   useEffect(() => {
-    setSrc("https://bitter-imgs.s3.eu-west-2.amazonaws.com/pfp-" + myHandle);
+    setSrc(
+      "https://bitter-imgs.s3.eu-west-2.amazonaws.com/pfp-" +
+        myHandle +
+        `?${Date.now()}`
+    );
   }, [myHandle]);
 
   return (

@@ -8,7 +8,11 @@ const UserBanner: React.FC<{ handle: string }> = ({ handle }) => {
   };
 
   useEffect(() => {
-    setSrc("https://bitter-imgs.s3.eu-west-2.amazonaws.com/banner-" + handle);
+    setSrc(
+      "https://bitter-imgs.s3.eu-west-2.amazonaws.com/banner-" +
+        handle +
+        `?${Date.now()}`
+    );
   }, [handle]);
 
   return (

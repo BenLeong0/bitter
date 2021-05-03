@@ -8,7 +8,9 @@ const UserPhoto: React.FC<{ handle: string }> = ({ handle }) => {
   };
 
   useEffect(() => {
-    setSrc("https://bitter-imgs.s3.eu-west-2.amazonaws.com/pfp-" + handle);
+    setSrc(
+      `https://bitter-imgs.s3.eu-west-2.amazonaws.com/pfp-${handle}?${Date.now()}`
+    );
   }, [handle]);
 
   return (
