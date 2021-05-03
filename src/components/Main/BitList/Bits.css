@@ -30,6 +30,9 @@
 
 .bit-pfp img {
   border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  background-color: white;
 }
 
 .bit-content {
