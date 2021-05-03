@@ -4,8 +4,6 @@ const UserPhoto: React.FC<{ handle: string }> = ({ handle }) => {
   const [src, setSrc] = useState<string>("");
 
   const onError = () => {
-    console.log("errorr");
-
     setSrc(`${process.env.PUBLIC_URL}/placeholderpfp.png`);
   };
 
