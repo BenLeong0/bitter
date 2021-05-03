@@ -21,6 +21,7 @@
 .user-photo img {
   border-radius: 50%;
   border: white solid 4px;
+  background-color: white;
 }
 
 .user-branding {
