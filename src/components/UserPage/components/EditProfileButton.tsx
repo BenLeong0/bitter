@@ -45,8 +45,6 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
 
   // Record if changes made
   const [textChanged, setTextChanged] = useState<boolean>(false);
-  const [pfpChanged, setPfpChanged] = useState<boolean>(false);
-  const [bannerChanged, setBannerChanged] = useState<boolean>(false);
   const [changesSubmitted, setChangesSubmitted] = useState<boolean>(false);
 
   const textButtonActive: boolean =
@@ -66,8 +64,6 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
       setBio(props.bio);
     }
     setTextChanged(false);
-    setPfpChanged(false);
-    setBannerChanged(false);
     setPfp(undefined);
     setBanner(undefined);
   };
@@ -280,7 +276,7 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
               )}
               {/* Post error occurred */}
               {errorOccurred ? (
-                <div className="form-error-message">Bio too long</div>
+                <div className="form-error-message">An error occurred</div>
               ) : (
                 ""
               )}
