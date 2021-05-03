@@ -342,6 +342,12 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
             >
               Submit change
             </button>
+            {/* Post error occurred */}
+            {pfpErrorOccurred ? (
+              <div className="form-error-message">An error occurred</div>
+            ) : (
+              ""
+            )}
 
             <hr />
 
@@ -362,6 +368,12 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
             >
               Submit change
             </button>
+            {/* Post error occurred */}
+            {bannerErrorOccurred ? (
+              <div className="form-error-message">An error occurred</div>
+            ) : (
+              ""
+            )}
 
             <hr />
 
