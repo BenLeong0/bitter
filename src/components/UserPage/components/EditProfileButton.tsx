@@ -43,6 +43,8 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
   const [bannerErrorOccurred, setBannerErrorOccurred] = useState<boolean>(
     false
   );
+  const [pfpTooBig, setPfpTooBig] = useState<boolean>(false);
+  const [bannerTooBig, setBannerTooBig] = useState<boolean>(false);
 
   // Images
   const [pfp, setPfp] = useState<any>(undefined);
@@ -71,6 +73,8 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
     setTextChanged(false);
     setPfp(undefined);
     setBanner(undefined);
+    setPfpTooBig(false);
+    setBannerTooBig(false);
   };
 
   // Update input fields on page load
@@ -148,6 +152,7 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
   const handlePfpChange = async (e: any) => {
     const file: any = e.target.files[0];
     setPfp(file);
+    setPfpTooBig(file.size > 20971520);
   };
 
   const onSubmitPfp = async (e: any) => {
@@ -202,6 +207,7 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
   const handleBannerChange = async (e: any) => {
     const file: any = e.target.files[0];
     setBanner(file);
+    setBannerTooBig(file.size > 20971520);
   };
 
   const onSubmitBanner = async (e: any) => {
@@ -336,11 +342,17 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
             <button
               className="button-primary edit-profile-button"
               style={{ opacity: pfp === undefined ? 0.5 : 1 }}
-              disabled={pfp === undefined}
+              disabled={pfp === undefined || pfpTooBig}
               onClick={onSubmitPfp}
             >
               Upload new profile pic
             </button>
+            {/* File too big */}
+            {pfpTooBig ? (
+              <div className="form-error-message">File too big (max 20MB)</div>
+            ) : (
+              ""
+            )}
             {/* Post error occurred */}
             {pfpErrorOccurred ? (
               <div className="form-error-message">An error occurred</div>
@@ -362,11 +374,17 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
             <button
               className="button-primary edit-profile-button"
               style={{ opacity: banner === undefined ? 0.5 : 1 }}
-              disabled={banner === undefined}
+              disabled={banner === undefined || bannerTooBig}
               onClick={onSubmitBanner}
             >
               Upload new banner
             </button>
+            {/* File too big */}
+            {bannerTooBig ? (
+              <div className="form-error-message">File too big (max 20MB)</div>
+            ) : (
+              ""
+            )}
             {/* Post error occurred */}
             {bannerErrorOccurred ? (
               <div className="form-error-message">An error occurred</div>
