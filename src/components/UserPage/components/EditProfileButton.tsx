@@ -8,7 +8,7 @@ import { AccountContext } from "../../Account";
 
 const StyledPopup = Styled(Popup)`
   &-content {
-    width: 300px;
+    width: 350px;
     padding: 40px;
     text-align: center;
   }
