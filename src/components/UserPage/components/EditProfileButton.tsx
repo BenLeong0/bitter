@@ -11,7 +11,6 @@ const StyledPopup = Styled(Popup)`
     width: 300px;
     padding: 40px;
     text-align: center;
-    transform: translateY(-160px)
   }
 `;
 
@@ -323,7 +322,7 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
               </button>
             </form>
 
-            <hr />
+            <hr className="edit-profile-hr" />
 
             <div className="edit-profile-label">Change profile picture</div>
             <input
@@ -349,7 +348,7 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
               ""
             )}
 
-            <hr />
+            <hr className="edit-profile-hr" />
 
             <div className="edit-profile-label">Change banner</div>
             <input
