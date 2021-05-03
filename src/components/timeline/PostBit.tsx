@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AccountContext } from "../Account";
 import PostBoxForm from "./PostBoxForm";
 import "./Postbox.css";
@@ -6,17 +6,27 @@ import { Link } from "react-router-dom";
 import ContextProps from "../../Types/ContextProps";
 
 const PostBit: React.FC<{}> = () => {
-  const { isLoggedIn }: ContextProps = useContext(AccountContext);
+  const { isLoggedIn, myHandle }: ContextProps = useContext(AccountContext);
+
+  // Profile pic src
+  const [src, setSrc] = useState<string>("");
+  const onError = () => {
+    setSrc(`${process.env.PUBLIC_URL}/placeholder48.png`);
+  };
+  useEffect(() => {
+    setSrc(
+      "https://bitter-imgs.s3.eu-west-2.amazonaws.com/pfp-" +
+        myHandle +
+        `?${Date.now()}`
+    );
+  }, [myHandle]);
 
   return (
     <div className="postbox">
       {isLoggedIn ? (
         <>
           <div className="postbox-pfp">
-            <img
-              src={`${process.env.PUBLIC_URL}/placeholder48.png`}
-              alt="pfp"
-            />
+            <img src={src} onError={onError} alt="pfp" />
           </div>
           <PostBoxForm />
         </>

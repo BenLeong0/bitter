@@ -2,6 +2,14 @@
 
 .user-banner {
   float: left;
+  border-bottom: grey solid 1px;
+}
+
+.user-banner img {
+  background-color: white;
+  object-fit: fill;
+  height: 150px;
+  width: 600px;
 }
 
 .user-pfp-follow {
@@ -21,6 +29,10 @@
 .user-photo img {
   border-radius: 50%;
   border: white solid 4px;
+  background-color: white;
+  object-fit: fill;
+  height: 140px;
+  width: 140px;
 }
 
 .user-branding {
@@ -112,7 +124,7 @@
 .edit-profile-title {
   margin-bottom: 25px;
   font-weight: bold;
-  font-size: 24px;
+  font-size: 28px;
 }
 
 .edit-profile-input {
@@ -120,7 +132,13 @@
 }
 
 .edit-profile-label {
-  margin: 20px 0 10px;
+  margin: 20px 0;
+  font-size: large;
+  font-weight: bold;
+}
+
+.edit-profile-hr {
+  margin: 20px 0 0;
 }
 
 .edit-profile-input {
@@ -131,4 +149,9 @@
 
 .edit-profile-button {
   margin-top: 20px;
+}
+
+.image-rec-size {
+  font-size: 12px;
+  margin-top: 4px;
 }

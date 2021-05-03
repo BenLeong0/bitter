@@ -8,10 +8,9 @@ import { AccountContext } from "../../Account";
 
 const StyledPopup = Styled(Popup)`
   &-content {
-    width: 300px;
+    width: 350px;
     padding: 40px;
     text-align: center;
-    transform: translateY(-160px)
   }
 `;
 
@@ -23,86 +22,95 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
   // Whether modal is open or not
   const [open, setOpen] = useState<boolean>(false);
   const closeModal = () => {
-    setInputs();
+    if (changesSubmitted) history.go(0);
     setOpen(false);
+    resetInputs();
   };
   const history = useHistory();
 
+  const maxDisplayNameLength = 25;
+  const maxBioLength = 160;
+
+  //#region states
   // Input field states
   const [displayName, setDisplayName] = useState<string>("");
   const [bio, setBio] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   // Error messages
-  const [displayNameEmpty, setDisplayNameEmpty] = useState<boolean>(false);
-  const [displayNameTooLong, setDisplayNameTooLong] = useState<boolean>(false);
-  const [bioTooLong, setBioTooLong] = useState<boolean>(false);
-  const [errorOccurred, setErrorOccurred] = useState<boolean>(false);
+  const [textErrorOccurred, setTextErrorOccurred] = useState<boolean>(false);
+  const [pfpErrorOccurred, setPfpErrorOccurred] = useState<boolean>(false);
+  const [bannerErrorOccurred, setBannerErrorOccurred] = useState<boolean>(
+    false
+  );
+  const [pfpTooBig, setPfpTooBig] = useState<boolean>(false);
+  const [bannerTooBig, setBannerTooBig] = useState<boolean>(false);
+
+  // Images
+  const [pfp, setPfp] = useState<any>(undefined);
+  const [banner, setBanner] = useState<any>(undefined);
+
+  // Record if changes made
+  const [textChanged, setTextChanged] = useState<boolean>(false);
+  const [changesSubmitted, setChangesSubmitted] = useState<boolean>(false);
+
+  const textButtonActive: boolean =
+    textChanged &&
+    displayName.trim().length > 0 &&
+    displayName.trim().length <= maxDisplayNameLength &&
+    bio.trim().length <= maxBioLength;
+  //#endregion
 
   const { getSession, API_URL }: ContextProps = useContext(AccountContext);
 
-  const setInputs = () => {
+  const resetInputs = () => {
     if (props.display_name) {
       setDisplayName(props.display_name);
     }
     if (props.bio) {
       setBio(props.bio);
     }
+    setTextChanged(false);
+    setPfp(undefined);
+    setBanner(undefined);
+    setPfpTooBig(false);
+    setBannerTooBig(false);
   };
 
   // Update input fields on page load
   useEffect(() => {
-    setInputs();
+    resetInputs();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props]);
 
+  const toBase64 = (file: any) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+
+  //#region text fields
   // Inputting changes
   const handleBioChange = (e: any) => {
     const { value } = e.target;
-    if (value.length > 160) {
-      setBioTooLong(true);
-    } else {
-      setBioTooLong(false);
-    }
     setBio(value);
+    setTextChanged(true);
   };
   const handleDisplayNameChange = (e: any) => {
     const { value } = e.target;
-    if (value.length === 0) {
-      setDisplayNameEmpty(true);
-      setDisplayNameTooLong(false);
-    } else if (value.length > 25) {
-      setDisplayNameEmpty(false);
-      setDisplayNameTooLong(true);
-    } else {
-      setDisplayNameEmpty(false);
-      setDisplayNameTooLong(false);
-    }
     setDisplayName(value);
+    setTextChanged(true);
   };
 
-  // Submit changes
-  const onSubmit = async (e: any) => {
+  // Submit text field changes
+  const onSubmitText = async (e: any) => {
     e.preventDefault();
 
     // Remove whitespace from start and end
     setBio(bio.trim());
     setDisplayName(displayName.trim());
-
-    // Check lengths
-    if (displayName.trim().length <= 0) {
-      setDisplayNameEmpty(true);
-      setDisplayNameTooLong(false);
-      return;
-    } else if (displayName.trim().length > 25) {
-      setDisplayNameEmpty(false);
-      setDisplayNameTooLong(true);
-      return;
-    }
-    if (bio.trim().length > 160) {
-      setBioTooLong(true);
-      return;
-    }
 
     getSession().then(async ({ headers }) => {
       // Set loading
@@ -127,21 +135,128 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
           // Success/failure handling
           if (resultJSON.code === "updateSuccess") {
             // Refresh page
-            history.go(0);
+            setChangesSubmitted(true);
           } else {
             // Error message
-            setErrorOccurred(true);
-
-            // Set not loading
-            setIsLoading(false);
+            setTextErrorOccurred(true);
           }
         });
 
-      // Refresh page if successful
-      // Else show generic error message
-      closeModal();
+      // Set not loading
+      setIsLoading(false);
     });
   };
+  //#endregion
+
+  //#region pfp
+  const handlePfpChange = async (e: any) => {
+    const file: any = e.target.files[0];
+    setPfp(file);
+    setPfpTooBig(file.size > 20971520);
+  };
+
+  const onSubmitPfp = async (e: any) => {
+    e.preventDefault();
+
+    // Convert pfp to base64
+    const base64File = await toBase64(pfp);
+    if (typeof base64File !== "string") return;
+
+    getSession().then(async ({ headers }) => {
+      // Set loading
+      setIsLoading(true);
+
+      // Set content type (necessary)
+      headers["Content-Type"] = "application/json";
+
+      // Request options
+      var requestOptions = {
+        headers,
+        method: "PUT",
+        body: JSON.stringify({
+          image: base64File,
+          field: "pfp",
+          type: pfp.type,
+        }),
+      };
+
+      // Post to api
+      await fetch(`${API_URL}/users`, requestOptions)
+        .then((response) => response.text())
+        .then((result) => {
+          const resultJSON = JSON.parse(result);
+
+          // Success/failure handling
+          if (resultJSON.code === "uploadSuccess") {
+            // Refresh page
+            setChangesSubmitted(true);
+            setPfp(undefined);
+          } else {
+            // Error message
+            setPfpErrorOccurred(true);
+          }
+        });
+
+      // Set not loading
+      setIsLoading(false);
+    });
+  };
+  //#endregion
+
+  //#region banner
+  const handleBannerChange = async (e: any) => {
+    const file: any = e.target.files[0];
+    setBanner(file);
+    setBannerTooBig(file.size > 20971520);
+  };
+
+  const onSubmitBanner = async (e: any) => {
+    e.preventDefault();
+
+    // Convert banner to base64
+    const base64File = await toBase64(banner);
+    if (typeof base64File !== "string") return;
+
+    getSession().then(async ({ headers }) => {
+      // Set loading
+      setIsLoading(true);
+
+      // Set content type (necessary)
+      headers["Content-Type"] = "application/json";
+
+      // Request options
+      var requestOptions = {
+        headers,
+        method: "PUT",
+        body: JSON.stringify({
+          image: base64File,
+          field: "banner",
+          type: banner.type,
+        }),
+      };
+
+      // Post to api
+      await fetch(`${API_URL}/users`, requestOptions)
+        .then((response) => response.text())
+        .then((result) => {
+          const resultJSON = JSON.parse(result);
+
+          // Success/failure handling
+          if (resultJSON.code === "uploadSuccess") {
+            // Refresh page
+            setChangesSubmitted(true);
+            setBanner(undefined);
+          } else {
+            // Error message
+            setBannerErrorOccurred(true);
+          }
+        });
+
+      // Set not loading
+      setIsLoading(false);
+    });
+  };
+  //#endregion
 
   return (
     <>
@@ -159,7 +274,7 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
         ) : (
           <>
             <div className="edit-profile-title">Edit Profile</div>
-            <form onSubmit={onSubmit}>
+            <form onSubmit={onSubmitText}>
               <div className="edit-profile-label">Change display name</div>
               <TextareaAutosize
                 className="edit-profile-input"
@@ -168,7 +283,7 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
                 onChange={handleDisplayNameChange}
               />
               {/* Display name empty */}
-              {displayNameEmpty ? (
+              {displayName.trim().length === 0 ? (
                 <div className="form-error-message">
                   Display name cannot be empty
                 </div>
@@ -176,7 +291,7 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
                 ""
               )}
               {/* Display name too long */}
-              {displayNameTooLong ? (
+              {displayName.trim().length > maxDisplayNameLength ? (
                 <div className="form-error-message">
                   Display name is too long
                 </div>
@@ -192,29 +307,107 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
                 onChange={handleBioChange}
               />
               {/* Bio too long */}
-              {bioTooLong ? (
+              {bio.trim().length > maxBioLength ? (
                 <div className="form-error-message">Bio too long</div>
               ) : (
                 ""
               )}
               {/* Post error occurred */}
-              {errorOccurred ? (
-                <div className="form-error-message">Bio too long</div>
+              {textErrorOccurred ? (
+                <div className="form-error-message">An error occurred</div>
               ) : (
                 ""
               )}
-
               <button
                 type="submit"
                 className="button-primary edit-profile-button"
+                style={{
+                  opacity: textButtonActive ? 1 : 0.5,
+                  cursor: !textButtonActive ? "initial" : "pointer",
+                }}
+                disabled={!textButtonActive}
               >
-                Save changes
-              </button>
-              <br />
-              <button onClick={closeModal} style={{ marginTop: "10px" }}>
-                Cancel
+                Submit changes
               </button>
             </form>
+
+            <hr className="edit-profile-hr" />
+
+            <div className="edit-profile-label">Change profile picture</div>
+            <input
+              type="file"
+              name="upload-pfp"
+              accept=".jpeg, .png, .jpg"
+              id="upload-pfp"
+              onChange={handlePfpChange}
+            />
+            <div className="image-rec-size">(Recommended size: 140x140)</div>
+            <button
+              className="button-primary edit-profile-button"
+              style={{
+                opacity: pfp === undefined || pfpTooBig ? 0.5 : 1,
+                cursor:
+                  pfp === undefined || bannerTooBig ? "initial" : "pointer",
+              }}
+              disabled={pfp === undefined || pfpTooBig}
+              onClick={onSubmitPfp}
+            >
+              Upload new profile pic
+            </button>
+            {/* File too big */}
+            {pfpTooBig ? (
+              <div className="form-error-message">File too big (max 20MB)</div>
+            ) : (
+              ""
+            )}
+            {/* Post error occurred */}
+            {pfpErrorOccurred ? (
+              <div className="form-error-message">An error occurred</div>
+            ) : (
+              ""
+            )}
+
+            <hr className="edit-profile-hr" />
+
+            <div className="edit-profile-label">Change banner</div>
+            <input
+              type="file"
+              name="upload-banner"
+              accept=".jpeg, .png, .jpg"
+              id="upload-banner"
+              onChange={handleBannerChange}
+            />
+            <div className="image-rec-size">(Recommended size: 600x150)</div>
+            <button
+              className="button-primary edit-profile-button"
+              style={{
+                opacity: banner === undefined || bannerTooBig ? 0.5 : 1,
+                cursor:
+                  banner === undefined || bannerTooBig ? "initial" : "pointer",
+              }}
+              disabled={banner === undefined || bannerTooBig}
+              onClick={onSubmitBanner}
+            >
+              Upload new banner
+            </button>
+            {/* File too big */}
+            {bannerTooBig ? (
+              <div className="form-error-message">File too big (max 20MB)</div>
+            ) : (
+              ""
+            )}
+            {/* Post error occurred */}
+            {bannerErrorOccurred ? (
+              <div className="form-error-message">An error occurred</div>
+            ) : (
+              ""
+            )}
+
+            <hr className="edit-profile-hr" />
+
+            <button onClick={closeModal} style={{ marginTop: "20px" }}>
+              Close window
+            </button>
           </>
         )}
       </StyledPopup>

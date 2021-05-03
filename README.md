@@ -96,7 +96,7 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
   - [x] Reply text box / popup
   - [x] "Reply to" note
   - [x] Database links
-  - [ ] Bit pages
+  - [x] Bit pages
     - [x] List thread above
     - [x] List replies below
       - [x] Prioritise prethread participants
@@ -109,9 +109,9 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
 - [x] Case insensitive tagging
 - [x] Reply / rebit notes side by side instead of stacked
 - [x] Regex field verifications (username etc)
-- [ ] Check interaction icons when moving between posts
 - [ ] Viewable list of rebitters/likers/dislikers for posts
 - [ ] Hashtags
+  - [ ] NoSQL database?
 
 ### Timeline
 
@@ -122,7 +122,7 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
   - [x] "Login / Register" message if not logged in
 - [x] Display name + handle link to user page
 - [x] User info / Login button in left column
-- [ ] Profile pic
+- [x] Profile pic
 
 ### Posts
 
@@ -136,16 +136,16 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
   - [x] Buttons
   - [x] Counters
 - [x] Tagging
-- [ ] Profile pics
-- [ ] Replies
+- [x] Profile pics
+- [x] Replies
 
 ### User pages
 
-- [ ] Individual pages for each user
+- [x] Individual pages for each user
   - [x] Display name and banner
-  - [ ] Profile pic
-    - [ ] Show on all tweets
-  - [ ] Banner
+  - [x] Profile pic
+    - [x] Show on all tweets
+  - [x] Banner
   - [x] Bio
   - [x] Join date
   - [x] Follow button
@@ -154,8 +154,8 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
     - [x] Button replaces follow button
     - [x] Change display name
     - [x] Change bio
-    - [ ] Change pic
-    - [ ] Change banner
+    - [x] Change pic
+    - [x] Change banner
   - [x] Tabs
     - [x] Main (no replies)
     - [x] Posts and replies

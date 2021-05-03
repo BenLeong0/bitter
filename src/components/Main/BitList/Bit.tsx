@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import BitButtonBar from "./BitButtonBar";
 import { Link } from "react-router-dom";
 import OutsideAlerter from "./OutsideAlerter";
@@ -111,7 +111,18 @@ const Bit: React.FC<BitProps> = ({ classes = "", ...bitInfo }) => {
     AccountContext
   );
 
-  console.log(bitInfo);
+  // Profile pic src
+  const [src, setSrc] = useState<string>("");
+  const onError = () => {
+    setSrc(`${process.env.PUBLIC_URL}/placeholder48.png`);
+  };
+  useEffect(() => {
+    setSrc(
+      "https://bitter-imgs.s3.eu-west-2.amazonaws.com/pfp-" +
+        bitInfo.handle +
+        `?${Date.now()}`
+    );
+  }, [bitInfo.handle]);
 
   // Split for tags
   const splitContent = bitInfo.content.split("@");
@@ -219,10 +230,7 @@ const Bit: React.FC<BitProps> = ({ classes = "", ...bitInfo }) => {
       {/* Poster profile picture */}
       <Link to={`/u/${bitInfo.handle}`}>
         <div className="bit-pfp">
-          <img
-            src={`${process.env.PUBLIC_URL}/placeholder48.png`}
-            alt="profile pic"
-          />
+          <img src={src} onError={onError} alt="profile pic" />
         </div>
       </Link>
 
