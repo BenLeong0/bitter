@@ -340,7 +340,7 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
               disabled={pfp === undefined}
               onClick={onSubmitPfp}
             >
-              Submit change
+              Upload new profile pic
             </button>
             {/* Post error occurred */}
             {pfpErrorOccurred ? (
@@ -366,7 +366,7 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
               disabled={banner === undefined}
               onClick={onSubmitBanner}
             >
-              Submit change
+              Upload new banner
             </button>
             {/* Post error occurred */}
             {bannerErrorOccurred ? (
