@@ -39,7 +39,13 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   // Error messages
-  const [errorOccurred, setErrorOccurred] = useState<boolean>(false);
+  const [textErrorOccurred, setTextErrorOccurred] = useState<boolean>(false);
+  const [pfpErrorOccurred, setPfpErrorOccurred] = useState<boolean>(false);
+  const [bannerErrorOccurred, setBannerErrorOccurred] = useState<boolean>(
+    false
+  );
+
+  // Images
   const [pfp, setPfp] = useState<any>(undefined);
   const [banner, setBanner] = useState<any>(undefined);
 
@@ -129,7 +135,7 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
             setChangesSubmitted(true);
           } else {
             // Error message
-            setErrorOccurred(true);
+            setTextErrorOccurred(true);
           }
         });
 
@@ -210,7 +216,7 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
             setBanner(undefined);
           } else {
             // Error message
-            setErrorOccurred(true);
+            setBannerErrorOccurred(true);
           }
         });
 
@@ -275,7 +281,7 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
                 ""
               )}
               {/* Post error occurred */}
-              {errorOccurred ? (
+              {textErrorOccurred ? (
                 <div className="form-error-message">An error occurred</div>
               ) : (
                 ""
