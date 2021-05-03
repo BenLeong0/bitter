@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import SuggestedUserFollowButton from "./components/SuggestedUserFollowButton";
 
@@ -9,16 +9,22 @@ interface User {
 }
 
 const UserSuggestion: React.FC<User> = (user) => {
+  // Profile pic src
+  const [src, setSrc] = useState<string>("");
+  const onError = () => {
+    setSrc(`${process.env.PUBLIC_URL}/placeholder48.png`);
+  };
+  useEffect(() => {
+    setSrc("https://bitter-imgs.s3.eu-west-2.amazonaws.com/pfp-" + user.handle);
+  }, [user.handle]);
+
   return (
     <>
       <hr className="solid" />
       <div className="user-suggestion">
         <Link to={"/u/" + user.handle}>
           <div className="user-suggestion-pfp">
-            <img
-              src={`${process.env.PUBLIC_URL}/placeholder48.png`}
-              alt="profile pic"
-            />
+            <img src={src} onError={onError} alt="profile pic" />
           </div>
           <div className="user-suggestion-info">
             <div className="user-suggestion-displayname">
