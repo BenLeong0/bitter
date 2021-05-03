@@ -2,6 +2,14 @@
 
 .user-banner {
   float: left;
+  border-bottom: grey solid 1px;
+}
+
+.user-banner img {
+  background-color: white;
+  object-fit: fill;
+  height: 150px;
+  width: 600px;
 }
 
 .user-pfp-follow {
@@ -22,6 +30,9 @@
   border-radius: 50%;
   border: white solid 4px;
   background-color: white;
+  object-fit: fill;
+  height: 140px;
+  width: 140px;
 }
 
 .user-branding {
