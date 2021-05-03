@@ -374,9 +374,9 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
               ""
             )}
 
-            <hr />
+            <hr className="edit-profile-hr" />
 
-            <button onClick={closeModal} style={{ marginTop: "10px" }}>
+            <button onClick={closeModal} style={{ marginTop: "20px" }}>
               Close window
             </button>
           </>
