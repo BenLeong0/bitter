@@ -11,7 +11,7 @@ import ContextProps from "../Types/ContextProps";
 import ReplyThread from "../components/BitPage/ReplyThread";
 
 const BitPage: React.FC<{}> = () => {
-  const [post, setPost] = useState<BitInfo>({
+  const emptyPost: BitInfo = {
     post_id: "",
     handle: "",
     post_time: "",
@@ -20,7 +20,8 @@ const BitPage: React.FC<{}> = () => {
     likes: 0,
     replies: 0,
     reposts: 0,
-  });
+  };
+  const [post, setPost] = useState<BitInfo>(emptyPost);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [post_id, setPostId] = useState<string>(
     useLocation().pathname.slice(3)
@@ -35,12 +36,17 @@ const BitPage: React.FC<{}> = () => {
     setIsLoading(true);
 
     // Returns {post_id: '', handle: ''} if post not found
-    const fetchInfo = await fetch(
+    const data = await fetch(
       `${API_URL}/bits?post_id=${post_id}&handle=${myHandle}`
     );
-    const data: BitInfo = await fetchInfo.json();
+    const resp: any = await data.json();
+    if (resp.code === "getSuccess") {
+      const post: BitInfo = JSON.parse(resp.post);
+      setPost(post);
+    } else {
+      setPost(emptyPost);
+    }
 
-    setPost(data);
     setIsLoading(false);
     var elmnt = document.getElementsByClassName("thread-main-bit")[0];
     if (elmnt) elmnt.scrollIntoView();
