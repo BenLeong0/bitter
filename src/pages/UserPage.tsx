@@ -50,11 +50,17 @@ const UserPage: React.FC<{}> = () => {
       `${API_URL}/users?handle=${handle}&myHandle=${myHandle}`,
       { method: "GET" }
     );
-    const data: User = await fetchUser.json();
-    setUser(data);
-    setCurrHandle(data.handle);
-    if (data.isFollowing) {
-      setIsFollowing(data.isFollowing);
+    const resp: any = await fetchUser.json();
+    if (resp.code === "getSuccess") {
+      const user: User = JSON.parse(resp.user);
+      setUser(user);
+      setCurrHandle(user.handle);
+      if (user.isFollowing) {
+        setIsFollowing(user.isFollowing);
+      }
+    } else {
+      setUser({ handle: "" });
+      setCurrHandle("");
     }
     setIsLoading(false);
   };
