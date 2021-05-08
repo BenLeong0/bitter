@@ -14,9 +14,9 @@ The stack will consist of:
 
 I have previous experience with Javascript, React, and Python, but this will be my first time using TypeScript and Amazon Web Services, and was my first time using Django. Additionally, this will be my first time implementing SQL knowledge that I have developed but not used before.
 
-## CURRENT OVERHAUL
+## OVERHAUL
 
-Current to-do list as I move the entire project to AWS, and implement TypeScript.
+To-do list as I move the entire backend to AWS, and implement TypeScript.
 
 - [x] Convert files to TS
   - [x] Change file extensions to `.tsx` and deal with errors
@@ -123,6 +123,7 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
 - [x] Display name + handle link to user page
 - [x] User info / Login button in left column
 - [x] Profile pic
+- [x] All posts timeline (not just following)
 
 ### Posts
 
@@ -145,11 +146,12 @@ Current to-do list as I move the entire project to AWS, and implement TypeScript
   - [x] Display name and banner
   - [x] Profile pic
     - [x] Show on all tweets
+    - [x] Darken on hover
   - [x] Banner
   - [x] Bio
   - [x] Join date
   - [x] Follow button
-  - [~] Edit profile
+  - [x] Edit profile
     - [x] Single API endpoint for all
     - [x] Button replaces follow button
     - [x] Change display name
