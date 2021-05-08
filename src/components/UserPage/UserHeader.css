@@ -35,6 +35,10 @@
   width: 140px;
 }
 
+.user-photo img:hover {
+  filter: brightness(0.8);
+}
+
 .user-branding {
   text-align: center;
   width: 264px;

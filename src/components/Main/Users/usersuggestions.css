@@ -36,6 +36,10 @@
   object-fit: fill;
 }
 
+.user-suggestion-pfp img:hover {
+  filter: brightness(0.8);
+}
+
 .user-suggestion div {
   float: left;
 }

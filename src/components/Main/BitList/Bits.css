@@ -36,6 +36,10 @@
   background-color: white;
 }
 
+.bit-pfp img:hover {
+  filter: brightness(0.8);
+}
+
 .bit-content {
   float: left;
   text-align: left;
