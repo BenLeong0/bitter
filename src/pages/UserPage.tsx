@@ -55,9 +55,7 @@ const UserPage: React.FC<{}> = () => {
       const user: User = JSON.parse(resp.user);
       setUser(user);
       setCurrHandle(user.handle);
-      if (user.isFollowing) {
-        setIsFollowing(user.isFollowing);
-      }
+      if (user.isFollowing) setIsFollowing(user.isFollowing);
     } else {
       setUser({ handle: "" });
       setCurrHandle("");
