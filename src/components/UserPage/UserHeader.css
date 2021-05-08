@@ -24,11 +24,12 @@
 .user-photo {
   margin-top: -16%;
   margin-left: 20px;
+  border-radius: 50%;
+  border: white solid 4px;
 }
 
 .user-photo img {
   border-radius: 50%;
-  border: white solid 4px;
   background-color: white;
   object-fit: fill;
   height: 140px;
@@ -36,7 +37,7 @@
 }
 
 .user-photo img:hover {
-  filter: brightness(0.8);
+  filter: brightness(0.7);
 }
 
 .user-branding {
