@@ -12,7 +12,7 @@ const UserSuggestions: React.FC<{}> = () => {
   const [fetchError, setFetchError] = useState<boolean>(false);
   const { API_URL, myHandle }: ContextProps = useContext(AccountContext);
 
-  // Fetch 3 random users from the database
+  // Fetch 5 random users from the database
   const fetchSuggestions = async () => {
     setIsLoading(true);
 
