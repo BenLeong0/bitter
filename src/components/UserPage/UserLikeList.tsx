@@ -45,7 +45,6 @@ const UserBitList: React.FC<Props> = () => {
     );
     const resp: any = await data.json();
 
-    // Only update if final request ie ignore if another request was sent out after
     if (resp.code === "getSuccess") {
       const bits: Array<BitInfo> = JSON.parse(resp.posts);
       setLikes(bits);
