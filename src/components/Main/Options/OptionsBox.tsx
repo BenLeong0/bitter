@@ -4,6 +4,7 @@ import OptionLink from "./OptionLink";
 import UserBox from "./OptionsUserBox";
 
 import HomeLogo from "./home.svg";
+import AllPostsLogo from "./allposts.svg";
 import UserLogo from "./user.svg";
 import SettingsLogo from "./settings.svg";
 import LoginLogo from "./login.svg";
@@ -28,6 +29,7 @@ const OptionsBox: React.FC<{}> = () => {
   }
 
   const homeOption = new Option("Home", "/home", HomeLogo);
+  const allPostsOption = new Option("All posts", "/all", AllPostsLogo);
   const userOption = new Option("My Page", "/me", UserLogo);
   const settingsOption = new Option("Settings", "/settings", SettingsLogo);
   const loginOption = new Option("Login", "/login", LoginLogo);
@@ -39,6 +41,7 @@ const OptionsBox: React.FC<{}> = () => {
       {isLoggedIn ? (
         <>
           {/* My page/settings if logged in */}
+          <OptionLink {...allPostsOption} />
           <OptionLink {...userOption} />
           <OptionLink {...settingsOption} />
           <hr />
