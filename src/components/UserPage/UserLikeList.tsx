@@ -43,8 +43,15 @@ const UserBitList: React.FC<Props> = () => {
     const data = await fetch(
       `${API_URL}/users/posts/likes?handle=${currHandle}&myHandle=${myHandle}`
     );
-    const items: Array<BitInfo> = await data.json();
-    setLikes(items);
+    const resp: any = await data.json();
+
+    // Only update if final request ie ignore if another request was sent out after
+    if (resp.code === "getSuccess") {
+      const bits: Array<BitInfo> = JSON.parse(resp.posts);
+      setLikes(bits);
+    } else {
+      setLikes([]);
+    }
     setIsLoading(false);
   };
 
