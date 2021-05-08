@@ -229,3 +229,11 @@ button.button-primary.delete-post {
 .reply-bit .bit-content {
   margin-top: 10px;
 }
+
+.deleted-bit {
+  font-style: italic;
+  font-weight: bold;
+  color: grey;
+  margin: 10px 0 25px;
+  font-size: large;
+}
