@@ -9,6 +9,7 @@ import ContextProps from "../../../Types/ContextProps";
 const UserSuggestions: React.FC<{}> = () => {
   const [suggestedUsers, updateSuggestions] = useState<Array<User>>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [fetchError, setFetchError] = useState<boolean>(false);
   const { API_URL, myHandle }: ContextProps = useContext(AccountContext);
 
   // Fetch 3 random users from the database
@@ -16,8 +17,15 @@ const UserSuggestions: React.FC<{}> = () => {
     setIsLoading(true);
 
     const data = await fetch(`${API_URL}/users/suggested?myHandle=${myHandle}`);
-    const items: Array<User> = await data.json();
-    updateSuggestions(items);
+    const resp: any = await data.json();
+    if (resp.code === "getSuccess") {
+      setFetchError(false);
+      const users: Array<User> = JSON.parse(resp.users);
+      updateSuggestions(users);
+    } else {
+      updateSuggestions([]);
+      setFetchError(true);
+    }
     setIsLoading(false);
   };
 
@@ -38,6 +46,13 @@ const UserSuggestions: React.FC<{}> = () => {
           {suggestedUsers.map((user) => (
             <UserSuggestion {...user} key={user.handle} />
           ))}
+          {fetchError ? (
+            <div className="user-suggestions-error">
+              Oops, looks like an error occurred...
+            </div>
+          ) : (
+            <></>
+          )}
           <div className="user-suggestions-reroller">
             <button onClick={fetchSuggestions}> Reroll </button>
           </div>

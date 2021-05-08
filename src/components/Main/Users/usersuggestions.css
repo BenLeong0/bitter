@@ -14,6 +14,13 @@
   padding: 30px;
 }
 
+.user-suggestions-error {
+  margin: 25px 60px;
+  color: crimson;
+  font-weight: bold;
+  font-size: larger;
+}
+
 .user-suggestions-title {
   width: 280px;
   margin: auto;
