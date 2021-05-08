@@ -44,11 +44,16 @@ const TimelineBitList: React.FC<{}> = () => {
     console.log("Fetching bits...");
 
     const data = await fetch(`${API_URL}/bits/timeline?handle=${myHandle}`);
-    const items: Array<BitInfo> = await data.json();
+    const resp: any = await data.json();
 
     // Only update if final request ie ignore if another request was sent out after
     if (requestId === requestCounter) {
-      setBits(items);
+      if (resp.code === "getSuccess") {
+        const bits: Array<BitInfo> = JSON.parse(resp.posts);
+        setBits(bits);
+      } else {
+        setBits([]);
+      }
       setIsLoading(false);
     }
   };
