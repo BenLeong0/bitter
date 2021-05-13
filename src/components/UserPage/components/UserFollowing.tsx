@@ -11,9 +11,8 @@ const UserFollowing: React.FC<UserFollowingProps> = () => {
   const [users, setUsers] = useState<Array<User>>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const { API_URL, currHandle, myHandle }: ContextProps = useContext(
-    AccountContext
-  );
+  const { API_URL, currHandle, myHandle }: ContextProps =
+    useContext(AccountContext);
 
   // Fetch posts every time the user changes
   useEffect(() => {
@@ -26,8 +25,14 @@ const UserFollowing: React.FC<UserFollowingProps> = () => {
     const data = await fetch(
       `${API_URL}/users/following?handle=${currHandle}&myHandle=${myHandle}`
     );
-    const items: Array<User> = await data.json();
-    setUsers(items);
+    const resp: any = await data.json();
+
+    if (resp.code === "getSuccess") {
+      const userlist: Array<User> = JSON.parse(resp.users);
+      setUsers(userlist);
+    } else {
+      setUsers([]);
+    }
     setIsLoading(false);
   };
 
