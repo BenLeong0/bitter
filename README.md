@@ -52,9 +52,8 @@ To-do list as I move the entire backend to AWS, and implement TypeScript.
   - [x] Users
   - [x] Follows
   - [x] Test posts
-- [ ] Success + error message for API calls
-  - [ ] Lambda functions
-  - [ ] Message popup
+- [x] Success + error message for API calls
+  - [x] All `{code: str, message: str}`
 
 ## To-do list
 
@@ -139,6 +138,7 @@ To-do list as I move the entire backend to AWS, and implement TypeScript.
 - [x] Tagging
 - [x] Profile pics
 - [x] Replies
+  - [x] Delete replied-to posts
 
 ### User pages
 
