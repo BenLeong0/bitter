@@ -113,9 +113,11 @@ const Bit: React.FC<BitProps> = ({ classes = "", ...bitInfo }) => {
 
   // Profile pic src
   const [src, setSrc] = useState<string>("");
+
   const onError = () => {
-    setSrc(`${process.env.PUBLIC_URL}/placeholder48.png`);
+    setSrc(`https://bitter-imgs.s3.eu-west-2.amazonaws.com/pfpdefault`);
   };
+
   useEffect(() => {
     setSrc(
       "https://bitter-imgs.s3.eu-west-2.amazonaws.com/pfp-" +
