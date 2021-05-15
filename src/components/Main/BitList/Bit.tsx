@@ -108,9 +108,8 @@ function formatDate(date: Date) {
 }
 
 const Bit: React.FC<BitProps> = ({ classes = "", ...bitInfo }) => {
-  const { API_URL, getSession, isAdmin, myHandle }: ContextProps = useContext(
-    AccountContext
-  );
+  const { API_URL, getSession, isAdmin, myHandle }: ContextProps =
+    useContext(AccountContext);
 
   // Profile pic src
   const [src, setSrc] = useState<string>("");
@@ -121,7 +120,7 @@ const Bit: React.FC<BitProps> = ({ classes = "", ...bitInfo }) => {
     setSrc(
       "https://bitter-imgs.s3.eu-west-2.amazonaws.com/pfp-" +
         bitInfo.handle +
-        `?${Date.now()}`
+        `?${Date.now().toString().slice(0, -2)}`
     );
   }, [bitInfo.handle]);
 
