@@ -18,7 +18,7 @@ const UserSuggestion: React.FC<User> = (user) => {
     setSrc(
       "https://bitter-imgs.s3.eu-west-2.amazonaws.com/pfp-" +
         user.handle +
-        `?${Date.now().toString().slice(0, -2)}`
+        `?${Date.now().toString().slice(0, -4)}`
     );
   }, [user.handle]);
 
