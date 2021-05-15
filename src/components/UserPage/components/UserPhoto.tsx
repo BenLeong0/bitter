@@ -4,12 +4,13 @@ const UserPhoto: React.FC<{ handle: string }> = ({ handle }) => {
   const [src, setSrc] = useState<string>("");
 
   const onError = () => {
-    setSrc(`${process.env.PUBLIC_URL}/placeholderpfp.png`);
+    setSrc(`https://bitter-imgs.s3.eu-west-2.amazonaws.com/pfpdefault`);
   };
 
   useEffect(() => {
     setSrc(
-      `https://bitter-imgs.s3.eu-west-2.amazonaws.com/pfp-${handle}?${Date.now()}`
+      `https://bitter-imgs.s3.eu-west-2.amazonaws.com/pfp-${handle}` +
+        `?${Date.now().toString().slice(0, -4)}`
     );
   }, [handle]);
 
