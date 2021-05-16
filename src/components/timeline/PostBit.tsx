@@ -11,13 +11,13 @@ const PostBit: React.FC<{}> = () => {
   // Profile pic src
   const [src, setSrc] = useState<string>("");
   const onError = () => {
-    setSrc(`${process.env.PUBLIC_URL}/placeholder48.png`);
+    setSrc(`https://bitter-imgs.s3.eu-west-2.amazonaws.com/pfpdefault`);
   };
+
   useEffect(() => {
     setSrc(
-      "https://bitter-imgs.s3.eu-west-2.amazonaws.com/pfp-" +
-        myHandle +
-        `?${Date.now()}`
+      `https://bitter-imgs.s3.eu-west-2.amazonaws.com/pfp-${myHandle}` +
+        `?${Date.now().toString().slice(0, -4)}`
     );
   }, [myHandle]);
 
