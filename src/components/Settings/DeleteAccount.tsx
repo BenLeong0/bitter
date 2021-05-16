@@ -11,19 +11,14 @@ const ChangeEmail: React.FC<ChangeEmailProps> = () => {
   const [deleteConfirmation, setDeleteConfirmation] = useState<string>("");
 
   const [isPasswordCorrect, setIsPasswordCorrect] = useState<boolean>(true);
-  const [isConfirmationCorrect, setIsConfirmationCorrect] = useState<boolean>(
-    true
-  );
+  const [isConfirmationCorrect, setIsConfirmationCorrect] =
+    useState<boolean>(true);
 
   const [errorOccurred, setErrorOccurred] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const {
-    authenticate,
-    getSession,
-    logout,
-    API_URL,
-  }: ContextProps = useContext(AccountContext);
+  const { authenticate, getSession, logout, API_URL, myHandle }: ContextProps =
+    useContext(AccountContext);
 
   const history = useHistory();
   const onSubmit = async (e: any) => {
@@ -31,7 +26,7 @@ const ChangeEmail: React.FC<ChangeEmailProps> = () => {
     setIsLoading(true);
 
     // Check deleteConfirmation is correct
-    if (deleteConfirmation !== "delete-me") {
+    if (deleteConfirmation !== `delete-me-${myHandle}`) {
       setIsConfirmationCorrect(false);
       setIsLoading(false);
       return;
@@ -127,7 +122,8 @@ const ChangeEmail: React.FC<ChangeEmailProps> = () => {
             </div>
 
             <div className="delete-account-label">
-              Type <code>delete-me</code> below to confirm your decision
+              Type <code>delete-me-{myHandle}</code> below to confirm your
+              decision
             </div>
 
             <div className="settings-input-field">
