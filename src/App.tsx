@@ -17,7 +17,6 @@ import RightColumn from "./components/Main/RightColumn";
 // Pages
 import PageNotFound from "./pages/PageNotFound";
 import Timeline from "./pages/Timeline";
-import AllPosts from "./pages/AllPosts";
 import UserPage from "./pages/UserPage";
 import BitPage from "./pages/BitPage";
 import Settings from "./pages/Settings";
@@ -67,7 +66,13 @@ const App: React.FC<{}> = () => {
               />
 
               {/* Home page and redirects */}
-              <Route path="/home" exact render={() => <Timeline />} />
+              <Route
+                path="/home"
+                exact
+                render={() => (
+                  <Timeline timelineType="timeline" key="timeline" />
+                )}
+              />
               <Route
                 path="/"
                 exact
@@ -80,7 +85,7 @@ const App: React.FC<{}> = () => {
                 exact
                 render={() =>
                   isLoggedIn === true ? (
-                    <AllPosts />
+                    <Timeline timelineType="all" key="all" />
                   ) : (
                     <Redirect to={{ pathname: "/home" }} />
                   )

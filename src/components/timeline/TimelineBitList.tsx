@@ -4,31 +4,16 @@ import BitList from "../Main/BitList/BitList";
 import BitInfo from "../../Types/BitInfo";
 import ContextProps from "../../Types/ContextProps";
 
-// interface BitInfo {
-//   content: string;
-//   dislikes: number;
-//   display_name: string;
-//   handle: string;
-//   index: number;
-//   likes: number;
-//   post_id: number;
-//   post_time: string;
-//   replies: number;
-//   reply_to: number;
-//   reposts: number;
-//   status: number;
-//   user_id: string;
-// }
-
-const TimelineBitList: React.FC<{}> = () => {
+const TimelineBitList: React.FC<{ timelineType: string }> = ({
+  timelineType,
+}) => {
   // fetch list of bits
   const [bits, setBits] = useState<Array<BitInfo>>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [requestCounter, setRequestCounter] = useState<number>(0);
 
-  const { API_URL, myHandle, refreshList }: ContextProps = useContext(
-    AccountContext
-  );
+  const { API_URL, myHandle, refreshList }: ContextProps =
+    useContext(AccountContext);
 
   useEffect(() => {
     fetchBits();
@@ -43,7 +28,9 @@ const TimelineBitList: React.FC<{}> = () => {
     // setBits([]);
     console.log("Fetching bits...");
 
-    const data = await fetch(`${API_URL}/bits/timeline?handle=${myHandle}`);
+    const data = await fetch(
+      `${API_URL}/bits/${timelineType}?handle=${myHandle}`
+    );
     const resp: any = await data.json();
 
     // Only update if final request ie ignore if another request was sent out after
