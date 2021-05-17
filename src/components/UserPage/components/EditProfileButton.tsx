@@ -63,7 +63,7 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
     bio.trim().length <= maxBioLength;
   //#endregion
 
-  const { getSession, API_URL }: ContextProps = useContext(AccountContext);
+  const { API_URL }: ContextProps = useContext(AccountContext);
 
   const resetInputs = () => {
     if (props.display_name) {
