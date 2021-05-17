@@ -1,11 +1,11 @@
-import CoreService from "./CoreService"
+import CoreService from "./CoreService";
 
 
 export default class HttpService {
-    coreService: CoreService
+    coreService: CoreService;
 
     constructor() {
-        this.coreService = new CoreService()
+        this.coreService = new CoreService();
     }
 
     async makeGetRequest(url: string): Promise<any> {
