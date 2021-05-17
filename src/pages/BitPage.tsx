@@ -9,8 +9,10 @@ import Bit from "../components/Main/BitList/Bit";
 import BitInfo from "../Types/BitInfo";
 import ContextProps from "../Types/ContextProps";
 import ReplyThread from "../components/BitPage/ReplyThread";
+import HttpService from "../components/core/HttpService";
 
 const BitPage: React.FC<{}> = () => {
+  const httpService = new HttpService();
   const emptyPost: BitInfo = {
     post_id: "",
     handle: "",
@@ -36,10 +38,8 @@ const BitPage: React.FC<{}> = () => {
     setIsLoading(true);
 
     // Returns {post_id: '', handle: ''} if post not found
-    const data = await fetch(
-      `${API_URL}/bits?post_id=${post_id}&handle=${myHandle}`
-    );
-    const resp: any = await data.json();
+    const url = `${API_URL}/bits?post_id=${post_id}&handle=${myHandle}`;
+    const resp: any = await httpService.makeGetRequest(url);
     if (resp.code === "getSuccess") {
       const post: BitInfo = JSON.parse(resp.post);
       setPost(post);

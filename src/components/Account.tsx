@@ -6,6 +6,7 @@ import {
   CognitoUserAttribute,
 } from "amazon-cognito-identity-js";
 import Pool from "../UserPool";
+import HttpService from "./core/HttpService";
 
 // type ContextProps = {
 //   API_URL: string;
@@ -47,6 +48,7 @@ const Account: React.FC<Props> = ({
   setMyHandle,
   children,
 }) => {
+  const httpService = new HttpService();
   const url = "https://7z39hjjfg1.execute-api.eu-west-2.amazonaws.com";
   const stage = "/dev";
   const API_URL: string = url + stage;
@@ -184,8 +186,8 @@ const Account: React.FC<Props> = ({
   };
 
   const isEmailUsed = async (email: string): Promise<boolean> => {
-    const data = await fetch(`${API_URL}/users/exists?email=${email}`);
-    const result = await data.json();
+    const url = `${API_URL}/users/exists?email=${email}`;
+    const result = await httpService.makeGetRequest(url);
     console.log(result);
 
     return result;

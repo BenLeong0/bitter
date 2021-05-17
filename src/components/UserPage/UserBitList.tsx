@@ -6,6 +6,7 @@ import "./UserFollowList.css";
 
 import BitInfo from "../../Types/BitInfo";
 import ContextProps from "../../Types/ContextProps";
+import HttpService from "../core/HttpService";
 // interface BitInfo {
 //   content: string;
 //   dislikes: number;
@@ -27,13 +28,14 @@ interface Props {
 }
 
 const UserBitList: React.FC<Props> = ({ replies }) => {
+  const httpService = new HttpService();
+
   // fetch list of bits
   const [bits, setBits] = useState<Array<BitInfo>>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const { API_URL, currHandle, myHandle }: ContextProps = useContext(
-    AccountContext
-  );
+  const { API_URL, currHandle, myHandle }: ContextProps =
+    useContext(AccountContext);
 
   // Fetch posts every time the user changes
   useEffect(() => {
@@ -43,10 +45,8 @@ const UserBitList: React.FC<Props> = ({ replies }) => {
 
   const fetchBits = async () => {
     setIsLoading(true);
-    const data = await fetch(
-      `${API_URL}/users/posts?handle=${currHandle}&myHandle=${myHandle}`
-    );
-    const resp: any = await data.json();
+    const url = `${API_URL}/users/posts?handle=${currHandle}&myHandle=${myHandle}`;
+    const resp: any = await httpService.makeGetRequest(url);
 
     if (resp.code === "getSuccess") {
       const bits: Array<BitInfo> = JSON.parse(resp.posts);

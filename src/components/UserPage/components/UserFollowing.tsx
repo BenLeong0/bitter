@@ -3,10 +3,13 @@ import { AccountContext } from "../../Account";
 import User from "../../../Types/User";
 import UserFollowList from "./UserFollowList";
 import ContextProps from "../../../Types/ContextProps";
+import HttpService from "../../core/HttpService";
 
 export interface UserFollowingProps {}
 
 const UserFollowing: React.FC<UserFollowingProps> = () => {
+  const httpService = new HttpService();
+
   // fetch list of bits
   const [users, setUsers] = useState<Array<User>>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -22,10 +25,8 @@ const UserFollowing: React.FC<UserFollowingProps> = () => {
 
   const fetchUsers = async () => {
     setIsLoading(true);
-    const data = await fetch(
-      `${API_URL}/users/following?handle=${currHandle}&myHandle=${myHandle}`
-    );
-    const resp: any = await data.json();
+    const url = `${API_URL}/users/following?handle=${currHandle}&myHandle=${myHandle}`;
+    const resp: any = await httpService.makeGetRequest(url);
 
     if (resp.code === "getSuccess") {
       const userlist: Array<User> = JSON.parse(resp.users);

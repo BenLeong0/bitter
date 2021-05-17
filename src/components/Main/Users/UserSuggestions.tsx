@@ -5,8 +5,11 @@ import { AccountContext } from "../../Account";
 
 import User from "../../../Types/User";
 import ContextProps from "../../../Types/ContextProps";
+import HttpService from "../../core/HttpService";
 
 const UserSuggestions: React.FC<{}> = () => {
+  const httpService = new HttpService();
+
   const [suggestedUsers, updateSuggestions] = useState<Array<User>>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [fetchError, setFetchError] = useState<boolean>(false);
@@ -16,8 +19,8 @@ const UserSuggestions: React.FC<{}> = () => {
   const fetchSuggestions = async () => {
     setIsLoading(true);
 
-    const data = await fetch(`${API_URL}/users/suggested?myHandle=${myHandle}`);
-    const resp: any = await data.json();
+    const url = `${API_URL}/users/suggested?myHandle=${myHandle}`;
+    const resp: any = await httpService.makeGetRequest(url);
     if (resp.code === "getSuccess") {
       setFetchError(false);
       const users: Array<User> = JSON.parse(resp.users);
