@@ -7,15 +7,6 @@ import UserFollowButton from "./components/UserFollowButton";
 import UserInfo from "./components/UserInfo";
 
 import User from "../../Types/User";
-// interface User {
-//   handle: string;
-//   handle?: string;
-//   display_name?: string;
-//   created_on?: string;
-//   bio?: string;
-//   follower_count?: number;
-//   following_count?: number;
-// }
 
 interface Props {
   updatePageState: (stateId: number) => void;
