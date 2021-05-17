@@ -9,7 +9,7 @@ export default class HttpService {
     }
 
     async makeGetRequest(url: string): Promise<any> {
-        const requestOptions = {
+        let requestOptions = {
             method: "GET"
         };
         let data: any = await fetch(url, requestOptions);
@@ -33,14 +33,12 @@ export default class HttpService {
     }
 
     async uploadImage(url: string, file: any, field?: string): Promise<any> {
-        const base64File = await this.coreService.toBase64(file);
+        let base64File = await this.coreService.toBase64(file);
         if (typeof base64File !== "string") return;
+        let fileType = file.type;
 
         let {headers} = await this.coreService.getSession();
         headers["Content-Type"] = "application/json";
-        console.log(headers);
-
-        let fileType = file.type;
 
         let requestOptions = {
             headers,
