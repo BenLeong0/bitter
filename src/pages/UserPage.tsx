@@ -12,17 +12,10 @@ import UserNotFound from "../components/UserPage/UserNotFound";
 
 import User from "../Types/User";
 import ContextProps from "../Types/ContextProps";
-// interface User {
-//   user_id: string;
-//   handle?: string;
-//   display_name?: string;
-//   created_on?: string;
-//   bio?: string;
-//   follower_count?: number;
-//   following_count?: number;
-// }
+import HttpService from "../components/core/HttpService";
 
 const UserPage: React.FC<{}> = () => {
+  const httpService = new HttpService();
   const [user, setUser] = useState<User>({ handle: "" });
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [listState, setListState] = useState<any>(
@@ -45,12 +38,10 @@ const UserPage: React.FC<{}> = () => {
   const fetchUser = async (handle: string) => {
     setIsLoading(true);
     updatePageState(0);
-    // Returns {user_id: ''} if user not found
-    const fetchUser = await fetch(
-      `${API_URL}/users?handle=${handle}&myHandle=${myHandle}`,
-      { method: "GET" }
-    );
-    const resp: any = await fetchUser.json();
+
+    const url = `${API_URL}/users?handle=${handle}&myHandle=${myHandle}`;
+    const resp: any = await httpService.makeGetRequest(url);
+
     if (resp.code === "getSuccess") {
       const user: User = JSON.parse(resp.user);
       setUser(user);
