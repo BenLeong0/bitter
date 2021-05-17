@@ -128,15 +128,12 @@ const Account: React.FC<Props> = ({
     });
 
   const createFollowEdge = async (destinationHandle: string) => {
-    getSession().then(async ({ headers }) => {
-      fetch(`${API_URL}/users/follow?handle=${destinationHandle}`, {
-        headers,
-        method: "POST",
-      })
-        .then((response) => response.text())
-        .then((result) => console.log(result))
-        .catch((error) => console.error("Follow error:", error));
-    });
+    let url = `${API_URL}/users/follow`;
+    let body = { handle: destinationHandle };
+    await httpService
+      .makePostRequest(url, body)
+      .then((resp) => console.log(resp))
+      .catch((error) => console.error("Follow error:", error));
   };
 
   const deleteFollowEdge = async (destinationHandle: string) => {
