@@ -137,15 +137,12 @@ const Account: React.FC<Props> = ({
   };
 
   const deleteFollowEdge = async (destinationHandle: string) => {
-    getSession().then(async ({ headers }) => {
-      fetch(`${API_URL}/users/follow?handle=${destinationHandle}`, {
-        headers,
-        method: "DELETE",
-      })
-        .then((response) => response.text())
-        .then((result) => console.log(result))
-        .catch((error) => console.error("Unfollow error:", error));
-    });
+    let url = `${API_URL}/users/follow`;
+    let body = { handle: destinationHandle };
+    await httpService
+      .makeDeleteRequest(url, body)
+      .then((resp) => console.log(resp))
+      .catch((error) => console.error("Follow error:", error));
   };
 
   const authenticate = async (Username: string, Password: string) =>
