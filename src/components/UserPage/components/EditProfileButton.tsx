@@ -85,14 +85,6 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props]);
 
-  const toBase64 = (file: any) =>
-    new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = (error) => reject(error);
-    });
-
   //#region text fields
   // Inputting changes
   const handleBioChange = (e: any) => {
