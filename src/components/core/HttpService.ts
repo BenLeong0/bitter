@@ -32,6 +32,21 @@ export default class HttpService {
         return JSON.parse(resp);
     }
 
+    async makeDeleteRequest(url: string, body: any): Promise<any> {
+        let {headers} = await this.coreService.getSession();
+        headers["Content-Type"] = "application/json";
+
+        let requestOptions = {
+            headers,
+            method: "DELETE",
+            body: JSON.stringify(body),
+        };
+
+        let data: any = await fetch(url, requestOptions);
+        let resp: string = await data.text();
+        return JSON.parse(resp);
+    }
+
     async makePatchRequest(url: string, body: any): Promise<any> {
         let {headers} = await this.coreService.getSession();
         headers["Content-Type"] = "application/json";
