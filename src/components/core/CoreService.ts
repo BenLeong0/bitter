@@ -6,31 +6,26 @@ export default class Common {
         await new Promise((resolve, reject) => {
         const user: CognitoUser | null = Pool.getCurrentUser();
         if (user == null) return reject("Not logged in");
-        user.getSession(
-        async (err: Error, session: CognitoUserSession | null) => {
-            if (err) {
-            reject();
-            } else if (session) {
+
+        user.getSession(async (err: Error, session: CognitoUserSession | null) => {
+            if (err || !session) return reject();
+
             const attributes: any = await new Promise((resolve, reject) => {
                 user.getUserAttributes(
                 (
                     err: Error | undefined,
                     attributes: CognitoUserAttribute[] | undefined
                 ) => {
-                    if (err) {
-                    reject(err);
-                    } else if (attributes) {
-                    const results: any = {};
+                    if (err || !attributes) return reject(err);
 
+                    const results: any = {};
                     for (let attribute of attributes) {
                         const { Name, Value } = attribute;
                         results[Name] = Value;
                     }
 
                     resolve(results);
-                    }
-                }
-                );
+                });
             });
 
             const token = session.getIdToken().getJwtToken();
@@ -44,9 +39,9 @@ export default class Common {
                 ...session,
                 ...attributes,
             });
-            }
         });
     });
+
 
     toBase64 = (file: any) =>
         new Promise((resolve, reject) => {
