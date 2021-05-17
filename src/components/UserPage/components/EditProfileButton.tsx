@@ -5,6 +5,7 @@ import Popup from "reactjs-popup";
 import Styled from "styled-components";
 import ContextProps from "../../../Types/ContextProps";
 import { AccountContext } from "../../Account";
+import HttpService from "../../core/HttpService";
 
 const StyledPopup = Styled(Popup)`
   &-content {
@@ -19,6 +20,8 @@ const StyledPopup = Styled(Popup)`
 const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
   props
 ) => {
+  const httpService = new HttpService();
+
   // Whether modal is open or not
   const [open, setOpen] = useState<boolean>(false);
   const closeModal = () => {
@@ -40,9 +43,8 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
   // Error messages
   const [textErrorOccurred, setTextErrorOccurred] = useState<boolean>(false);
   const [pfpErrorOccurred, setPfpErrorOccurred] = useState<boolean>(false);
-  const [bannerErrorOccurred, setBannerErrorOccurred] = useState<boolean>(
-    false
-  );
+  const [bannerErrorOccurred, setBannerErrorOccurred] =
+    useState<boolean>(false);
   const [pfpTooBig, setPfpTooBig] = useState<boolean>(false);
   const [bannerTooBig, setBannerTooBig] = useState<boolean>(false);
 
@@ -112,39 +114,20 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
     setBio(bio.trim());
     setDisplayName(displayName.trim());
 
-    getSession().then(async ({ headers }) => {
-      // Set loading
-      setIsLoading(true);
-
-      // Set Content-Type (might be correct by default)
-      headers["Content-Type"] = "application/json";
-
-      // Request options
-      var requestOptions = {
-        headers,
-        method: "PATCH",
-        body: JSON.stringify({ display_name: displayName, bio: bio }),
-      };
-
-      // Post to api
-      await fetch(`${API_URL}/users`, requestOptions)
-        .then((response) => response.text())
-        .then((result) => {
-          const resultJSON = JSON.parse(result);
-
-          // Success/failure handling
-          if (resultJSON.code === "updateSuccess") {
-            // Refresh page
-            setChangesSubmitted(true);
-          } else {
-            // Error message
-            setTextErrorOccurred(true);
-          }
-        });
-
-      // Set not loading
-      setIsLoading(false);
+    // Make patch request
+    setIsLoading(true);
+    let url = `${API_URL}/users`;
+    let body = { display_name: displayName, bio: bio };
+    await httpService.makePatchRequest(url, body).then((resp) => {
+      if (resp.code === "updateSuccess") {
+        // Refresh page
+        setChangesSubmitted(true);
+      } else {
+        // Error message
+        setTextErrorOccurred(true);
+      }
     });
+    setIsLoading(false);
   };
   //#endregion
 
@@ -158,48 +141,19 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
   const onSubmitPfp = async (e: any) => {
     e.preventDefault();
 
-    // Convert pfp to base64
-    const base64File = await toBase64(pfp);
-    if (typeof base64File !== "string") return;
-
-    getSession().then(async ({ headers }) => {
-      // Set loading
-      setIsLoading(true);
-
-      // Set content type (necessary)
-      headers["Content-Type"] = "application/json";
-
-      // Request options
-      var requestOptions = {
-        headers,
-        method: "PUT",
-        body: JSON.stringify({
-          image: base64File,
-          field: "pfp",
-          type: pfp.type,
-        }),
-      };
-
-      // Post to api
-      await fetch(`${API_URL}/users`, requestOptions)
-        .then((response) => response.text())
-        .then((result) => {
-          const resultJSON = JSON.parse(result);
-
-          // Success/failure handling
-          if (resultJSON.code === "uploadSuccess") {
-            // Refresh page
-            setChangesSubmitted(true);
-            setPfp(undefined);
-          } else {
-            // Error message
-            setPfpErrorOccurred(true);
-          }
-        });
-
-      // Set not loading
-      setIsLoading(false);
+    setIsLoading(true);
+    let url = `${API_URL}/users`;
+    await httpService.uploadImage(url, pfp, "pfp").then((resp) => {
+      if (resp.code === "uploadSuccess") {
+        // Refresh page
+        setChangesSubmitted(true);
+        setPfp(undefined);
+      } else {
+        // Error message
+        setPfpErrorOccurred(true);
+      }
     });
+    setIsLoading(false);
   };
   //#endregion
 
@@ -213,48 +167,19 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
   const onSubmitBanner = async (e: any) => {
     e.preventDefault();
 
-    // Convert banner to base64
-    const base64File = await toBase64(banner);
-    if (typeof base64File !== "string") return;
-
-    getSession().then(async ({ headers }) => {
-      // Set loading
-      setIsLoading(true);
-
-      // Set content type (necessary)
-      headers["Content-Type"] = "application/json";
-
-      // Request options
-      var requestOptions = {
-        headers,
-        method: "PUT",
-        body: JSON.stringify({
-          image: base64File,
-          field: "banner",
-          type: banner.type,
-        }),
-      };
-
-      // Post to api
-      await fetch(`${API_URL}/users`, requestOptions)
-        .then((response) => response.text())
-        .then((result) => {
-          const resultJSON = JSON.parse(result);
-
-          // Success/failure handling
-          if (resultJSON.code === "uploadSuccess") {
-            // Refresh page
-            setChangesSubmitted(true);
-            setBanner(undefined);
-          } else {
-            // Error message
-            setBannerErrorOccurred(true);
-          }
-        });
-
-      // Set not loading
-      setIsLoading(false);
+    setIsLoading(true);
+    let url = `${API_URL}/users`;
+    await httpService.uploadImage(url, banner, "banner").then((resp) => {
+      if (resp.code === "uploadSuccess") {
+        // Refresh page
+        setChangesSubmitted(true);
+        setBanner(undefined);
+      } else {
+        // Error message
+        setBannerErrorOccurred(true);
+      }
     });
+    setIsLoading(false);
   };
   //#endregion
 
