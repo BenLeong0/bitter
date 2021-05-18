@@ -9,7 +9,6 @@ import Pool from "../UserPool";
 import HttpService from "./core/HttpService";
 
 // type ContextProps = {
-//   API_URL: string;
 //   authenticate: (Username: string, Password: string) => Promise<any>;
 //   isEmailUsed: (email: string) => Promise<boolean>
 //   getSession: () => Promise<any>;
@@ -49,9 +48,6 @@ const Account: React.FC<Props> = ({
   children,
 }) => {
   const httpService = new HttpService();
-  const url = "https://7z39hjjfg1.execute-api.eu-west-2.amazonaws.com";
-  const stage = "/dev";
-  const API_URL: string = url + stage;
 
   // Info about current user being viewed, i.e. owner of /u/handle
   const [currHandle, setCurrHandle] = useState<string>("");
@@ -200,7 +196,6 @@ const Account: React.FC<Props> = ({
   return (
     <AccountContext.Provider
       value={{
-        API_URL,
         authenticate,
         isEmailUsed,
         getSession,
