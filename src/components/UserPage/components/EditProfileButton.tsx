@@ -1,10 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import TextareaAutosize from "react-textarea-autosize";
 import Popup from "reactjs-popup";
 import Styled from "styled-components";
-import ContextProps from "../../../Types/ContextProps";
-import { AccountContext } from "../../Account";
 import HttpService from "../../core/HttpService";
 
 const StyledPopup = Styled(Popup)`
