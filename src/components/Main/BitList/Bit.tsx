@@ -139,7 +139,13 @@ const Bit: React.FC<BitProps> = ({ classes = "", ...bitInfo }) => {
     let body = { post_id: bitInfo.post_id };
     await httpService
       .makeDeleteRequest(url, body)
-      .then((resp) => console.log(resp))
+      .then((resp) => {
+        if (resp.code === "deleteSuccess") {
+          setIsDeleted(true);
+        } else {
+          console.error(resp);
+        }
+      })
       .catch((error) => console.error("Error:", error));
   };
 
