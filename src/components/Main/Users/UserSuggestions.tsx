@@ -13,14 +13,14 @@ const UserSuggestions: React.FC<{}> = () => {
   const [suggestedUsers, updateSuggestions] = useState<Array<User>>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [fetchError, setFetchError] = useState<boolean>(false);
-  const { API_URL, myHandle }: ContextProps = useContext(AccountContext);
+  const { myHandle }: ContextProps = useContext(AccountContext);
 
   // Fetch 5 random users from the database
   const fetchSuggestions = async () => {
     setIsLoading(true);
 
-    const url = `${API_URL}/users/suggested?myHandle=${myHandle}`;
-    const resp: any = await httpService.makeGetRequest(url);
+    const res = `/suggested?myHandle=${myHandle}`;
+    const resp: any = await httpService.makeGetRequest(res);
     if (resp.code === "getSuccess") {
       setFetchError(false);
       const users: Array<User> = JSON.parse(resp.users);

@@ -31,8 +31,7 @@ const UserBitList: React.FC<Props> = () => {
   const [likes, setLikes] = useState<Array<BitInfo>>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const { API_URL, currHandle, myHandle }: ContextProps =
-    useContext(AccountContext);
+  const { currHandle, myHandle }: ContextProps = useContext(AccountContext);
 
   // Fetch posts every time the user changes
   useEffect(() => {
@@ -42,8 +41,8 @@ const UserBitList: React.FC<Props> = () => {
 
   const fetchBits = async () => {
     setIsLoading(true);
-    const url = `${API_URL}/users/posts/likes?handle=${currHandle}&myHandle=${myHandle}`;
-    const resp: any = await httpService.makeGetRequest(url);
+    const res = `/users/posts/likes?handle=${currHandle}&myHandle=${myHandle}`;
+    const resp: any = await httpService.makeGetRequest(res);
 
     if (resp.code === "getSuccess") {
       const bits: Array<BitInfo> = JSON.parse(resp.posts);

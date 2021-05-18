@@ -45,8 +45,8 @@ const UserBitList: React.FC<Props> = ({ replies }) => {
 
   const fetchBits = async () => {
     setIsLoading(true);
-    const url = `${API_URL}/users/posts?handle=${currHandle}&myHandle=${myHandle}`;
-    const resp: any = await httpService.makeGetRequest(url);
+    const res = `/users/posts?handle=${currHandle}&myHandle=${myHandle}`;
+    const resp: any = await httpService.makeGetRequest(res);
 
     if (resp.code === "getSuccess") {
       const bits: Array<BitInfo> = JSON.parse(resp.posts);

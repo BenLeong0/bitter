@@ -180,8 +180,8 @@ const Account: React.FC<Props> = ({
   };
 
   const isEmailUsed = async (email: string): Promise<boolean> => {
-    const url = `${API_URL}/users/exists?email=${email}`;
-    const result = await httpService.makeGetRequest(url);
+    const res = `exists?email=${email}`;
+    const result = await httpService.makeGetRequest(res);
     console.log(result);
 
     return result;

@@ -31,15 +31,15 @@ const BitPage: React.FC<{}> = () => {
 
   document.title = (post.handle ? "@" + post.handle : "post") + " / Bitter";
 
-  const { API_URL, myHandle }: ContextProps = useContext(AccountContext);
+  const { myHandle }: ContextProps = useContext(AccountContext);
 
   // Database call for post by post_id
   const fetchPost = async (post_id: string) => {
     setIsLoading(true);
 
     // Returns {post_id: '', handle: ''} if post not found
-    const url = `${API_URL}/bits?post_id=${post_id}&handle=${myHandle}`;
-    const resp: any = await httpService.makeGetRequest(url);
+    const res = `/bits?post_id=${post_id}&handle=${myHandle}`;
+    const resp: any = await httpService.makeGetRequest(res);
     if (resp.code === "getSuccess") {
       const post: BitInfo = JSON.parse(resp.post);
       setPost(post);

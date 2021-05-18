@@ -24,13 +24,8 @@ const UserPage: React.FC<{}> = () => {
 
   document.title = (user.handle ? "@" + user.handle : "user") + " / Bitter";
 
-  const {
-    API_URL,
-    currHandle,
-    setCurrHandle,
-    myHandle,
-    setIsFollowing,
-  }: ContextProps = useContext(AccountContext);
+  const { currHandle, setCurrHandle, myHandle, setIsFollowing }: ContextProps =
+    useContext(AccountContext);
 
   const handle: string = useLocation().pathname.slice(3);
 
@@ -39,8 +34,8 @@ const UserPage: React.FC<{}> = () => {
     setIsLoading(true);
     updatePageState(0);
 
-    const url = `${API_URL}/users?handle=${handle}&myHandle=${myHandle}`;
-    const resp: any = await httpService.makeGetRequest(url);
+    const res = `/users?handle=${handle}&myHandle=${myHandle}`;
+    const resp: any = await httpService.makeGetRequest(res);
 
     if (resp.code === "getSuccess") {
       const user: User = JSON.parse(resp.user);
