@@ -186,11 +186,11 @@ const Account: React.FC<Props> = ({
   };
 
   const isEmailUsed = async (email: string): Promise<boolean> => {
-    const res = `exists?email=${email}`;
-    const result = await httpService.makeGetRequest(res);
-    console.log(result);
+    let res = `exists?email=${email}`;
+    let resp = await httpService.makeGetRequest(res);
 
-    return result;
+    console.log(resp);
+    return resp;
   };
 
   const refreshBitList = () => {
