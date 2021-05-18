@@ -47,9 +47,7 @@ const ChangeEmail: React.FC<ChangeEmailProps> = () => {
         let body = { accessToken: accessToken.jwtToken };
         let resp = await httpService.makeDeleteRequest(res, body);
 
-        // success/failure handling
         if (resp.code === "deleteSuccess") {
-          // Redirect to /home
           logout();
           history.push(`/home`);
           console.log(resp);
