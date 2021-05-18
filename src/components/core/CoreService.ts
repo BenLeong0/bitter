@@ -1,7 +1,7 @@
 import { AuthenticationDetails, CognitoUser, CognitoUserAttribute, CognitoUserSession } from "amazon-cognito-identity-js";
 import Pool from "../../UserPool";
 
-export default class Common {
+export default class Core {
     getSession = async (): Promise<any> =>
         await new Promise((resolve, reject) => {
         const user: CognitoUser | null = Pool.getCurrentUser();
