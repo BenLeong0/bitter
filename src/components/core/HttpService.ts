@@ -12,7 +12,7 @@ export default class HttpService {
     }
 
     async makeGetRequest(res: string): Promise<any> {
-        let url = this.url + res;
+        let url = this.API_URL + res;
         let requestOptions = {
             method: "GET"
         };
@@ -26,7 +26,7 @@ export default class HttpService {
         let {headers} = await this.coreService.getSession();
         headers["Content-Type"] = "application/json";
 
-        let url = this.url + res;
+        let url = this.API_URL + res;
         let requestOptions = {
             headers,
             method: "POST",
@@ -42,7 +42,7 @@ export default class HttpService {
         let {headers} = await this.coreService.getSession();
         headers["Content-Type"] = "application/json";
 
-        let url = this.url + res;
+        let url = this.API_URL + res;
         let requestOptions = {
             headers,
             method: "DELETE",
@@ -58,7 +58,7 @@ export default class HttpService {
         let {headers} = await this.coreService.getSession();
         headers["Content-Type"] = "application/json";
 
-        let url = this.url + res;
+        let url = this.API_URL + res;
         let requestOptions = {
             headers,
             method: "PATCH",
@@ -78,7 +78,7 @@ export default class HttpService {
         let {headers} = await this.coreService.getSession();
         headers["Content-Type"] = "application/json";
 
-        let url = this.url + res;
+        let url = this.API_URL + res;
         let requestOptions = {
             headers,
             method: "PUT",
