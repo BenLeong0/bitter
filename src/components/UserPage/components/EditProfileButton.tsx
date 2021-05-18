@@ -63,8 +63,6 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
     bio.trim().length <= maxBioLength;
   //#endregion
 
-  const { API_URL }: ContextProps = useContext(AccountContext);
-
   const resetInputs = () => {
     if (props.display_name) {
       setDisplayName(props.display_name);
@@ -108,9 +106,9 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
 
     // Make patch request
     setIsLoading(true);
-    let url = `${API_URL}/users`;
+    let res = `/users`;
     let body = { display_name: displayName, bio: bio };
-    let resp: any = await httpService.makePatchRequest(url, body);
+    let resp: any = await httpService.makePatchRequest(res, body);
 
     if (resp.code === "updateSuccess") {
       // Refresh page
@@ -136,8 +134,8 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
     e.preventDefault();
 
     setIsLoading(true);
-    let url = `${API_URL}/users`;
-    let resp: any = await httpService.uploadImage(url, pfp, "pfp");
+    let res = `/users`;
+    let resp: any = await httpService.uploadImage(res, pfp, "pfp");
 
     if (resp.code === "uploadSuccess") {
       // Refresh page
@@ -164,8 +162,8 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
     e.preventDefault();
 
     setIsLoading(true);
-    let url = `${API_URL}/users`;
-    let resp: any = await httpService.uploadImage(url, banner, "banner");
+    let res = `/users`;
+    let resp: any = await httpService.uploadImage(res, banner, "banner");
 
     if (resp.code === "uploadSuccess") {
       // Refresh page
