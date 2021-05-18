@@ -65,9 +65,8 @@ const ChangeEmail: React.FC<ChangeEmailProps> = () => {
           default:
             console.error(err);
         }
-      });
-
-    setIsLoading(false);
+      })
+      .finally(() => setIsLoading(false));
   };
 
   return (
