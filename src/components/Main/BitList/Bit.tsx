@@ -12,22 +12,7 @@ import RepliedButton from "./Icons/replied.svg";
 import ContextProps from "../../../Types/ContextProps";
 import BitReplyBox from "./BitReplyBox";
 import DeletedBit from "./DeletedBit";
-
-// interface BitInfo {
-//   content: string;
-//   dislikes: number;
-//   display_name: string;
-//   handle: string;
-//   index: number;
-//   likes: number;
-//   post_id: number;
-//   post_time: string;
-//   replies: number;
-//   reply_to: number;
-//   reposts: number;
-//   status: number;
-//   user_id: string;
-// }
+import HttpService from "../../core/HttpService";
 
 interface OtherProps {
   classes?: string;
@@ -108,6 +93,8 @@ function formatDate(date: Date) {
 }
 
 const Bit: React.FC<BitProps> = ({ classes = "", ...bitInfo }) => {
+  const httpService = new HttpService();
+
   const { API_URL, getSession, isAdmin, myHandle }: ContextProps =
     useContext(AccountContext);
 
@@ -147,33 +134,13 @@ const Bit: React.FC<BitProps> = ({ classes = "", ...bitInfo }) => {
   // Delete button
   const handleDeletePost = async (e: any) => {
     e.preventDefault();
-    getSession().then(async ({ headers }) => {
-      // Request options
-      var requestOptions = {
-        headers,
-        method: "DELETE",
-      };
 
-      // Call API
-      await fetch(`${API_URL}/bits?post_id=${bitInfo.post_id}`, requestOptions)
-        .then((response) => response.text())
-        .then((result) => {
-          const resultJSON = JSON.parse(result);
-
-          // success/failure handling
-          if (resultJSON.code === "deleteSuccess") {
-            // Hide post
-            setIsDeleted(true);
-          } else {
-            // Error message
-            console.log(result);
-          }
-        })
-        .catch((err) => {
-          console.log("Error:", err);
-          // setErrorOccurred(true);
-        });
-    });
+    let url = `${API_URL}/bits`;
+    let body = { post_id: bitInfo.post_id };
+    await httpService
+      .makeDeleteRequest(url, body)
+      .then((resp) => console.log(resp))
+      .catch((error) => console.error("Error:", error));
   };
 
   // Delete popover
