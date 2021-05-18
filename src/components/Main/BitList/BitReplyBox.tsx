@@ -1,7 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import TextareaAutosize from "react-textarea-autosize";
-import ContextProps from "../../../Types/ContextProps";
-import { AccountContext } from "../../Account";
 import HttpService from "../../core/HttpService";
 
 export interface BitReplyBoxProps {
@@ -11,7 +9,6 @@ export interface BitReplyBoxProps {
 
 const BitReplyBox: React.FC<BitReplyBoxProps> = ({ post_id, setReplying }) => {
   const httpService = new HttpService();
-  const { getSession, API_URL }: ContextProps = useContext(AccountContext);
 
   const [post, updatePost] = useState<string>("");
   const [remainingChars, updateChars] = useState<number>(140);
