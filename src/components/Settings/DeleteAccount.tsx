@@ -2,11 +2,16 @@ import React, { useContext, useState } from "react";
 import { useHistory } from "react-router";
 import ContextProps from "../../Types/ContextProps";
 import { AccountContext } from "../Account";
+import HttpService from "../core/HttpService";
+import CoreService from "../core/CoreService";
 import DeleteAccountConfirmation from "./DeleteAccountConfirmation";
 
 export interface ChangeEmailProps {}
 
 const ChangeEmail: React.FC<ChangeEmailProps> = () => {
+  const httpService = new HttpService();
+  const core = new CoreService();
+
   const [password, setPassword] = useState<string>("");
   const [deleteConfirmation, setDeleteConfirmation] = useState<string>("");
 
@@ -17,8 +22,7 @@ const ChangeEmail: React.FC<ChangeEmailProps> = () => {
   const [errorOccurred, setErrorOccurred] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const { authenticate, getSession, logout, API_URL, myHandle }: ContextProps =
-    useContext(AccountContext);
+  const { logout, myHandle }: ContextProps = useContext(AccountContext);
 
   const history = useHistory();
   const onSubmit = async (e: any) => {
@@ -33,61 +37,39 @@ const ChangeEmail: React.FC<ChangeEmailProps> = () => {
     }
 
     // Check password
-    getSession()
-      .then(async ({ user, headers, accessToken }) => {
-        // Check login details
-        authenticate(user.username, password)
-          .then(async () => {
-            // Setup request
-            headers["Content-Type"] = "application/json";
-            var requestOptions = {
-              headers,
-              method: "DELETE",
-            };
+    await core
+      .authenticate(password)
+      .then(async () => {
+        let session = await core.getSession();
+        let { accessToken } = session;
 
-            // Call API (delete from pool and database)
-            await fetch(
-              `${API_URL}/users?accessToken=${accessToken.jwtToken}`,
-              requestOptions
-            )
-              .then((response) => response.text())
-              .then((result) => {
-                const resultJSON = JSON.parse(result);
+        let res = `/users`;
+        let body = { accessToken: accessToken.jwtToken };
+        let resp = await httpService.makeDeleteRequest(res, body);
 
-                // success/failure handling
-                if (resultJSON.code === "deleteSuccess") {
-                  // Redirect to /home
-                  logout();
-                  history.push(`/home`);
-                } else {
-                  // Error message
-                  setErrorOccurred(true);
-                  setIsLoading(false);
-                  console.error(resultJSON);
-                }
-              })
-              .catch((err) => {
-                console.log("Error:", err);
-                setErrorOccurred(true);
-                setIsLoading(false);
-              });
-          })
-          .catch((err: any) => {
-            const code = err.code;
-            switch (code) {
-              case "NotAuthorizedException":
-                setIsPasswordCorrect(false);
-                break;
-              default:
-                console.error(err);
-                setIsLoading(false);
-            }
-          });
+        // success/failure handling
+        if (resp.code === "deleteSuccess") {
+          // Redirect to /home
+          logout();
+          history.push(`/home`);
+          console.log(resp);
+        } else {
+          setErrorOccurred(true);
+          console.error(resp);
+        }
       })
       .catch((err: any) => {
-        console.error(err);
-        setIsLoading(false);
+        let code = err.code;
+        switch (code) {
+          case "NotAuthorizedException":
+            setIsPasswordCorrect(false);
+            break;
+          default:
+            console.error(err);
+        }
       });
+
+    setIsLoading(false);
   };
 
   return (
