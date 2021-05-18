@@ -64,9 +64,9 @@ const BitButtonBar: React.FC<BitButtonBarProps> = ({
     setIsReposted(true);
     setRebitShift(rebitShift + 1);
 
-    let res = `/bits/rebit?post_id=${props.post_id}`;
+    let res = `/bits/rebit?post_id`;
     let body = { post_id: props.post_id };
-    let resp: any = await httpService.makePostRequest(res, {});
+    let resp: any = await httpService.makePostRequest(res, body);
 
     if (resp.code === "rebitSuccess") {
       console.log(resp);
@@ -80,9 +80,9 @@ const BitButtonBar: React.FC<BitButtonBarProps> = ({
     setIsReposted(false);
     setRebitShift(rebitShift - 1);
 
-    let res = `/bits/rebit?post_id=${props.post_id}`;
+    let res = `/bits/rebit?post_id`;
     let body = { post_id: props.post_id };
-    let resp: any = await httpService.makeDeleteRequest(res, {});
+    let resp: any = await httpService.makeDeleteRequest(res, body);
 
     if (resp.code === "unrebitSuccess") {
       console.log(resp);
@@ -98,7 +98,7 @@ const BitButtonBar: React.FC<BitButtonBarProps> = ({
 
     let res = `/bits/like?post_id=${props.post_id}`;
     let body = { post_id: props.post_id };
-    let resp: any = await httpService.makePostRequest(res, {});
+    let resp: any = await httpService.makePostRequest(res, body);
 
     if (resp.code === "likeSuccess") {
       console.log(resp);
@@ -114,7 +114,7 @@ const BitButtonBar: React.FC<BitButtonBarProps> = ({
 
     let res = `/bits/like?post_id=${props.post_id}`;
     let body = { post_id: props.post_id };
-    let resp: any = await httpService.makeDeleteRequest(res, {});
+    let resp: any = await httpService.makeDeleteRequest(res, body);
 
     if (resp.code === "unlikeSuccess") {
       console.log(resp);
@@ -130,7 +130,7 @@ const BitButtonBar: React.FC<BitButtonBarProps> = ({
 
     let res = `/bits/dislike?post_id=${props.post_id}`;
     let body = { post_id: props.post_id };
-    let resp: any = await httpService.makePostRequest(res, {});
+    let resp: any = await httpService.makePostRequest(res, body);
 
     if (resp.code === "dislikeSuccess") {
       console.log(resp);
@@ -146,7 +146,7 @@ const BitButtonBar: React.FC<BitButtonBarProps> = ({
 
     let res = `/bits/dislike?post_id=${props.post_id}`;
     let body = { post_id: props.post_id };
-    let resp: any = await httpService.makeDeleteRequest(res, {});
+    let resp: any = await httpService.makeDeleteRequest(res, body);
 
     if (resp.code === "undislikeSuccess") {
       console.log(resp);
