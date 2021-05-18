@@ -108,9 +108,12 @@ To-do list as I move the entire backend to AWS, and implement TypeScript.
 - [x] Case insensitive tagging
 - [x] Reply / rebit notes side by side instead of stacked
 - [x] Regex field verifications (username etc)
+- [x] Status field for rebits etc in db
+- [ ] Folder structure
 - [ ] Viewable list of rebitters/likers/dislikers for posts
 - [ ] Hashtags
   - [ ] NoSQL database?
+- [ ] Make `delete_account` more optimal lol
 
 ### Timeline
 
