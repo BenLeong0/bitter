@@ -34,8 +34,7 @@ const UserBitList: React.FC<Props> = ({ replies }) => {
   const [bits, setBits] = useState<Array<BitInfo>>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const { API_URL, currHandle, myHandle }: ContextProps =
-    useContext(AccountContext);
+  const { currHandle, myHandle }: ContextProps = useContext(AccountContext);
 
   // Fetch posts every time the user changes
   useEffect(() => {
