@@ -30,7 +30,7 @@ const TimelineBitList: React.FC<{ timelineType: string }> = ({
     // setBits([]);
     console.log("Fetching bits...");
 
-    const res = `/${timelineType}?handle=${myHandle}`;
+    const res = `/bits/${timelineType}?handle=${myHandle}`;
     const resp: any = await httpService.makeGetRequest(res);
 
     // Only update if final request ie ignore if another request was sent out after
