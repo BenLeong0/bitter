@@ -110,15 +110,17 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
     setIsLoading(true);
     let url = `${API_URL}/users`;
     let body = { display_name: displayName, bio: bio };
-    await httpService.makePatchRequest(url, body).then((resp) => {
-      if (resp.code === "updateSuccess") {
-        // Refresh page
-        setChangesSubmitted(true);
-      } else {
-        // Error message
-        setTextErrorOccurred(true);
-      }
-    });
+    let resp: any = await httpService.makePatchRequest(url, body);
+
+    if (resp.code === "updateSuccess") {
+      // Refresh page
+      setChangesSubmitted(true);
+    } else {
+      // Error message
+      setTextErrorOccurred(true);
+      console.error(resp);
+    }
+
     setIsLoading(false);
   };
   //#endregion
@@ -135,16 +137,18 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
 
     setIsLoading(true);
     let url = `${API_URL}/users`;
-    await httpService.uploadImage(url, pfp, "pfp").then((resp) => {
-      if (resp.code === "uploadSuccess") {
-        // Refresh page
-        setChangesSubmitted(true);
-        setPfp(undefined);
-      } else {
-        // Error message
-        setPfpErrorOccurred(true);
-      }
-    });
+    let resp: any = await httpService.uploadImage(url, pfp, "pfp");
+
+    if (resp.code === "uploadSuccess") {
+      // Refresh page
+      setChangesSubmitted(true);
+      setPfp(undefined);
+    } else {
+      // Error message
+      setPfpErrorOccurred(true);
+      console.error(resp);
+    }
+
     setIsLoading(false);
   };
   //#endregion
@@ -161,16 +165,18 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
 
     setIsLoading(true);
     let url = `${API_URL}/users`;
-    await httpService.uploadImage(url, banner, "banner").then((resp) => {
-      if (resp.code === "uploadSuccess") {
-        // Refresh page
-        setChangesSubmitted(true);
-        setBanner(undefined);
-      } else {
-        // Error message
-        setBannerErrorOccurred(true);
-      }
-    });
+    let resp: any = await httpService.uploadImage(url, banner, "banner");
+
+    if (resp.code === "uploadSuccess") {
+      // Refresh page
+      setChangesSubmitted(true);
+      setBanner(undefined);
+    } else {
+      // Error message
+      setBannerErrorOccurred(true);
+      console.error(resp);
+    }
+
     setIsLoading(false);
   };
   //#endregion

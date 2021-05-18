@@ -40,15 +40,18 @@ const BitPage: React.FC<{}> = () => {
     // Returns {post_id: '', handle: ''} if post not found
     const res = `/bits?post_id=${post_id}&handle=${myHandle}`;
     const resp: any = await httpService.makeGetRequest(res);
+
     if (resp.code === "getSuccess") {
       const post: BitInfo = JSON.parse(resp.post);
       setPost(post);
     } else {
       setPost(emptyPost);
+      console.error(resp);
     }
 
     setIsLoading(false);
-    var elmnt = document.getElementsByClassName("thread-main-bit")[0];
+
+    let elmnt = document.getElementsByClassName("thread-main-bit")[0];
     if (elmnt) elmnt.scrollIntoView();
   };
 
