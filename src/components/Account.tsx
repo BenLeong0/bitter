@@ -186,7 +186,7 @@ const Account: React.FC<Props> = ({
   };
 
   const isEmailUsed = async (email: string): Promise<boolean> => {
-    let res = `exists?email=${email}`;
+    let res = `/users/exists?email=${email}`;
     let resp: any = await httpService.makeGetRequest(res);
 
     console.log(resp);
