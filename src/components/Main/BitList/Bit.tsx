@@ -95,7 +95,7 @@ function formatDate(date: Date) {
 const Bit: React.FC<BitProps> = ({ classes = "", ...bitInfo }) => {
   const httpService = new HttpService();
 
-  const { API_URL, getSession, isAdmin, myHandle }: ContextProps =
+  const { API_URL, isAdmin, myHandle }: ContextProps =
     useContext(AccountContext);
 
   // Profile pic src
