@@ -135,18 +135,16 @@ const Bit: React.FC<BitProps> = ({ classes = "", ...bitInfo }) => {
   const handleDeletePost = async (e: any) => {
     e.preventDefault();
 
-    let url = `${API_URL}/bits`;
+    let res = `/bits`;
     let body = { post_id: bitInfo.post_id };
-    await httpService
-      .makeDeleteRequest(url, body)
-      .then((resp) => {
-        if (resp.code === "deleteSuccess") {
-          setIsDeleted(true);
-        } else {
-          console.error(resp);
-        }
-      })
-      .catch((error) => console.error("Error:", error));
+    let resp: any = await httpService.makeDeleteRequest(res, body);
+
+    if (resp.code === "deleteSuccess") {
+      setIsDeleted(true);
+      console.log(resp);
+    } else {
+      console.error(resp);
+    }
   };
 
   // Delete popover
