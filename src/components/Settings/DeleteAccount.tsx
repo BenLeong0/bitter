@@ -10,7 +10,7 @@ export interface ChangeEmailProps {}
 
 const ChangeEmail: React.FC<ChangeEmailProps> = () => {
   const httpService = new HttpService();
-  const core = new CoreService();
+  const coreService = new CoreService();
 
   const [password, setPassword] = useState<string>("");
   const [deleteConfirmation, setDeleteConfirmation] = useState<string>("");
@@ -37,10 +37,10 @@ const ChangeEmail: React.FC<ChangeEmailProps> = () => {
     }
 
     // Check password
-    await core
+    await coreService
       .authenticate(password)
       .then(async () => {
-        let session = await core.getSession();
+        let session = await coreService.getSession();
         let { accessToken } = session;
 
         let res = "/users";
