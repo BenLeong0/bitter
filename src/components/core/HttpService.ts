@@ -1,6 +1,5 @@
 import CoreService from "./CoreService";
 
-
 export default class HttpService {
     coreService: CoreService;
     url: string = "https://7z39hjjfg1.execute-api.eu-west-2.amazonaws.com";
@@ -11,10 +10,21 @@ export default class HttpService {
         this.coreService = new CoreService();
     }
 
-    async makeGetRequest(res: string): Promise<any> {
-        let url = this.url + res;
+    async makeGetRequest(
+        res: string,
+        queryParams?: { [key: string]: string; }
+    ): Promise<any> {
+        let url = this.API_URL + res;
         let requestOptions = {
             method: "GET"
+        };
+
+        if (typeof queryParams !== "undefined") {
+            let reducer = (accumulator: string, currValue: string[]) => (
+                accumulator + '&' + currValue[0] + '=' + currValue[1]
+            );
+            let queryString =  Object.entries(queryParams).reduce(reducer, '');
+            url += '?' + queryString;
         };
 
         let data: any = await fetch(url, requestOptions);
@@ -26,7 +36,7 @@ export default class HttpService {
         let {headers} = await this.coreService.getSession();
         headers["Content-Type"] = "application/json";
 
-        let url = this.url + res;
+        let url = this.API_URL + res;
         let requestOptions = {
             headers,
             method: "POST",
@@ -42,7 +52,7 @@ export default class HttpService {
         let {headers} = await this.coreService.getSession();
         headers["Content-Type"] = "application/json";
 
-        let url = this.url + res;
+        let url = this.API_URL + res;
         let requestOptions = {
             headers,
             method: "DELETE",
@@ -58,7 +68,7 @@ export default class HttpService {
         let {headers} = await this.coreService.getSession();
         headers["Content-Type"] = "application/json";
 
-        let url = this.url + res;
+        let url = this.API_URL + res;
         let requestOptions = {
             headers,
             method: "PATCH",
@@ -78,7 +88,7 @@ export default class HttpService {
         let {headers} = await this.coreService.getSession();
         headers["Content-Type"] = "application/json";
 
-        let url = this.url + res;
+        let url = this.API_URL + res;
         let requestOptions = {
             headers,
             method: "PUT",

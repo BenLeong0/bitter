@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import TextareaAutosize from "react-textarea-autosize";
-import ContextProps from "../../../Types/ContextProps";
-import { AccountContext } from "../../Account";
+import HttpService from "../../core/HttpService";
 
 export interface BitReplyBoxProps {
   post_id: string;
@@ -9,7 +8,7 @@ export interface BitReplyBoxProps {
 }
 
 const BitReplyBox: React.FC<BitReplyBoxProps> = ({ post_id, setReplying }) => {
-  const { getSession, API_URL }: ContextProps = useContext(AccountContext);
+  const httpService = new HttpService();
 
   const [post, updatePost] = useState<string>("");
   const [remainingChars, updateChars] = useState<number>(140);
@@ -32,56 +31,33 @@ const BitReplyBox: React.FC<BitReplyBoxProps> = ({ post_id, setReplying }) => {
 
   const handleSubmitClick = async (e: any) => {
     e.preventDefault();
-    e.preventDefault();
-    getSession().then(async ({ headers }) => {
-      // Check valid length
-      if (remainingChars < 0 || remainingChars >= 140) {
-        console.error("Invalid post length.");
-        return;
-      }
 
-      // Set loading
-      setIsLoading(true);
-      setErrorOccurred(false);
+    // Check valid length
+    if (remainingChars < 0 || remainingChars >= 140) {
+      console.error("Invalid post length.");
+      return;
+    }
 
-      // Set Content-Type (might be correct by default)
-      headers["Content-Type"] = "application/json";
+    // Set loading
+    setIsLoading(true);
+    setErrorOccurred(false);
 
-      // Request options
-      var requestOptions = {
-        headers,
-        method: "POST",
-        body: JSON.stringify({ content: post, replyTo: post_id }),
-      };
+    let res = "/bits";
+    let body = { content: post, replyTo: post_id };
+    let resp = await httpService.makePostRequest(res, body);
 
-      // Post to API
-      await fetch(`${API_URL}/bits`, requestOptions)
-        .then((response) => response.text())
-        .then((result) => {
-          const resultJSON = JSON.parse(result);
+    if (resp.code === "postSuccess") {
+      // Empty input field
+      updatePost("");
+      setReplying(false);
+      console.log(resp);
+    } else {
+      // Error message
+      setErrorOccurred(true);
+      console.error(resp);
+    }
 
-          // success/failure handling
-          if (resultJSON.code === "postSuccess") {
-            // Empty input field
-            updatePost("");
-            setReplying(false);
-          } else {
-            // Error message
-            setErrorOccurred(true);
-          }
-        })
-        .catch((err) => {
-          console.log("Error:", err);
-          setErrorOccurred(true);
-        })
-        .finally(() => {
-          // Set not loading
-          setIsLoading(false);
-        });
-    });
-    // Post reply
-    // Empty text box
-    // Hide textbox
+    setIsLoading(false);
   };
 
   const updateCharCount = () => {

@@ -11,6 +11,7 @@ import { AccountContext } from "../../Account";
 
 import BitInfo from "../../../Types/BitInfo";
 import ContextProps from "../../../Types/ContextProps";
+import HttpService from "../../core/HttpService";
 
 interface OtherProps {
   toggleReplying: () => void;
@@ -24,14 +25,14 @@ const BitButtonBar: React.FC<BitButtonBarProps> = ({
   replying,
   ...props
 }) => {
+  const httpService = new HttpService();
+
   // Affect like/dislike counter
   const [rebitShift, setRebitShift] = useState<number>(0);
   const [likeShift, setLikeShift] = useState<number>(0);
   const [dislikeShift, setDislikeShift] = useState<number>(0);
 
-  const { API_URL, getSession, isLoggedIn }: ContextProps = useContext(
-    AccountContext
-  );
+  const { isLoggedIn }: ContextProps = useContext(AccountContext);
 
   const [isReposted, setIsReposted] = useState<boolean>(
     typeof props.isReposted === "undefined" ? false : props.isReposted
@@ -62,90 +63,96 @@ const BitButtonBar: React.FC<BitButtonBarProps> = ({
     if (!isLoggedIn) return;
     setIsReposted(true);
     setRebitShift(rebitShift + 1);
-    getSession().then(async ({ headers }) => {
-      fetch(`${API_URL}/bits/rebit?post_id=${props.post_id}`, {
-        headers,
-        method: "POST",
-      })
-        .then((response) => response.text())
-        .then((result) => console.log(result))
-        .catch((error) => console.error(error));
-    });
+
+    let res = "/bits/rebit?post_id";
+    let body = { post_id: props.post_id };
+    let resp: any = await httpService.makePostRequest(res, body);
+
+    if (resp.code === "rebitSuccess") {
+      console.log(resp);
+    } else {
+      console.error(resp);
+    }
   };
 
-  const unrebit = () => {
+  const unrebit = async () => {
     if (!isLoggedIn) return;
     setIsReposted(false);
     setRebitShift(rebitShift - 1);
-    getSession().then(async ({ headers }) => {
-      fetch(`${API_URL}/bits/rebit?post_id=${props.post_id}`, {
-        headers,
-        method: "DELETE",
-      })
-        .then((response) => response.text())
-        .then((result) => console.log(result))
-        .catch((error) => console.error(error));
-    });
+
+    let res = "/bits/rebit?post_id";
+    let body = { post_id: props.post_id };
+    let resp: any = await httpService.makeDeleteRequest(res, body);
+
+    if (resp.code === "unrebitSuccess") {
+      console.log(resp);
+    } else {
+      console.error(resp);
+    }
   };
 
   const like = async () => {
     if (!isLoggedIn) return;
     setIsLiked(true);
     setLikeShift(likeShift + 1);
-    getSession().then(async ({ headers }) => {
-      fetch(`${API_URL}/bits/like?post_id=${props.post_id}`, {
-        headers,
-        method: "POST",
-      })
-        .then((response) => response.text())
-        .then((result) => console.log(result))
-        .catch((error) => console.error(error));
-    });
+
+    let res = "/bits/like";
+    let body = { post_id: props.post_id };
+    let resp: any = await httpService.makePostRequest(res, body);
+
+    if (resp.code === "likeSuccess") {
+      console.log(resp);
+    } else {
+      console.error(resp);
+    }
   };
 
   const unlike = async () => {
     if (!isLoggedIn) return;
     setIsLiked(false);
     setLikeShift(likeShift - 1);
-    getSession().then(async ({ headers }) => {
-      fetch(`${API_URL}/bits/like?post_id=${props.post_id}`, {
-        headers,
-        method: "DELETE",
-      })
-        .then((response) => response.text())
-        .then((result) => console.log(result))
-        .catch((error) => console.error(error));
-    });
+
+    let res = "/bits/like";
+    let body = { post_id: props.post_id };
+    let resp: any = await httpService.makeDeleteRequest(res, body);
+
+    if (resp.code === "unlikeSuccess") {
+      console.log(resp);
+    } else {
+      console.error(resp);
+    }
   };
 
   const dislike = async () => {
     if (!isLoggedIn) return;
     setIsDisliked(true);
     setDislikeShift(dislikeShift + 1);
-    getSession().then(async ({ headers }) => {
-      fetch(`${API_URL}/bits/dislike?post_id=${props.post_id}`, {
-        headers,
-        method: "POST",
-      })
-        .then((response) => response.text())
-        .then((result) => console.log(result))
-        .catch((error) => console.error(error));
-    });
+
+    let res = "/bits/dislike";
+    let body = { post_id: props.post_id };
+    let resp: any = await httpService.makePostRequest(res, body);
+
+    if (resp.code === "dislikeSuccess") {
+      console.log(resp);
+    } else {
+      console.error(resp);
+    }
   };
 
   const undislike = async () => {
     if (!isLoggedIn) return;
     setIsDisliked(false);
     setDislikeShift(dislikeShift - 1);
-    getSession().then(async ({ headers }) => {
-      fetch(`${API_URL}/bits/dislike?post_id=${props.post_id}`, {
-        headers,
-        method: "DELETE",
-      })
-        .then((response) => response.text())
-        .then((result) => console.log(result))
-        .catch((error) => console.error(error));
-    });
+
+    let res = "/bits/dislike";
+    let body = { post_id: props.post_id };
+    let resp: any = await httpService.makeDeleteRequest(res, body);
+
+    if (resp.code === "undislikeSuccess") {
+      console.log(resp);
+    } else {
+      console.error(resp);
+    }
   };
 
   return (

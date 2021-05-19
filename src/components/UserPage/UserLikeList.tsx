@@ -26,15 +26,19 @@ const UserBitList: React.FC<Props> = () => {
 
   const fetchBits = async () => {
     setIsLoading(true);
-    const res = `/users/posts/likes?handle=${currHandle}&myHandle=${myHandle}`;
-    const resp: any = await httpService.makeGetRequest(res);
+
+    let res = "/users/posts/likes";
+    let queryParams = { handle: currHandle, myHandle };
+    let resp: any = await httpService.makeGetRequest(res, queryParams);
 
     if (resp.code === "getSuccess") {
-      const bits: Array<BitInfo> = JSON.parse(resp.posts);
+      let bits: Array<BitInfo> = JSON.parse(resp.posts);
       setLikes(bits);
     } else {
       setLikes([]);
+      console.error(resp);
     }
+
     setIsLoading(false);
   };
 

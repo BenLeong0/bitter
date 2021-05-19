@@ -1,10 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import TextareaAutosize from "react-textarea-autosize";
 import Popup from "reactjs-popup";
 import Styled from "styled-components";
-import ContextProps from "../../../Types/ContextProps";
-import { AccountContext } from "../../Account";
 import HttpService from "../../core/HttpService";
 
 const StyledPopup = Styled(Popup)`
@@ -63,8 +61,6 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
     bio.trim().length <= maxBioLength;
   //#endregion
 
-  const { API_URL }: ContextProps = useContext(AccountContext);
-
   const resetInputs = () => {
     if (props.display_name) {
       setDisplayName(props.display_name);
@@ -108,17 +104,19 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
 
     // Make patch request
     setIsLoading(true);
-    let url = `${API_URL}/users`;
+    let res = "/users";
     let body = { display_name: displayName, bio: bio };
-    await httpService.makePatchRequest(url, body).then((resp) => {
-      if (resp.code === "updateSuccess") {
-        // Refresh page
-        setChangesSubmitted(true);
-      } else {
-        // Error message
-        setTextErrorOccurred(true);
-      }
-    });
+    let resp: any = await httpService.makePatchRequest(res, body);
+
+    if (resp.code === "updateSuccess") {
+      // Refresh page
+      setChangesSubmitted(true);
+    } else {
+      // Error message
+      setTextErrorOccurred(true);
+      console.error(resp);
+    }
+
     setIsLoading(false);
   };
   //#endregion
@@ -134,17 +132,19 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
     e.preventDefault();
 
     setIsLoading(true);
-    let url = `${API_URL}/users`;
-    await httpService.uploadImage(url, pfp, "pfp").then((resp) => {
-      if (resp.code === "uploadSuccess") {
-        // Refresh page
-        setChangesSubmitted(true);
-        setPfp(undefined);
-      } else {
-        // Error message
-        setPfpErrorOccurred(true);
-      }
-    });
+    let res = "/users";
+    let resp: any = await httpService.uploadImage(res, pfp, "pfp");
+
+    if (resp.code === "uploadSuccess") {
+      // Refresh page
+      setChangesSubmitted(true);
+      setPfp(undefined);
+    } else {
+      // Error message
+      setPfpErrorOccurred(true);
+      console.error(resp);
+    }
+
     setIsLoading(false);
   };
   //#endregion
@@ -160,17 +160,19 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
     e.preventDefault();
 
     setIsLoading(true);
-    let url = `${API_URL}/users`;
-    await httpService.uploadImage(url, banner, "banner").then((resp) => {
-      if (resp.code === "uploadSuccess") {
-        // Refresh page
-        setChangesSubmitted(true);
-        setBanner(undefined);
-      } else {
-        // Error message
-        setBannerErrorOccurred(true);
-      }
-    });
+    let res = "/users";
+    let resp: any = await httpService.uploadImage(res, banner, "banner");
+
+    if (resp.code === "uploadSuccess") {
+      // Refresh page
+      setChangesSubmitted(true);
+      setBanner(undefined);
+    } else {
+      // Error message
+      setBannerErrorOccurred(true);
+      console.error(resp);
+    }
+
     setIsLoading(false);
   };
   //#endregion

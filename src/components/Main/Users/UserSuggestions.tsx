@@ -19,8 +19,10 @@ const UserSuggestions: React.FC<{}> = () => {
   const fetchSuggestions = async () => {
     setIsLoading(true);
 
-    const res = `/suggested?myHandle=${myHandle}`;
-    const resp: any = await httpService.makeGetRequest(res);
+    let res = "/users/suggested";
+    let queryParams = { myHandle };
+    let resp: any = await httpService.makeGetRequest(res, queryParams);
+
     if (resp.code === "getSuccess") {
       setFetchError(false);
       const users: Array<User> = JSON.parse(resp.users);
@@ -28,7 +30,9 @@ const UserSuggestions: React.FC<{}> = () => {
     } else {
       updateSuggestions([]);
       setFetchError(true);
+      console.error(resp);
     }
+
     setIsLoading(false);
   };
 
