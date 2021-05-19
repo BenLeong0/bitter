@@ -19,8 +19,9 @@ const UserSuggestions: React.FC<{}> = () => {
   const fetchSuggestions = async () => {
     setIsLoading(true);
 
-    let res = `/users/suggested?myHandle=${myHandle}`;
-    let resp: any = await httpService.makeGetRequest(res);
+    let res = `/users/suggested`;
+    let queryParams = { myHandle };
+    let resp: any = await httpService.makeGetRequest(res, queryParams);
 
     if (resp.code === "getSuccess") {
       setFetchError(false);
