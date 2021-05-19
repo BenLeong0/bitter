@@ -1,19 +1,25 @@
 import CoreService from "./CoreService";
 
+
+interface QueryParams {
+    [key: string]: string;
+}
+
+
 export default class HttpService {
+
     coreService: CoreService;
     url: string = "https://7z39hjjfg1.execute-api.eu-west-2.amazonaws.com";
     stage: string = "/dev";
     API_URL: string = this.url + this.stage;
 
+
     constructor() {
         this.coreService = new CoreService();
     }
 
-    async makeGetRequest(
-        res: string,
-        queryParams?: { [key: string]: string; }
-    ): Promise<any> {
+
+    async makeGetRequest(res: string, queryParams?: QueryParams): Promise<any> {
         let url = this.API_URL + res;
         let requestOptions = {
             method: "GET"
@@ -32,6 +38,7 @@ export default class HttpService {
         return resp;
     }
 
+
     async makePostRequest(res: string, body: any): Promise<any> {
         let {headers} = await this.coreService.getSession();
         headers["Content-Type"] = "application/json";
@@ -47,6 +54,7 @@ export default class HttpService {
         let resp: string = await data.text();
         return JSON.parse(resp);
     }
+
 
     async makeDeleteRequest(res: string, body: any): Promise<any> {
         let {headers} = await this.coreService.getSession();
@@ -64,6 +72,7 @@ export default class HttpService {
         return JSON.parse(resp);
     }
 
+
     async makePatchRequest(res: string, body: any): Promise<any> {
         let {headers} = await this.coreService.getSession();
         headers["Content-Type"] = "application/json";
@@ -79,6 +88,7 @@ export default class HttpService {
         let resp: string = await data.text();
         return JSON.parse(resp);
     }
+
 
     async uploadImage(res: string, file: any, field?: string): Promise<any> {
         let base64File = await this.coreService.toBase64(file);
