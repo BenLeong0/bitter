@@ -1,6 +1,11 @@
 import CoreService from "./CoreService";
 
 
+interface QueryParams {
+    [key: string]: string;
+}
+
+
 export default class HttpService {
 
     coreService: CoreService;
@@ -14,10 +19,7 @@ export default class HttpService {
     }
 
 
-    async makeGetRequest(
-        res: string,
-        queryParams?: { [key: string]: string; }
-    ): Promise<any> {
+    async makeGetRequest(res: string, queryParams?: QueryParams): Promise<any> {
         let url = this.API_URL + res;
         let requestOptions = {
             method: "GET"
