@@ -94,7 +94,7 @@ const BitPage: React.FC<{}> = () => {
               )}
             </>
           ) : (
-            <BitNotFound />
+            <div className="user-not-found">Post could not be found.</div>
           )}
         </div>
       )}
