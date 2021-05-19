@@ -39,7 +39,8 @@ const BitPage: React.FC<{}> = () => {
 
     // Returns {post_id: '', handle: ''} if post not found
     const res = `/bits?post_id=${post_id}&handle=${myHandle}`;
-    const resp: any = await httpService.makeGetRequest(res);
+    let queryParams = { handle: myHandle, post_id };
+    const resp: any = await httpService.makeGetRequest(res, queryParams);
 
     if (resp.code === "getSuccess") {
       const post: BitInfo = JSON.parse(resp.post);

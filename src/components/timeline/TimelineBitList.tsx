@@ -29,8 +29,9 @@ const TimelineBitList: React.FC<{ timelineType: string }> = ({
     setIsLoading(true);
     console.log("Fetching bits...");
 
-    let res = `/bits/${timelineType}?handle=${myHandle}`;
-    let resp: any = await httpService.makeGetRequest(res);
+    let res = `/bits/${timelineType}`;
+    let queryParams = { handle: myHandle };
+    let resp: any = await httpService.makeGetRequest(res, queryParams);
 
     // Only update if final request ie ignore if another request was sent out after
     if (requestId === requestCounter) {

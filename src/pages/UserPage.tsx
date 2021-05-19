@@ -34,8 +34,9 @@ const UserPage: React.FC<{}> = () => {
     setIsLoading(true);
     updatePageState(0);
 
-    let res = `/users?handle=${handle}&myHandle=${myHandle}`;
-    let resp: any = await httpService.makeGetRequest(res);
+    let res = "/users";
+    let queryParams = { handle, myHandle };
+    let resp: any = await httpService.makeGetRequest(res, queryParams);
 
     if (resp.code === "getSuccess") {
       let user: User = JSON.parse(resp.user);

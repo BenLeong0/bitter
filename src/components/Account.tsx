@@ -124,7 +124,7 @@ const Account: React.FC<Props> = ({
     });
 
   const createFollowEdge = async (destinationHandle: string) => {
-    let res = `/users/follow`;
+    let res = "/users/follow";
     let body = { handle: destinationHandle };
     let resp: any = await httpService.makePostRequest(res, body);
 
@@ -136,7 +136,7 @@ const Account: React.FC<Props> = ({
   };
 
   const deleteFollowEdge = async (destinationHandle: string) => {
-    let res = `/users/follow`;
+    let res = "/users/follow";
     let body = { handle: destinationHandle };
     let resp: any = await httpService.makeDeleteRequest(res, body);
 
@@ -182,8 +182,9 @@ const Account: React.FC<Props> = ({
   };
 
   const isEmailUsed = async (email: string): Promise<boolean> => {
-    let res = `/users/exists?email=${email}`;
-    let resp: any = await httpService.makeGetRequest(res);
+    let res = "/users/exists";
+    let queryParams = { email };
+    let resp: any = await httpService.makeGetRequest(res, queryParams);
 
     console.log(resp);
     return resp;
