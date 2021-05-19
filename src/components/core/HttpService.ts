@@ -1,10 +1,5 @@
 import CoreService from "./CoreService";
 
-interface queryParam {
-    param: string;
-    value: string
-}
-
 export default class HttpService {
     coreService: CoreService;
     url: string = "https://7z39hjjfg1.execute-api.eu-west-2.amazonaws.com";
@@ -17,7 +12,7 @@ export default class HttpService {
 
     async makeGetRequest(
         res: string,
-        queryParams?: Array<queryParam>
+        queryParams?: { [key: string]: string; }
     ): Promise<any> {
         let url = this.API_URL + res;
         let requestOptions = {
@@ -25,11 +20,11 @@ export default class HttpService {
         };
 
         if (typeof queryParams !== "undefined") {
-            let reducer = (accumulator: string, currValue: queryParam) => (
-                accumulator + currValue.param + '=' + currValue.value + '&'
+            let reducer = (accumulator: string, currValue: string[]) => (
+                accumulator + currValue[0] + '=' + currValue[1] + '&'
             );
 
-            let queryString =  queryParams.reduce(reducer, '?').slice(0,-1);
+            let queryString =  Object.entries(queryParams).reduce(reducer, '?').slice(0,-1);
             url += queryString;
         };
 
