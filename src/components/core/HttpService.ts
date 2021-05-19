@@ -113,4 +113,14 @@ export default class HttpService {
         let resp: string = await data.text();
         return JSON.parse(resp);
     }
+
+
+    isEmailUsed = async (email: string): Promise<boolean> => {
+      let res = "/users/exists";
+      let queryParams = { email };
+      let resp: any = await this.makeGetRequest(res, queryParams);
+
+      console.log(resp);
+      return resp;
+    };
 }

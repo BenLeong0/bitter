@@ -1,16 +1,7 @@
 import { AuthenticationDetails, CognitoUser, CognitoUserAttribute, CognitoUserSession } from "amazon-cognito-identity-js";
 import Pool from "../../UserPool";
-import HttpService from "./HttpService";
 
 export default class CoreService {
-
-    httpService: HttpService;
-
-
-    constructor() {
-        this.httpService = new HttpService();
-    }
-
 
     getSession = async (): Promise<any> => {
         let resp: any = new Promise((resolve, reject) => {
@@ -92,14 +83,4 @@ export default class CoreService {
             reader.onerror = (error) => reject(error);
         })
     );
-
-
-    isEmailUsed = async (email: string): Promise<boolean> => {
-      let res = "/users/exists";
-      let queryParams = { email };
-      let resp: any = await this.httpService.makeGetRequest(res, queryParams);
-
-      console.log(resp);
-      return resp;
-    };
 }
