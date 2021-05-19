@@ -21,11 +21,10 @@ export default class HttpService {
 
         if (typeof queryParams !== "undefined") {
             let reducer = (accumulator: string, currValue: string[]) => (
-                accumulator + currValue[0] + '=' + currValue[1] + '&'
+                accumulator + '&' + currValue[0] + '=' + currValue[1]
             );
-
-            let queryString =  Object.entries(queryParams).reduce(reducer, '?').slice(0,-1);
-            url += queryString;
+            let queryString =  Object.entries(queryParams).reduce(reducer, '');
+            url += '?' + queryString;
         };
 
         let data: any = await fetch(url, requestOptions);
