@@ -45,7 +45,7 @@ const UserBitList: React.FC<Props> = ({ replies }) => {
   const fetchBits = async () => {
     setIsLoading(true);
 
-    let res = `/users/posts`;
+    let res = "/users/posts";
     let queryParams = { handle: currHandle, myHandle };
     let resp: any = await httpService.makeGetRequest(res, queryParams);
 

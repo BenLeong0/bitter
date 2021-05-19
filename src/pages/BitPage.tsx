@@ -38,7 +38,7 @@ const BitPage: React.FC<{}> = () => {
     setIsLoading(true);
 
     // Returns {post_id: '', handle: ''} if post not found
-    const res = `/bits?post_id=${post_id}&handle=${myHandle}`;
+    const res = "/bits";
     let queryParams = { handle: myHandle, post_id };
     const resp: any = await httpService.makeGetRequest(res, queryParams);
 

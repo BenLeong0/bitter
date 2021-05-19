@@ -104,7 +104,7 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
 
     // Make patch request
     setIsLoading(true);
-    let res = `/users`;
+    let res = "/users";
     let body = { display_name: displayName, bio: bio };
     let resp: any = await httpService.makePatchRequest(res, body);
 
@@ -132,7 +132,7 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
     e.preventDefault();
 
     setIsLoading(true);
-    let res = `/users`;
+    let res = "/users";
     let resp: any = await httpService.uploadImage(res, pfp, "pfp");
 
     if (resp.code === "uploadSuccess") {
@@ -160,7 +160,7 @@ const EditProfileButton: React.FC<{ bio?: string; display_name?: string }> = (
     e.preventDefault();
 
     setIsLoading(true);
-    let res = `/users`;
+    let res = "/users";
     let resp: any = await httpService.uploadImage(res, banner, "banner");
 
     if (resp.code === "uploadSuccess") {

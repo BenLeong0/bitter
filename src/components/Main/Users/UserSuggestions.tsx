@@ -19,7 +19,7 @@ const UserSuggestions: React.FC<{}> = () => {
   const fetchSuggestions = async () => {
     setIsLoading(true);
 
-    let res = `/users/suggested`;
+    let res = "/users/suggested";
     let queryParams = { myHandle };
     let resp: any = await httpService.makeGetRequest(res, queryParams);
 

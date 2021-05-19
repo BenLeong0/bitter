@@ -43,7 +43,7 @@ const ChangeEmail: React.FC<ChangeEmailProps> = () => {
         let session = await core.getSession();
         let { accessToken } = session;
 
-        let res = `/users`;
+        let res = "/users";
         let body = { accessToken: accessToken.jwtToken };
         let resp = await httpService.makeDeleteRequest(res, body);
 

@@ -134,7 +134,7 @@ const Bit: React.FC<BitProps> = ({ classes = "", ...bitInfo }) => {
   const handleDeletePost = async (e: any) => {
     e.preventDefault();
 
-    let res = `/bits`;
+    let res = "/bits";
     let body = { post_id: bitInfo.post_id };
     let resp: any = await httpService.makeDeleteRequest(res, body);
 

@@ -25,7 +25,7 @@ const UserFollowing: React.FC<UserFollowingProps> = () => {
   const fetchUsers = async () => {
     setIsLoading(true);
 
-    let res = `/users/following`;
+    let res = "/users/following";
     let queryParams = { handle: currHandle, myHandle };
     let resp: any = await httpService.makeGetRequest(res, queryParams);
 
