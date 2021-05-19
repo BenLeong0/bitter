@@ -1,5 +1,9 @@
 import CoreService from "./CoreService";
 
+interface queryParam {
+    param: string;
+    value: string
+}
 
 export default class HttpService {
     coreService: CoreService;
@@ -11,10 +15,22 @@ export default class HttpService {
         this.coreService = new CoreService();
     }
 
-    async makeGetRequest(res: string): Promise<any> {
+    async makeGetRequest(
+        res: string,
+        queryParams?: Array<queryParam>
+    ): Promise<any> {
         let url = this.API_URL + res;
         let requestOptions = {
             method: "GET"
+        };
+
+        if (typeof queryParams !== "undefined") {
+            let reducer = (accumulator: string, currValue: queryParam) => (
+                accumulator + currValue.param + '=' + currValue.value + '&'
+            );
+
+            let queryString =  queryParams.reduce(reducer, '?').slice(0,-1);
+            url += queryString;
         };
 
         let data: any = await fetch(url, requestOptions);
