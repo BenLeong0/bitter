@@ -1,7 +1,5 @@
 export default interface ContextProps {
-  API_URL: string;
   authenticate: (Username: string, Password: string) => Promise<any>;
-  isEmailUsed: (email: string) => Promise<boolean>
   getSession: () => Promise<any>;
   logout: () => void;
   refreshList: boolean;

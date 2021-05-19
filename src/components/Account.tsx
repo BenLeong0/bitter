@@ -10,7 +10,6 @@ import HttpService from "./core/HttpService";
 
 // type ContextProps = {
 //   authenticate: (Username: string, Password: string) => Promise<any>;
-//   isEmailUsed: (email: string) => Promise<boolean>
 //   getSession: () => Promise<any>;
 //   logout: () => void;
 //   refreshList: boolean;
@@ -181,15 +180,6 @@ const Account: React.FC<Props> = ({
     }
   };
 
-  const isEmailUsed = async (email: string): Promise<boolean> => {
-    let res = "/users/exists";
-    let queryParams = { email };
-    let resp: any = await httpService.makeGetRequest(res, queryParams);
-
-    console.log(resp);
-    return resp;
-  };
-
   const refreshBitList = () => {
     setRefreshList(!refreshList);
   };
@@ -198,7 +188,6 @@ const Account: React.FC<Props> = ({
     <AccountContext.Provider
       value={{
         authenticate,
-        isEmailUsed,
         getSession,
         logout,
         refreshList,

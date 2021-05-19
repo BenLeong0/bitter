@@ -1,12 +1,12 @@
 import { CognitoUserAttribute } from "amazon-cognito-identity-js";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { AccountContext } from "../components/Account";
-import ContextProps from "../Types/ContextProps";
+import CoreService from "../components/core/CoreService";
 import UserPool from "../UserPool";
 import "./Register.css";
 
 const Register: React.FC<{}> = () => {
+  const coreService = new CoreService();
   document.title = "Register / Bitter";
 
   const [username, setUsername] = useState<string>("");
@@ -29,8 +29,6 @@ const Register: React.FC<{}> = () => {
   const [hasSucceeded, setHasSucceeded] = useState<boolean>(false);
   const [errorOccurred, setErrorOccurred] = useState<boolean>(false);
 
-  const { isEmailUsed }: ContextProps = useContext(AccountContext);
-
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -41,7 +39,7 @@ const Register: React.FC<{}> = () => {
     }
 
     // Check if email exists
-    if (await isEmailUsed(email)) {
+    if (await coreService.isEmailUsed(email)) {
       setEmailExists(true);
       return;
     }
