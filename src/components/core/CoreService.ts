@@ -6,48 +6,46 @@ export default class CoreService {
     getSession = async (): Promise<any> => {
         let resp: any = new Promise((resolve, reject) => {
             const user: CognitoUser | null = Pool.getCurrentUser();
-            if (!user) {reject("not logged in"); return}
+            if (!user) {reject("not logged in"); return};
             user.getSession(async (err: Error, session: CognitoUserSession | null) => {
                 if (err) {
                     reject();
                 } else if (session) {
                     const attributes: any = await new Promise((resolve, reject) => {
-                    user.getUserAttributes(
-                        (
-                        err: Error | undefined,
-                        attributes: CognitoUserAttribute[] | undefined
+                        user.getUserAttributes((
+                            err: Error | undefined,
+                            attributes: CognitoUserAttribute[] | undefined
                         ) => {
-                        if (err) {
-                            reject(err);
-                        } else if (attributes) {
-                            const results: any = {};
+                            if (err) {
+                                reject(err);
+                            } else if (attributes) {
+                                const results: any = {};
 
-                            for (let attribute of attributes) {
-                            const { Name, Value } = attribute;
-                            results[Name] = Value;
+                                for (let attribute of attributes) {
+                                    const { Name, Value } = attribute;
+                                    results[Name] = Value;
+                                }
+
+                                resolve(results);
                             }
-
-                            resolve(results);
-                        }
-                        }
-                    );
+                        });
                     });
 
                     const token = session.getIdToken().getJwtToken();
 
                     resolve({
-                    user,
-                    headers: {
-                        Authorization: token,
-                        "x-api-key": attributes["custom:apikey"],
-                    },
-                    ...session,
-                    ...attributes,
+                        user,
+                        headers: {
+                            Authorization: token,
+                            "x-api-key": attributes["custom:apikey"],
+                        },
+                        ...session,
+                        ...attributes,
                     });
                 }
             });
-        })
-        return resp
+        });
+        return resp;
     };
 
 
