@@ -96,7 +96,7 @@ const BitButtonBar: React.FC<BitButtonBarProps> = ({
     setIsLiked(true);
     setLikeShift(likeShift + 1);
 
-    let res = `/bits/like?post_id=${props.post_id}`;
+    let res = `/bits/like`;
     let body = { post_id: props.post_id };
     let resp: any = await httpService.makePostRequest(res, body);
 
@@ -112,7 +112,7 @@ const BitButtonBar: React.FC<BitButtonBarProps> = ({
     setIsLiked(false);
     setLikeShift(likeShift - 1);
 
-    let res = `/bits/like?post_id=${props.post_id}`;
+    let res = `/bits/like`;
     let body = { post_id: props.post_id };
     let resp: any = await httpService.makeDeleteRequest(res, body);
 
@@ -128,7 +128,7 @@ const BitButtonBar: React.FC<BitButtonBarProps> = ({
     setIsDisliked(true);
     setDislikeShift(dislikeShift + 1);
 
-    let res = `/bits/dislike?post_id=${props.post_id}`;
+    let res = `/bits/dislike`;
     let body = { post_id: props.post_id };
     let resp: any = await httpService.makePostRequest(res, body);
 
@@ -144,7 +144,7 @@ const BitButtonBar: React.FC<BitButtonBarProps> = ({
     setIsDisliked(false);
     setDislikeShift(dislikeShift - 1);
 
-    let res = `/bits/dislike?post_id=${props.post_id}`;
+    let res = `/bits/dislike`;
     let body = { post_id: props.post_id };
     let resp: any = await httpService.makeDeleteRequest(res, body);
 
