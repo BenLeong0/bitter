@@ -2,7 +2,7 @@ import { AuthenticationDetails, CognitoUser, CognitoUserAttribute, CognitoUserSe
 import Pool from "../../UserPool";
 
 export default class CoreService {
-    // NEATEN!
+
     getSession = async (): Promise<any> => {
         let resp: any = new Promise((resolve, reject) => {
             const user: CognitoUser | null = Pool.getCurrentUser();
@@ -75,11 +75,12 @@ export default class CoreService {
     }
 
 
-    toBase64 = (file: any) =>
+    toBase64 = (file: any) => (
         new Promise((resolve, reject) => {
             const reader = new FileReader();
             reader.readAsDataURL(file);
             reader.onload = () => resolve(reader.result);
             reader.onerror = (error) => reject(error);
-        });
+        })
+    );
 }
