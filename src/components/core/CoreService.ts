@@ -4,6 +4,21 @@ import Session from "../../Types/Session";
 
 export default class CoreService {
 
+    months: string[] = [
+        "Jan ",
+        "Feb ",
+        "Mar ",
+        "Apr ",
+        "May ",
+        "Jun ",
+        "Jul ",
+        "Aug ",
+        "Sep ",
+        "Oct ",
+        "Nov ",
+        "Dec ",
+    ];
+
     getSession = async (): Promise<Session> => {
         let resp: any = new Promise<Session>((resolve, reject) => {
             const user: CognitoUser | null = Pool.getCurrentUser();
@@ -115,20 +130,6 @@ export default class CoreService {
     timestampFormat(post_time: string): string {
         const bitTime: Date = new Date(post_time);
         const milliseconds: number = Date.now() - bitTime.getTime(); // Difference in milliseconds
-        const months: Array<string> = [
-            "Jan ",
-            "Feb ",
-            "Mar ",
-            "Apr ",
-            "May ",
-            "Jun ",
-            "Jul ",
-            "Aug ",
-            "Sep ",
-            "Oct ",
-            "Nov ",
-            "Dec ",
-        ];
 
         var temp: number = Math.floor(milliseconds / 1000);
 
@@ -136,9 +137,9 @@ export default class CoreService {
         if (days) {
             // Full date if over a month ago, show year if not current year
             if (days > 30) {
-            const day: string = String(bitTime.getDate());
-            const month: string = months[bitTime.getMonth()];
-            const year: string =
+            let day: string = String(bitTime.getDate());
+            let month: string = this.months[bitTime.getMonth()];
+            let year: string =
                 bitTime.getFullYear() === new Date().getFullYear()
                 ? ""
                 : ", bitTime.getFullYear()";
@@ -164,7 +165,7 @@ export default class CoreService {
         }
 
 
-    formatDate(date: Date) {
+    formatBitDate(date: Date) {
         var hours: any = date.getHours();
         var minutes: any = date.getMinutes();
         var ampm: any = hours >= 12 ? "pm" : "am";
@@ -183,4 +184,13 @@ export default class CoreService {
             strTime
         );
     }
+
+
+    formatJoinDate = (date: string | undefined) => {
+      if (!date) return "";
+      let x = new Date(date);
+      let month = x.getMonth();
+      let year = x.getFullYear();
+      return "Joined: " + this.months[month] + " " + year;
+    };
 }

@@ -154,7 +154,7 @@ const Bit: React.FC<BitInfo & OtherProps> = ({ classes = "", ...bitInfo }) => {
               <Link to={`/b/${bitInfo.post_id}`}>
                 <span
                   className="bit-info-time"
-                  title={coreService.formatDate(new Date(bitInfo.post_time))}
+                  title={coreService.formatBitDate(new Date(bitInfo.post_time))}
                 >
                   {coreService.timestampFormat(bitInfo.post_time)}
                 </span>

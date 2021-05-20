@@ -1,15 +1,7 @@
 import React, { useState } from "react";
 
 import User from "../../../Types/User";
-// interface User {
-//   user_id: string;
-//   handle?: string;
-//   display_name?: string;
-//   created_on?: string;
-//   bio?: string;
-//   follower_count?: number;
-//   following_count?: number;
-// }
+import CoreService from "../../core/CoreService";
 
 interface Props {
   updatePageState: (stateId: number) => void;
@@ -17,32 +9,10 @@ interface Props {
 }
 
 const UserInfo: React.FC<Props> = ({ updatePageState, user }) => {
+  const coreService = new CoreService();
   const [listId, setListId] = useState<number>(0);
   const printProps = () => {
     console.log("yo", user);
-  };
-
-  const months: Array<string> = [
-    "Jan ",
-    "Feb ",
-    "Mar ",
-    "Apr ",
-    "May ",
-    "Jun ",
-    "Jul ",
-    "Aug ",
-    "Sep ",
-    "Oct ",
-    "Nov ",
-    "Dec ",
-  ];
-
-  const formatDate = (date: string | undefined) => {
-    if (!date) return "";
-    const x = new Date(date);
-    const month = x.getMonth();
-    const year = x.getFullYear();
-    return "Joined: " + months[month] + " " + year;
   };
 
   const changeTab = (state: number): void => {
@@ -55,7 +25,9 @@ const UserInfo: React.FC<Props> = ({ updatePageState, user }) => {
       <div className="user-displayname" onClick={printProps}>
         {user.display_name}
       </div>
-      <div id="user-joindate">{formatDate(user.created_on)}</div>
+      <div id="user-joindate">
+        {coreService.formatJoinDate(user.created_on)}
+      </div>
       <div className="user-handle">{user.handle}</div>
       <div className="user-bio">{user.bio}</div>
       <div className="user-tabs">
