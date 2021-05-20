@@ -1,12 +1,12 @@
 import { CognitoUserAttribute } from "amazon-cognito-identity-js";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import HttpService from "../components/core/HttpService";
+import ValidationService from "../components/core/ValidationService";
 import UserPool from "../UserPool";
 import "./Register.css";
 
 const Register: React.FC<{}> = () => {
-  const httpService = new HttpService();
+  const validationService = new ValidationService();
   document.title = "Register / Bitter";
 
   const [username, setUsername] = useState<string>("");
@@ -39,7 +39,7 @@ const Register: React.FC<{}> = () => {
     }
 
     // Check if email exists
-    if (await httpService.isEmailUsed(email)) {
+    if (await validationService.isEmailUsed(email)) {
       setEmailExists(true);
       return;
     }
