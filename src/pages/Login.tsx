@@ -4,32 +4,33 @@ import { Link } from "react-router-dom";
 import "./Login.css";
 import { CognitoUserSession } from "amazon-cognito-identity-js";
 import ContextProps from "../Types/ContextProps";
+import CoreService from "../components/core/CoreService";
 
 interface LoginProps {
   setMyHandle: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const Login: React.FC<LoginProps> = ({ setMyHandle }) => {
+  const coreService = new CoreService();
   document.title = "Login / Bitter";
 
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
   const [emailNotVerified, setEmailNotVerified] = useState<boolean>(false);
-  const [invalidLoginDetails, setInvalidLoginDetails] = useState<boolean>(
-    false
-  );
+  const [invalidLoginDetails, setInvalidLoginDetails] =
+    useState<boolean>(false);
 
   const [errorOccurred, setErrorOccurred] = useState<boolean>(false);
 
-  const { authenticate, setIsLoggedIn, setIsAdmin }: ContextProps = useContext(
-    AccountContext
-  );
+  const { setIsLoggedIn, setIsAdmin }: ContextProps =
+    useContext(AccountContext);
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    authenticate(username, password)
+    coreService
+      .login(username, password)
       .then((data: CognitoUserSession) => {
         console.log("Logged in!");
         setMyHandle(data.getIdToken().payload["cognito:username"]);

@@ -76,6 +76,31 @@ export default class CoreService {
     }
 
 
+    login = async (Username: string, Password: string) =>
+        await new Promise<CognitoUserSession>((resolve, reject) => {
+            const user = new CognitoUser({ Username, Pool });
+
+            const authDetails = new AuthenticationDetails({ Username, Password });
+
+            user.authenticateUser(authDetails, {
+                onSuccess: (data) => {
+                    console.log("onSuccess:", data);
+                    resolve(data);
+                },
+
+                onFailure: (err) => {
+                    console.error("onFailure:", err);
+                    reject(err);
+                },
+
+                newPasswordRequired: (data) => {
+                    console.log("newPasswordRequired:", data);
+                    resolve(data);
+                },
+            });
+        });
+
+
     toBase64 = (file: any) => (
         new Promise((resolve, reject) => {
             const reader = new FileReader();
