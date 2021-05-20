@@ -1,6 +1,5 @@
 export default interface ContextProps {
   authenticate: (Username: string, Password: string) => Promise<any>;
-  getSession: () => Promise<any>;
   logout: () => void;
   refreshList: boolean;
   setRefreshList: React.Dispatch<React.SetStateAction<boolean>>;
@@ -15,6 +14,4 @@ export default interface ContextProps {
   setIsAdmin: React.Dispatch<React.SetStateAction<boolean>>;
   myHandle: string;
   setMyHandle: React.Dispatch<React.SetStateAction<string>>;
-  createFollowEdge: (destinationId: string) => Promise<void>;
-  deleteFollowEdge: (destinationId: string) => Promise<void>;
 };

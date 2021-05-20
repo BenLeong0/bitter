@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import ContextProps from "../../../../Types/ContextProps";
 import { AccountContext } from "../../../Account";
+import InteractionsService from "../../../core/InteractionsService";
 
 type Props = {
   setIsFollowingSuggested: React.Dispatch<React.SetStateAction<boolean>>;
@@ -8,14 +9,11 @@ type Props = {
 };
 
 const UnfollowButton: React.FC<Props> = (props) => {
+  const interactionsService = new InteractionsService();
   const { setIsFollowingSuggested, handle } = props;
 
-  const {
-    myHandle,
-    currHandle,
-    setIsFollowing,
-    deleteFollowEdge,
-  }: ContextProps = useContext(AccountContext);
+  const { myHandle, currHandle, setIsFollowing }: ContextProps =
+    useContext(AccountContext);
 
   const unfollow = async () => {
     if (myHandle === handle) {
@@ -31,7 +29,7 @@ const UnfollowButton: React.FC<Props> = (props) => {
     }
 
     // update db
-    deleteFollowEdge(handle);
+    interactionsService.deleteFollowEdge(handle);
   };
 
   return (
