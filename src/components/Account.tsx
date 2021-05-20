@@ -1,7 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 import { CognitoUser, AuthenticationDetails } from "amazon-cognito-identity-js";
 import Pool from "../UserPool";
-import HttpService from "./core/HttpService";
 import CoreService from "./core/CoreService";
 
 // type ContextProps = {
@@ -20,8 +19,6 @@ import CoreService from "./core/CoreService";
 //   setIsAdmin: React.Dispatch<React.SetStateAction<boolean>>;
 //   myHandle: string;
 //   setMyHandle: React.Dispatch<React.SetStateAction<string>>;
-//   createFollowEdge: (destinationId: string) => Promise<void>;
-//   deleteFollowEdge: (destinationId: string) => Promise<void>;
 // };
 
 interface Props {
@@ -41,7 +38,6 @@ const Account: React.FC<Props> = ({
   setMyHandle,
   children,
 }) => {
-  const httpService = new HttpService();
   const coreService = new CoreService();
 
   // Info about current user being viewed, i.e. owner of /u/handle
@@ -68,30 +64,6 @@ const Account: React.FC<Props> = ({
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const createFollowEdge = async (destinationHandle: string) => {
-    let res = "/users/follow";
-    let body = { handle: destinationHandle };
-    let resp: any = await httpService.makePostRequest(res, body);
-
-    if (resp.code === "followSuccess") {
-      console.log(resp);
-    } else {
-      console.error(resp);
-    }
-  };
-
-  const deleteFollowEdge = async (destinationHandle: string) => {
-    let res = "/users/follow";
-    let body = { handle: destinationHandle };
-    let resp: any = await httpService.makeDeleteRequest(res, body);
-
-    if (resp.code === "unfollowSuccess") {
-      console.log(resp);
-    } else {
-      console.error(resp);
-    }
-  };
 
   const authenticate = async (Username: string, Password: string) =>
     await new Promise((resolve, reject) => {
@@ -149,8 +121,6 @@ const Account: React.FC<Props> = ({
         setIsAdmin,
         myHandle,
         setMyHandle,
-        createFollowEdge,
-        deleteFollowEdge,
       }}
     >
       {children}
