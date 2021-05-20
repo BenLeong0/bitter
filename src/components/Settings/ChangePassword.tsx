@@ -37,8 +37,6 @@ const ChangePassword: React.FC<ChangePasswordProps> = () => {
       return;
     }
 
-    let { user } = await coreService.getSession();
-
     let callback = (err: any, result: any): void => {
       if (err) console.error(err);
       if (result === "SUCCESS") {
@@ -60,7 +58,7 @@ const ChangePassword: React.FC<ChangePasswordProps> = () => {
 
     coreService
       .authenticate(password)
-      .then(() => user.changePassword(password, newPassword, callback))
+      .then((user: any) => user.changePassword(password, newPassword, callback))
       .catch(catchError);
   };
 
