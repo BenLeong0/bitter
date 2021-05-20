@@ -41,7 +41,6 @@ const Account: React.FC<Props> = ({
       .catch((err) => {
         setMyHandle("");
         setIsAdmin(false);
-
         return;
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
