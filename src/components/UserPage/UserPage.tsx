@@ -19,7 +19,7 @@ const UserPage: React.FC<{}> = () => {
   const [user, setUser] = useState<User>({ handle: "" });
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [listState, setListState] = useState<any>(
-    <UserBitList replies={false} />
+    <UserBitList showReplies={false} />
   );
 
   document.title = (user.handle ? "@" + user.handle : "user") + " / Bitter";
@@ -74,10 +74,10 @@ const UserPage: React.FC<{}> = () => {
   function updatePageState(stateId: number): void {
     if (stateId === 0) {
       // Posts
-      setListState(<UserBitList replies={false} />);
+      setListState(<UserBitList showReplies={false} />);
     } else if (stateId === 1) {
       // Posts and replies
-      setListState(<UserBitList replies={true} />);
+      setListState(<UserBitList showReplies={true} />);
     } else if (stateId === 2) {
       // following list
       setListState(<UserFollowing />);

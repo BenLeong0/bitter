@@ -9,10 +9,10 @@ import ContextProps from "../../Types/ContextProps";
 import HttpService from "../core/HttpService";
 
 interface Props {
-  replies: boolean;
+  showReplies: boolean;
 }
 
-const UserBitList: React.FC<Props> = ({ replies }) => {
+const UserBitList: React.FC<Props> = ({ showReplies }) => {
   const httpService = new HttpService();
 
   // fetch list of bits
@@ -47,7 +47,7 @@ const UserBitList: React.FC<Props> = ({ replies }) => {
   // pass into BitList
   return (
     <BitList
-      bits={replies ? bits : bits.filter((post) => !post.reply_to)}
+      bits={showReplies ? bits : bits.filter((post) => !post.reply_to)}
       isLoading={isLoading}
     />
   );
