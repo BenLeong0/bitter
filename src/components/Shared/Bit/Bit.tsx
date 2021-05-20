@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import BitButtonBar from "./BitButtonBar";
 import { Link } from "react-router-dom";
-import OutsideAlerter from "../BitList/OutsideAlerter";
+import OutsideAlerter from "./OutsideAlerter";
 
 import BitInfo from "../../../Types/BitInfo";
 import BitTag from "./BitTag";
@@ -10,7 +10,7 @@ import DeleteButton from "./Icons/delete.svg";
 import RebitedButton from "./Icons/rebited.svg";
 import RepliedButton from "./Icons/replied.svg";
 import ContextProps from "../../../Types/ContextProps";
-import BitReplyBox from "../BitList/BitReplyBox";
+import BitReplyBox from "./BitReplyBox";
 import DeletedBit from "./DeletedBit";
 import HttpService from "../../core/HttpService";
 

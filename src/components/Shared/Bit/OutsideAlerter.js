@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from "react";
+// Used for bit delete button
 
 /**
  * Hook that alerts clicks outside of the passed ref
