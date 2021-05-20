@@ -98,7 +98,7 @@ const Register: React.FC<{}> = () => {
       result = true;
     }
 
-    if (!checkIsPasswordValid(password)) {
+    if (!validationService.isPasswordValid(password)) {
       console.log("invalid password");
       setIsPasswordValid(false);
       result = true;
@@ -115,16 +115,6 @@ const Register: React.FC<{}> = () => {
   const checkIsHandleValid = (s: string) => {
     if (s.length < 1) return false;
     return !/[^a-zA-Z0-9]/.test(s);
-  };
-
-  const checkIsPasswordValid = (s: string) => {
-    if (s.length < 8) return false;
-    return (
-      /[a-z]/.test(s) &&
-      /[A-Z]/.test(s) &&
-      /[0-9]/.test(s) &&
-      /[-=+^$*.[\]{}()?"!@#%&/\\,><':;|_~`]/.test(s)
-    );
   };
 
   return (

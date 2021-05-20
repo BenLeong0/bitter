@@ -10,6 +10,17 @@ export default class ValidationService {
     }
 
 
+    isPasswordValid = (s: string) => {
+        if (s.length < 8) return false;
+        return (
+          /[a-z]/.test(s) &&
+          /[A-Z]/.test(s) &&
+          /[0-9]/.test(s) &&
+          /[-=+^$*.[\]{}()?"!@#%&/\\,><':;|_~`]/.test(s)
+        );
+      };
+
+
     isEmailUsed = async (email: string): Promise<boolean> => {
         let res = "/users/exists";
         let queryParams = { email };

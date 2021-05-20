@@ -1,11 +1,14 @@
 import React, { useContext, useState } from "react";
 import ContextProps from "../../Types/ContextProps";
 import { AccountContext } from "../Account";
+import ValidationService from "../core/ValidationService";
 import ChangePasswordConfirmation from "./ChangePasswordConfirmation";
 
 export interface ChangePasswordProps {}
 
 const ChangePassword: React.FC<ChangePasswordProps> = () => {
+  const validationService = new ValidationService();
+
   const [password, setPassword] = useState<string>("");
   const [newPassword, setNewPassword] = useState<string>("");
   const [confirmNewPassword, setConfirmNewPassword] = useState<string>("");
@@ -18,21 +21,11 @@ const ChangePassword: React.FC<ChangePasswordProps> = () => {
 
   const { getSession, authenticate }: ContextProps = useContext(AccountContext);
 
-  const checkIsPasswordValid = (s: string) => {
-    if (s.length < 8) return false;
-    return (
-      /[a-z]/.test(s) &&
-      /[A-Z]/.test(s) &&
-      /[0-9]/.test(s) &&
-      /[-=+^$*.[\]{}()?"!@#%&/\\,><':;|_~`]/.test(s)
-    );
-  };
-
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     // Check new password is valid
-    if (!checkIsPasswordValid(newPassword)) {
+    if (!validationService.isPasswordValid(newPassword)) {
       console.log("invalid password");
       setIsNewPasswordValid(false);
       setHasSucceeded(false);
