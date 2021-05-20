@@ -1,4 +1,5 @@
 import HttpService from "./HttpService";
+import User from "../../Types/User";
 
 export default class ValidationService {
 
@@ -28,5 +29,14 @@ export default class ValidationService {
 
         console.log(resp);
         return resp;
+      };
+
+
+      isHater = (user: User): boolean => {
+        return (
+          typeof user.dislikes !== "undefined" &&
+          typeof user.likes !== "undefined" &&
+          user.dislikes > user.likes
+        )
       };
 }

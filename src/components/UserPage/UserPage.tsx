@@ -37,12 +37,14 @@ const UserPage: React.FC<{}> = () => {
     let res = "/users";
     let queryParams = { handle, myHandle };
     let resp: any = await httpService.makeGetRequest(res, queryParams);
+    console.log(resp);
 
     if (resp.code === "getSuccess") {
       let user: User = JSON.parse(resp.user);
       setUser(user);
       setCurrHandle(user.handle);
-      if (user.isFollowing) setIsFollowing(user.isFollowing);
+      if (typeof user.isFollowing !== "undefined")
+        setIsFollowing(user.isFollowing);
     } else {
       setUser({ handle: "" });
       setCurrHandle("");

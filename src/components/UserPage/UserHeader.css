@@ -47,8 +47,11 @@
   font-family: "Rye", cursive;
   font-size: 40px;
   font-weight: bold;
-  text-decoration: underline;
   cursor: default;
+}
+
+.user-branding span {
+  text-decoration: underline;
 }
 
 .user-branding-hater {
@@ -56,8 +59,7 @@
 }
 
 .user-follow-button {
-  width: 432px;
-  /* 600 - pfp.leftmargin - pfp.border - pfp.width */
+  width: 160px;
 }
 
 .user-follow-button button {
