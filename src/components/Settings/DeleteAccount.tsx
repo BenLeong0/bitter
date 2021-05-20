@@ -36,6 +36,11 @@ const ChangeEmail: React.FC<ChangeEmailProps> = () => {
       return;
     }
 
+    const catchError = (err: any) => {
+      if (err.code === "NotAuthorizedException") setIsPasswordCorrect(false);
+      console.error(err);
+    };
+
     // Check password
     await coreService
       .authenticate(password)
@@ -56,16 +61,7 @@ const ChangeEmail: React.FC<ChangeEmailProps> = () => {
           console.error(resp);
         }
       })
-      .catch((err: any) => {
-        let code = err.code;
-        switch (code) {
-          case "NotAuthorizedException":
-            setIsPasswordCorrect(false);
-            break;
-          default:
-            console.error(err);
-        }
-      })
+      .catch(catchError)
       .finally(() => setIsLoading(false));
   };
 
