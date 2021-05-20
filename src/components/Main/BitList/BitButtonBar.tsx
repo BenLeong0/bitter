@@ -11,7 +11,6 @@ import { AccountContext } from "../../Account";
 
 import BitInfo from "../../../Types/BitInfo";
 import ContextProps from "../../../Types/ContextProps";
-import HttpService from "../../core/HttpService";
 import InteractionsService from "../../core/InteractionsService";
 
 interface OtherProps {
@@ -26,7 +25,6 @@ const BitButtonBar: React.FC<BitButtonBarProps> = ({
   replying,
   ...props
 }) => {
-  const httpService = new HttpService();
   const interactionsService = new InteractionsService();
 
   // Affect like/dislike counter
@@ -53,13 +51,6 @@ const BitButtonBar: React.FC<BitButtonBarProps> = ({
       typeof props.isDisliked === "undefined" ? false : props.isDisliked
     );
   }, [props.isReposted, props.isLiked, props.isDisliked]);
-
-  const reply = () => {
-    toggleReplying();
-    console.log(`reply to tweet ${props.post_id}`);
-    console.error("CHANGE REPLY ICON COLOUR");
-    console.log(JSON.stringify(props));
-  };
 
   const rebit = async () => {
     if (!isLoggedIn) return;
@@ -107,9 +98,13 @@ const BitButtonBar: React.FC<BitButtonBarProps> = ({
     <div className="bit-buttons">
       <div className="bit-stat">
         {replying ? (
-          <img src={ReplyingButton} alt="reply button" onClick={reply} />
+          <img
+            src={ReplyingButton}
+            alt="reply button"
+            onClick={toggleReplying}
+          />
         ) : (
-          <img src={ReplyButton} alt="reply button" onClick={reply} />
+          <img src={ReplyButton} alt="reply button" onClick={toggleReplying} />
         )}
         <div className="bit-stat-count">{props.replies}</div>
       </div>
