@@ -1,0 +1,21 @@
+.bitlist-loader {
+  float: left;
+  width: 100%;
+  margin-top: 40px;
+}
+
+.bitlist-loader .loader {
+  width: 30px;
+  height: 30px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+}
+
+.no-bits {
+  color: grey;
+  font-style: italic;
+  font-weight: bold;
+  margin-top: 20px;
+  float: left;
+  width: 100%;
+}

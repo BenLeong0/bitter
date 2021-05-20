@@ -3,7 +3,7 @@ import { useHistory, useLocation } from "react-router-dom";
 import BitPreThread from "./PreThreadList";
 import "./BitPage.css";
 import { AccountContext } from "../Account";
-import Bit from "../Main/BitList/Bit";
+import Bit from "../Shared/Bit/Bit";
 
 import BitInfo from "../../Types/BitInfo";
 import ContextProps from "../../Types/ContextProps";

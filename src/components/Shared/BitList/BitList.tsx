@@ -1,6 +1,6 @@
 import React from "react";
-import Bit from "./Bit";
-import "./Bits.css";
+import Bit from "../Bit/Bit";
+import "./BitList.css";
 
 import BitInfo from "../../../Types/BitInfo";
 // interface BitInfo {

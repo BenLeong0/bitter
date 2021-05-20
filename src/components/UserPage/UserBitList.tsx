@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { AccountContext } from "../Account";
-import BitList from "../Main/BitList/BitList";
+import BitList from "../Shared/BitList/BitList";
 import "./UserBitList.css";
 import "./UserFollowList.css";
 
