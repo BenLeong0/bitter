@@ -131,48 +131,43 @@ export default class CoreService {
         const bitTime: Date = new Date(post_time);
         const milliseconds: number = Date.now() - bitTime.getTime(); // Difference in milliseconds
 
-        var temp: number = Math.floor(milliseconds / 1000);
+        let temp: number = Math.floor(milliseconds / 1000);
 
-        var days: number = Math.floor((temp %= 31536000) / 86400);
+        let days: number = Math.floor((temp %= 31536000) / 86400);
         if (days) {
             // Full date if over a month ago, show year if not current year
-            if (days > 30) {
+            if (days <= 30) return days + "d";
             let day: string = String(bitTime.getDate());
             let month: string = this.months[bitTime.getMonth()];
-            let year: string =
+            let year: string = (
                 bitTime.getFullYear() === new Date().getFullYear()
                 ? ""
-                : ", bitTime.getFullYear()";
-
+                : ", bitTime.getFullYear()"
+            );
             return month + day + year;
-            }
+        }
 
-            return days + "d";
-        }
-        var hours: number = Math.floor((temp %= 86400) / 3600);
-        if (hours) {
-            return hours + "h";
-        }
-        var minutes: number = Math.floor((temp %= 3600) / 60);
-        if (minutes) {
-            return minutes + "m";
-        }
-        var seconds: number = temp % 60;
-        if (seconds) {
-            return seconds + "s";
-        }
+        let hours: number = Math.floor((temp %= 86400) / 3600);
+        if (hours) return hours + "h";
+
+        let minutes: number = Math.floor((temp %= 3600) / 60);
+        if (minutes) return minutes + "m";
+
+        let seconds: number = temp % 60;
+        if (seconds) return seconds + "s";
+
         return "less than a second"; //'just now' //or other string you like;
         }
 
 
     formatBitDate(date: Date) {
-        var hours: any = date.getHours();
-        var minutes: any = date.getMinutes();
-        var ampm: any = hours >= 12 ? "pm" : "am";
+        let hours: any = date.getHours();
+        let minutes: any = date.getMinutes();
+        let ampm: any = hours >= 12 ? "pm" : "am";
         hours = hours % 12;
         hours = hours ? hours : 12; // the hour '0' should be '12'
         minutes = minutes < 10 ? "0" + minutes : minutes;
-        var strTime = hours + ":" + minutes + " " + ampm;
+        let strTime = hours + ":" + minutes + " " + ampm;
         return (
             date.getMonth() +
             1 +
