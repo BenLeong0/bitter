@@ -29,7 +29,9 @@ const ChangePasswordConfirmation: React.FC<ChangeEmailConfirmationProps> = ({
 
   return (
     <>
-      <button onClick={() => setOpen(true)}>Submit</button>
+      <button onClick={() => setOpen(true)} type="button">
+        Submit
+      </button>
 
       <StyledPopup open={open} modal onClose={closeModal}>
         <div style={{ marginBottom: "30px" }}>

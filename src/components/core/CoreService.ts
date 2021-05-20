@@ -51,7 +51,7 @@ export default class CoreService {
 
     authenticate = async (Password: string) => {
         const Username = await this.getSession().then(({user}) => user.username);
-        const user = new CognitoUser({Username, Pool })
+        const user = new CognitoUser({ Username, Pool })
         const authDetails = new AuthenticationDetails({ Username, Password });
 
         return await new Promise((resolve, reject) => {
