@@ -1,9 +1,9 @@
 import React from "react";
-import "../components/Settings/Settings.css";
-import ChangeEmail from "../components/Settings/ChangeEmail";
-import ChangePassword from "../components/Settings/ChangePassword";
-import DeleteAccount from "../components/Settings/DeleteAccount";
-import LogoutButton from "../components/Settings/LogoutButton";
+import "./Settings.css";
+import ChangeEmail from "./ChangeEmail";
+import ChangePassword from "./ChangePassword";
+import DeleteAccount from "./DeleteAccount";
+import LogoutButton from "./LogoutButton";
 
 // Confirmation popup styles
 import "reactjs-popup/dist/index.css";

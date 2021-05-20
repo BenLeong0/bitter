@@ -1,7 +1,7 @@
 import React from "react";
-import PostBit from "../components/Timeline/PostBit";
-import TimelineBitList from "../components/Timeline/TimelineBitList";
-import "../components/Timeline/Timeline.css";
+import PostBit from "./PostBit";
+import TimelineBitList from "./TimelineBitList";
+import "./Timeline.css";
 
 const Timeline: React.FC<{ timelineType: string }> = ({ timelineType }) => {
   const pageTitle = timelineType === "all" ? "All posts" : "Home";

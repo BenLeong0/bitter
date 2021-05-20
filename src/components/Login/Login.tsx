@@ -1,10 +1,10 @@
 import React, { useContext, useState } from "react";
-import { AccountContext } from "../components/Account";
+import { AccountContext } from "../Account";
 import { Link } from "react-router-dom";
 import "./Login.css";
 import { CognitoUserSession } from "amazon-cognito-identity-js";
-import ContextProps from "../Types/ContextProps";
-import CoreService from "../components/core/CoreService";
+import ContextProps from "../../Types/ContextProps";
+import CoreService from "../core/CoreService";
 
 interface LoginProps {
   setMyHandle: React.Dispatch<React.SetStateAction<string>>;

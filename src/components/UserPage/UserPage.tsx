@@ -1,18 +1,18 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useHistory, useLocation } from "react-router-dom";
-import { AccountContext } from "../components/Account";
-import "../components/UserPage/UserPage.css";
+import { AccountContext } from "../Account";
+import "./UserPage.css";
 
-import UserHeader from "../components/UserPage/UserHeader";
-import UserBitList from "../components/UserPage/UserBitList";
-import UserFollowing from "../components/UserPage/components/UserFollowing";
-import UserFollowers from "../components/UserPage/components/UserFollowers";
-import UserLikeList from "../components/UserPage/UserLikeList";
-import UserNotFound from "../components/UserPage/UserNotFound";
+import UserHeader from "./UserHeader";
+import UserBitList from "./UserBitList";
+import UserFollowing from "./components/UserFollowing";
+import UserFollowers from "./components/UserFollowers";
+import UserLikeList from "./UserLikeList";
+import UserNotFound from "./UserNotFound";
 
-import User from "../Types/User";
-import ContextProps from "../Types/ContextProps";
-import HttpService from "../components/core/HttpService";
+import User from "../../Types/User";
+import ContextProps from "../../Types/ContextProps";
+import HttpService from "../core/HttpService";
 
 const UserPage: React.FC<{}> = () => {
   const httpService = new HttpService();

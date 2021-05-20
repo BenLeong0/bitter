@@ -1,8 +1,8 @@
 import { CognitoUserAttribute } from "amazon-cognito-identity-js";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import ValidationService from "../components/core/ValidationService";
-import UserPool from "../UserPool";
+import ValidationService from "../core/ValidationService";
+import UserPool from "../../UserPool";
 import "./Register.css";
 
 const Register: React.FC<{}> = () => {
