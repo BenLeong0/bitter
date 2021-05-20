@@ -31,7 +31,7 @@ const Bit: React.FC<BitInfo & OtherProps> = ({ classes = "", ...bitInfo }) => {
   const [src, setSrc] = useState<string>("");
 
   const onError = () => {
-    setSrc(`https://bitter-imgs.s3.eu-west-2.amazonaws.com/pfpdefault`);
+    setSrc("https://bitter-imgs.s3.eu-west-2.amazonaws.com/pfpdefault");
   };
 
   useEffect(() => {
