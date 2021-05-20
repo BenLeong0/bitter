@@ -1,10 +1,11 @@
 import { AuthenticationDetails, CognitoUser, CognitoUserAttribute, CognitoUserSession } from "amazon-cognito-identity-js";
 import Pool from "../../UserPool";
+import Session from "../../Types/Session";
 
 export default class CoreService {
 
-    getSession = async (): Promise<any> => {
-        let resp: any = new Promise((resolve, reject) => {
+    getSession = async (): Promise<Session> => {
+        let resp: any = new Promise<Session>((resolve, reject) => {
             const user: CognitoUser | null = Pool.getCurrentUser();
             if (!user) {reject("not logged in"); return};
             user.getSession(async (err: Error, session: CognitoUserSession | null) => {
@@ -49,13 +50,13 @@ export default class CoreService {
     };
 
 
-    authenticate = async (Password: string) => {
+    authenticate = async (Password: string): Promise<CognitoUser> => {
         const { user } = await this.getSession()
         const Username = user.username
         const cognitoUser = new CognitoUser({ Username, Pool })
         const authDetails = new AuthenticationDetails({ Username, Password });
 
-        return await new Promise((resolve, reject) => {
+        return await new Promise<CognitoUser>((resolve, reject) => {
             cognitoUser.authenticateUser(authDetails, {
                 onSuccess: (data) => {
                   console.log("onSuccess:", user);
