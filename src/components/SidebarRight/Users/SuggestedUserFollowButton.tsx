@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
-import FollowButton from "./FollowButton";
-import UnfollowButton from "./UnfollowButton";
-import { AccountContext } from "../../../Account";
-import ContextProps from "../../../../Types/ContextProps";
+import FollowButton from "../../Shared/FollowButtons/FollowButton";
+import UnfollowButton from "../../Shared/FollowButtons/UnfollowButton";
+import { AccountContext } from "../../Account";
+import ContextProps from "../../../Types/ContextProps";
 
 interface Props {
   className: string;
@@ -11,9 +11,8 @@ interface Props {
 }
 
 const SuggestedUserFollowButton: React.FC<Props> = (props) => {
-  const [isFollowingSuggested, setIsFollowingSuggested] = useState<boolean>(
-    false
-  );
+  const [isFollowingSuggested, setIsFollowingSuggested] =
+    useState<boolean>(false);
 
   const { handle, className } = props;
 
@@ -40,13 +39,10 @@ const SuggestedUserFollowButton: React.FC<Props> = (props) => {
       {isFollowingSuggested ? (
         <UnfollowButton
           handle={handle}
-          setIsFollowingSuggested={setIsFollowingSuggested}
+          setFollowing={setIsFollowingSuggested}
         />
       ) : (
-        <FollowButton
-          handle={handle}
-          setIsFollowingSuggested={setIsFollowingSuggested}
-        />
+        <FollowButton handle={handle} setFollowing={setIsFollowingSuggested} />
       )}
     </div>
   );

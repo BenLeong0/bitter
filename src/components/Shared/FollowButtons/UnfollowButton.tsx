@@ -3,9 +3,15 @@ import ContextProps from "../../../Types/ContextProps";
 import { AccountContext } from "../../Account";
 import InteractionsService from "../../core/InteractionsService";
 
-const UnfollowButton: React.FC<{ handle: string }> = ({ handle }) => {
+type Props = {
+  setFollowing: (following: boolean) => void;
+  handle: string;
+};
+
+const UnfollowButton: React.FC<Props> = ({ setFollowing, handle }) => {
   const interactionsService = new InteractionsService();
-  const { myHandle, setIsFollowing }: ContextProps = useContext(AccountContext);
+  const { myHandle, currHandle, setIsFollowing, isLoggedIn }: ContextProps =
+    useContext(AccountContext);
 
   const unfollow = async () => {
     if (myHandle === handle) {
@@ -13,7 +19,13 @@ const UnfollowButton: React.FC<{ handle: string }> = ({ handle }) => {
       return;
     }
 
-    setIsFollowing(false);
+    if (!isLoggedIn) return console.log("Not logged in!");
+
+    setFollowing(false);
+    // Update userPage if same user
+    if (handle === currHandle) {
+      setIsFollowing(false);
+    }
 
     // update db
     interactionsService.deleteFollowEdge(handle);

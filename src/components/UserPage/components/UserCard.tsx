@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import User from "../../../Types/User";
 import ContextProps from "../../../Types/ContextProps";
 import { AccountContext } from "../../Account";
-import SuggestedUserFollowButton from "../../SidebarRight/Users/components/SuggestedUserFollowButton";
+import SuggestedUserFollowButton from "../../SidebarRight/Users/SuggestedUserFollowButton";
 
 const UserCard: React.FC<{ user: User }> = ({ user }) => {
   // myHandle to show/hide follow button

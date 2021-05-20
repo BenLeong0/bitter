@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import FollowButton from "./FollowButton";
-import UnfollowButton from "./UnfollowButton";
+import FollowButton from "../../Shared/FollowButtons/FollowButton";
+import UnfollowButton from "../../Shared/FollowButtons/UnfollowButton";
 import EditProfileButton from "./EditProfileButton";
 import { AccountContext } from "../../Account";
 import ContextProps from "../../../Types/ContextProps";
@@ -11,7 +11,8 @@ const UserFollowButton: React.FC<{
   display_name?: string;
   isHater: () => boolean;
 }> = ({ handle, bio, display_name, isHater }) => {
-  const { myHandle, isFollowing }: ContextProps = useContext(AccountContext);
+  const { myHandle, isFollowing, setIsFollowing }: ContextProps =
+    useContext(AccountContext);
 
   return (
     <div className="user-follow-button">
@@ -29,9 +30,9 @@ const UserFollowButton: React.FC<{
       {myHandle === handle ? (
         <EditProfileButton bio={bio} display_name={display_name} />
       ) : isFollowing ? (
-        <UnfollowButton handle={handle} />
+        <UnfollowButton handle={handle} setFollowing={setIsFollowing} />
       ) : (
-        <FollowButton handle={handle} />
+        <FollowButton handle={handle} setFollowing={setIsFollowing} />
       )}
     </div>
   );

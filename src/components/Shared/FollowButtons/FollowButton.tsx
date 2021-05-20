@@ -3,20 +3,27 @@ import ContextProps from "../../../Types/ContextProps";
 import { AccountContext } from "../../Account";
 import InteractionsService from "../../core/InteractionsService";
 
-const FollowButton: React.FC<{ handle: string }> = ({ handle }) => {
+type Props = {
+  setFollowing: (following: boolean) => void;
+  handle: string;
+};
+
+const FollowButton: React.FC<Props> = ({ setFollowing, handle }) => {
   const interactionsService = new InteractionsService();
-  const { setIsFollowing, isLoggedIn }: ContextProps =
+  const { currHandle, setIsFollowing, isLoggedIn }: ContextProps =
     useContext(AccountContext);
 
   const follow = async () => {
-    if (isLoggedIn) {
-      setIsFollowing(true);
+    if (!isLoggedIn) return console.log("Not logged in!");
 
-      // update db
-      interactionsService.createFollowEdge(handle);
-    } else {
-      console.log("Not logged in");
+    setFollowing(true);
+    // Update userPage if same user
+    if (handle === currHandle) {
+      setIsFollowing(true);
     }
+
+    // update db
+    interactionsService.createFollowEdge(handle);
   };
 
   return (
