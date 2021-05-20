@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useHistory, useLocation } from "react-router-dom";
-import BitNotFound from "../components/BitPage/BitNotFound";
 import BitPreThread from "../components/BitPage/PreThreadList";
 import "../components/BitPage/BitPage.css";
 import { AccountContext } from "../components/Account";
@@ -94,7 +93,7 @@ const BitPage: React.FC<{}> = () => {
               )}
             </>
           ) : (
-            <BitNotFound />
+            <div className="user-not-found">Post could not be found.</div>
           )}
         </div>
       )}

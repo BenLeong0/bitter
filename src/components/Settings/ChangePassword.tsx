@@ -1,11 +1,14 @@
-import React, { useContext, useState } from "react";
-import ContextProps from "../../Types/ContextProps";
-import { AccountContext } from "../Account";
+import React, { useState } from "react";
+import CoreService from "../core/CoreService";
+import ValidationService from "../core/ValidationService";
 import ChangePasswordConfirmation from "./ChangePasswordConfirmation";
 
 export interface ChangePasswordProps {}
 
 const ChangePassword: React.FC<ChangePasswordProps> = () => {
+  const validationService = new ValidationService();
+  const coreService = new CoreService();
+
   const [password, setPassword] = useState<string>("");
   const [newPassword, setNewPassword] = useState<string>("");
   const [confirmNewPassword, setConfirmNewPassword] = useState<string>("");
@@ -16,23 +19,11 @@ const ChangePassword: React.FC<ChangePasswordProps> = () => {
 
   const [hasSucceeded, setHasSucceeded] = useState<boolean>(false);
 
-  const { getSession, authenticate }: ContextProps = useContext(AccountContext);
-
-  const checkIsPasswordValid = (s: string) => {
-    if (s.length < 8) return false;
-    return (
-      /[a-z]/.test(s) &&
-      /[A-Z]/.test(s) &&
-      /[0-9]/.test(s) &&
-      /[-=+^$*.[\]{}()?"!@#%&/\\,><':;|_~`]/.test(s)
-    );
-  };
-
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     // Check new password is valid
-    if (!checkIsPasswordValid(newPassword)) {
+    if (!validationService.isPasswordValid(newPassword)) {
       console.log("invalid password");
       setIsNewPasswordValid(false);
       setHasSucceeded(false);
@@ -46,42 +37,29 @@ const ChangePassword: React.FC<ChangePasswordProps> = () => {
       return;
     }
 
-    // Authenticate and change
-    getSession()
-      .then(({ user }: { user: any }) => {
-        // Check login details
-        authenticate(user.username, password)
-          .then(() => {
-            //Change password
-            user.changePassword(
-              password,
-              newPassword,
-              (err: any, result: any) => {
-                if (err) console.error(err);
-                if (result === "SUCCESS") {
-                  setHasSucceeded(true);
-                }
-              }
-            );
-          })
-          .catch((err: any) => {
-            const code = err.code;
-            switch (code) {
-              case "NotAuthorizedException":
-                setCorrectOldPassword(false);
-                break;
-              default:
-                console.error(err);
-            }
-            setHasSucceeded(false);
-          });
-      })
-      .catch((err: any) => {
-        console.error(err);
-      });
-    // check password
-    // highlight input if incorrect + error message
-    // send verification to new email
+    let callback = (err: any, result: any): void => {
+      if (err) console.error(err);
+      if (result === "SUCCESS") {
+        setHasSucceeded(true);
+      }
+    };
+
+    let catchError = (err: any): void => {
+      const code = err.code;
+      switch (code) {
+        case "NotAuthorizedException":
+          setCorrectOldPassword(false);
+          break;
+        default:
+          console.error(err);
+      }
+      setHasSucceeded(false);
+    };
+
+    coreService
+      .authenticate(password)
+      .then((user: any) => user.changePassword(password, newPassword, callback))
+      .catch(catchError);
   };
 
   return (

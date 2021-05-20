@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import ContextProps from "../../../../Types/ContextProps";
 import { AccountContext } from "../../../Account";
+import InteractionsService from "../../../core/InteractionsService";
 
 type Props = {
   setIsFollowingSuggested: React.Dispatch<React.SetStateAction<boolean>>;
@@ -8,14 +9,11 @@ type Props = {
 };
 
 const FollowButton: React.FC<Props> = (props) => {
+  const interactionsService = new InteractionsService();
   const { setIsFollowingSuggested, handle } = props;
 
-  const {
-    currHandle,
-    setIsFollowing,
-    createFollowEdge,
-    isLoggedIn,
-  }: ContextProps = useContext(AccountContext);
+  const { currHandle, setIsFollowing, isLoggedIn }: ContextProps =
+    useContext(AccountContext);
 
   const follow = async () => {
     if (isLoggedIn) {
@@ -27,7 +25,7 @@ const FollowButton: React.FC<Props> = (props) => {
       }
 
       // update db
-      createFollowEdge(handle);
+      interactionsService.createFollowEdge(handle);
     } else {
       console.log("Not logged in!");
     }

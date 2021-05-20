@@ -1,12 +1,15 @@
 import { CognitoUserAttribute } from "amazon-cognito-identity-js";
-import React, { useContext, useState } from "react";
-import ContextProps from "../../Types/ContextProps";
-import { AccountContext } from "../Account";
+import React, { useState } from "react";
+import CoreService from "../core/CoreService";
+import ValidationService from "../core/ValidationService";
 import ChangeEmailConfirmation from "./ChangeEmailConfirmation";
 
 export interface ChangeEmailProps {}
 
 const ChangeEmail: React.FC<ChangeEmailProps> = () => {
+  const validationService = new ValidationService();
+  const coreService = new CoreService();
+
   const [newEmail, setNewEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
@@ -14,55 +17,37 @@ const ChangeEmail: React.FC<ChangeEmailProps> = () => {
   const [isPasswordCorrect, setIsPasswordCorrect] = useState<boolean>(true);
   const [hasSucceeded, setHasSucceeded] = useState<boolean>(false);
 
-  const { authenticate, getSession, isEmailUsed }: ContextProps = useContext(
-    AccountContext
-  );
-
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     // Check if email is already used
-    if (await isEmailUsed(newEmail)) {
+    if (await validationService.isEmailUsed(newEmail)) {
       setEmailExists(true);
       return;
     }
 
-    // check valid email (done by type = "email" ?)
-    getSession()
-      .then(({ user }) => {
-        // Check password
-        authenticate(user.username, password)
-          .then(() => {
-            const attributes = [
-              new CognitoUserAttribute({ Name: "email", Value: newEmail }),
-            ];
+    let attributes = [
+      new CognitoUserAttribute({ Name: "email", Value: newEmail }),
+    ];
 
-            user.updateAttributes(
-              attributes,
-              (err: string, results: string) => {
-                if (err) {
-                  console.error(err);
-                } else {
-                  setHasSucceeded(true);
-                }
-                console.log(results);
-              }
-            );
-          })
-          .catch((err) => {
-            switch (err.code) {
-              case "NotAuthorizedException":
-                // Incorrect password
-                setIsPasswordCorrect(false);
-                break;
-            }
-          });
-      })
-      .catch((err) => console.error(err));
+    let callback = (err: string, results: string) => {
+      if (err) {
+        console.error(err);
+      } else {
+        setHasSucceeded(true);
+      }
+      console.log(results);
+    };
 
-    // check password
-    // highlight input if incorrect + error message
-    // send verification to new email
+    let catchError = (err: any): void => {
+      if (err.code === "NotAuthorizedException") setIsPasswordCorrect(false);
+      console.error(err);
+    };
+
+    coreService
+      .authenticate(password)
+      .then((user: any) => user.updateAttributes(attributes, callback))
+      .catch(catchError);
   };
 
   return (

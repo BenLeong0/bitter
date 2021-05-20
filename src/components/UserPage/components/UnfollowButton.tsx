@@ -1,13 +1,11 @@
 import React, { useContext } from "react";
 import ContextProps from "../../../Types/ContextProps";
 import { AccountContext } from "../../Account";
+import InteractionsService from "../../core/InteractionsService";
 
 const UnfollowButton: React.FC<{ handle: string }> = ({ handle }) => {
-  const {
-    myHandle,
-    setIsFollowing,
-    deleteFollowEdge,
-  }: ContextProps = useContext(AccountContext);
+  const interactionsService = new InteractionsService();
+  const { myHandle, setIsFollowing }: ContextProps = useContext(AccountContext);
 
   const unfollow = async () => {
     if (myHandle === handle) {
@@ -18,7 +16,7 @@ const UnfollowButton: React.FC<{ handle: string }> = ({ handle }) => {
     setIsFollowing(false);
 
     // update db
-    deleteFollowEdge(handle);
+    interactionsService.deleteFollowEdge(handle);
   };
 
   return (

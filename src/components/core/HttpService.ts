@@ -40,7 +40,7 @@ export default class HttpService {
 
 
     async makePostRequest(res: string, body: any): Promise<any> {
-        let {headers} = await this.coreService.getSession();
+        let { headers } = await this.coreService.getSession();
         headers["Content-Type"] = "application/json";
 
         let url = this.API_URL + res;
@@ -57,7 +57,7 @@ export default class HttpService {
 
 
     async makeDeleteRequest(res: string, body: any): Promise<any> {
-        let {headers} = await this.coreService.getSession();
+        let { headers } = await this.coreService.getSession();
         headers["Content-Type"] = "application/json";
 
         let url = this.API_URL + res;
@@ -74,7 +74,7 @@ export default class HttpService {
 
 
     async makePatchRequest(res: string, body: any): Promise<any> {
-        let {headers} = await this.coreService.getSession();
+        let { headers } = await this.coreService.getSession();
         headers["Content-Type"] = "application/json";
 
         let url = this.API_URL + res;
@@ -95,7 +95,7 @@ export default class HttpService {
         if (typeof base64File !== "string") return;
         let fileType = file.type;
 
-        let {headers} = await this.coreService.getSession();
+        let { headers } = await this.coreService.getSession();
         headers["Content-Type"] = "application/json";
 
         let url = this.API_URL + res;

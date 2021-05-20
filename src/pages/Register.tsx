@@ -1,12 +1,12 @@
 import { CognitoUserAttribute } from "amazon-cognito-identity-js";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { AccountContext } from "../components/Account";
-import ContextProps from "../Types/ContextProps";
+import ValidationService from "../components/core/ValidationService";
 import UserPool from "../UserPool";
 import "./Register.css";
 
 const Register: React.FC<{}> = () => {
+  const validationService = new ValidationService();
   document.title = "Register / Bitter";
 
   const [username, setUsername] = useState<string>("");
@@ -29,8 +29,6 @@ const Register: React.FC<{}> = () => {
   const [hasSucceeded, setHasSucceeded] = useState<boolean>(false);
   const [errorOccurred, setErrorOccurred] = useState<boolean>(false);
 
-  const { isEmailUsed }: ContextProps = useContext(AccountContext);
-
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -41,7 +39,7 @@ const Register: React.FC<{}> = () => {
     }
 
     // Check if email exists
-    if (await isEmailUsed(email)) {
+    if (await validationService.isEmailUsed(email)) {
       setEmailExists(true);
       return;
     }
@@ -100,7 +98,7 @@ const Register: React.FC<{}> = () => {
       result = true;
     }
 
-    if (!checkIsPasswordValid(password)) {
+    if (!validationService.isPasswordValid(password)) {
       console.log("invalid password");
       setIsPasswordValid(false);
       result = true;
@@ -117,16 +115,6 @@ const Register: React.FC<{}> = () => {
   const checkIsHandleValid = (s: string) => {
     if (s.length < 1) return false;
     return !/[^a-zA-Z0-9]/.test(s);
-  };
-
-  const checkIsPasswordValid = (s: string) => {
-    if (s.length < 8) return false;
-    return (
-      /[a-z]/.test(s) &&
-      /[A-Z]/.test(s) &&
-      /[0-9]/.test(s) &&
-      /[-=+^$*.[\]{}()?"!@#%&/\\,><':;|_~`]/.test(s)
-    );
   };
 
   return (

@@ -10,7 +10,7 @@ export interface ChangeEmailProps {}
 
 const ChangeEmail: React.FC<ChangeEmailProps> = () => {
   const httpService = new HttpService();
-  const core = new CoreService();
+  const coreService = new CoreService();
 
   const [password, setPassword] = useState<string>("");
   const [deleteConfirmation, setDeleteConfirmation] = useState<string>("");
@@ -36,11 +36,16 @@ const ChangeEmail: React.FC<ChangeEmailProps> = () => {
       return;
     }
 
+    const catchError = (err: any) => {
+      if (err.code === "NotAuthorizedException") setIsPasswordCorrect(false);
+      console.error(err);
+    };
+
     // Check password
-    await core
+    await coreService
       .authenticate(password)
       .then(async () => {
-        let session = await core.getSession();
+        let session = await coreService.getSession();
         let { accessToken } = session;
 
         let res = "/users";
@@ -56,16 +61,7 @@ const ChangeEmail: React.FC<ChangeEmailProps> = () => {
           console.error(resp);
         }
       })
-      .catch((err: any) => {
-        let code = err.code;
-        switch (code) {
-          case "NotAuthorizedException":
-            setIsPasswordCorrect(false);
-            break;
-          default:
-            console.error(err);
-        }
-      })
+      .catch(catchError)
       .finally(() => setIsLoading(false));
   };
 
