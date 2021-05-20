@@ -113,74 +113,74 @@ export default class CoreService {
 
 
     timestampFormat(post_time: string): string {
-      const bitTime: Date = new Date(post_time);
-      const milliseconds: number = Date.now() - bitTime.getTime(); // Difference in milliseconds
-      const months: Array<string> = [
-        "Jan ",
-        "Feb ",
-        "Mar ",
-        "Apr ",
-        "May ",
-        "Jun ",
-        "Jul ",
-        "Aug ",
-        "Sep ",
-        "Oct ",
-        "Nov ",
-        "Dec ",
-      ];
+        const bitTime: Date = new Date(post_time);
+        const milliseconds: number = Date.now() - bitTime.getTime(); // Difference in milliseconds
+        const months: Array<string> = [
+            "Jan ",
+            "Feb ",
+            "Mar ",
+            "Apr ",
+            "May ",
+            "Jun ",
+            "Jul ",
+            "Aug ",
+            "Sep ",
+            "Oct ",
+            "Nov ",
+            "Dec ",
+        ];
 
-      var temp: number = Math.floor(milliseconds / 1000);
+        var temp: number = Math.floor(milliseconds / 1000);
 
-      var days: number = Math.floor((temp %= 31536000) / 86400);
-      if (days) {
-        // Full date if over a month ago, show year if not current year
-        if (days > 30) {
-          const day: string = String(bitTime.getDate());
-          const month: string = months[bitTime.getMonth()];
-          const year: string =
-            bitTime.getFullYear() === new Date().getFullYear()
-              ? ""
-              : ", bitTime.getFullYear()";
+        var days: number = Math.floor((temp %= 31536000) / 86400);
+        if (days) {
+            // Full date if over a month ago, show year if not current year
+            if (days > 30) {
+            const day: string = String(bitTime.getDate());
+            const month: string = months[bitTime.getMonth()];
+            const year: string =
+                bitTime.getFullYear() === new Date().getFullYear()
+                ? ""
+                : ", bitTime.getFullYear()";
 
-          return month + day + year;
+            return month + day + year;
+            }
+
+            return days + "d";
         }
-
-        return days + "d";
-      }
-      var hours: number = Math.floor((temp %= 86400) / 3600);
-      if (hours) {
-        return hours + "h";
-      }
-      var minutes: number = Math.floor((temp %= 3600) / 60);
-      if (minutes) {
-        return minutes + "m";
-      }
-      var seconds: number = temp % 60;
-      if (seconds) {
-        return seconds + "s";
-      }
-      return "less than a second"; //'just now' //or other string you like;
-    }
+        var hours: number = Math.floor((temp %= 86400) / 3600);
+        if (hours) {
+            return hours + "h";
+        }
+        var minutes: number = Math.floor((temp %= 3600) / 60);
+        if (minutes) {
+            return minutes + "m";
+        }
+        var seconds: number = temp % 60;
+        if (seconds) {
+            return seconds + "s";
+        }
+        return "less than a second"; //'just now' //or other string you like;
+        }
 
 
     formatDate(date: Date) {
-      var hours: any = date.getHours();
-      var minutes: any = date.getMinutes();
-      var ampm: any = hours >= 12 ? "pm" : "am";
-      hours = hours % 12;
-      hours = hours ? hours : 12; // the hour '0' should be '12'
-      minutes = minutes < 10 ? "0" + minutes : minutes;
-      var strTime = hours + ":" + minutes + " " + ampm;
-      return (
-        date.getMonth() +
-        1 +
-        "/" +
-        date.getDate() +
-        "/" +
-        date.getFullYear() +
-        " " +
-        strTime
-      );
+        var hours: any = date.getHours();
+        var minutes: any = date.getMinutes();
+        var ampm: any = hours >= 12 ? "pm" : "am";
+        hours = hours % 12;
+        hours = hours ? hours : 12; // the hour '0' should be '12'
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        var strTime = hours + ":" + minutes + " " + ampm;
+        return (
+            date.getMonth() +
+            1 +
+            "/" +
+            date.getDate() +
+            "/" +
+            date.getFullYear() +
+            " " +
+            strTime
+        );
     }
 }
