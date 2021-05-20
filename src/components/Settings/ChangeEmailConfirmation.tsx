@@ -31,6 +31,7 @@ const ChangeEmailConfirmation: React.FC<ChangeEmailConfirmationProps> = ({
             setOpen(true);
           }
         }}
+        type="button"
       >
         Submit
       </button>

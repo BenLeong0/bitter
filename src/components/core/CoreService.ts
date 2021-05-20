@@ -50,15 +50,16 @@ export default class CoreService {
 
 
     authenticate = async (Password: string) => {
-        const Username = await this.getSession().then(({user}) => user.username);
-        const user = new CognitoUser({ Username, Pool })
+        const { user } = await this.getSession()
+        const Username = user.username
+        const cognitoUser = new CognitoUser({ Username, Pool })
         const authDetails = new AuthenticationDetails({ Username, Password });
 
         return await new Promise((resolve, reject) => {
-            user.authenticateUser(authDetails, {
+            cognitoUser.authenticateUser(authDetails, {
                 onSuccess: (data) => {
-                  console.log("onSuccess:", data);
-                  resolve(data);
+                  console.log("onSuccess:", user);
+                  resolve(user);
                 },
 
                 onFailure: (err) => {
