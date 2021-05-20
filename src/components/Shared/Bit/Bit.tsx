@@ -21,9 +21,7 @@ interface OtherProps {
   classes?: string;
 }
 
-type BitProps = BitInfo & OtherProps;
-
-const Bit: React.FC<BitProps> = ({ classes = "", ...bitInfo }) => {
+const Bit: React.FC<BitInfo & OtherProps> = ({ classes = "", ...bitInfo }) => {
   const httpService = new HttpService();
   const coreService = new CoreService();
 
