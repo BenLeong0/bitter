@@ -11,9 +11,7 @@ interface Props {
 const UserInfo: React.FC<Props> = ({ updatePageState, user }) => {
   const coreService = new CoreService();
   const [listId, setListId] = useState<number>(0);
-  const printProps = () => {
-    console.log("yo", user);
-  };
+  const printProps = () => console.log(user);
 
   const changeTab = (state: number): void => {
     setListId(state);
