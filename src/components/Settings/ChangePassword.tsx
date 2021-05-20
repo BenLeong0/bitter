@@ -1,6 +1,4 @@
-import React, { useContext, useState } from "react";
-import ContextProps from "../../Types/ContextProps";
-import { AccountContext } from "../Account";
+import React, { useState } from "react";
 import CoreService from "../core/CoreService";
 import ValidationService from "../core/ValidationService";
 import ChangePasswordConfirmation from "./ChangePasswordConfirmation";
@@ -20,8 +18,6 @@ const ChangePassword: React.FC<ChangePasswordProps> = () => {
   const [correctOldPassword, setCorrectOldPassword] = useState<boolean>(true);
 
   const [hasSucceeded, setHasSucceeded] = useState<boolean>(false);
-
-  const { getSession, authenticate }: ContextProps = useContext(AccountContext);
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
