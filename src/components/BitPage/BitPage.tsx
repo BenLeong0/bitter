@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useHistory, useLocation } from "react-router-dom";
-import BitPreThread from "../components/BitPage/PreThreadList";
-import "../components/BitPage/BitPage.css";
-import { AccountContext } from "../components/Account";
-import Bit from "../components/Main/BitList/Bit";
+import BitPreThread from "./PreThreadList";
+import "./BitPage.css";
+import { AccountContext } from "../Account";
+import Bit from "../Main/BitList/Bit";
 
-import BitInfo from "../Types/BitInfo";
-import ContextProps from "../Types/ContextProps";
-import ReplyThread from "../components/BitPage/ReplyThread";
-import HttpService from "../components/core/HttpService";
+import BitInfo from "../../Types/BitInfo";
+import ContextProps from "../../Types/ContextProps";
+import ReplyThread from "./ReplyThread";
+import HttpService from "../core/HttpService";
 
 const BitPage: React.FC<{}> = () => {
   const httpService = new HttpService();
