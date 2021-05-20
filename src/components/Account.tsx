@@ -1,16 +1,11 @@
 import React, { createContext, useState, useEffect } from "react";
-import {
-  CognitoUser,
-  AuthenticationDetails,
-  CognitoUserSession,
-  CognitoUserAttribute,
-} from "amazon-cognito-identity-js";
+import { CognitoUser, AuthenticationDetails } from "amazon-cognito-identity-js";
 import Pool from "../UserPool";
 import HttpService from "./core/HttpService";
+import CoreService from "./core/CoreService";
 
 // type ContextProps = {
 //   authenticate: (Username: string, Password: string) => Promise<any>;
-//   getSession: () => Promise<any>;
 //   logout: () => void;
 //   refreshList: boolean;
 //   setRefreshList: React.Dispatch<React.SetStateAction<boolean>>;
@@ -47,6 +42,7 @@ const Account: React.FC<Props> = ({
   children,
 }) => {
   const httpService = new HttpService();
+  const coreService = new CoreService();
 
   // Info about current user being viewed, i.e. owner of /u/handle
   const [currHandle, setCurrHandle] = useState<string>("");
@@ -57,7 +53,8 @@ const Account: React.FC<Props> = ({
   const [refreshList, setRefreshList] = useState<boolean>(true);
 
   useEffect(() => {
-    getSession()
+    coreService
+      .getSession()
       .then((session: any) => {
         if (session["custom:role"] === "admin") setIsAdmin(true);
         setIsLoggedIn(true);
@@ -71,56 +68,6 @@ const Account: React.FC<Props> = ({
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const getSession = async (): Promise<any> =>
-    await new Promise((resolve, reject) => {
-      const user: CognitoUser | null = Pool.getCurrentUser();
-      if (user) {
-        user.getSession(
-          async (err: Error, session: CognitoUserSession | null) => {
-            if (err) {
-              reject();
-            } else if (session) {
-              const attributes: any = await new Promise((resolve, reject) => {
-                user.getUserAttributes(
-                  (
-                    err: Error | undefined,
-                    attributes: CognitoUserAttribute[] | undefined
-                  ) => {
-                    if (err) {
-                      reject(err);
-                    } else if (attributes) {
-                      const results: any = {};
-
-                      for (let attribute of attributes) {
-                        const { Name, Value } = attribute;
-                        results[Name] = Value;
-                      }
-
-                      resolve(results);
-                    }
-                  }
-                );
-              });
-
-              const token = session.getIdToken().getJwtToken();
-
-              resolve({
-                user,
-                headers: {
-                  Authorization: token,
-                  "x-api-key": attributes["custom:apikey"],
-                },
-                ...session,
-                ...attributes,
-              });
-            }
-          }
-        );
-      } else {
-        reject("Not logged in");
-      }
-    });
 
   const createFollowEdge = async (destinationHandle: string) => {
     let res = "/users/follow";
@@ -188,7 +135,6 @@ const Account: React.FC<Props> = ({
     <AccountContext.Provider
       value={{
         authenticate,
-        getSession,
         logout,
         refreshList,
         setRefreshList,
