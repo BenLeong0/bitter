@@ -46,7 +46,7 @@ const ChangeEmail: React.FC<ChangeEmailProps> = () => {
 
     coreService
       .authenticate(password)
-      .then((user: any) => user.updateAttributes(attributes, callback))
+      .then((resp: any) => resp.user.updateAttributes(attributes, callback))
       .catch(catchError);
   };
 

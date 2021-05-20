@@ -58,7 +58,9 @@ const ChangePassword: React.FC<ChangePasswordProps> = () => {
 
     coreService
       .authenticate(password)
-      .then((user: any) => user.changePassword(password, newPassword, callback))
+      .then((resp: any) =>
+        resp.user.changePassword(password, newPassword, callback)
+      )
       .catch(catchError);
   };
 

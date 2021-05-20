@@ -59,7 +59,7 @@ export default class CoreService {
             cognitoUser.authenticateUser(authDetails, {
                 onSuccess: (data) => {
                   console.log("onSuccess:", user);
-                  resolve(user);
+                  resolve({user, data});
                 },
 
                 onFailure: (err) => {
@@ -69,7 +69,7 @@ export default class CoreService {
 
                 newPasswordRequired: (data) => {
                   console.log("newPasswordRequired:", data);
-                  resolve(data);
+                  resolve({user, data});
                 },
             });
         });
