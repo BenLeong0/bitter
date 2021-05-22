@@ -24,7 +24,7 @@ const UserCard: React.FC<{ user: User }> = ({ user }) => {
       </Link>
 
       <div className="user-card-content">
-        {/* Poster info */}
+        {/* User info */}
         <Link to={`/u/${user.handle}`}>
           <div className="user-card-info">
             <span className="bit-info-displayname">{user.display_name}</span>
