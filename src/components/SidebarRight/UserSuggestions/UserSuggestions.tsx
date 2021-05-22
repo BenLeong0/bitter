@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import "./usersuggestions.css";
+import "./UserSuggestions.css";
 import UserSuggestion from "./UserSuggestion";
 import { AccountContext } from "../../Account";
 

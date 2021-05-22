@@ -1,5 +1,5 @@
 import React from "react";
-import "./findusers.css";
+import "./FindUser.css";
 import FindUserForm from "./FindUserForm";
 
 const FindUser: React.FC<{}> = () => {
