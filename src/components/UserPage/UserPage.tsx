@@ -39,7 +39,6 @@ const UserPage: React.FC<{}> = () => {
       setIsFollowing(user.isFollowing);
   };
 
-  // Database call for user by handle
   const fetchUser = async (handle: string) => {
     setIsLoading(true);
     updatePageState(0);

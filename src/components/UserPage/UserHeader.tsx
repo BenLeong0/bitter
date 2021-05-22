@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import "./UserHeader.css";
 
 import UserBanner from "./components/UserBanner";
 import UserPhoto from "./components/UserPhoto";

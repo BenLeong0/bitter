@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { AccountContext } from "../Account";
 import BitList from "../Shared/BitList/BitList";
-import "./UserBitList.css";
 
 import BitInfo from "../../Types/BitInfo";
 import ContextProps from "../../Types/ContextProps";
