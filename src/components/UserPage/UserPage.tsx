@@ -27,6 +27,17 @@ const UserPage: React.FC<{}> = () => {
     useContext(AccountContext);
 
   const handle: string = useLocation().pathname.slice(3);
+  useEffect(() => {
+    fetchUser(handle);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [myHandle]);
+
+  const updateUser = (user: User) => {
+    setUser(user);
+    setCurrHandle(user.handle);
+    if (typeof user.isFollowing !== "undefined")
+      setIsFollowing(user.isFollowing);
+  };
 
   // Database call for user by handle
   const fetchUser = async (handle: string) => {
@@ -39,24 +50,14 @@ const UserPage: React.FC<{}> = () => {
 
     if (resp.code === "getSuccess") {
       let user: User = JSON.parse(resp.user);
-      setUser(user);
-      setCurrHandle(user.handle);
-      if (typeof user.isFollowing !== "undefined")
-        setIsFollowing(user.isFollowing);
+      updateUser(user);
     } else {
-      setUser({ handle: "" });
-      setCurrHandle("");
       console.error(resp);
+      updateUser({ handle: "" });
     }
 
     setIsLoading(false);
   };
-
-  // Load info on mount
-  useEffect(() => {
-    fetchUser(handle);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [myHandle]);
 
   // Update when moving between user pages
   const history = useHistory();
@@ -66,9 +67,7 @@ const UserPage: React.FC<{}> = () => {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  // }, [history]);
 
-  // Change view between bits / bits+replies / following / followers / likes
   function updatePageState(stateId: number): void {
     if (stateId === 0) {
       // Posts
