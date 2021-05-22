@@ -69,21 +69,24 @@ const UserPage: React.FC<{}> = () => {
   }, []);
 
   function updatePageState(stateId: number): void {
-    if (stateId === 0) {
-      // Posts
-      setListState(<UserBitList showReplies={false} />);
-    } else if (stateId === 1) {
-      // Posts and replies
-      setListState(<UserBitList showReplies={true} />);
-    } else if (stateId === 2) {
-      // following list
-      setListState(<UserFollowing />);
-    } else if (stateId === 3) {
-      // followers list
-      setListState(<UserFollowers />);
-    } else if (stateId === 4) {
-      // like list
-      setListState(<UserLikeList />);
+    switch (stateId) {
+      case 0:
+        setListState(<UserBitList showReplies={false} />);
+        break;
+      case 1:
+        setListState(<UserBitList showReplies={true} />);
+        break;
+      case 2:
+        setListState(<UserFollowing />);
+        break;
+      case 3:
+        setListState(<UserFollowers />);
+        break;
+      case 4:
+        setListState(<UserLikeList />);
+        break;
+      default:
+        setListState(<UserBitList showReplies={false} />);
     }
   }
 
