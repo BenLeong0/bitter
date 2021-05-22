@@ -8,7 +8,6 @@ import UserBitList from "./UserBitList";
 import UserFollowing from "./components/UserFollowing";
 import UserFollowers from "./components/UserFollowers";
 import UserLikeList from "./UserLikeList";
-import UserNotFound from "./UserNotFound";
 
 import User from "../../Types/User";
 import ContextProps from "../../Types/ContextProps";
@@ -103,7 +102,10 @@ const UserPage: React.FC<{}> = () => {
               {listState}
             </>
           ) : (
-            <UserNotFound handle={handle} />
+            <div className="user-not-found">
+              User <span className="user-not-found-handle">@{handle}</span>{" "}
+              could not be found.
+            </div>
           )}
         </div>
       )}

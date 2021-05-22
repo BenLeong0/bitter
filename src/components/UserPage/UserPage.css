@@ -14,3 +14,15 @@
 .user-loader {
   margin-top: 60px;
 }
+
+/* User not found page */
+
+.user-not-found {
+  font-size: 50px;
+  font-family: "Alte DIN 1451 Mittelschrift gepraegt";
+  margin-top: 50px;
+}
+
+.user-not-found-handle {
+  color: grey;
+}
