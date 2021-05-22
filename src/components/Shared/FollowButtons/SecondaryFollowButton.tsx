@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
-import FollowButton from "../../Shared/FollowButtons/FollowButton";
-import UnfollowButton from "../../Shared/FollowButtons/UnfollowButton";
+import FollowButton from "./FollowButton";
+import UnfollowButton from "./UnfollowButton";
 import { AccountContext } from "../../Account";
 import ContextProps from "../../../Types/ContextProps";
 

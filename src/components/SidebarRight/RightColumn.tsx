@@ -1,7 +1,7 @@
 import React from "react";
 
-import FindUser from "./Users/FindUser";
-import UserSuggestions from "./Users/UserSuggestions";
+import FindUser from "./FindUser/FindUser";
+import UserSuggestions from "./UserSuggestions/UserSuggestions";
 
 const RightColumn: React.FC<{}> = () => {
   return (

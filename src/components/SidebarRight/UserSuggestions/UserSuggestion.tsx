@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import SuggestedUserFollowButton from "./SuggestedUserFollowButton";
+import SuggestedUserFollowButton from "../../Shared/FollowButtons/SecondaryFollowButton";
 
 interface User {
   handle: string;
