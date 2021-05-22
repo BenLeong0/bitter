@@ -86,7 +86,7 @@ const Bit: React.FC<BitInfo & OtherProps> = ({ classes = "", ...bitInfo }) => {
         <DeletedBit classes={classes} />
       ) : (
         <div
-          className={"bit " + classes}
+          className={"bit " + classes.trim()}
           style={{
             display: isDeleted ? "none" : "",
           }}
