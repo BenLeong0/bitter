@@ -3,10 +3,10 @@ import { useHistory, useLocation } from "react-router-dom";
 import { AccountContext } from "../Account";
 import "./UserPage.css";
 
-import UserHeader from "./UserHeader";
+import UserHeader from "./UserHeader/UserHeader";
 import UserBitList from "./UserBitList";
-import UserFollowing from "./components/UserFollowing";
-import UserFollowers from "./components/UserFollowers";
+import UserFollowing from "./UserFollowList/UserFollowing";
+import UserFollowers from "./UserFollowList/UserFollowers";
 import UserLikeList from "./UserLikeList";
 
 import User from "../../Types/User";

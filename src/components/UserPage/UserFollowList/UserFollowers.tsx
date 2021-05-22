@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AccountContext } from "../../Account";
+import UserFollowList from "../UserFollowList";
 import User from "../../../Types/User";
-import UserFollowList from "./UserFollowList";
 import ContextProps from "../../../Types/ContextProps";
 import HttpService from "../../core/HttpService";
 
 export interface UserFollowingProps {}
 
-const UserFollowing: React.FC<UserFollowingProps> = () => {
+const UserFollowers: React.FC<UserFollowingProps> = () => {
   const httpService = new HttpService();
 
   // fetch list of bits
@@ -25,7 +25,7 @@ const UserFollowing: React.FC<UserFollowingProps> = () => {
   const fetchUsers = async () => {
     setIsLoading(true);
 
-    let res = "/users/following";
+    let res = "/users/followers";
     let queryParams = { handle: currHandle, myHandle };
     let resp: any = await httpService.makeGetRequest(res, queryParams);
 
@@ -43,4 +43,4 @@ const UserFollowing: React.FC<UserFollowingProps> = () => {
   return <UserFollowList users={users} isLoading={isLoading} />;
 };
 
-export default UserFollowing;
+export default UserFollowers;

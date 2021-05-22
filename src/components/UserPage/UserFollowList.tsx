@@ -1,7 +1,7 @@
 import React from "react";
 
-import User from "../../../Types/User";
-import UserCard from "./UserCard";
+import User from "../../Types/User";
+import UserCard from "./UserFollowList/UserCard";
 
 export interface UserFollowListProps {
   users: Array<User>;

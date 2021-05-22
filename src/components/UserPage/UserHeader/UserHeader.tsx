@@ -1,16 +1,16 @@
 import React, { useContext } from "react";
 
-import UserBanner from "./components/UserBanner";
-import UserPhoto from "./components/UserPhoto";
-import UserInfo from "./components/UserInfo";
+import UserBanner from "./UserBanner";
+import UserPhoto from "./UserPhoto";
+import UserInfo from "./UserInfo";
+import EditProfileButton from "./EditProfileButton";
+import UnfollowButton from "../../Shared/FollowButtons/UnfollowButton";
+import FollowButton from "../../Shared/FollowButtons/FollowButton";
 
-import User from "../../Types/User";
-import ValidationService from "../core/ValidationService";
-import { AccountContext } from "../Account";
-import EditProfileButton from "./components/EditProfileButton";
-import UnfollowButton from "../Shared/FollowButtons/UnfollowButton";
-import FollowButton from "../Shared/FollowButtons/FollowButton";
-import ContextProps from "../../Types/ContextProps";
+import User from "../../../Types/User";
+import ContextProps from "../../../Types/ContextProps";
+import ValidationService from "../../core/ValidationService";
+import { AccountContext } from "../../Account";
 
 interface Props {
   updatePageState: (stateId: number) => void;
