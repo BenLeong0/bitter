@@ -10,6 +10,14 @@ export default class InteractionsService {
     }
 
 
+    postBit = async (content: string, replyTo: string='') => {
+      let res = "/bits";
+      let body = { content, replyTo };
+      let resp: any = await this.httpService.makePostRequest(res, body);
+      return resp;
+    }
+
+
     createFollowEdge = async (destinationHandle: string) => {
       let res = "/users/follow";
       let body = { handle: destinationHandle };

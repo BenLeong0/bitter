@@ -2,12 +2,10 @@ import React, { useContext, useEffect, useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import ContextProps from "../../Types/ContextProps";
 import { AccountContext } from "../Account";
-import CoreService from "../core/CoreService";
-import HttpService from "../core/HttpService";
+import InteractionsService from "../core/InteractionsService";
 
 const PostBoxForm: React.FC<{}> = () => {
-  const coreService = new CoreService();
-  const httpService = new HttpService();
+  const interactionsService = new InteractionsService();
 
   const { refreshBitList }: ContextProps = useContext(AccountContext);
 
@@ -57,39 +55,33 @@ const PostBoxForm: React.FC<{}> = () => {
 
   const handleSubmitClick = async (e: any) => {
     e.preventDefault();
-    coreService
-      .getSession()
-      .then(async ({ headers }) => {
-        // Check valid length
-        if (remainingChars < 0 || remainingChars >= 140) {
-          console.error("Invalid post length.");
-          return;
-        }
 
-        setIsLoading(true);
-        setErrorOccurred(false);
+    // Check valid length
+    if (remainingChars < 0 || remainingChars >= 140) {
+      console.error("Invalid post length.");
+      return;
+    }
 
-        let res = "/bits";
-        let body = { content: post, replyTo: "" };
-        let resp: any = await httpService.makePostRequest(res, body);
+    setIsLoading(true);
+    setErrorOccurred(false);
 
-        if (resp.code === "postSuccess") {
-          updatePost("");
-          console.log(resp);
-        } else {
-          setErrorOccurred(true);
-          console.error(resp);
-        }
-      })
-      .catch((err) => {
-        console.log("Error:", err);
+    await postBit();
+
+    // Set not loading
+    setIsLoading(false);
+    refreshBitList();
+  };
+
+  const postBit = async () => {
+    await interactionsService.postBit(post).then((resp) => {
+      if (resp.code === "postSuccess") {
+        updatePost("");
+        console.log(resp);
+      } else {
         setErrorOccurred(true);
-      })
-      .finally(() => {
-        // Set not loading
-        setIsLoading(false);
-        refreshBitList();
-      });
+        console.error(resp);
+      }
+    });
   };
 
   return (
