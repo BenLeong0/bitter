@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import TextareaAutosize from "react-textarea-autosize";
-import InteractionsService from "../../core/InteractionsService";
+import BitService from "../../core/BitService";
 
 export interface BitReplyBoxProps {
   post_id: string;
@@ -8,7 +8,7 @@ export interface BitReplyBoxProps {
 }
 
 const BitReplyBox: React.FC<BitReplyBoxProps> = ({ post_id, setReplying }) => {
-  const interactionsService = new InteractionsService();
+  const bitService = new BitService();
 
   const [post, updatePost] = useState<string>("");
   const [remainingChars, updateChars] = useState<number>(140);
@@ -42,7 +42,7 @@ const BitReplyBox: React.FC<BitReplyBoxProps> = ({ post_id, setReplying }) => {
     setIsLoading(true);
     setErrorOccurred(false);
 
-    await interactionsService
+    await bitService
       .postBit(post, post_id)
       .then(() => {
         updatePost("");
