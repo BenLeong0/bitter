@@ -1,6 +1,8 @@
 import CoreService from "./CoreService";
 import HttpService from "./HttpService";
 
+import User from "../../Types/User";
+
 export default class UserService {
 
     httpService: HttpService;
@@ -40,6 +42,20 @@ export default class UserService {
 
 
     // Get user
+
+    getSuggestedUsers = async (myHandle: string): Promise<User[]> => {
+        let res = "/users/suggested";
+        let queryParams = { myHandle };
+        let resp: any = await this.httpService.makeGetRequest(res, queryParams);
+        return new Promise ((resolve, reject) => {
+            if (resp.code === "getSuccess") {
+              const users: Array<User> = JSON.parse(resp.users);
+              resolve(users);
+            } else {
+                reject([]);
+            }
+        });
+    }
 
     // Get following/followers
 
