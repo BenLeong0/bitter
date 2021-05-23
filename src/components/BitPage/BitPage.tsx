@@ -5,23 +5,13 @@ import "./BitPage.css";
 import { AccountContext } from "../Account";
 import Bit from "../Shared/Bit/Bit";
 
-import BitInfo from "../../Types/BitInfo";
+import BitInfo, { emptyPost } from "../../Types/BitInfo";
 import ContextProps from "../../Types/ContextProps";
 import ReplyThread from "./ReplyThread";
 import BitService from "../core/BitService";
 
 const BitPage: React.FC<{}> = () => {
   const bitService = new BitService();
-  const emptyPost: BitInfo = {
-    post_id: "",
-    handle: "",
-    post_time: "",
-    content: "",
-    dislikes: 0,
-    likes: 0,
-    replies: 0,
-    reposts: 0,
-  };
   const [post, setPost] = useState<BitInfo>(emptyPost);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [post_id, setPostId] = useState<string>(
