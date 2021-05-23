@@ -36,7 +36,7 @@ const LogoutButton: React.FC<LogoutButtonProps> = () => {
     logout();
 
     // Redirect to home page
-    history.push(`/home`);
+    history.push("/home");
   };
 
   return (

@@ -1,33 +1,16 @@
 import React, { useState, useEffect, useContext } from "react";
 import { AccountContext } from "../Account";
-import BitList from "../Main/BitList/BitList";
-import "./UserBitList.css";
-import "./UserFollowList.css";
+import BitList from "../Shared/BitList/BitList";
 
 import BitInfo from "../../Types/BitInfo";
 import ContextProps from "../../Types/ContextProps";
 import HttpService from "../core/HttpService";
-// interface BitInfo {
-//   content: string;
-//   dislikes: number;
-//   display_name: string;
-//   handle: string;
-//   index: number;
-//   likes: number;
-//   post_id: number;
-//   post_time: string;
-//   replies: number;
-//   reply_to: number;
-//   reposts: number;
-//   status: number;
-//   user_id: number;
-// }
 
 interface Props {
-  replies: boolean;
+  showReplies: boolean;
 }
 
-const UserBitList: React.FC<Props> = ({ replies }) => {
+const UserBitList: React.FC<Props> = ({ showReplies }) => {
   const httpService = new HttpService();
 
   // fetch list of bits
@@ -62,7 +45,7 @@ const UserBitList: React.FC<Props> = ({ replies }) => {
   // pass into BitList
   return (
     <BitList
-      bits={replies ? bits : bits.filter((post) => !post.reply_to)}
+      bits={showReplies ? bits : bits.filter((post) => !post.reply_to)}
       isLoading={isLoading}
     />
   );

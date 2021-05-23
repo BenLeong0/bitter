@@ -1,6 +1,6 @@
 import React from "react";
 import BitInfo from "../../Types/BitInfo";
-import Bit from "../Main/BitList/Bit";
+import Bit from "../Shared/Bit/Bit";
 
 export interface PreThreadProps {
   bit: BitInfo;

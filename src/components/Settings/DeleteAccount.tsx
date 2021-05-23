@@ -54,7 +54,7 @@ const ChangeEmail: React.FC<ChangeEmailProps> = () => {
 
         if (resp.code === "deleteSuccess") {
           logout();
-          history.push(`/home`);
+          history.push("/home");
           console.log(resp);
         } else {
           setErrorOccurred(true);
