@@ -2,15 +2,15 @@ import React, { useContext, useState } from "react";
 import { useHistory } from "react-router";
 import ContextProps from "../../Types/ContextProps";
 import { AccountContext } from "../Account";
-import HttpService from "../core/HttpService";
 import CoreService from "../core/CoreService";
+import UserService from "../core/UserService";
 import DeleteAccountConfirmation from "./DeleteAccountConfirmation";
 
 export interface ChangeEmailProps {}
 
 const ChangeEmail: React.FC<ChangeEmailProps> = () => {
-  const httpService = new HttpService();
   const coreService = new CoreService();
+  const userService = new UserService();
 
   const [password, setPassword] = useState<string>("");
   const [deleteConfirmation, setDeleteConfirmation] = useState<string>("");
@@ -45,21 +45,13 @@ const ChangeEmail: React.FC<ChangeEmailProps> = () => {
     await coreService
       .authenticate(password)
       .then(async () => {
-        let session = await coreService.getSession();
-        let { accessToken } = session;
-
-        let res = "/users";
-        let body = { accessToken: accessToken.jwtToken };
-        let resp = await httpService.makeDeleteRequest(res, body);
-
-        if (resp.code === "deleteSuccess") {
-          logout();
-          history.push("/home");
-          console.log(resp);
-        } else {
-          setErrorOccurred(true);
-          console.error(resp);
-        }
+        userService
+          .deleteAccount()
+          .then(() => {
+            logout();
+            history.push("/home");
+          })
+          .catch(() => setErrorOccurred(true));
       })
       .catch(catchError)
       .finally(() => setIsLoading(false));
