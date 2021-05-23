@@ -3,12 +3,12 @@ import { AccountContext } from "../Account";
 import BitList from "../Shared/BitList/BitList";
 import BitInfo from "../../Types/BitInfo";
 import ContextProps from "../../Types/ContextProps";
-import HttpService from "../core/HttpService";
+import BitService from "../core/BitService";
 
 const TimelineBitList: React.FC<{ timelineType: string }> = ({
   timelineType,
 }) => {
-  const httpService = new HttpService();
+  const bitService = new BitService();
 
   // fetch list of bits
   const [bits, setBits] = useState<Array<BitInfo>>([]);
@@ -27,22 +27,20 @@ const TimelineBitList: React.FC<{ timelineType: string }> = ({
     const requestId = requestCounter;
 
     setIsLoading(true);
+
     console.log("Fetching bits...");
 
-    let res = `/bits/${timelineType}`;
-    let queryParams = { handle: myHandle };
-    let resp: any = await httpService.makeGetRequest(res, queryParams);
-
-    // Only update if final request ie ignore if another request was sent out after
-    if (requestId === requestCounter) {
-      if (resp.code === "getSuccess") {
-        let bits: Array<BitInfo> = JSON.parse(resp.posts);
-        setBits(bits);
-      } else {
-        setBits([]);
-      }
-      setIsLoading(false);
-    }
+    await bitService
+      .getTimeline(timelineType, myHandle)
+      .then((bits) => {
+        if (requestId === requestCounter) setBits(bits);
+      })
+      .catch((bits) => {
+        if (requestId === requestCounter) setBits(bits);
+      })
+      .finally(() => {
+        if (requestId === requestCounter) setIsLoading(false);
+      });
   };
 
   // pass into BitList

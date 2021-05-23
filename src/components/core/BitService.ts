@@ -42,6 +42,25 @@ export default class BitService {
       });
     }
 
+
+    getTimeline = async (timelineType: string, handle: string=''): Promise<BitInfo[]> => {
+      console.log("Fetching bits...");
+
+      let res = `/bits/${timelineType}`;
+      let queryParams = { handle };
+      let resp: any = await this.httpService.makeGetRequest(res, queryParams);
+      return new Promise((resolve, reject) => {
+        if (resp.code === "getSuccess") {
+          let bits: Array<BitInfo> = JSON.parse(resp.posts);
+          resolve(bits)
+        } else {
+          reject([])
+        }
+      })
+
+    }
+
+
     getBitPage = async (handle: string, post_id: string): Promise<BitInfo> => {
       const res = "/bits";
       let queryParams = { handle, post_id };
