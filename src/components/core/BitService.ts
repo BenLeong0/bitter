@@ -26,6 +26,22 @@ export default class BitService {
       });
     }
 
+
+    deleteBit = async (post_id: string): Promise<void> => {
+      let res = "/bits";
+      let body = { post_id };
+      let resp: any = await this.httpService.makeDeleteRequest(res, body);
+      return new Promise((resolve, reject) => {
+        if (resp.code === "deleteSuccess") {
+          console.log(resp);
+          resolve();
+        } else {
+          console.error(resp);
+          reject();
+        }
+      });
+    }
+
     getBitPage = async (handle: string, post_id: string): Promise<BitInfo> => {
       const res = "/bits";
       let queryParams = { handle, post_id };
