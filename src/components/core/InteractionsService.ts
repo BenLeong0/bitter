@@ -10,11 +10,19 @@ export default class InteractionsService {
     }
 
 
-    postBit = async (content: string, replyTo: string='') => {
+    postBit = async (content: string, replyTo: string=''): Promise<void> => {
       let res = "/bits";
       let body = { content, replyTo };
       let resp: any = await this.httpService.makePostRequest(res, body);
-      return resp;
+      return new Promise((resolve, reject) => {
+        if (resp.code === "postSuccess") {
+          console.log(resp);
+          resolve();
+        } else {
+          console.error(resp);
+          reject();
+        }
+      });
     }
 
 

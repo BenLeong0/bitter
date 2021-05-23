@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import TextareaAutosize from "react-textarea-autosize";
-import HttpService from "../../core/HttpService";
+import InteractionsService from "../../core/InteractionsService";
 
 export interface BitReplyBoxProps {
   post_id: string;
@@ -8,7 +8,7 @@ export interface BitReplyBoxProps {
 }
 
 const BitReplyBox: React.FC<BitReplyBoxProps> = ({ post_id, setReplying }) => {
-  const httpService = new HttpService();
+  const interactionsService = new InteractionsService();
 
   const [post, updatePost] = useState<string>("");
   const [remainingChars, updateChars] = useState<number>(140);
@@ -42,20 +42,13 @@ const BitReplyBox: React.FC<BitReplyBoxProps> = ({ post_id, setReplying }) => {
     setIsLoading(true);
     setErrorOccurred(false);
 
-    let res = "/bits";
-    let body = { content: post, replyTo: post_id };
-    let resp = await httpService.makePostRequest(res, body);
-
-    if (resp.code === "postSuccess") {
-      // Empty input field
-      updatePost("");
-      setReplying(false);
-      console.log(resp);
-    } else {
-      // Error message
-      setErrorOccurred(true);
-      console.error(resp);
-    }
+    await interactionsService
+      .postBit(post, post_id)
+      .then(() => {
+        updatePost("");
+        setReplying(false);
+      })
+      .catch(() => setErrorOccurred(true));
 
     setIsLoading(false);
   };
