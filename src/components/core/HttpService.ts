@@ -51,8 +51,8 @@ export default class HttpService {
         };
 
         let data: any = await fetch(url, requestOptions);
-        let resp: string = await data.text();
-        return JSON.parse(resp);
+        let resp: any = await data.json();
+        return resp;
     }
 
 
@@ -68,8 +68,8 @@ export default class HttpService {
         };
 
         let data: any = await fetch(url, requestOptions);
-        let resp: string = await data.text();
-        return JSON.parse(resp);
+        let resp: any = await data.json();
+        return resp;
     }
 
 
@@ -85,8 +85,8 @@ export default class HttpService {
         };
 
         let data: any = await fetch(url, requestOptions);
-        let resp: string = await data.text();
-        return JSON.parse(resp);
+        let resp: any = await data.json();
+        return resp;
     }
 
 
@@ -110,7 +110,7 @@ export default class HttpService {
         };
 
         let data: any = await fetch(url, requestOptions);
-        let resp: string = await data.text();
-        return JSON.parse(resp);
+        let resp: any = await data.json();
+        return resp;
     }
 }
