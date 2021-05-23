@@ -1,3 +1,4 @@
+import BitInfo, { emptyPost } from "../../Types/BitInfo";
 import HttpService from "./HttpService";
 
 export default class BitService {
@@ -23,6 +24,21 @@ export default class BitService {
           reject();
         }
       });
+    }
+
+    getBitPage = async (handle: string, post_id: string): Promise<BitInfo> => {
+      const res = "/bits";
+      let queryParams = { handle, post_id };
+      let resp: any = await this.httpService.makeGetRequest(res, queryParams);
+      return new Promise((resolve, reject) => {
+        if (resp.code === "getSuccess") {
+          const post: BitInfo = JSON.parse(resp.post);
+          resolve(post);
+        } else {
+          console.error(resp);
+          reject(emptyPost);
+        }
+      })
     }
 
     // Get bitlist
