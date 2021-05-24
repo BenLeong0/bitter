@@ -3,12 +3,12 @@ import "./OptionsBox.css";
 import OptionLink from "./OptionLink";
 import UserBox from "./OptionsUserBox";
 
-import HomeLogo from "./home.svg";
-import AllPostsLogo from "./allposts.svg";
-import UserLogo from "./user.svg";
-import SettingsLogo from "./settings.svg";
-import LoginLogo from "./login.svg";
-import RegisterLogo from "./register.svg";
+import HomeLogo from "./Icons/home.svg";
+import AllPostsLogo from "./Icons/allposts.svg";
+import UserLogo from "./Icons/user.svg";
+import SettingsLogo from "./Icons/settings.svg";
+import LoginLogo from "./Icons/login.svg";
+import RegisterLogo from "./Icons/register.svg";
 
 import { AccountContext } from "../../Account";
 import ContextProps from "../../../Types/ContextProps";

@@ -2,10 +2,10 @@ import React, { useContext, useEffect, useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import ContextProps from "../../Types/ContextProps";
 import { AccountContext } from "../Account";
-import InteractionsService from "../core/InteractionsService";
+import BitService from "../core/BitService";
 
 const PostBoxForm: React.FC<{}> = () => {
-  const interactionsService = new InteractionsService();
+  const bitService = new BitService();
 
   const { refreshBitList }: ContextProps = useContext(AccountContext);
 
@@ -65,7 +65,7 @@ const PostBoxForm: React.FC<{}> = () => {
     setIsLoading(true);
     setErrorOccurred(false);
 
-    await interactionsService
+    await bitService
       .postBit(post)
       .then(() => updatePost(""))
       .catch(() => setErrorOccurred(true));
@@ -74,18 +74,6 @@ const PostBoxForm: React.FC<{}> = () => {
     setIsLoading(false);
     refreshBitList();
   };
-
-  // const postBit = async () => {
-  //   await interactionsService.postBit(post).then((resp) => {
-  //     if (resp.code === "postSuccess") {
-  //       updatePost("");
-  //       console.log(resp);
-  //     } else {
-  //       setErrorOccurred(true);
-  //       console.error(resp);
-  //     }
-  //   });
-  // };
 
   return (
     <div className="postbox-input">

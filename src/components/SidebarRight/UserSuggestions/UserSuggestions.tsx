@@ -5,10 +5,10 @@ import { AccountContext } from "../../Account";
 
 import User from "../../../Types/User";
 import ContextProps from "../../../Types/ContextProps";
-import HttpService from "../../core/HttpService";
+import UserService from "../../core/UserService";
 
 const UserSuggestions: React.FC<{}> = () => {
-  const httpService = new HttpService();
+  const userService = new UserService();
 
   const [suggestedUsers, updateSuggestions] = useState<Array<User>>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -19,19 +19,16 @@ const UserSuggestions: React.FC<{}> = () => {
   const fetchSuggestions = async () => {
     setIsLoading(true);
 
-    let res = "/users/suggested";
-    let queryParams = { myHandle };
-    let resp: any = await httpService.makeGetRequest(res, queryParams);
-
-    if (resp.code === "getSuccess") {
-      setFetchError(false);
-      const users: Array<User> = JSON.parse(resp.users);
-      updateSuggestions(users);
-    } else {
-      updateSuggestions([]);
-      setFetchError(true);
-      console.error(resp);
-    }
+    userService
+      .getSuggestedUsers(myHandle)
+      .then((users) => {
+        setFetchError(false);
+        updateSuggestions(users);
+      })
+      .catch((users) => {
+        setFetchError(true);
+        updateSuggestions(users);
+      });
 
     setIsLoading(false);
   };

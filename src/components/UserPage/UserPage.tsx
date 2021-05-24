@@ -11,10 +11,10 @@ import UserLikeList from "./UserLikeList";
 
 import User from "../../Types/User";
 import ContextProps from "../../Types/ContextProps";
-import HttpService from "../core/HttpService";
+import UserService from "../core/UserService";
 
 const UserPage: React.FC<{}> = () => {
-  const httpService = new HttpService();
+  const userService = new UserService();
   const [user, setUser] = useState<User>({ handle: "" });
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [listState, setListState] = useState<any>(
@@ -43,17 +43,10 @@ const UserPage: React.FC<{}> = () => {
     setIsLoading(true);
     updatePageState(0);
 
-    let res = "/users";
-    let queryParams = { handle, myHandle };
-    let resp: any = await httpService.makeGetRequest(res, queryParams);
-
-    if (resp.code === "getSuccess") {
-      let user: User = JSON.parse(resp.user);
-      updateUser(user);
-    } else {
-      console.error(resp);
-      updateUser({ handle: "" });
-    }
+    await userService
+      .fetchUser(handle, myHandle)
+      .then((user) => updateUser(user))
+      .catch(() => updateUser({ handle: "" }));
 
     setIsLoading(false);
   };

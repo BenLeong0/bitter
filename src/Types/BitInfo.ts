@@ -20,3 +20,14 @@ export default interface BitInfo {
     pre_thread?: Array<BitInfo>;
     reply_threads?: Array<Array<BitInfo>>
   }
+
+  export const emptyPost: BitInfo = {
+    post_id: "",
+    handle: "",
+    post_time: "",
+    content: "",
+    dislikes: 0,
+    likes: 0,
+    replies: 0,
+    reposts: 0,
+  };

@@ -10,48 +10,6 @@ export default class InteractionsService {
     }
 
 
-    postBit = async (content: string, replyTo: string=''): Promise<void> => {
-      let res = "/bits";
-      let body = { content, replyTo };
-      let resp: any = await this.httpService.makePostRequest(res, body);
-      return new Promise((resolve, reject) => {
-        if (resp.code === "postSuccess") {
-          console.log(resp);
-          resolve();
-        } else {
-          console.error(resp);
-          reject();
-        }
-      });
-    }
-
-
-    createFollowEdge = async (destinationHandle: string) => {
-      let res = "/users/follow";
-      let body = { handle: destinationHandle };
-      let resp: any = await this.httpService.makePostRequest(res, body);
-
-      if (resp.code === "followSuccess") {
-        console.log(resp);
-      } else {
-        console.error(resp);
-      }
-    };
-
-
-    deleteFollowEdge = async (destinationHandle: string) => {
-      let res = "/users/follow";
-      let body = { handle: destinationHandle };
-      let resp: any = await this.httpService.makeDeleteRequest(res, body);
-
-      if (resp.code === "unfollowSuccess") {
-        console.log(resp);
-      } else {
-        console.error(resp);
-      }
-    };
-
-
     rebitPost = async (post_id: string) => {
       let res = "/bits/rebit";
       let body = { post_id };

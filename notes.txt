@@ -1,0 +1,33 @@
+core
+¬ Bit.tsx
+¬ BitList.tsx
+
+-> combine AllBitsList and TimelineBitList
+Timeline
+¬ Timeline.tsx (timelineType)
+¬ PostBit.tsx
+¬ PostBox.tsx (combine with postbit)
+¬ Timeline.css (contain all?)
+
+Settings
+¬ Settings.tsx
+¬
+
+UserPage
+¬ Userpage.tsx
+==UserHeader
+  ¬ UserHeader.tsx
+  ¬ EditProfileButton.tsx
+
+
+
+Class
+¬ HTTP requests
+ ¬ Post bit
+ ¬ Get timeline
+¬ Validation
+ ¬ For posts (length etc)
+ ¬ Account creation etc
+¬ Core
+ ¬ getSession
+ ¬ take everything from account lol

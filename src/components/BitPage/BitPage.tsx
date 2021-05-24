@@ -5,23 +5,13 @@ import "./BitPage.css";
 import { AccountContext } from "../Account";
 import Bit from "../Shared/Bit/Bit";
 
-import BitInfo from "../../Types/BitInfo";
+import BitInfo, { emptyPost } from "../../Types/BitInfo";
 import ContextProps from "../../Types/ContextProps";
 import ReplyThread from "./ReplyThread";
-import HttpService from "../core/HttpService";
+import BitService from "../core/BitService";
 
 const BitPage: React.FC<{}> = () => {
-  const httpService = new HttpService();
-  const emptyPost: BitInfo = {
-    post_id: "",
-    handle: "",
-    post_time: "",
-    content: "",
-    dislikes: 0,
-    likes: 0,
-    replies: 0,
-    reposts: 0,
-  };
+  const bitService = new BitService();
   const [post, setPost] = useState<BitInfo>(emptyPost);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [post_id, setPostId] = useState<string>(
@@ -36,18 +26,10 @@ const BitPage: React.FC<{}> = () => {
   const fetchPost = async (post_id: string) => {
     setIsLoading(true);
 
-    // Returns {post_id: '', handle: ''} if post not found
-    const res = "/bits";
-    let queryParams = { handle: myHandle, post_id };
-    const resp: any = await httpService.makeGetRequest(res, queryParams);
-
-    if (resp.code === "getSuccess") {
-      const post: BitInfo = JSON.parse(resp.post);
-      setPost(post);
-    } else {
-      setPost(emptyPost);
-      console.error(resp);
-    }
+    await bitService
+      .getBitPage(myHandle, post_id)
+      .then((respPost) => setPost(respPost))
+      .catch((respPost) => setPost(respPost));
 
     setIsLoading(false);
 

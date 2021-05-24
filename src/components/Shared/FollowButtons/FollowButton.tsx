@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import ContextProps from "../../../Types/ContextProps";
 import { AccountContext } from "../../Account";
-import InteractionsService from "../../core/InteractionsService";
+import UserService from "../../core/UserService";
 
 type Props = {
   setFollowing: (following: boolean) => void;
@@ -9,7 +9,7 @@ type Props = {
 };
 
 const FollowButton: React.FC<Props> = ({ setFollowing, handle }) => {
-  const interactionsService = new InteractionsService();
+  const userService = new UserService();
   const { currHandle, setIsFollowing, isLoggedIn }: ContextProps =
     useContext(AccountContext);
 
@@ -23,7 +23,7 @@ const FollowButton: React.FC<Props> = ({ setFollowing, handle }) => {
     }
 
     // update db
-    interactionsService.createFollowEdge(handle);
+    userService.createFollowEdge(handle);
   };
 
   return (

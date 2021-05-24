@@ -1,28 +1,29 @@
 import React, { useContext, useEffect, useState } from "react";
-import BitButtonBar from "./BitButtonBar";
 import { Link } from "react-router-dom";
-import OutsideAlerter from "./OutsideAlerter";
+import { AccountContext } from "../../Account";
+import ContextProps from "../../../Types/ContextProps";
 
+import BitButtonBar from "./BitButtonBar";
 import BitInfo from "../../../Types/BitInfo";
 import BitTag from "./BitTag";
-import { AccountContext } from "../../Account";
-import DeleteButton from "./Icons/delete.svg";
-import RebitedButton from "./Icons/rebited.svg";
-import RepliedButton from "./Icons/replied.svg";
-import ContextProps from "../../../Types/ContextProps";
+import OutsideAlerter from "./OutsideAlerter";
 import BitReplyBox from "./BitReplyBox";
 import DeletedBit from "./DeletedBit";
-import HttpService from "../../core/HttpService";
+
+import RepliedButton from "./Icons/replied.svg";
+import RebitedButton from "./Icons/rebited.svg";
+import DeleteButton from "./Icons/delete.svg";
 
 import "./Bit.css";
 import CoreService from "../../core/CoreService";
+import BitService from "../../core/BitService";
 
 interface OtherProps {
   classes?: string;
 }
 
 const Bit: React.FC<BitInfo & OtherProps> = ({ classes = "", ...bitInfo }) => {
-  const httpService = new HttpService();
+  const bitService = new BitService();
   const coreService = new CoreService();
 
   const { isAdmin, myHandle }: ContextProps = useContext(AccountContext);
@@ -64,16 +65,10 @@ const Bit: React.FC<BitInfo & OtherProps> = ({ classes = "", ...bitInfo }) => {
   const handleDeletePost = async (e: any) => {
     e.preventDefault();
 
-    let res = "/bits";
-    let body = { post_id: bitInfo.post_id };
-    let resp: any = await httpService.makeDeleteRequest(res, body);
-
-    if (resp.code === "deleteSuccess") {
-      setIsDeleted(true);
-      console.log(resp);
-    } else {
-      console.error(resp);
-    }
+    await bitService
+      .deleteBit(bitInfo.post_id)
+      .then(() => setIsDeleted(true))
+      .catch(() => {});
   };
 
   // Delete popover
