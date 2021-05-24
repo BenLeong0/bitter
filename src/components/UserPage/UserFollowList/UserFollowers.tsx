@@ -3,12 +3,12 @@ import { AccountContext } from "../../Account";
 import UserFollowList from "../UserFollowList";
 import User from "../../../Types/User";
 import ContextProps from "../../../Types/ContextProps";
-import HttpService from "../../core/HttpService";
+import UserService from "../../core/UserService";
 
 export interface UserFollowingProps {}
 
 const UserFollowers: React.FC<UserFollowingProps> = () => {
-  const httpService = new HttpService();
+  const userService = new UserService();
 
   // fetch list of bits
   const [users, setUsers] = useState<Array<User>>([]);
@@ -25,17 +25,10 @@ const UserFollowers: React.FC<UserFollowingProps> = () => {
   const fetchUsers = async () => {
     setIsLoading(true);
 
-    let res = "/users/followers";
-    let queryParams = { handle: currHandle, myHandle };
-    let resp: any = await httpService.makeGetRequest(res, queryParams);
-
-    if (resp.code === "getSuccess") {
-      let userlist: Array<User> = JSON.parse(resp.users);
-      setUsers(userlist);
-    } else {
-      setUsers([]);
-      console.error(resp);
-    }
+    await userService
+      .getFollowers(currHandle, myHandle)
+      .then((users) => setUsers(users))
+      .catch((users) => setUsers(users));
 
     setIsLoading(false);
   };

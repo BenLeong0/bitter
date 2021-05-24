@@ -57,7 +57,30 @@ export default class UserService {
         });
     }
 
-    // Get following/followers
+
+    getFollowList = async (list: string, handle: string, myHandle: string=''): Promise<User[]> => {
+      let res = `/users/${list}`;
+      let queryParams = { handle, myHandle };
+      let resp: any = await this.httpService.makeGetRequest(res, queryParams);
+      return new Promise((resolve, reject) => {
+        if (resp.code === "getSuccess") {
+          let userlist: Array<User> = JSON.parse(resp.users);
+          resolve(userlist)
+        } else {
+          console.error(resp);
+          reject([])
+        }
+      })
+    }
+
+
+    getFollowing = async (handle: string, myHandle: string=''): Promise<User[]> =>
+      this.getFollowList("following", handle, myHandle);
+
+
+    getFollowers = async (handle: string, myHandle: string=''): Promise<User[]> =>
+      this.getFollowList("followers", handle, myHandle);
+
 
     deleteAccount = async (): Promise<void> => {
         let session = await this.coreService.getSession();
