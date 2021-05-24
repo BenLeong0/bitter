@@ -6,22 +6,22 @@ import {
   Redirect,
 } from "react-router-dom";
 
-import Admin from "./pages/Admin";
+import Admin from "./components/Admin/Admin";
 import { Account } from "./components/Account";
 import "./App.css";
 
 // Persistent
-import LeftColumn from "./components/Main/LeftColumn";
-import RightColumn from "./components/Main/RightColumn";
+import LeftColumn from "./components/SidebarLeft/LeftColumn";
+import RightColumn from "./components/SidebarRight/RightColumn";
 
 // Pages
-import PageNotFound from "./pages/PageNotFound";
-import Timeline from "./pages/Timeline";
-import UserPage from "./pages/UserPage";
-import BitPage from "./pages/BitPage";
-import Settings from "./pages/Settings";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
+import PageNotFound from "./components/Shared/PageNotFound";
+import Timeline from "./components/Timeline/Timeline";
+import UserPage from "./components/UserPage/UserPage";
+import BitPage from "./components/BitPage/BitPage";
+import Settings from "./components/Settings/Settings";
+import Login from "./components/Login/Login";
+import Register from "./components/Register/Register";
 import PrivateRoute from "./PrivateRoute";
 
 const App: React.FC<{}> = () => {
