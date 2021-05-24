@@ -15,6 +15,21 @@ export default class UserService {
     }
 
 
+    fetchUser = async (handle: string, myHandle: string=''): Promise<User> => {
+      let res = "/users";
+      let queryParams = { handle, myHandle };
+      let resp: any = await this.httpService.makeGetRequest(res, queryParams);
+      return new Promise ((resolve, reject) => {
+          if (resp.code === "getSuccess") {
+            const user: User = JSON.parse(resp.user);
+            resolve(user);
+          } else {
+              reject({ handle: "" });
+          }
+      });
+    }
+
+
     createFollowEdge = async (destinationHandle: string) => {
       let res = "/users/follow";
       let body = { handle: destinationHandle };
@@ -40,8 +55,6 @@ export default class UserService {
       }
     };
 
-
-    // Get user
 
     getSuggestedUsers = async (myHandle: string): Promise<User[]> => {
         let res = "/users/suggested";
