@@ -4,14 +4,14 @@ import BitList from "../Shared/BitList/BitList";
 
 import BitInfo from "../../Types/BitInfo";
 import ContextProps from "../../Types/ContextProps";
-import HttpService from "../core/HttpService";
+import BitService from "../core/BitService";
 
 interface Props {
   showReplies: boolean;
 }
 
 const UserBitList: React.FC<Props> = ({ showReplies }) => {
-  const httpService = new HttpService();
+  const bitService = new BitService();
 
   // fetch list of bits
   const [bits, setBits] = useState<Array<BitInfo>>([]);
@@ -28,16 +28,10 @@ const UserBitList: React.FC<Props> = ({ showReplies }) => {
   const fetchBits = async () => {
     setIsLoading(true);
 
-    let res = "/users/posts";
-    let queryParams = { handle: currHandle, myHandle };
-    let resp: any = await httpService.makeGetRequest(res, queryParams);
-
-    if (resp.code === "getSuccess") {
-      let bits: Array<BitInfo> = JSON.parse(resp.posts);
-      setBits(bits);
-    } else {
-      setBits([]);
-    }
+    await bitService
+      .getUserBits(currHandle, myHandle)
+      .then((bits) => setBits(bits))
+      .catch((bits) => setBits(bits));
 
     setIsLoading(false);
   };
