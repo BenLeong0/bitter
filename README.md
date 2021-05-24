@@ -109,7 +109,9 @@ To-do list as I move the entire backend to AWS, and implement TypeScript.
 - [x] Reply / rebit notes side by side instead of stacked
 - [x] Regex field verifications (username etc)
 - [x] Status field for rebits etc in db
-- [ ] Folder structure
+- [x] Services
+- [x] Folder structure
+- [x] Shared input validation for tweets, emails etc
 - [ ] Viewable list of rebitters/likers/dislikers for posts
 - [ ] Hashtags
   - [ ] NoSQL database?
