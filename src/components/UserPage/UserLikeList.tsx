@@ -4,12 +4,12 @@ import BitList from "../Shared/BitList/BitList";
 
 import BitInfo from "../../Types/BitInfo";
 import ContextProps from "../../Types/ContextProps";
-import HttpService from "../core/HttpService";
+import BitService from "../core/BitService";
 
 interface Props {}
 
 const UserBitList: React.FC<Props> = () => {
-  const httpService = new HttpService();
+  const bitService = new BitService();
 
   // fetch list of bits
   const [likes, setLikes] = useState<Array<BitInfo>>([]);
@@ -26,17 +26,10 @@ const UserBitList: React.FC<Props> = () => {
   const fetchBits = async () => {
     setIsLoading(true);
 
-    let res = "/users/posts/likes";
-    let queryParams = { handle: currHandle, myHandle };
-    let resp: any = await httpService.makeGetRequest(res, queryParams);
-
-    if (resp.code === "getSuccess") {
-      let bits: Array<BitInfo> = JSON.parse(resp.posts);
-      setLikes(bits);
-    } else {
-      setLikes([]);
-      console.error(resp);
-    }
+    await bitService
+      .getUserBits(currHandle, myHandle)
+      .then((bits) => setLikes(bits))
+      .catch((bits) => setLikes(bits));
 
     setIsLoading(false);
   };

@@ -91,4 +91,20 @@ export default class BitService {
         }
       })
     }
+
+
+    getUserLikes = async (handle: string, myHandle: string=''): Promise<BitInfo[]> => {
+      const res = "/user/posts/likes";
+      let queryParams = { handle, myHandle };
+      let resp: any = await this.httpService.makeGetRequest(res, queryParams);
+      return new Promise((resolve, reject) => {
+        if (resp.code === "getSuccess") {
+          let bits: Array<BitInfo> = JSON.parse(resp.posts);
+          resolve(bits);
+        } else {
+          console.error(resp);
+          reject([]);
+        }
+      })
+    }
 }
