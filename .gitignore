@@ -22,6 +22,5 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-src/UserPool.js
-src/UserPool.tsx
+/src/UserPool.ts
 README.md
